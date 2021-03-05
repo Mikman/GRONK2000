@@ -50,34 +50,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := STM32F103C8-BlinkendeLygter
+BUILD_ARTIFACT_NAME := LED_test
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-STM32F103C8-BlinkendeLygter.elf \
+LED_test.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-STM32F103C8-BlinkendeLygter.list \
+LED_test.list \
 
 OBJCOPY_BIN += \
-STM32F103C8-BlinkendeLygter.bin \
+LED_test.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: STM32F103C8-BlinkendeLygter.elf secondary-outputs
+main-build: LED_test.elf secondary-outputs
 
 # Tool invocations
-STM32F103C8-BlinkendeLygter.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/STM32CubeIDE/workspace_1.6.0/STM32F103C8-BlinkendeLygter/STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "STM32F103C8-BlinkendeLygter.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/STM32CubeIDE/workspace_1.6.0/STM32F103C8-BlinkendeLygter/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F103C8-BlinkendeLygter.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+LED_test.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/LED_test/STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "LED_test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/LED_test/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LED_test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -86,13 +86,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-STM32F103C8-BlinkendeLygter.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32F103C8-BlinkendeLygter.list"
+LED_test.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "LED_test.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-STM32F103C8-BlinkendeLygter.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "STM32F103C8-BlinkendeLygter.bin"
+LED_test.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "LED_test.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

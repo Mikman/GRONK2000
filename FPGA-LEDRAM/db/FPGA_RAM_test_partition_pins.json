@@ -1,0 +1,33 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "CS",
+					"strict" : false
+				},
+				{
+					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "OE",
+					"strict" : false
+				},
+				{
+					"name" : "CS_SW",
+					"strict" : false
+				},
+				{
+					"name" : "WE_SW",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SW",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

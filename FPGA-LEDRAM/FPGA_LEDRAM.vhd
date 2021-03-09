@@ -17,9 +17,16 @@ end FPGA_LEDRAM;
 architecture Behavioral of FPGA_LEDRAM is
 	
 	begin
-		address <= "1011001110001111000";
-		--data <= "10100111";
-		--LEDs(7 downto 0) <= data(7 downto 0);
+		--address <= "1011001110001111000";
+		--data <= "01010101";
+		
+		--address <= "1011001110001111001";
+		--data <= "10101010";
+		
+		address <= "1011001110001111010";
+		--data <= "11110000";
+		
+		LEDs(7 downto 0) <= data(7 downto 0);
 		
 		CS <= CS_SW;
 		WE <= WE_SW;

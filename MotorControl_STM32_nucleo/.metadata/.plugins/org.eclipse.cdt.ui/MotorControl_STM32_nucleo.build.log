@@ -1,0 +1,10 @@
+15:07:05 **** Incremental Build of configuration Debug for project MotorControl_STM32_nucleo ****
+make -j3 all 
+arm-none-eabi-size   MotorControl_STM32_nucleo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10768	     20	   1700	  12488	   30c8	MotorControl_STM32_nucleo.elf
+Finished building: default.size.stdout
+ 
+
+15:07:05 Build Finished. 0 errors, 0 warnings. (took 318ms)
+

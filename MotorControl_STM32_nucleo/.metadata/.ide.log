@@ -1282,3 +1282,41 @@
 2021-03-09 15:40:39,821 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 5306mS.
 2021-03-09 15:40:39,822 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
 2021-03-09 15:40:39,824 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-10 10:16:08,371 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 265551088 Bytes (742391808)
+2021-03-10 10:16:09,133 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 272891120 Bytes (742391808)
+2021-03-10 10:16:09,464 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 281806064 Bytes (742391808)
+2021-03-10 10:16:09,892 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: NVIC
+2021-03-10 10:16:09,892 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: USART
+2021-03-10 10:16:09,892 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: TIM1_8L4
+2021-03-10 10:16:09,893 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: SYS
+2021-03-10 10:16:09,893 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: GPIO
+2021-03-10 10:16:09,893 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: RCC
+2021-03-10 10:16:09,894 [INFO] CodeGenerator:641 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.2.0.202102191602//db/
+2021-03-10 10:16:10,454 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/license.tmp_save
+2021-03-10 10:16:10,565 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/license.tmp
+2021-03-10 10:16:10,655 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/gpio.tmp_save
+2021-03-10 10:16:10,748 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/gpio.tmp
+2021-03-10 10:16:11,814 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-10 10:16:11,817 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-10 10:16:11,829 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/stm32l4xx_it.c_save
+2021-03-10 10:16:11,948 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/stm32l4xx_it.c
+2021-03-10 10:16:11,952 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/stm32l4xx_it.h_save
+2021-03-10 10:16:12,444 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/stm32l4xx_it.h
+2021-03-10 10:16:12,461 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/stm32l4xx_hal_msp.c_save
+2021-03-10 10:16:12,659 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/stm32l4xx_hal_msp.c
+2021-03-10 10:16:12,678 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/system.tmp_save
+2021-03-10 10:16:12,811 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/MXTmpFiles/system.tmp
+2021-03-10 10:16:12,818 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/stm32l4xx_hal_conf.h_save
+2021-03-10 10:16:12,959 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/stm32l4xx_hal_conf.h
+2021-03-10 10:16:13,001 [WARN] IPConfigManager:2976 - IP not found : TIM
+2021-03-10 10:16:13,002 [WARN] CodeGenerator:3191 - IP not found : null
+2021-03-10 10:16:13,007 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/main.h_save
+2021-03-10 10:16:13,090 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Inc/main.h
+2021-03-10 10:16:13,094 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/main.c_save
+2021-03-10 10:16:13,246 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/Core/Src/main.c
+2021-03-10 10:16:14,798 [INFO] ProjectBuilder:2460 - Time for Copy HAL[1] : 249mS.
+2021-03-10 10:16:14,802 [INFO] ProjectBuilder:3418 - Project Generator version: 3.13.0-B3
+2021-03-10 10:16:15,922 [INFO] ConfigFileManager:1242 - The Die is : DIE435
+2021-03-10 10:16:18,761 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 3959mS.
+2021-03-10 10:16:18,763 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 1mS.
+2021-03-10 10:16:18,764 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.

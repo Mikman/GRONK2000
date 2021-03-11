@@ -96,7 +96,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  TIM2->CCR1 = 2500;
+  TIM2->CCR1 = 32500;
 
   /* USER CODE END 2 */
 
@@ -107,7 +107,7 @@ int main(void)
 	  HAL_ADC_Start(&hadc1);
 	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
 	  raw = HAL_ADC_GetValue(&hadc1);
-	  TIM2->CCR1 = raw*1.22;
+	  TIM2->CCR1 = raw*15;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

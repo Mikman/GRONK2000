@@ -2282,3 +2282,177 @@
 2021-03-10 18:07:50,440 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 2339mS.
 2021-03-10 18:07:50,441 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
 2021-03-10 18:07:50,442 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:18:27,948 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,955 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,955 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,955 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,955 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,955 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,956 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,956 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,956 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,956 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:18:27,962 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,980 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,983 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,984 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:20:14,988 [INFO] ADCParametersView:97 -                Rank 1 : false
+2021-03-11 13:41:34,585 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 851310200 Bytes (1073741824)
+2021-03-11 13:41:35,736 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 859176568 Bytes (1073741824)
+2021-03-11 13:41:42,703 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 922091128 Bytes (1073741824)
+2021-03-11 13:41:43,468 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: NVIC
+2021-03-11 13:41:43,469 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: TIM1_8F1
+2021-03-11 13:41:43,469 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: SYS
+2021-03-11 13:41:43,469 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: GPIO
+2021-03-11 13:41:43,470 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: ADC
+2021-03-11 13:41:43,470 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: RCC
+2021-03-11 13:41:43,471 [INFO] CodeGenerator:641 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.2.0.202102191602//db/
+2021-03-11 13:41:44,089 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp_save
+2021-03-11 13:41:44,242 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp
+2021-03-11 13:41:44,534 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp_save
+2021-03-11 13:41:44,644 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp
+2021-03-11 13:41:45,076 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:41:45,087 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:41:45,103 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c_save
+2021-03-11 13:41:45,276 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c
+2021-03-11 13:41:45,279 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h_save
+2021-03-11 13:41:45,390 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h
+2021-03-11 13:41:45,408 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c_save
+2021-03-11 13:41:45,770 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c
+2021-03-11 13:41:45,776 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp_save
+2021-03-11 13:41:45,870 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp
+2021-03-11 13:41:45,879 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h_save
+2021-03-11 13:41:45,982 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h
+2021-03-11 13:41:46,012 [WARN] IPConfigManager:2976 - IP not found : TIM
+2021-03-11 13:41:46,014 [WARN] CodeGenerator:3191 - IP not found : null
+2021-03-11 13:41:46,032 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h_save
+2021-03-11 13:41:46,239 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h
+2021-03-11 13:41:46,242 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c_save
+2021-03-11 13:41:46,411 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c
+2021-03-11 13:41:47,729 [INFO] ProjectBuilder:2460 - Time for Copy HAL[1] : 279mS.
+2021-03-11 13:41:47,733 [INFO] ProjectBuilder:3418 - Project Generator version: 3.13.0-B3
+2021-03-11 13:41:48,373 [INFO] ConfigFileManager:1242 - The Die is : DIE410
+2021-03-11 13:41:51,740 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 4007mS.
+2021-03-11 13:41:51,742 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 1mS.
+2021-03-11 13:41:51,743 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:46:08,498 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 288497136 Bytes (1073741824)
+2021-03-11 13:46:09,680 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 296271576 Bytes (1073741824)
+2021-03-11 13:46:12,269 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 261878776 Bytes (1073741824)
+2021-03-11 13:46:12,668 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: NVIC
+2021-03-11 13:46:12,668 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: TIM1_8F1
+2021-03-11 13:46:12,669 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: SYS
+2021-03-11 13:46:12,670 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: GPIO
+2021-03-11 13:46:12,671 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: ADC
+2021-03-11 13:46:12,671 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: RCC
+2021-03-11 13:46:12,673 [INFO] CodeGenerator:641 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.2.0.202102191602//db/
+2021-03-11 13:46:13,065 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp_save
+2021-03-11 13:46:13,232 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp
+2021-03-11 13:46:13,250 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp_save
+2021-03-11 13:46:13,392 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp
+2021-03-11 13:46:13,641 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:46:13,644 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:46:13,676 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c_save
+2021-03-11 13:46:13,785 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c
+2021-03-11 13:46:13,790 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h_save
+2021-03-11 13:46:13,895 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h
+2021-03-11 13:46:13,903 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c_save
+2021-03-11 13:46:14,049 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c
+2021-03-11 13:46:14,052 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp_save
+2021-03-11 13:46:14,154 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp
+2021-03-11 13:46:14,161 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h_save
+2021-03-11 13:46:14,266 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h
+2021-03-11 13:46:14,302 [WARN] IPConfigManager:2976 - IP not found : TIM
+2021-03-11 13:46:14,303 [WARN] CodeGenerator:3191 - IP not found : null
+2021-03-11 13:46:14,307 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h_save
+2021-03-11 13:46:14,422 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h
+2021-03-11 13:46:14,428 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c_save
+2021-03-11 13:46:14,577 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c
+2021-03-11 13:46:15,673 [INFO] ProjectBuilder:2460 - Time for Copy HAL[1] : 312mS.
+2021-03-11 13:46:15,681 [INFO] ProjectBuilder:3418 - Project Generator version: 3.13.0-B3
+2021-03-11 13:46:16,990 [INFO] ConfigFileManager:1242 - The Die is : DIE410
+2021-03-11 13:46:19,388 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 3707mS.
+2021-03-11 13:46:19,389 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:46:19,391 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:51:38,508 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 315583456 Bytes (1073741824)
+2021-03-11 13:51:39,676 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 324494304 Bytes (1073741824)
+2021-03-11 13:51:39,995 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 333409248 Bytes (1073741824)
+2021-03-11 13:51:40,440 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: NVIC
+2021-03-11 13:51:40,441 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: TIM1_8F1
+2021-03-11 13:51:40,441 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: SYS
+2021-03-11 13:51:40,442 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: GPIO
+2021-03-11 13:51:40,442 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: ADC
+2021-03-11 13:51:40,442 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: RCC
+2021-03-11 13:51:40,443 [INFO] CodeGenerator:641 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.2.0.202102191602//db/
+2021-03-11 13:51:40,832 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp_save
+2021-03-11 13:51:40,993 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp
+2021-03-11 13:51:41,014 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp_save
+2021-03-11 13:51:41,117 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp
+2021-03-11 13:51:41,419 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:51:41,420 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:51:41,426 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c_save
+2021-03-11 13:51:41,518 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c
+2021-03-11 13:51:41,528 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h_save
+2021-03-11 13:51:41,616 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h
+2021-03-11 13:51:41,627 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c_save
+2021-03-11 13:51:41,788 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c
+2021-03-11 13:51:41,790 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp_save
+2021-03-11 13:51:41,872 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp
+2021-03-11 13:51:41,884 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h_save
+2021-03-11 13:51:41,961 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h
+2021-03-11 13:51:41,998 [WARN] IPConfigManager:2976 - IP not found : TIM
+2021-03-11 13:51:41,999 [WARN] CodeGenerator:3191 - IP not found : null
+2021-03-11 13:51:42,003 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h_save
+2021-03-11 13:51:42,106 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h
+2021-03-11 13:51:42,110 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c_save
+2021-03-11 13:51:42,374 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c
+2021-03-11 13:51:43,376 [INFO] ProjectBuilder:2460 - Time for Copy HAL[1] : 190mS.
+2021-03-11 13:51:43,378 [INFO] ProjectBuilder:3418 - Project Generator version: 3.13.0-B3
+2021-03-11 13:51:43,836 [INFO] ConfigFileManager:1242 - The Die is : DIE410
+2021-03-11 13:51:46,585 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 3207mS.
+2021-03-11 13:51:46,587 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:51:46,591 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 1mS.
+2021-03-11 13:59:34,399 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 763336352 Bytes (1073741824)
+2021-03-11 13:59:35,419 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 771724960 Bytes (1073741824)
+2021-03-11 13:59:37,405 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 275547232 Bytes (1073741824)
+2021-03-11 13:59:37,919 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: NVIC
+2021-03-11 13:59:37,919 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: TIM1_8F1
+2021-03-11 13:59:37,920 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: SYS
+2021-03-11 13:59:37,920 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: GPIO
+2021-03-11 13:59:37,920 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: ADC
+2021-03-11 13:59:37,920 [INFO] BlockDiagram:2735 - set Specific Code input for plugin: RCC
+2021-03-11 13:59:37,921 [INFO] CodeGenerator:641 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.2.0.202102191602//db/
+2021-03-11 13:59:38,591 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp_save
+2021-03-11 13:59:38,723 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/license.tmp
+2021-03-11 13:59:38,747 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp_save
+2021-03-11 13:59:38,844 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/gpio.tmp
+2021-03-11 13:59:39,544 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:59:39,549 [INFO] LogOutputStream:76 - [STDOUT_REDIRECT] Command line
+2021-03-11 13:59:39,560 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c_save
+2021-03-11 13:59:39,698 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_it.c
+2021-03-11 13:59:39,701 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h_save
+2021-03-11 13:59:39,798 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_it.h
+2021-03-11 13:59:39,807 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c_save
+2021-03-11 13:59:40,018 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/stm32f1xx_hal_msp.c
+2021-03-11 13:59:40,024 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp_save
+2021-03-11 13:59:40,135 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/MXTmpFiles/system.tmp
+2021-03-11 13:59:40,146 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h_save
+2021-03-11 13:59:40,265 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/stm32f1xx_hal_conf.h
+2021-03-11 13:59:40,297 [WARN] IPConfigManager:2976 - IP not found : TIM
+2021-03-11 13:59:40,297 [WARN] CodeGenerator:3191 - IP not found : null
+2021-03-11 13:59:40,321 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h_save
+2021-03-11 13:59:40,422 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Inc/main.h
+2021-03-11 13:59:40,458 [INFO] CodeEngine:229 - oldGeneratedFile, /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c_save
+2021-03-11 13:59:40,670 [INFO] CodeEngine:247 - Generated code: /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/Core/Src/main.c
+2021-03-11 13:59:42,180 [INFO] ProjectBuilder:2460 - Time for Copy HAL[1] : 269mS.
+2021-03-11 13:59:42,182 [INFO] ProjectBuilder:3418 - Project Generator version: 3.13.0-B3
+2021-03-11 13:59:43,034 [INFO] ConfigFileManager:1242 - The Die is : DIE410
+2021-03-11 13:59:45,928 [INFO] ProjectBuilder:3584 - Time for Generating toolchain IDE Files: 3746mS.
+2021-03-11 13:59:45,928 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 0mS.
+2021-03-11 13:59:45,930 [INFO] ProjectBuilder:2339 - Time for Copy CMSIS : 1mS.

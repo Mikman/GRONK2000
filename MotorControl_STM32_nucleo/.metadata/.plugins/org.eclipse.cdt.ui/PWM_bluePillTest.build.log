@@ -1,4 +1,4 @@
-14:00:44 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+14:27:05 **** Build of configuration Debug for project PWM_bluePillTest ****
 make -j3 all 
 arm-none-eabi-size   PWM_bluePillTest.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   PWM_bluePillTest.elf
 Finished building: default.size.stdout
  
 
-14:00:45 Build Finished. 0 errors, 0 warnings. (took 268ms)
+14:27:05 Build Finished. 0 errors, 0 warnings. (took 220ms)
 

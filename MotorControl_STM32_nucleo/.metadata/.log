@@ -880,3 +880,28 @@ Reason: (4) No device found on target.
 !SUBENTRY 2 com.st.stm32cube.ide.mcu.debug.stlink 4 0 2021-03-10 17:54:44.849
 !MESSAGE Error in initializing ST-LINK device.
 Reason: (4) No device found on target.
+!SESSION 2021-03-11 14:26:28.347 -----------------------------------------------
+eclipse.buildId=Version 1.6.0
+java.version=11.0.9.1
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=da_DK
+Framework arguments:  -keyring /Users/kaspergronkjaer/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/kaspergronkjaer/.eclipse_keyring
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-03-11 14:26:36.316
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-03-11 14:26:40.758
+!MESSAGE Log4j initialized with config file /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/.metadata/.log4j.xml
+
+!ENTRY org.eclipse.core.net 1 0 2021-03-11 14:26:45.122
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-03-11 14:26:49.237
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-03-11 14:26:49.474
+!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-11 14:29:10.671
+!MESSAGE Indexed 'STM32_MPU6050' (19 sources, 78 headers) in 5.78 sec: 3,658 declarations; 13,170 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.012%)

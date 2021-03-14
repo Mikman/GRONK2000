@@ -107,7 +107,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   tempBuf[0] = configRegister;
-  tempBuf[1] = 0b00001000;
+  tempBuf[1] = b00001000;
 
   HAL_I2C_Master_Transmit(&hi2c1, MPU_Address, tempBuf, 1, HAL_MAX_DELAY);
 

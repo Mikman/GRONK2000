@@ -789,3 +789,92 @@ arm-none-eabi-size   STM32_MPU6050.elf
   10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
 Finished building: default.size.stdout
  
+11:15:15 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10228	     20	   1652	  11900	   2e7c	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:15:34 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10228	     20	   1652	  11900	   2e7c	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:28:41 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:16: error: 'b00001000' undeclared (first use in this function)
+  110 |   tempBuf[1] = b00001000;
+      |                ^~~~~~~~~
+../Core/Src/main.c:110:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j3 all" terminated with exit code 2. Build might be incomplete.
+11:29:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:16: error: 'B00001000' undeclared (first use in this function)
+  110 |   tempBuf[1] = B00001000;
+      |                ^~~~~~~~~
+../Core/Src/main.c:110:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j3 all" terminated with exit code 2. Build might be incomplete.
+11:31:09 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:31:51 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:33:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 

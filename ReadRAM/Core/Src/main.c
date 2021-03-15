@@ -86,7 +86,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  ReadRamData();
+  //ReadRamData();
   /*
   unsigned int pinSetting = 0b0100;
 
@@ -187,7 +187,7 @@ static void MX_GPIO_Init(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin ) {
 	switch (GPIO_Pin) {
-	case READ_RAM_EXT_INT_PIN: LoadData_Callback(); break;
+	case GPIO_PIN_0: LoadData_Callback(); break;
 	}
 }
 

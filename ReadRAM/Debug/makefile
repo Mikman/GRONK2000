@@ -61,8 +61,8 @@ all: main-build
 main-build: ReadRAM.elf secondary-outputs
 
 # Tool invocations
-ReadRAM.elf: $(OBJS) $(USER_OBJS) C:\Users\Rasmu\OneDrive\Billeder\Dokumenter\GitHub\GRONK-STM32\ReadRAM\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Rasmu\OneDrive\Billeder\Dokumenter\GitHub\GRONK-STM32\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ReadRAM.elf: $(OBJS) $(USER_OBJS) C:\Users\Mikkel\Documents\GitHub\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Mikkel\Documents\GitHub\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

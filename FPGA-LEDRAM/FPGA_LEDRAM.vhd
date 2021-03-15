@@ -3,33 +3,36 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_STD.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
 
 entity FPGA_LEDRAM is
 	port (
 		address: out STD_LOGIC_VECTOR(18 downto 0);
-		data: in STD_LOGIC_VECTOR(7 downto 0);
+		data: inout STD_LOGIC_VECTOR(7 downto 0);
 		CS, WE, OE: out STD_LOGIC;
-		CS_SW, WE_SW, OE_SW: in STD_LOGIC;
+		CS_SW, WE_SW, OE_SW, addr_SW: in STD_LOGIC;
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0)
 		);
 end FPGA_LEDRAM;
 
 architecture Behavioral of FPGA_LEDRAM is
-	
+	signal i: integer := 0;
 	begin
-		--address <= "1011001110001111000";
-		--data <= "01010101";
-		
-		--address <= "1011001110001111001";
-		--data <= "10101010";
-		
-		address <= "1011001110001111010";
-		--data <= "11110000";
-		
+		address <= conv_std_logic_vector(i, address'length);
 		LEDs(7 downto 0) <= data(7 downto 0);
-		
+		--data <= "10000000";
 		CS <= CS_SW;
 		WE <= WE_SW;
 		OE <= OE_SW;
+		
+		
+		process(addr_SW)
+		begin
+			if (addr_SW'event and addr_SW = '0') then
+				i <= i + 1;
+			end if;
+		end process;
+		
+		
 		
 	end Behavioral;

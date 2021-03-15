@@ -1,48 +1,62 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_STD.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity multipleByteProgram is
 	port (
 		address: out STD_LOGIC_VECTOR(18 downto 0);
 		data: out STD_LOGIC_VECTOR(7 downto 0);
-		WE, OE: out STD_LOGIC;
+		WE, OE: buffer STD_LOGIC;
 		CS: buffer STD_LOGIC;
-		writebtn: in STD_LOGIC
+		LEDs: out STD_LOGIC_VECTOR(9 downto 0);
+		writebtn, clk, switchyboi: in STD_LOGIC
 	);
 end multipleByteProgram;
 
 architecture Behavorial of multipleByteProgram is
+
+signal ticks: integer := 0;
+signal counting, decrementingAmount: boolean;
+signal amount: integer := 5;
+
+
 begin
-		--type vector_array is array(0 to 4) of STD_LOGIC_VECTOR(7 downto 0);
-		
-		--variable data_array: vector_array;
-		
-		--data_array[0] := "00000001";
-		--data_array[1] := "00000010";
-		--data_array[2] := "00000011";
-		--data_array[3] := "00000100";
-		--data_array[4] := "00000101";
-		
-		
-	process is
+	
+	CS <= '0';
+	WE <= '0' when (ticks > 1) else '1';
+	LEDs(4 downto 0) <= std_logic_vector(to_unsigned(amount, 5));
+	LEDs(9 downto 5) <= std_logic_vector(to_unsigned(ticks, 5));
+	
+	
+	process(clk)
 	begin
+		if (clk'event and clk='1' and switchyboi = '1') then
 		
-		if (writebtn'event and writebtn = '0') then
+			-- Assigning counting
+			if (amount >= 0) then
+				counting <= true;
+			else
+				counting <= false;
+			end if;
 			
-			for i in 0 to 4 loop
-			address <= conv_std_logic_vector(i, address'length);
-			data <= conv_std_logic_vector((i + 1), data'length);
-			CS <= '0';
-			WE <= '0';
-			wait for 35 ns; --Dette virker ikke, lad istedet clocken på FPGAen tælle op i 2 clk cycles ved 50 MHz = 40 ns
-			CS <= '1';
-			WE <= '1';
-			end loop;
+			-- Increment ticks
+			if (counting) then
+				ticks <= ticks + 1;
+			end if;
 			
+			-- Reset ticks or assign addr and data
+			if (ticks >= 5) then
+				ticks <= 0;
+				amount <= amount - 1;
+			elsif (ticks >= 1) then
+				address <= std_logic_vector(to_unsigned(amount, address'length));
+				data <= std_logic_vector(to_unsigned((amount + 1), data'length));
+			end if;
+			
+			
+		
 		end if;
-		
 	end process;
+	
 
 end Behavorial;

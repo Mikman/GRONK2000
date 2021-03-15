@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGA_RAM_test
-Tue Mar 09 16:04:02 2021
+Mon Mar 15 15:19:52 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -13,10 +13,11 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -42,14 +43,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Tue Mar 09 16:04:02 2021       ;
+; Analysis & Synthesis Status     ; Successful - Mon Mar 15 15:19:52 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGA_RAM_test                               ;
 ; Top-level Entity Name           ; FPGA_LEDRAM                                 ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 0                                           ;
-; Total pins                      ; 41                                          ;
+; Total registers                 ; 19                                          ;
+; Total pins                      ; 42                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -158,10 +159,11 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 8           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 8           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-8         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -174,31 +176,31 @@ refer to the applicable agreement for further details.
 +----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                     ;
-+---------------------------------------------+-------------------+
-; Resource                                    ; Usage             ;
-+---------------------------------------------+-------------------+
-; Estimate of Logic utilization (ALMs needed) ; 0                 ;
-;                                             ;                   ;
-; Combinational ALUT usage for logic          ; 0                 ;
-;     -- 7 input functions                    ; 0                 ;
-;     -- 6 input functions                    ; 0                 ;
-;     -- 5 input functions                    ; 0                 ;
-;     -- 4 input functions                    ; 0                 ;
-;     -- <=3 input functions                  ; 0                 ;
-;                                             ;                   ;
-; Dedicated logic registers                   ; 0                 ;
-;                                             ;                   ;
-; I/O pins                                    ; 41                ;
-;                                             ;                   ;
-; Total DSP Blocks                            ; 0                 ;
-;                                             ;                   ;
-; Maximum fan-out node                        ; address[0]~output ;
-; Maximum fan-out                             ; 1                 ;
-; Total fan-out                               ; 52                ;
-; Average fan-out                             ; 0.63              ;
-+---------------------------------------------+-------------------+
++-------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                 ;
++---------------------------------------------+---------------+
+; Resource                                    ; Usage         ;
++---------------------------------------------+---------------+
+; Estimate of Logic utilization (ALMs needed) ; 10            ;
+;                                             ;               ;
+; Combinational ALUT usage for logic          ; 19            ;
+;     -- 7 input functions                    ; 0             ;
+;     -- 6 input functions                    ; 0             ;
+;     -- 5 input functions                    ; 0             ;
+;     -- 4 input functions                    ; 0             ;
+;     -- <=3 input functions                  ; 19            ;
+;                                             ;               ;
+; Dedicated logic registers                   ; 19            ;
+;                                             ;               ;
+; I/O pins                                    ; 42            ;
+;                                             ;               ;
+; Total DSP Blocks                            ; 0             ;
+;                                             ;               ;
+; Maximum fan-out node                        ; addr_SW~input ;
+; Maximum fan-out                             ; 19            ;
+; Total fan-out                               ; 155           ;
+; Average fan-out                             ; 1.19          ;
++---------------------------------------------+---------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -206,9 +208,19 @@ refer to the applicable agreement for further details.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |FPGA_LEDRAM               ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 41   ; 0            ; |FPGA_LEDRAM        ; FPGA_LEDRAM ; work         ;
+; |FPGA_LEDRAM               ; 19 (19)             ; 19 (19)                   ; 0                 ; 0          ; 42   ; 0            ; |FPGA_LEDRAM        ; FPGA_LEDRAM ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------+
+; Registers Removed During Synthesis                          ;
++----------------------------------------+--------------------+
+; Register name                          ; Reason for Removal ;
++----------------------------------------+--------------------+
+; i[19..31]                              ; Lost fanout        ;
+; Total Number of Removed Registers = 13 ;                    ;
++----------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -216,7 +228,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
+; Total registers                              ; 19    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -231,13 +243,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 2                           ;
-;     normal            ; 2                           ;
-;         0 data inputs ; 2                           ;
-; boundary_port         ; 41                          ;
+; arriav_ff             ; 19                          ;
+;     plain             ; 19                          ;
+; arriav_io_obuf        ; 8                           ;
+; arriav_lcell_comb     ; 19                          ;
+;     arith             ; 18                          ;
+;         1 data inputs ; 17                          ;
+;         2 data inputs ; 1                           ;
+;     normal            ; 1                           ;
+;         1 data inputs ; 1                           ;
+; boundary_port         ; 42                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 0.00                        ;
-; Average LUT depth     ; 0.00                        ;
+; Max LUT depth         ; 2.70                        ;
+; Average LUT depth     ; 1.55                        ;
 +-----------------------+-----------------------------+
 
 
@@ -256,48 +274,49 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Tue Mar 09 16:03:52 2021
+    Info: Processing started: Mon Mar 15 15:19:41 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file de0_cv_golden_top.v
     Info (12023): Found entity 1: DE0_CV_golden_top File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/DE0_CV_golden_top.v Line: 54
 Info (12021): Found 2 design units, including 1 entities, in source file fpga_ledram.vhd
-    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 17
-    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 7
+    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 18
+    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file multiplebyteprogram.vhd
     Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
-    Info (12023): Found entity 1: multipleByteProgram File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 6
+    Info (12023): Found entity 1: multipleByteProgram File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
 Info (12127): Elaborating entity "FPGA_LEDRAM" for the top level hierarchy
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "address[0]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[1]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[2]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[3]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[4]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[5]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[6]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[7]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[8]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[9]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[10]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[11]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[12]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[13]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[14]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[15]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[16]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[17]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
-    Warning (13410): Pin "address[18]" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 9
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "data[0]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[1]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[2]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[3]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[4]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[5]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[6]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+    Warning (13040): bidirectional pin "data[7]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
+Info (286030): Timing-Driven Synthesis is running
+Warning (14632): Output pin "LEDs[0]" driven by bidirectional pin "data[0]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[1]" driven by bidirectional pin "data[1]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[2]" driven by bidirectional pin "data[2]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[3]" driven by bidirectional pin "data[3]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[4]" driven by bidirectional pin "data[4]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[5]" driven by bidirectional pin "data[5]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[6]" driven by bidirectional pin "data[6]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Warning (14632): Output pin "LEDs[7]" driven by bidirectional pin "data[7]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
+Info (17049): 13 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 41 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 11 input pins
+Info (21057): Implemented 61 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
     Info (21059): Implemented 30 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 21 warnings
-    Info: Peak virtual memory: 4856 megabytes
-    Info: Processing ended: Tue Mar 09 16:04:02 2021
-    Info: Elapsed time: 00:00:10
+    Info (21060): Implemented 8 bidirectional pins
+    Info (21061): Implemented 19 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 4887 megabytes
+    Info: Processing ended: Mon Mar 15 15:19:52 2021
+    Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:21
 
 

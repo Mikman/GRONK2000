@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CEBA4F23C7
-set_global_assignment -name TOP_LEVEL_ENTITY multipleByteProgram
+set_global_assignment -name TOP_LEVEL_ENTITY FPGA_LEDRAM
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "MON MAY  5 11:54:18 2014"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -88,9 +88,6 @@ set_location_assignment PIN_N21 -to address[11]
 set_location_assignment PIN_M21 -to address[12]
 set_location_assignment PIN_M20 -to address[13]
 set_location_assignment PIN_K22 -to address[14]
-set_location_assignment PIN_M6 -to CS_SW
-set_location_assignment PIN_M7 -to WE_SW
-set_location_assignment PIN_W9 -to OE_SW
 set_location_assignment PIN_K21 -to address[17]
 set_location_assignment PIN_C16 -to address[15]
 set_location_assignment PIN_K20 -to address[16]
@@ -104,6 +101,19 @@ set_location_assignment PIN_N1 -to LEDs[5]
 set_location_assignment PIN_U2 -to LEDs[6]
 set_location_assignment PIN_U1 -to LEDs[7]
 set_global_assignment -name VHDL_FILE multipleByteProgram.vhd
+set_location_assignment PIN_M9 -to clk
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR "C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM" -section_id eda_simulation
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_global_assignment -name EDA_USER_COMPILED_SIMULATION_LIBRARY_DIRECTORY "C:\\Users\\joach\\OneDrive\\Dokumenter\\Github\\GRONK2000\\FPGA-LEDRAM" -section_id eda_simulation
+set_location_assignment PIN_L2 -to LEDs[8]
+set_location_assignment PIN_L1 -to LEDs[9]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK3_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK4_50
@@ -310,6 +320,11 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[2]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS
+set_location_assignment PIN_U7 -to addr_SW
+set_location_assignment PIN_M6 -to CS_SW
+set_location_assignment PIN_M7 -to WE_SW
+set_location_assignment PIN_W9 -to OE_SW
+set_location_assignment PIN_AB12 -to switchyboi
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

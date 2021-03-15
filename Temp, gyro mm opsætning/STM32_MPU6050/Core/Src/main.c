@@ -53,9 +53,14 @@ I2C_HandleTypeDef hi2c2;
 
 static const uint8_t MPU_Address = 0x68;
 
+//Register used for initialization
+static const uint8_t SIGNAL_PATH_RESET = 0x68; //Resets the analog and digital signal paths of the gyroscope, accelerometer, and temperature sensors.
+static const uint8_t MPU_PWR_MGT_1 = 0x6B; // Power management 1
 
-// MPU registrer til temp
-static const uint8_t MPU_TempRegLSB = 0x41;
+
+// MPU Read registers
+static const uint8_t MPU_TempReg = 0x41;
+
 
 
 
@@ -67,6 +72,47 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
+
+HAL_StatusTypeDef MPU_Init(){
+	HAL_StatusTypeDef returnValue;
+	uint8_t initializationBuffer[5];
+
+	initializationBuffer[0] = MPU_PWR_MGT_1;
+	initializationBuffer[1] = 0x00; //Set clocksource to internal 8MHz oscillator
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
+	initializationBuffer[0] = SIGNAL_PATH_RESET;
+	initializationBuffer[1] = 0x07; // Resets gyro, accel & temp signal path
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
+	return returnValue;
+
+
+}
+
+float MPU_Read_Temp(){
+	// Enumeration of possible errors
+	HAL_StatusTypeDef returnValue;
+	int16_t rawTempVal;
+	float tempVal = 0.0;
+
+	uint8_t tempBuf[2];
+	 tempBuf[0] = MPU_TempReg;
+	 returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), tempBuf, 1, HAL_MAX_DELAY);
+	 if(returnValue != HAL_OK) return returnValue;
+	 returnValue = HAL_I2C_Master_Receive(&hi2c1, (MPU_Address<<1) | 0x01, tempBuf, 2, HAL_MAX_DELAY);
+	 if(returnValue != HAL_OK) return returnValue;
+
+	 // Data composition from raw data
+	 rawTempVal = ((int16_t)tempBuf[0] << 8 | tempBuf[1]);
+
+	 // Temperature calculation
+	 tempVal = (rawTempVal)/340.0 + 36.53;
+
+	 return tempVal;
+}
 
 /* USER CODE END PFP */
 
@@ -83,14 +129,6 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-
-	// En enumeration der beskriver en evt. fejl
-	HAL_StatusTypeDef returnValue;
-	uint8_t tempBuf[16];
-
-	int16_t rawTempVal;
-	float tempVal0 = 0.0;
-	float tempVal = 0.0;
 
 
   /* USER CODE END 1 */
@@ -119,7 +157,10 @@ int main(void)
 
   lcd_init();
 
-  lcd_send_string("Hello World");
+  MPU_Init();
+
+
+  //lcd_send_string("Hello World");
 
   /* USER CODE END 2 */
 
@@ -127,24 +168,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  tempBuf[0] = 0x6B;
-	  tempBuf[1] = 0x00;
-	  returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), tempBuf, 2, HAL_MAX_DELAY);
-
-	  tempBuf[0] = 0x41;
-	  returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), tempBuf, 1, HAL_MAX_DELAY);
-	  returnValue = HAL_I2C_Master_Receive(&hi2c1, (MPU_Address<<1) | 0x01, tempBuf, 2, HAL_MAX_DELAY);
-
-
-
-	  // sammensætning af rå data
-	  rawTempVal = ((int16_t)tempBuf[0] << 8 | tempBuf[1]);
-	  tempVal0 = (rawTempVal)/340.0;
-	  tempVal = tempVal0 + 36.53;
+	  float temperature = MPU_Read_Temp();
 
 	  char buf[20];
-	  sprintf(buf, "%f", tempVal);
+	  sprintf(buf, "%f", temperature);
 
 	  lcd_put_cur(0, 0);
 	  lcd_send_string(buf);

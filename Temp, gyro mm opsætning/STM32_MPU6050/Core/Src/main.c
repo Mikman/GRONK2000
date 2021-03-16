@@ -51,15 +51,24 @@ I2C_HandleTypeDef hi2c2;
 
 /* USER CODE BEGIN PV */
 
+// I2C device addresses
 static const uint8_t MPU_Address = 0x68;
 
-//Register used for initialization
+//Register used for MPU initialization
 static const uint8_t SIGNAL_PATH_RESET = 0x68; //Resets the analog and digital signal paths of the gyroscope, accelerometer, and temperature sensors.
 static const uint8_t MPU_PWR_MGT_1 = 0x6B; // Power management 1
+static const uint8_t DLPF_CFG = 0x1A;  // Config register read/write
+static const uint8_t SMPLRT_DIV = 0x19;  // Sample divider to achieve a desired sample rate
+static const uint8_t GYRO_CONFIG = 0x1B;  // Gyroscope scale config - degrees per second
+static const uint8_t GYRO_CONFIG_SCALE = 0x18; // 0x00 = 250 degrees/second, 0x08 = 500 degrees/second, 0x10 = 1000 degrees/second, 0x18 = 2000 degrees/second
 
+static const uint8_t ACCEL_CONFIG = 0x1C;  // Accelerometer scale config - degrees per second
+static const uint8_t ACCEL_CONFIG_SCALE = 0x18; // 0x00 = 2g, 0x08 = 4g, 0x10 = 8g, 0x18 = 16g
 
 // MPU Read registers
 static const uint8_t MPU_TempReg = 0x41;
+static const uint8_t MPU_GyroOut = 0x43;
+static const uint8_t MPU_AccelOut = 0x3B;
 
 
 
@@ -83,9 +92,30 @@ HAL_StatusTypeDef MPU_Init(){
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = SIGNAL_PATH_RESET;
-	initializationBuffer[1] = 0x07; // Resets gyro, accel & temp signal path
+	initializationBuffer[1] = 0x07; // Resets gyro, accel & temp signal path to disable any filtering
 	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
 	if(returnValue != HAL_OK) return returnValue;
+
+	initializationBuffer[0] = DLPF_CFG;
+	initializationBuffer[1] = 0x00; //Digital low pass filter disable & gyro sample rate at 8 kHz
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
+	initializationBuffer[0] = SMPLRT_DIV;
+	initializationBuffer[1] = 0x07; //Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV)  @ 1kHz
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
+	initializationBuffer[0] = GYRO_CONFIG;
+	initializationBuffer[1] = GYRO_CONFIG_SCALE; // Sets the full scale to +-2000 degrees per second
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
+	initializationBuffer[0] = ACCEL_CONFIG;
+	initializationBuffer[1] = ACCEL_CONFIG_SCALE; // Sets the accelerometer full scale to +-16g
+	returnValue = HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	if(returnValue != HAL_OK) return returnValue;
+
 
 	return returnValue;
 
@@ -114,6 +144,80 @@ float MPU_Read_Temp(){
 	 return tempVal;
 }
 
+float MPU_Read_Gyro(char axis){
+	int16_t rawGyroData_X;
+	int16_t rawGyroData_Y;
+	int16_t rawGyroData_Z;
+
+	float gyro_X;
+	float gyro_Y;
+	float gyro_Z;
+
+	float sensitivity;
+
+	if (GYRO_CONFIG_SCALE == 0x00)sensitivity =  131.0;
+	if (GYRO_CONFIG_SCALE == 0x08)sensitivity =  65.5;
+	if (GYRO_CONFIG_SCALE == 0x10)sensitivity =  32.8;
+	if (GYRO_CONFIG_SCALE == 0x18)sensitivity =  16.4;
+
+	 uint8_t gyroBuf[10];
+	 gyroBuf[0] = MPU_GyroOut;
+	 HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), gyroBuf, 1, HAL_MAX_DELAY);
+	 HAL_I2C_Master_Receive(&hi2c1, (MPU_Address<<1) | 0x01, gyroBuf, 6, HAL_MAX_DELAY);
+
+	 // Data composition from raw data
+	 rawGyroData_X = ((int16_t)gyroBuf[0] << 8 | gyroBuf[1]);
+	 rawGyroData_Y = ((int16_t)gyroBuf[2] << 8 | gyroBuf[3]);
+	 rawGyroData_Z = ((int16_t)gyroBuf[4] << 8 | gyroBuf[5]);
+
+	 gyro_X = (float)rawGyroData_X/sensitivity;
+	 gyro_Y = (float)rawGyroData_Y/sensitivity;
+	 gyro_Z = (float)rawGyroData_Z/sensitivity;
+
+	 if ((axis == 'X') | (axis == 'x'))return gyro_X;
+	 if ((axis == 'Y') | (axis == 'y'))return gyro_Y;
+	 if ((axis == 'Z') | (axis == 'z'))return gyro_Z;
+	 else return 0.0;
+
+}
+
+
+float MPU_Read_Accel(char axis){
+	int16_t rawAccelData_X;
+	int16_t rawAccelData_Y;
+	int16_t rawAccelData_Z;
+
+	float accel_X;
+	float accel_Y;
+	float accel_Z;
+
+	float sensitivity;
+
+	if (ACCEL_CONFIG_SCALE == 0x00)sensitivity =  16384.0;
+	if (ACCEL_CONFIG_SCALE == 0x08)sensitivity =  8192.0;
+	if (ACCEL_CONFIG_SCALE == 0x10)sensitivity =  4096.0;
+	if (ACCEL_CONFIG_SCALE == 0x18)sensitivity =  2048.0;
+
+	 uint8_t accelBuf[10];
+	 accelBuf[0] = MPU_AccelOut;
+	 HAL_I2C_Master_Transmit(&hi2c1, (MPU_Address<<1), accelBuf, 1, HAL_MAX_DELAY);
+	 HAL_I2C_Master_Receive(&hi2c1, (MPU_Address<<1) | 0x01, accelBuf, 6, HAL_MAX_DELAY);
+
+	 // Data composition from raw data
+	 rawAccelData_X = ((int16_t)accelBuf[0] << 8 | accelBuf[1]);
+	 rawAccelData_Y = ((int16_t)accelBuf[2] << 8 | accelBuf[3]);
+	 rawAccelData_Z = ((int16_t)accelBuf[4] << 8 | accelBuf[5]);
+
+	 accel_X = (float)rawAccelData_X/sensitivity;
+	 accel_Y = (float)rawAccelData_Y/sensitivity;
+	 accel_Z = (float)rawAccelData_Z/sensitivity;
+
+	 if ((axis == 'X') | (axis == 'x'))return accel_X;
+	 if ((axis == 'Y') | (axis == 'y'))return accel_Y;
+	 if ((axis == 'Z') | (axis == 'z'))return accel_Z;
+	 else return 0.0;
+
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -168,10 +272,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  float temperature = MPU_Read_Temp();
+
+	  float accel = MPU_Read_Accel('z');
 
 	  char buf[20];
-	  sprintf(buf, "%f", temperature);
+	  sprintf(buf, "%f", accel);
 
 	  lcd_put_cur(0, 0);
 	  lcd_send_string(buf);

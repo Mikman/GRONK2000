@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGA_RAM_test
-Mon Mar 15 15:19:52 2021
+Tue Mar 16 15:08:02 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -10,14 +10,7 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Post-Synthesis Netlist Statistics for Top Partition
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Messages
 
 
 
@@ -40,27 +33,22 @@ refer to the applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Mar 15 15:19:52 2021       ;
-; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
-; Revision Name                   ; FPGA_RAM_test                               ;
-; Top-level Entity Name           ; FPGA_LEDRAM                                 ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 19                                          ;
-; Total pins                      ; 42                                          ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 0                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Tue Mar 16 15:08:02 2021           ;
+; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name               ; FPGA_RAM_test                               ;
+; Top-level Entity Name       ; CamToRAM                                    ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -69,7 +57,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CEBA4F23C7        ;                    ;
-; Top-level entity name                                                           ; FPGA_LEDRAM        ; FPGA_RAM_test      ;
+; Top-level entity name                                                           ; CamToRAM           ; FPGA_RAM_test      ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Optimization Technique                                                          ; Speed              ; Balanced           ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
@@ -159,113 +147,11 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 8           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 8           ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-8         ;   0.0%      ;
 +----------------------------+-------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                           ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                    ; Library ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
-; FPGA_LEDRAM.vhd                  ; yes             ; User VHDL File  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd ;         ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
-
-
-+-------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                 ;
-+---------------------------------------------+---------------+
-; Resource                                    ; Usage         ;
-+---------------------------------------------+---------------+
-; Estimate of Logic utilization (ALMs needed) ; 10            ;
-;                                             ;               ;
-; Combinational ALUT usage for logic          ; 19            ;
-;     -- 7 input functions                    ; 0             ;
-;     -- 6 input functions                    ; 0             ;
-;     -- 5 input functions                    ; 0             ;
-;     -- 4 input functions                    ; 0             ;
-;     -- <=3 input functions                  ; 19            ;
-;                                             ;               ;
-; Dedicated logic registers                   ; 19            ;
-;                                             ;               ;
-; I/O pins                                    ; 42            ;
-;                                             ;               ;
-; Total DSP Blocks                            ; 0             ;
-;                                             ;               ;
-; Maximum fan-out node                        ; addr_SW~input ;
-; Maximum fan-out                             ; 19            ;
-; Total fan-out                               ; 155           ;
-; Average fan-out                             ; 1.19          ;
-+---------------------------------------------+---------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |FPGA_LEDRAM               ; 19 (19)             ; 19 (19)                   ; 0                 ; 0          ; 42   ; 0            ; |FPGA_LEDRAM        ; FPGA_LEDRAM ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+-------------------------------------------------------------+
-; Registers Removed During Synthesis                          ;
-+----------------------------------------+--------------------+
-; Register name                          ; Reason for Removal ;
-+----------------------------------------+--------------------+
-; i[19..31]                              ; Lost fanout        ;
-; Total Number of Removed Registers = 13 ;                    ;
-+----------------------------------------+--------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 19    ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_ff             ; 19                          ;
-;     plain             ; 19                          ;
-; arriav_io_obuf        ; 8                           ;
-; arriav_lcell_comb     ; 19                          ;
-;     arith             ; 18                          ;
-;         1 data inputs ; 17                          ;
-;         2 data inputs ; 1                           ;
-;     normal            ; 1                           ;
-;         1 data inputs ; 1                           ;
-; boundary_port         ; 42                          ;
-;                       ;                             ;
-; Max LUT depth         ; 2.70                        ;
-; Average LUT depth     ; 1.55                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:00     ;
-+----------------+--------------+
 
 
 +-------------------------------+
@@ -274,7 +160,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Mon Mar 15 15:19:41 2021
+    Info: Processing started: Tue Mar 16 15:07:53 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
@@ -286,37 +172,12 @@ Info (12021): Found 2 design units, including 1 entities, in source file fpga_le
 Info (12021): Found 2 design units, including 1 entities, in source file multiplebyteprogram.vhd
     Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
     Info (12023): Found entity 1: multipleByteProgram File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
-Info (12127): Elaborating entity "FPGA_LEDRAM" for the top level hierarchy
-Warning (13039): The following bidirectional pins have no drivers
-    Warning (13040): bidirectional pin "data[0]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[1]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[2]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[3]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[4]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[5]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[6]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-    Warning (13040): bidirectional pin "data[7]" has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 11
-Info (286030): Timing-Driven Synthesis is running
-Warning (14632): Output pin "LEDs[0]" driven by bidirectional pin "data[0]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[1]" driven by bidirectional pin "data[1]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[2]" driven by bidirectional pin "data[2]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[3]" driven by bidirectional pin "data[3]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[4]" driven by bidirectional pin "data[4]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[5]" driven by bidirectional pin "data[5]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[6]" driven by bidirectional pin "data[6]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Warning (14632): Output pin "LEDs[7]" driven by bidirectional pin "data[7]" cannot be tri-stated File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 14
-Info (17049): 13 registers lost all their fanouts during netlist optimizations.
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 61 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 4 input pins
-    Info (21059): Implemented 30 output pins
-    Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 19 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 4887 megabytes
-    Info: Processing ended: Mon Mar 15 15:19:52 2021
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:21
+Error (10500): VHDL syntax error at CamToRAM.vhd(30) near text "begin";  expecting an identifier ("begin" is a reserved keyword), or a string literal File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 30
+Info (12021): Found 0 design units, including 0 entities, in source file camtoram.vhd
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 1 warning
+    Error: Peak virtual memory: 4843 megabytes
+    Error: Processing ended: Tue Mar 16 15:08:03 2021
+    Error: Elapsed time: 00:00:10
+    Error: Total CPU time (on all processors): 00:00:21
 
 

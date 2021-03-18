@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGA_RAM_test
-Tue Mar 16 15:08:02 2021
+Thu Mar 18 15:52:34 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Tue Mar 16 15:08:02 2021           ;
+; Analysis & Synthesis Status ; Failed - Thu Mar 18 15:52:34 2021           ;
 ; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name               ; FPGA_RAM_test                               ;
 ; Top-level Entity Name       ; CamToRAM                                    ;
@@ -160,7 +160,7 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Tue Mar 16 15:07:53 2021
+    Info: Processing started: Thu Mar 18 15:52:18 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
@@ -172,12 +172,42 @@ Info (12021): Found 2 design units, including 1 entities, in source file fpga_le
 Info (12021): Found 2 design units, including 1 entities, in source file multiplebyteprogram.vhd
     Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
     Info (12023): Found entity 1: multipleByteProgram File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
-Error (10500): VHDL syntax error at CamToRAM.vhd(30) near text "begin";  expecting an identifier ("begin" is a reserved keyword), or a string literal File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 30
-Info (12021): Found 0 design units, including 0 entities, in source file camtoram.vhd
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 1 warning
-    Error: Peak virtual memory: 4843 megabytes
-    Error: Processing ended: Tue Mar 16 15:08:03 2021
-    Error: Elapsed time: 00:00:10
-    Error: Total CPU time (on all processors): 00:00:21
+Info (12021): Found 2 design units, including 1 entities, in source file camtoram.vhd
+    Info (12022): Found design unit 1: CamToRAM-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 22
+    Info (12023): Found entity 1: CamToRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 5
+Info (12127): Elaborating entity "CamToRAM" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at CamToRAM.vhd(17): used implicit default value for signal "LEDs" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(67): signal "getImagePin" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 67
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(81): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 81
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(82): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 82
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(83): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 83
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(86): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 86
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(87): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(88): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 88
+Warning (10631): VHDL Process Statement warning at CamToRAM.vhd(77): inferring latch(es) for signal or variable "postArray", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Warning (10034): Output port "OE" at CamToRAM.vhd(15) has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 15
+Info (10041): Inferred latch for "postArray[0][0]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][1]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][2]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][3]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][4]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][5]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][6]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[0][7]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][0]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][1]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][2]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][3]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][4]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][5]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][6]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Info (10041): Inferred latch for "postArray[1][7]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Error (10822): HDL error at CamToRAM.vhd(67): couldn't implement registers for assignments on this clock edge File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 67
+Error (12153): Can't elaborate top-level user hierarchy
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 11 warnings
+    Error: Peak virtual memory: 4838 megabytes
+    Error: Processing ended: Thu Mar 18 15:52:34 2021
+    Error: Elapsed time: 00:00:16
+    Error: Total CPU time (on all processors): 00:00:32
 
 

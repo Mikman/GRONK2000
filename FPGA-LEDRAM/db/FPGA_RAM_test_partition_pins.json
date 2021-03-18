@@ -4,6 +4,10 @@
 			"name" : "Top",
 			"pins" : [
 				{
+					"name" : "XCLK",
+					"strict" : false
+				},
+				{
 					"name" : "address[0]",
 					"strict" : false
 				},
@@ -80,7 +84,35 @@
 					"strict" : false
 				},
 				{
-					"name" : "CS",
+					"name" : "RAMdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[7]",
 					"strict" : false
 				},
 				{
@@ -88,87 +120,39 @@
 					"strict" : false
 				},
 				{
-					"name" : "OE",
+					"name" : "clk",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[0]",
+					"name" : "VSYNC",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[1]",
+					"name" : "getImagePin",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[2]",
+					"name" : "PCLK",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[3]",
+					"name" : "CAMdata[6]",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[4]",
+					"name" : "HREF",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[5]",
+					"name" : "CAMdata[7]",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[6]",
+					"name" : "CAMdata[4]",
 					"strict" : false
 				},
 				{
-					"name" : "LEDs[7]",
-					"strict" : false
-				},
-				{
-					"name" : "data[0]",
-					"strict" : false
-				},
-				{
-					"name" : "data[1]",
-					"strict" : false
-				},
-				{
-					"name" : "data[2]",
-					"strict" : false
-				},
-				{
-					"name" : "data[3]",
-					"strict" : false
-				},
-				{
-					"name" : "data[4]",
-					"strict" : false
-				},
-				{
-					"name" : "data[5]",
-					"strict" : false
-				},
-				{
-					"name" : "data[6]",
-					"strict" : false
-				},
-				{
-					"name" : "data[7]",
-					"strict" : false
-				},
-				{
-					"name" : "CS_SW",
-					"strict" : false
-				},
-				{
-					"name" : "WE_SW",
-					"strict" : false
-				},
-				{
-					"name" : "OE_SW",
-					"strict" : false
-				},
-				{
-					"name" : "addr_SW",
+					"name" : "CAMdata[5]",
 					"strict" : false
 				}
 			]

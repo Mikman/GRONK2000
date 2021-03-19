@@ -20,7 +20,7 @@ namespace Gronk2000YCbCr422Converter
         string filePath;
         string fileContent;
 
-        enum CONV_METHOD
+        public enum CONV_METHOD
         {
             NONE,
             M2,
@@ -66,9 +66,9 @@ namespace Gronk2000YCbCr422Converter
             // https://en.wikipedia.org/wiki/YCbCr#ITU-R_BT.601_conversion
             // Y (4 bit) | Cb (2 bit) | Cr (2 bit)
             int Y, Cb, Cr;
-            Y = ((int)(yCbCr & 0xF0));
-            Cb = ((int)((yCbCr << 4) & 0b11000000));
-            Cr = ((int)((yCbCr << 6) & 0b11000000));
+            Y = ((int)  (yCbCr & 0xF0));
+            Cb = ((int) ((yCbCr << 4) & 0b11000000));
+            Cr = ((int) ((yCbCr << 6) & 0b11000000));
 
             switch (conv)
             {
@@ -103,6 +103,21 @@ namespace Gronk2000YCbCr422Converter
             return Color.FromArgb(R, G, B);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             int width = 640, height = 480;
@@ -121,8 +136,17 @@ namespace Gronk2000YCbCr422Converter
             l.Size = new System.Drawing.Size(100, 100);
             l.AutoSize = true;
             l.BringToFront();
-
+            
             this.Controls.Add(l);
+
+            //PalletteView palletteView = new PalletteView(null);
+            //palletteView.Dock = DockStyle.Fill;
+            //pallette_panel0.Controls.Add(palletteView);
+
+            PalletteGroupBox box = new PalletteGroupBox("Number 1", null);
+            box.Width = 741;
+            tabPage1.Controls.Add(box);
+
 
             for (int x = 0; x < width; x++)
             {
@@ -141,12 +165,7 @@ namespace Gronk2000YCbCr422Converter
                 }
             }
 
-            pictureBox1.Image = img;
-
-            Console.WriteLine("Converted color value: " + RgbToYCbCr(Color.Red).ToString());
-            Console.WriteLine("Converted color value: " + RgbToYCbCr(Color.FromArgb(0, 255, 0)).ToString());
-            Console.WriteLine("Converted color value: " + RgbToYCbCr(Color.White).ToString());
-            Console.WriteLine("Converted color value: " + RgbToYCbCr(Color.Yellow).ToString());
+            //pictureBox1.Image = img;
         }
 
         static int Clamp(int input, int min, int max)
@@ -191,6 +210,22 @@ namespace Gronk2000YCbCr422Converter
             //{
             //    RgbYcbcrPair(Color.FromArgb(r, g, b));
             //}
+        }
+
+        public struct ConversionSettings
+        {
+            public readonly int Y_bits, Cb_bits, Cr_bits;
+            public readonly CONV_METHOD method;
+
+            public ConversionSettings(CONV_METHOD method, int Y_bits = 4, int Cb_bits = 2, int Cr_bits = 2)
+            {
+                if ((Y_bits + Cb_bits + Cr_bits) != 8) throw new System.ArgumentException("YCbCr bit components must add up to 8.");
+
+                this.Y_bits = Y_bits;
+                this.Cb_bits = Cb_bits;
+                this.Cr_bits = Cr_bits;
+                this.method = method;
+            }
         }
     }
 }

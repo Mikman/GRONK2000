@@ -8,3 +8,5 @@ C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Co
 C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Converter\obj\Debug\Gronk2000YCbCr422Converter.csproj.CoreCompileInputs.cache
 C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Converter\obj\Debug\Gronk2000YCbCr422Converter.exe
 C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Converter\obj\Debug\Gronk2000YCbCr422Converter.pdb
+C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Converter\obj\Debug\Gronk2000YCbCr422Converter.PalletteGroupBox.resources
+C:\Users\Mikkel\Documents\GitHub\GRONK2000\YCbCr422Converter\Gronk2000YCbCr422Converter\obj\Debug\Gronk2000YCbCr422Converter.PalletteView.resources

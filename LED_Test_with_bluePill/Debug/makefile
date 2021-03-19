@@ -9,7 +9,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
+-include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include subdir.mk
@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := MotorControl_STM32_nucleo
+BUILD_ARTIFACT_NAME := LED_test_bluePill
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-MotorControl_STM32_nucleo.elf \
+LED_test_bluePill.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-MotorControl_STM32_nucleo.list \
+LED_test_bluePill.list \
 
 OBJCOPY_BIN += \
-MotorControl_STM32_nucleo.bin \
+LED_test_bluePill.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: MotorControl_STM32_nucleo.elf secondary-outputs
+main-build: LED_test_bluePill.elf secondary-outputs
 
 # Tool invocations
-MotorControl_STM32_nucleo.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MotorControl_STM32_nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MotorControl_STM32_nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+LED_test_bluePill.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/LED_Test_with_bluePill/STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "LED_test_bluePill.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/LED_Test_with_bluePill/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LED_test_bluePill.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,13 +71,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-MotorControl_STM32_nucleo.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "MotorControl_STM32_nucleo.list"
+LED_test_bluePill.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "LED_test_bluePill.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-MotorControl_STM32_nucleo.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "MotorControl_STM32_nucleo.bin"
+LED_test_bluePill.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "LED_test_bluePill.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

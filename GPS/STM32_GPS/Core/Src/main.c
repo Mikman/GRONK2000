@@ -23,16 +23,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "stdio.h"
+#include "string.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
-uint8_t flag = 0;
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	flag = 1;
-}
 
 /* USER CODE END PTD */
 
@@ -47,18 +44,57 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
-DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
+
+	char GPSFormat[6] = "$GPGGA";
+
+	uint8_t rawData[255] = {0};
+	uint8_t GPSData[255] = {0};
+
+
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+
+
+void readGPS(){
+	for (int i = 0 ; i < sizeof(rawData) ; i = i + 1){
+			  if (rawData[i] == '$'){
+				char formatTest[6] = {0};
+				int check = 5;
+
+				for ( int x = 0 ; x < 6 ; x = x +1){
+					formatTest[x] = rawData[i + x];
+					check = strcmp(formatTest, GPSFormat);
+
+					if (check == 0){
+
+						uint8_t counter = 0;
+						for (i = i +1 ; i < sizeof(rawData) ; i = i + 1){
+							if (rawData[i] != '$'){
+								GPSData[counter] = rawData[i];
+								counter = counter + 1;
+							}else{
+
+								HAL_Delay(1000);
+								return;
+							}
+						}
+					}
+				}
+			  }
+
+		  }
+}
+
+
 
 /* USER CODE END PFP */
 
@@ -74,7 +110,6 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
 
 
   /* USER CODE END 1 */
@@ -97,13 +132,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  uint8_t data[255] = {0};
 
-  HAL_UART_Receive_DMA(&huart1, data , 255);
+  	  uint8_t GPSData1[255] = {0};
+    HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY);
+
+
 
   /* USER CODE END 2 */
 
@@ -111,9 +147,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (flag == 1) {
+	 readGPS();
+	 for (int i = 0 ; i < sizeof(rawData) ; i = i + 1){
+		 GPSData1[i] = GPSData[i];
+	 }
 
-	  }
+
+
+
+	 HAL_Delay(1000);
+
+
 
     /* USER CODE END WHILE */
 
@@ -134,10 +178,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -146,12 +193,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -191,22 +238,6 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
-  * Enable DMA controller clock
-  */
-static void MX_DMA_Init(void)
-{
-
-  /* DMA controller clock enable */
-  __HAL_RCC_DMA1_CLK_ENABLE();
-
-  /* DMA interrupt init */
-  /* DMA1_Channel5_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -215,8 +246,8 @@ static void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
 
 }
 

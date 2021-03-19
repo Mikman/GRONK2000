@@ -111,6 +111,7 @@ namespace Gronk2000YCbCr422Converter
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // pallette_panel0
             // 

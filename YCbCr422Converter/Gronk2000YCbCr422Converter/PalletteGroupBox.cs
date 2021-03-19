@@ -50,7 +50,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.label_bits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_bits.AutoSize = true;
-            this.label_bits.Location = new System.Drawing.Point(511, 34);
+            this.label_bits.Location = new System.Drawing.Point(528, 34);
             this.label_bits.Name = "label_bits";
             this.label_bits.Size = new System.Drawing.Size(81, 13);
             this.label_bits.TabIndex = 4;
@@ -60,7 +60,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.label_y.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_y.AutoSize = true;
-            this.label_y.Location = new System.Drawing.Point(595, 16);
+            this.label_y.Location = new System.Drawing.Point(612, 16);
             this.label_y.Name = "label_y";
             this.label_y.Size = new System.Drawing.Size(14, 13);
             this.label_y.TabIndex = 5;
@@ -70,7 +70,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.label_cb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_cb.AutoSize = true;
-            this.label_cb.Location = new System.Drawing.Point(637, 16);
+            this.label_cb.Location = new System.Drawing.Point(654, 16);
             this.label_cb.Name = "label_cb";
             this.label_cb.Size = new System.Drawing.Size(20, 13);
             this.label_cb.TabIndex = 6;
@@ -80,7 +80,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.label_cr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_cr.AutoSize = true;
-            this.label_cr.Location = new System.Drawing.Point(679, 16);
+            this.label_cr.Location = new System.Drawing.Point(696, 16);
             this.label_cr.Name = "label_cr";
             this.label_cr.Size = new System.Drawing.Size(17, 13);
             this.label_cr.TabIndex = 7;
@@ -90,7 +90,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.combo_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.combo_method.FormattingEnabled = true;
-            this.combo_method.Location = new System.Drawing.Point(598, 58);
+            this.combo_method.Location = new System.Drawing.Point(615, 58);
             this.combo_method.Name = "combo_method";
             this.combo_method.Size = new System.Drawing.Size(120, 21);
             this.combo_method.TabIndex = 8;
@@ -99,7 +99,7 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.label_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_method.AutoSize = true;
-            this.label_method.Location = new System.Drawing.Point(511, 61);
+            this.label_method.Location = new System.Drawing.Point(528, 61);
             this.label_method.Name = "label_method";
             this.label_method.Size = new System.Drawing.Size(74, 13);
             this.label_method.TabIndex = 9;
@@ -108,7 +108,7 @@ namespace Gronk2000YCbCr422Converter
             // num_field_cr
             // 
             this.num_field_cr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_field_cr.Location = new System.Drawing.Point(682, 32);
+            this.num_field_cr.Location = new System.Drawing.Point(699, 32);
             this.num_field_cr.Name = "num_field_cr";
             this.num_field_cr.Size = new System.Drawing.Size(36, 20);
             this.num_field_cr.TabIndex = 1;
@@ -116,7 +116,7 @@ namespace Gronk2000YCbCr422Converter
             // num_field_cb
             // 
             this.num_field_cb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_field_cb.Location = new System.Drawing.Point(640, 32);
+            this.num_field_cb.Location = new System.Drawing.Point(657, 32);
             this.num_field_cb.Name = "num_field_cb";
             this.num_field_cb.Size = new System.Drawing.Size(36, 20);
             this.num_field_cb.TabIndex = 2;
@@ -124,7 +124,7 @@ namespace Gronk2000YCbCr422Converter
             // num_field_y
             // 
             this.num_field_y.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_field_y.Location = new System.Drawing.Point(598, 32);
+            this.num_field_y.Location = new System.Drawing.Point(615, 32);
             this.num_field_y.Name = "num_field_y";
             this.num_field_y.Size = new System.Drawing.Size(36, 20);
             this.num_field_y.TabIndex = 3;
@@ -135,8 +135,15 @@ namespace Gronk2000YCbCr422Converter
 
         }
 
+        Label l = new Label();
+
         public PalletteGroupBox(String header, ColorCompPair[] compPair)
         {
+            this.Location = new System.Drawing.Point(6, 6);
+            this.Width = 741;
+            this.Height = 86;
+            this.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
             InitializeComponent();
 
             this.Controls.Add(pallette_panel);
@@ -147,19 +154,19 @@ namespace Gronk2000YCbCr422Converter
             this.Controls.Add(label_method);
             this.Controls.Add(num_field_y);
             this.Controls.Add(num_field_cb);
-            this.Controls.Add(num_field_cb);
+            this.Controls.Add(num_field_cr);
             this.Controls.Add(combo_method);
 
-            this.Text = header;
-
-            this.Height = 86;
-            this.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.Text = header;            
             
             PalletteView view = new PalletteView(compPair);
             this.pallette_panel.Controls.Add(view);
             view.Dock = DockStyle.Fill;
-            view.Update();
             
+            this.Controls.Add(l);
+
+            this.Refresh();
+
         }
     }
 }

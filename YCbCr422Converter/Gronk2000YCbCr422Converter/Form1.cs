@@ -144,7 +144,6 @@ namespace Gronk2000YCbCr422Converter
             //pallette_panel0.Controls.Add(palletteView);
 
             PalletteGroupBox box = new PalletteGroupBox("Number 1", null);
-            box.Width = 741;
             tabPage1.Controls.Add(box);
 
 
@@ -166,6 +165,11 @@ namespace Gronk2000YCbCr422Converter
             }
 
             //pictureBox1.Image = img;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
 
         static int Clamp(int input, int min, int max)

@@ -1,0 +1,10 @@
+11:33:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+
+11:33:38 Build Finished. 0 errors, 0 warnings. (took 1s.54ms)
+

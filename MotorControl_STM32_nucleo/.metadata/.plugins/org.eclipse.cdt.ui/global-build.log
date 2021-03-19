@@ -5,3 +5,876 @@ arm-none-eabi-size   PWM_bluePillTest.elf
   13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
 Finished building: default.size.stdout
  
+10:07:26 **** Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:59: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o] Terminated: 15
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:57: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o] Terminated: 15
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:55: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o] Terminated: 15
+Command canceled
+10:08:10 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:09:14 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:09:55 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:10:05 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:10:59 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:13:49 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:14:00 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:14:43 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13416	     20	   1692	  15128	   3b18	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+10:17:28 **** Incremental Build of configuration Debug for project PWM_bluePillTest ****
+make -j3 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f1xx.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f1xx.d" -MT"Core/Src/system_stm32f1xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f1xx.o"
+arm-none-eabi-gcc -o "PWM_bluePillTest.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/PWM_bluePillTest/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PWM_bluePillTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: PWM_bluePillTest.elf
+ 
+arm-none-eabi-objdump -h -S  PWM_bluePillTest.elf  > "PWM_bluePillTest.list"
+arm-none-eabi-objcopy  -O binary  PWM_bluePillTest.elf  "PWM_bluePillTest.bin"
+arm-none-eabi-size   PWM_bluePillTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13384	     20	   1692	  15096	   3af8	PWM_bluePillTest.elf
+Finished building: default.size.stdout
+ 
+Finished building: PWM_bluePillTest.bin
+ 
+Finished building: PWM_bluePillTest.list
+ 
+11:30:34 **** Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o"
+arm-none-eabi-gcc -mcpu=cortex-m3 -g3 -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f103c8tx.d" -MT"Core/Startup/startup_stm32f103c8tx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Startup/startup_stm32f103c8tx.o" "../Core/Startup/startup_stm32f103c8tx.s"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:4: error: 'returnValue' undeclared (first use in this function); did you mean 'ReturnValue'?
+  120 |    returnValue = HAL_I2C_Master_Transmit(&hi2c1, MPU_Address, tempBuf, 2, HAL_MAX_DELAY);
+      |    ^~~~~~~~~~~
+      |    ReturnValue
+../Core/Src/main.c:120:4: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:127:63: warning: passing argument 3 of 'HAL_I2C_Master_Receive' makes pointer from integer without a cast [-Wint-conversion]
+  127 |     returnValue = HAL_I2C_Master_Receive(&hi2c1, MPU_Address, rawTempVal, 2, HAL_MAX_DELAY);
+      |                                                               ^~~~~~~~~~
+      |                                                               |
+      |                                                               int16_t {aka short int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:297,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:565:97: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int16_t' {aka 'short int'}
+  565 | HAL_StatusTypeDef HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                                        ~~~~~~~~~^~~~~
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+../Core/Src/main.c:82:20: warning: unused variable 'ReturnValue' [-Wunused-variable]
+   82 |  HAL_StatusTypeDef ReturnValue;
+      |                    ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j3 all" terminated with exit code 2. Build might be incomplete.
+11:30:49 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:63: warning: passing argument 3 of 'HAL_I2C_Master_Receive' makes pointer from integer without a cast [-Wint-conversion]
+  127 |     returnValue = HAL_I2C_Master_Receive(&hi2c1, MPU_Address, rawTempVal, 2, HAL_MAX_DELAY);
+      |                                                               ^~~~~~~~~~
+      |                                                               |
+      |                                                               int16_t {aka short int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:297,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:565:97: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int16_t' {aka 'short int'}
+  565 | HAL_StatusTypeDef HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                                        ~~~~~~~~~^~~~~
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f1xx.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f1xx.d" -MT"Core/Src/system_stm32f1xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f1xx.o"
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-size   STM32_MPU6050.elf 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+   text	   data	    bss	    dec	    hex	filename
+  10192	     20	   1668	  11880	   2e68	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:32:11 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10192	     20	   1668	  11880	   2e68	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:32:27 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10192	     20	   1668	  11880	   2e68	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:33:48 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10192	     20	   1668	  11880	   2e68	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:35:43 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:36:30 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:58:29 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:59:16 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:01:13 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+12:03:00 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+12:03:07 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:30:27 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:85:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   85 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+12:30:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10200	     20	   1668	  11888	   2e70	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:33:23 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10188	     20	   1652	  11860	   2e54	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+12:34:32 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10188	     20	   1652	  11860	   2e54	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:41:12 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+12:44:17 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:47:15 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:48:17 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:49:09 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+12:50:40 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+../Core/Src/main.c:80:20: warning: variable 'returnValue' set but not used [-Wunused-but-set-variable]
+   80 |  HAL_StatusTypeDef returnValue = HAL_ERROR;
+      |                    ^~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10092	     20	   1652	  11764	   2df4	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:09:54 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+../Core/Src/main.c:80:20: warning: variable 'returnValue' set but not used [-Wunused-but-set-variable]
+   80 |  HAL_StatusTypeDef returnValue = HAL_ERROR;
+      |                    ^~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10012	     20	   1652	  11684	   2da4	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:12:11 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+../Core/Src/main.c:80:20: warning: variable 'returnValue' set but not used [-Wunused-but-set-variable]
+   80 |  HAL_StatusTypeDef returnValue = HAL_ERROR;
+      |                    ^~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10092	     20	   1652	  11764	   2df4	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:13:18 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+../Core/Src/main.c:80:20: warning: variable 'returnValue' set but not used [-Wunused-but-set-variable]
+   80 |  HAL_StatusTypeDef returnValue = HAL_ERROR;
+      |                    ^~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10092	     20	   1652	  11764	   2df4	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:40:14 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:40:38 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:41:51 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:43:07 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:44:02 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10252	     20	   1652	  11924	   2e94	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:45:33 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:45:47 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:46:52 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:48:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:48:58 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:49:46 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+13:51:56 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:53:13 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+13:58:18 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+14:00:45 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+14:02:42 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+14:08:01 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+At top level:
+../Core/Src/main.c:51:22: warning: 'MPU_TempRegLSB' defined but not used [-Wunused-const-variable=]
+   51 | static const uint8_t MPU_TempRegLSB = 0x41 << 1;
+      |                      ^~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+14:08:53 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+At top level:
+../Core/Src/main.c:51:22: warning: 'MPU_TempRegLSB' defined but not used [-Wunused-const-variable=]
+   51 | static const uint8_t MPU_TempRegLSB = 0x41 << 1;
+      |                      ^~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+14:10:52 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   83 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+14:13:48 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10204	     20	   1652	  11876	   2e64	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:15:15 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10228	     20	   1652	  11900	   2e7c	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:15:34 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10228	     20	   1652	  11900	   2e7c	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:28:41 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:16: error: 'b00001000' undeclared (first use in this function)
+  110 |   tempBuf[1] = b00001000;
+      |                ^~~~~~~~~
+../Core/Src/main.c:110:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j3 all" terminated with exit code 2. Build might be incomplete.
+11:29:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:16: error: 'B00001000' undeclared (first use in this function)
+  110 |   tempBuf[1] = B00001000;
+      |                ^~~~~~~~~
+../Core/Src/main.c:110:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j3 all" terminated with exit code 2. Build might be incomplete.
+11:31:09 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:84:8: warning: variable 'tempVal' set but not used [-Wunused-but-set-variable]
+   84 |  float tempVal;
+      |        ^~~~~~~
+arm-none-eabi-gcc -o "STM32_MPU6050.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/Temp, gyro mm opsætning/STM32_MPU6050/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_MPU6050.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32_MPU6050.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_MPU6050.elf  > "STM32_MPU6050.list"
+arm-none-eabi-objcopy  -O binary  STM32_MPU6050.elf  "STM32_MPU6050.bin"
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_MPU6050.bin
+ 
+Finished building: STM32_MPU6050.list
+ 
+11:31:51 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 
+11:33:37 **** Incremental Build of configuration Debug for project STM32_MPU6050 ****
+make -j3 all 
+arm-none-eabi-size   STM32_MPU6050.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10236	     20	   1652	  11908	   2e84	STM32_MPU6050.elf
+Finished building: default.size.stdout
+ 

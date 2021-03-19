@@ -61,8 +61,8 @@ all: main-build
 main-build: MotorControl_STM32_nucleo.elf secondary-outputs
 
 # Tool invocations
-MotorControl_STM32_nucleo.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MotorControl_STM32_nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK2000/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MotorControl_STM32_nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+MotorControl_STM32_nucleo.elf: $(OBJS) $(USER_OBJS) /Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MotorControl_STM32_nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/kaspergronkjaer/Documents/GitHub/GRONK-STM32/MotorControl_STM32_nucleo/MotorControl_STM32_nucleo/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MotorControl_STM32_nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

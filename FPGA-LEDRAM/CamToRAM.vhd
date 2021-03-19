@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity CamToRAM is
 	port (
 		-- Camera I/O
-		XCLK: out STD_LOGIC;
+		XCLK, RESET, PWDN: out STD_LOGIC;
 		HREF, VSYNC, PCLK, getImagePin: in STD_LOGIC;
 		CAMdata: in STD_LOGIC_VECTOR(7 downto 0);
 		
@@ -22,7 +22,9 @@ end CamToRAM;
 architecture Behavioral of CamToRAM is
 
 signal ticks, addr, i: integer := 0;
-signal counting, currentImage: boolean := false;
+signal currentImage: boolean;
+signal counting, wantAnImage: boolean := false;
+signal nVSYNC: STD_LOGIC;
 
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 type postEditBuffer is array(1 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
@@ -30,20 +32,23 @@ signal preArray: preEditBuffer;
 signal postArray: postEditBuffer;
 
 begin
+	
 	-- Constant assignments for RAM
 	CS <= '0';
-	WE <= '0' when ((ticks mod 10) >= 1) else '1';
+	WE <= '0' when ((ticks mod 8) >= 1) else '1';
 	address <= std_logic_vector(to_unsigned(addr, address'length));
-	
-	-- Constant assignments for camera
-	XCLK <= '1' when ((ticks mod 5) = 0) else '0';	
 
-	
+	-- Constant assignments for camera
+	XCLK <= '1' when ((ticks mod 4) < 2) else '0';
+	RESET <= '1';
+	PWDN <= '0';
+
+
 	process(PCLK)
 	begin
 		if (PCLK'event and PCLK = '1') then
 			if (VSYNC ='0' and HREF = '1' and getImagePin = '1') then
-				preArray(i) <= CAMdata(7 downto 0);
+				preArray(i) <= CAMdata;
 				if (i >= 3) then
 					i <= 0;
 				else
@@ -57,17 +62,20 @@ begin
 				counting <= false;
 			end if;
 
-			
 		end if;
 	end process;
+
 	
-	
-	process(VSYNC)
+	currentImage <= true when ((VSYNC = '0') and wantAnImage) else false;
+
+	process(VSYNC, nVSYNC)
 	begin
-		if (VSYNC'event and VSYNC = '0' and getImagePin = '1') then
-			currentImage <= true;
-		else
-			currentImage <= false;
+		if (VSYNC'event and VSYNC = '0') then
+			if (getImagePin = '1') then
+				wantAnImage <= true;
+			else
+				wantAnImage <= false;
+			end if;
 		end if;
 	end process;
 
@@ -96,27 +104,27 @@ begin
 	begin
 		if (clk'event and clk='1') then
 			
+			-- Decisions based on ticks
+			if (ticks > 15) then
+				ticks <= 0;
+			end if;
+			
+			if (ticks mod 8 = 0) then
+				addr <= addr + 1;
+			end if;
+			
+			if (ticks < 8) then
+				RAMdata <= postArray(0);
+			else
+				RAMdata <= postArray(1);
+			end if;
+			
 			-- Incrementing ticks or resetting ticks and addr
 			if (counting) then
 				ticks <= ticks + 1;
 			else
 				ticks <= 0;
 				addr <= 0;
-			end if;
-			
-			-- Decisions based on ticks
-			if (ticks >= 19) then
-				ticks <= 0;
-			end if;
-			
-			if (ticks mod 10 = 0) then
-				addr <= addr + 1;
-			end if;
-			
-			if (ticks < 10) then
-				RAMdata <= postArray(0);
-			else
-				RAMdata <= postArray(1);
 			end if;
 		end if;
 	end process;

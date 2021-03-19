@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGA_RAM_test
-Thu Mar 18 15:52:34 2021
+Fri Mar 19 14:55:25 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -10,7 +10,17 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. User-Specified and Inferred Latches
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -33,22 +43,27 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Thu Mar 18 15:52:34 2021           ;
-; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
-; Revision Name               ; FPGA_RAM_test                               ;
-; Top-level Entity Name       ; CamToRAM                                    ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Fri Mar 19 14:55:25 2021       ;
+; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                   ; FPGA_RAM_test                               ;
+; Top-level Entity Name           ; CamToRAM                                    ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 105                                         ;
+; Total pins                      ; 56                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -147,11 +162,165 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 8           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 8           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-8         ;   0.0%      ;
 +----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                        ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                 ; Library ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
+; CamToRAM.vhd                     ; yes             ; User VHDL File  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd ;         ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 67        ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 122       ;
+;     -- 7 input functions                    ; 0         ;
+;     -- 6 input functions                    ; 10        ;
+;     -- 5 input functions                    ; 6         ;
+;     -- 4 input functions                    ; 3         ;
+;     -- <=3 input functions                  ; 103       ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 105       ;
+;                                             ;           ;
+; I/O pins                                    ; 56        ;
+;                                             ;           ;
+; Total DSP Blocks                            ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 59        ;
+; Total fan-out                               ; 765       ;
+; Average fan-out                             ; 2.26      ;
++---------------------------------------------+-----------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; |CamToRAM                  ; 122 (122)           ; 105 (105)                 ; 0                 ; 0          ; 56   ; 0            ; |CamToRAM           ; CamToRAM    ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; postArray[1][0]                                     ; Equal0              ; yes                    ;
+; postArray[0][0]                                     ; Equal0              ; yes                    ;
+; postArray[1][1]                                     ; Equal0              ; yes                    ;
+; postArray[0][1]                                     ; Equal0              ; yes                    ;
+; postArray[1][2]                                     ; Equal0              ; yes                    ;
+; postArray[0][2]                                     ; Equal0              ; yes                    ;
+; postArray[1][3]                                     ; Equal0              ; yes                    ;
+; postArray[0][3]                                     ; Equal0              ; yes                    ;
+; postArray[1][4]                                     ; Equal0              ; yes                    ;
+; postArray[0][4]                                     ; Equal0              ; yes                    ;
+; postArray[1][5]                                     ; Equal0              ; yes                    ;
+; postArray[0][5]                                     ; Equal0              ; yes                    ;
+; postArray[1][6]                                     ; Equal0              ; yes                    ;
+; postArray[0][6]                                     ; Equal0              ; yes                    ;
+; postArray[1][7]                                     ; Equal0              ; yes                    ;
+; postArray[0][7]                                     ; Equal0              ; yes                    ;
+; Number of user-specified and inferred latches = 16  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------+
+; Registers Removed During Synthesis                          ;
++----------------------------------------+--------------------+
+; Register name                          ; Reason for Removal ;
++----------------------------------------+--------------------+
+; addr[19..31]                           ; Lost fanout        ;
+; Total Number of Removed Registers = 13 ;                    ;
++----------------------------------------+--------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                              ;
++---------------+--------------------+-----------------------------------------------------------------------------------------------------+
+; Register name ; Reason for Removal ; Registers Removed due to This Register                                                              ;
++---------------+--------------------+-----------------------------------------------------------------------------------------------------+
+; addr[31]      ; Lost Fanouts       ; addr[30], addr[29], addr[28], addr[27], addr[26], addr[25], addr[24], addr[23], addr[22], addr[21], ;
+;               ;                    ; addr[20], addr[19]                                                                                  ;
++---------------+--------------------+-----------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 105   ;
+; Number of registers using Synchronous Clear  ; 83    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 63    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |CamToRAM|addr[0]          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 105                         ;
+;     ENA               ; 12                          ;
+;     ENA SCLR          ; 51                          ;
+;     SCLR              ; 32                          ;
+;     plain             ; 10                          ;
+; arriav_lcell_comb     ; 126                         ;
+;     arith             ; 83                          ;
+;         1 data inputs ; 83                          ;
+;     normal            ; 43                          ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 1                           ;
+;         3 data inputs ; 19                          ;
+;         4 data inputs ; 3                           ;
+;         5 data inputs ; 6                           ;
+;         6 data inputs ; 10                          ;
+; boundary_port         ; 56                          ;
+;                       ;                             ;
+; Max LUT depth         ; 4.10                        ;
+; Average LUT depth     ; 2.65                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -160,7 +329,7 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Thu Mar 18 15:52:18 2021
+    Info: Processing started: Fri Mar 19 14:55:08 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
@@ -177,37 +346,68 @@ Info (12021): Found 2 design units, including 1 entities, in source file camtora
     Info (12023): Found entity 1: CamToRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 5
 Info (12127): Elaborating entity "CamToRAM" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at CamToRAM.vhd(17): used implicit default value for signal "LEDs" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(67): signal "getImagePin" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 67
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(81): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 81
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(82): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 82
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(83): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 83
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(86): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 86
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(87): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(88): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 88
-Warning (10631): VHDL Process Statement warning at CamToRAM.vhd(77): inferring latch(es) for signal or variable "postArray", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
+Warning (10036): Verilog HDL or VHDL warning at CamToRAM.vhd(27): object "nVSYNC" assigned a value but never read File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 27
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(91): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 91
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(92): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 92
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(93): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 93
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(96): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 96
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(97): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 97
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(98): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 98
+Warning (10631): VHDL Process Statement warning at CamToRAM.vhd(87): inferring latch(es) for signal or variable "postArray", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
 Warning (10034): Output port "OE" at CamToRAM.vhd(15) has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 15
-Info (10041): Inferred latch for "postArray[0][0]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][1]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][2]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][3]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][4]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][5]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][6]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[0][7]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][0]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][1]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][2]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][3]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][4]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][5]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][6]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Info (10041): Inferred latch for "postArray[1][7]" at CamToRAM.vhd(77) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 77
-Error (10822): HDL error at CamToRAM.vhd(67): couldn't implement registers for assignments on this clock edge File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 67
-Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 11 warnings
-    Error: Peak virtual memory: 4838 megabytes
-    Error: Processing ended: Thu Mar 18 15:52:34 2021
-    Error: Elapsed time: 00:00:16
-    Error: Total CPU time (on all processors): 00:00:32
+Info (10041): Inferred latch for "postArray[0][0]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][1]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][2]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][3]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][4]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][5]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][6]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][7]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][0]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][1]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][2]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][3]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][4]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][5]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][6]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[1][7]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
+    Info (13026): Duplicate LATCH primitive "postArray[0][0]" merged with LATCH primitive "postArray[1][0]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+    Info (13026): Duplicate LATCH primitive "postArray[0][1]" merged with LATCH primitive "postArray[1][1]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+    Info (13026): Duplicate LATCH primitive "postArray[0][2]" merged with LATCH primitive "postArray[1][2]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+    Info (13026): Duplicate LATCH primitive "postArray[0][3]" merged with LATCH primitive "postArray[1][3]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "RESET" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 8
+    Warning (13410): Pin "PWDN" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 8
+    Warning (13410): Pin "OE" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 15
+    Warning (13410): Pin "CS" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 16
+    Warning (13410): Pin "LEDs[0]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[1]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[2]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[3]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[4]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[5]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[6]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[7]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[8]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+    Warning (13410): Pin "LEDs[9]" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 13 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 4 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "CAMdata[0]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 10
+    Warning (15610): No output dependent on input pin "CAMdata[1]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 10
+    Warning (15610): No output dependent on input pin "CAMdata[2]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 10
+    Warning (15610): No output dependent on input pin "CAMdata[3]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 10
+Info (21057): Implemented 195 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 13 input pins
+    Info (21059): Implemented 43 output pins
+    Info (21061): Implemented 139 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 31 warnings
+    Info: Peak virtual memory: 4879 megabytes
+    Info: Processing ended: Fri Mar 19 14:55:25 2021
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:33
 
 

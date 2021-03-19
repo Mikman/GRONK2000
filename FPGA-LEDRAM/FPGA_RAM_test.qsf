@@ -65,14 +65,6 @@ set_global_assignment -name VHDL_FILE FPGA_LEDRAM.vhd
 set_location_assignment PIN_T15 -to CS
 set_location_assignment PIN_T17 -to WE
 set_location_assignment PIN_T18 -to OE
-set_location_assignment PIN_T19 -to data[0]
-set_location_assignment PIN_T20 -to data[1]
-set_location_assignment PIN_R16 -to data[2]
-set_location_assignment PIN_R17 -to data[3]
-set_location_assignment PIN_R15 -to data[4]
-set_location_assignment PIN_P18 -to data[5]
-set_location_assignment PIN_K19 -to data[6]
-set_location_assignment PIN_K17 -to data[7]
 set_location_assignment PIN_P17 -to address[0]
 set_location_assignment PIN_L18 -to address[1]
 set_location_assignment PIN_P16 -to address[2]
@@ -118,11 +110,7 @@ set_location_assignment PIN_U7 -to addr_SW
 set_location_assignment PIN_M6 -to CS_SW
 set_location_assignment PIN_M7 -to WE_SW
 set_location_assignment PIN_W9 -to OE_SW
-set_location_assignment PIN_AB12 -to switchyboi
 set_global_assignment -name VHDL_FILE CamToRAM.vhd
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK3_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK4_50
@@ -329,4 +317,30 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[2]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS
+set_location_assignment PIN_G11 -to CAMdata[0]
+set_location_assignment PIN_J19 -to CAMdata[1]
+set_location_assignment PIN_J11 -to CAMdata[2]
+set_location_assignment PIN_H10 -to CAMdata[3]
+set_location_assignment PIN_A15 -to CAMdata[4]
+set_location_assignment PIN_H14 -to CAMdata[5]
+set_location_assignment PIN_L8 -to CAMdata[6]
+set_location_assignment PIN_J13 -to CAMdata[7]
+set_location_assignment PIN_B15 -to XCLK
+set_location_assignment PIN_C15 -to VSYNC
+set_location_assignment PIN_A14 -to PCLK
+set_location_assignment PIN_E14 -to HREF
+set_location_assignment PIN_T19 -to RAMdata[0]
+set_location_assignment PIN_T20 -to RAMdata[1]
+set_location_assignment PIN_R16 -to RAMdata[2]
+set_location_assignment PIN_R17 -to RAMdata[3]
+set_location_assignment PIN_R15 -to RAMdata[4]
+set_location_assignment PIN_P18 -to RAMdata[5]
+set_location_assignment PIN_K19 -to RAMdata[6]
+set_location_assignment PIN_K17 -to RAMdata[7]
+set_location_assignment PIN_AB12 -to getImagePin
+set_location_assignment PIN_J18 -to PWDN
+set_location_assignment PIN_H18 -to RESET
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

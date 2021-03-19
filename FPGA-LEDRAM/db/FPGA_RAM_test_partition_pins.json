@@ -128,11 +128,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "getImagePin",
+					"name" : "PCLK",
 					"strict" : false
 				},
 				{
-					"name" : "PCLK",
+					"name" : "getImagePin",
 					"strict" : false
 				},
 				{

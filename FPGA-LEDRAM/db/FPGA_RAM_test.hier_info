@@ -1,7 +1,10 @@
 |CamToRAM
-XCLK <= Equal1.DB_MAX_OUTPUT_PORT_TYPE
+XCLK <= LessThan1.DB_MAX_OUTPUT_PORT_TYPE
+RESET <= <VCC>
+PWDN <= <GND>
 HREF => process_0.IN0
-VSYNC => process_0.IN0
+VSYNC => currentImage.IN1
+VSYNC => wantAnImage.CLK
 VSYNC => process_0.IN1
 PCLK => counting.CLK
 PCLK => i[0].CLK
@@ -49,7 +52,7 @@ PCLK => preArray[3][5].CLK
 PCLK => preArray[3][6].CLK
 PCLK => preArray[3][7].CLK
 getImagePin => process_0.IN1
-getImagePin => process_0.IN1
+getImagePin => wantAnImage.DATAIN
 CAMdata[0] => ~NO_FANOUT~
 CAMdata[1] => ~NO_FANOUT~
 CAMdata[2] => ~NO_FANOUT~
@@ -106,7 +109,6 @@ LEDs[6] <= LEDs[6].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[7] <= LEDs[7].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[8] <= LEDs[8].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[9] <= LEDs[9].DB_MAX_OUTPUT_PORT_TYPE
-writebtn => ~NO_FANOUT~
 clk => RAMdata[0]~reg0.CLK
 clk => RAMdata[1]~reg0.CLK
 clk => RAMdata[2]~reg0.CLK
@@ -179,6 +181,5 @@ clk => ticks[28].CLK
 clk => ticks[29].CLK
 clk => ticks[30].CLK
 clk => ticks[31].CLK
-switchyboi => ~NO_FANOUT~
 
 

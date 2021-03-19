@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity multipleByteProgram is
 	port (
 		address: out STD_LOGIC_VECTOR(18 downto 0);
-		data: out STD_LOGIC_VECTOR(7 downto 0);
+		RAMdata: out STD_LOGIC_VECTOR(7 downto 0);
 		WE, OE: buffer STD_LOGIC;
 		CS: buffer STD_LOGIC;
 		LEDs: out STD_LOGIC_VECTOR(9 downto 0);
@@ -50,7 +50,7 @@ begin
 				amount <= amount - 1;
 			elsif (ticks >= 1) then
 				address <= std_logic_vector(to_unsigned(amount, address'length));
-				data <= std_logic_vector(to_unsigned((amount + 1), data'length));
+				RAMdata <= std_logic_vector(to_unsigned((amount + 1), RAMdata'length));
 			end if;
 			
 			

@@ -64,34 +64,71 @@ static void MX_USART1_UART_Init(void);
 
 
 
-void readGPS(){
-	for (int i = 0 ; i < sizeof(rawData) ; i = i + 1){
-			  if (rawData[i] == '$'){
-				char formatTest[6] = {0};
-				int check = 5;
+float readGPS(){
 
-				for ( int x = 0 ; x < 6 ; x = x +1){
-					formatTest[x] = rawData[i + x];
-					check = strcmp(formatTest, GPSFormat);
+	float timeUTC = 0.0;
+	float longitude = 0.0;
+	float latitude = 0.0;
+	float height = 0.0;
 
-					if (check == 0){
+	int flag = 0;
+	HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
 
-						uint8_t counter = 0;
-						for (i = i +1 ; i < sizeof(rawData) ; i = i + 1){
-							if (rawData[i] != '$'){
-								GPSData[counter] = rawData[i];
-								counter = counter + 1;
-							}else{
+	for (int i = 0 ; i < sizeof(rawData) || flag == 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
+		if (rawData[i] == '$') {
+			char formatTest[6] = { 0 }; // String for format comparison, i.e. $GPGGA
+			int check = 5; // Something else than 0 just for safety, since 0 means correct match
 
-								HAL_Delay(1000);
-								return;
-							}
+			for (int x = 0; x < 6; x = x + 1) {  // Loops over the next 6 characters and puts then in an array to check for the desired format
+				formatTest[x] = rawData[i + x];
+				check = strcmp(formatTest, GPSFormat);
+
+				if (check == 0) {
+
+					uint8_t counter = 0;
+					for (i = i + 1; i < sizeof(rawData); i = i + 1) { // loops until a '$' is found.
+						if (rawData[i] != '$') {
+							GPSData[counter] = rawData[i]; // Desired data format (GPGGA) is passed into another array
+							counter = counter + 1;
+						} else {
+							flag = 1;
+							break;
 						}
 					}
 				}
-			  }
+			}
+		}
 
-		  }
+	}
+
+	if (flag != 1){
+
+		return 0.0; // No data available
+
+	}else {
+
+		for (int i = 0 ; i < sizeof(GPSData) ; i = i + 1){
+
+			if (GPSData[i] == ','){
+
+				char concatTime[] = {0};
+
+				for ( i = i + 1 ; i < sizeof(GPSData) || GPSData[i] == ',' ; i = i + 1){
+
+
+					strcat(concatTime, GPSData[i]);
+
+				}
+			}
+		}
+
+
+
+	}
+
+
+
+
 }
 
 
@@ -136,8 +173,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
-  	  uint8_t GPSData1[255] = {0};
-    HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY);
 
 
 
@@ -148,11 +183,6 @@ int main(void)
   while (1)
   {
 	 readGPS();
-	 for (int i = 0 ; i < sizeof(rawData) ; i = i + 1){
-		 GPSData1[i] = GPSData[i];
-	 }
-
-
 
 
 	 HAL_Delay(1000);

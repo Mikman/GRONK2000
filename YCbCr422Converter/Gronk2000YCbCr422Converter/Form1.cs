@@ -82,12 +82,12 @@ namespace Gronk2000YCbCr422Converter
                     Cr |= 32;
                     break;
                 case CONV_METHOD.COMBI:
-                    Y = (int)((float)Y * (255f / 240f));
+                    Y = (int)((float) Y * (255f / 240f));
                     Cb |= 32;
                     Cr |= 32;
                     break;
                 case CONV_METHOD.J2:
-                    Y = (int)((float)Y * (255f / 240f));
+                    Y |= 0b1000;
                     Cb |= 32;
                     Cr |= 32;
                     break;
@@ -109,11 +109,20 @@ namespace Gronk2000YCbCr422Converter
             Bitmap img = new Bitmap(width, height);
 
             int colors = palette.Length;
-            int paletteCount = 4;
+            int paletteCount = 5;
 
             int sampleWidth = width / colors;
             int paletteHeight = height / paletteCount;
-            
+
+            Label l = new Label();
+            l.Name = "Label32";
+            l.Text = "Hejsa";
+            l.Location = new Point(50, 50);
+            l.Size = new System.Drawing.Size(100, 100);
+            l.AutoSize = true;
+            l.BringToFront();
+
+            this.Controls.Add(l);
 
             for (int x = 0; x < width; x++)
             {

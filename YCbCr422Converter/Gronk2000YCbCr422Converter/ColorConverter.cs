@@ -99,6 +99,21 @@ namespace Gronk2000YCbCr422Converter
             return YCbCrToRGB(RgbToYCbCr(col, settings), settings);
         }
 
+        public static Bitmap ConvertImage(Bitmap original, ConversionSettings settings)
+        {
+            Bitmap converted = new Bitmap(original.Width, original.Height);
+
+            for (int x = 0; x < original.Width; x++)
+            {
+                for (int y = 0; y < original.Height; y++)
+                {
+                    converted.SetPixel(x, y, Convert(original.GetPixel(x, y), settings));
+                }
+            }
+
+            return converted;
+        }
+
         private static int Clamp(int input, int min, int max)
         {
             if (input > max) input = max;

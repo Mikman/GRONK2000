@@ -18,6 +18,7 @@ namespace Gronk2000YCbCr422Converter
 
         string filePath;
         string fileContent;
+        private ColorConverter.ConversionSettings preview_settings = ColorConverter.ConversionSettings.Default;
 
         private List<Color> paletteColors = new List<Color>() { Color.Black, Color.FromArgb(192, 192, 192), Color.FromArgb(128, 128, 128), Color.FromArgb(64, 64, 64), Color.White, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 153, 0), Color.FromArgb(204, 255, 0), Color.FromArgb(51, 255, 0), Color.FromArgb(0, 255, 102), Color.FromArgb(0, 255, 255), Color.FromArgb(0, 102, 255), Color.FromArgb(51, 0, 255), Color.FromArgb(204, 0, 255), Color.FromArgb(255, 0, 153) };
 
@@ -28,6 +29,64 @@ namespace Gronk2000YCbCr422Converter
         public Form1()
         {
             InitializeComponent();
+
+            this.num_field_y.Value = preview_settings.Y_bits;
+            this.num_field_cb.Value = preview_settings.Cb_bits;
+            this.num_field_cr.Value = preview_settings.Cr_bits;
+
+            this.num_field_y.ValueChanged += ComponentBitsChanged;
+            this.num_field_cb.ValueChanged += ComponentBitsChanged;
+            this.num_field_cr.ValueChanged += ComponentBitsChanged;
+
+            this.combo_post_conv.SelectionChangeCommitted += SelectedPostConvChanged;
+            for (int i = 0; i < Enum.GetValues(typeof(ColorConverter.POST_CONV)).Length; i++)
+            {
+                this.combo_post_conv.Items.Add((object)Enum.GetNames(typeof(ColorConverter.POST_CONV))[i]);
+            }
+            this.combo_post_conv.SelectedIndex = (int)preview_settings.post_conv;
+
+            this.combo_pre_conv.SelectionChangeCommitted += SelectedPreConvChanged;
+            for (int i = 0; i < Enum.GetValues(typeof(ColorConverter.PRE_CONV)).Length; i++)
+            {
+                this.combo_pre_conv.Items.Add((object)Enum.GetNames(typeof(ColorConverter.PRE_CONV))[i]);
+            }
+            this.combo_pre_conv.SelectedIndex = (int)preview_settings.pre_conv;
+
+            UpdatePreview();
+        }
+
+        private void SelectedPreConvChanged(object sender, EventArgs args)
+        {
+            preview_settings.pre_conv = (ColorConverter.PRE_CONV)((ComboBox)sender).SelectedIndex;
+            UpdatePreview();
+        }
+
+        private void SelectedPostConvChanged(object sender, EventArgs args)
+        {
+            preview_settings.post_conv = (ColorConverter.POST_CONV)((ComboBox)sender).SelectedIndex;
+            UpdatePreview();
+        }
+
+        private void ComponentBitsChanged(object sender, EventArgs args)
+        {
+            if ((num_field_y.Value + num_field_cb.Value + num_field_cr.Value) == 8)
+            {
+                this.num_field_y.BackColor = this.num_field_cb.BackColor = this.num_field_cr.BackColor = NumericUpDown.DefaultBackColor;
+                this.preview_settings.Y_bits = (int)this.num_field_y.Value;
+                this.preview_settings.Cb_bits = (int)this.num_field_cb.Value;
+                this.preview_settings.Cr_bits = (int)this.num_field_cr.Value;
+                UpdatePreview();
+
+            }
+            else
+            {
+                this.num_field_y.BackColor = this.num_field_cb.BackColor = this.num_field_cr.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+        }
+
+        private void UpdatePreview()
+        {
+            this.pictureBox_preview_conv.Image = ColorConverter.ConvertImage((Bitmap) this.pictureBox_preview_og.Image, this.preview_settings);
         }
 
         private void btn_read_Click(object sender, EventArgs e)

@@ -50,8 +50,8 @@ namespace Gronk2000YCbCr422Converter
             this.label_bits = new System.Windows.Forms.Label();
             this.num_field_cb = new System.Windows.Forms.NumericUpDown();
             this.num_field_y = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_preview_og = new System.Windows.Forms.PictureBox();
+            this.pictureBox_preview_conv = new System.Windows.Forms.PictureBox();
             this.tab_container.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.table_pallettes.SuspendLayout();
@@ -61,8 +61,8 @@ namespace Gronk2000YCbCr422Converter
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_y)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview_og)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview_conv)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -164,8 +164,8 @@ namespace Gronk2000YCbCr422Converter
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox_preview_og, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox_preview_conv, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -300,21 +300,26 @@ namespace Gronk2000YCbCr422Converter
             this.num_field_y.Size = new System.Drawing.Size(36, 20);
             this.num_field_y.TabIndex = 12;
             // 
-            // pictureBox1
+            // pictureBox_preview_og
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_preview_og.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox_preview_og.Image = global::Gronk2000YCbCr422Converter.Properties.Resources.Parrot;
+            this.pictureBox_preview_og.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox_preview_og.Name = "pictureBox_preview_og";
+            this.pictureBox_preview_og.Size = new System.Drawing.Size(298, 438);
+            this.pictureBox_preview_og.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_preview_og.TabIndex = 0;
+            this.pictureBox_preview_og.TabStop = false;
             // 
-            // pictureBox2
+            // pictureBox_preview_conv
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(307, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.pictureBox_preview_conv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox_preview_conv.Location = new System.Drawing.Point(307, 3);
+            this.pictureBox_preview_conv.Name = "pictureBox_preview_conv";
+            this.pictureBox_preview_conv.Size = new System.Drawing.Size(298, 438);
+            this.pictureBox_preview_conv.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_preview_conv.TabIndex = 1;
+            this.pictureBox_preview_conv.TabStop = false;
             // 
             // Form1
             // 
@@ -337,8 +342,8 @@ namespace Gronk2000YCbCr422Converter
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_y)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview_og)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview_conv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,8 +370,8 @@ namespace Gronk2000YCbCr422Converter
         private System.Windows.Forms.Label label_bits;
         private System.Windows.Forms.NumericUpDown num_field_cb;
         private System.Windows.Forms.NumericUpDown num_field_y;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox_preview_og;
+        private System.Windows.Forms.PictureBox pictureBox_preview_conv;
     }
 }
 

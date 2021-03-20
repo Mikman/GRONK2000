@@ -4,21 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
+using Gronk2000YCbCr422Converter;
 
 namespace Gronk2000YCbCr422Converter
 {
     class PalletteGroupBox : GroupBox
     {
+        private ColorConverter.ConversionSettings settings;
+
+        private Color[] _palette = { };
+
+        private PalletteView _view;
+
         private Panel pallette_panel;
         private Label label_bits;
         private Label label_y;
         private Label label_cb;
         private Label label_cr;
-        private ComboBox combo_method;
-        private Label label_method;
+        private ComboBox combo_post_conv;
+        private Label label_post_conv;
         private NumericUpDown num_field_cr;
         private NumericUpDown num_field_cb;
+        private ComboBox combo_pre_conv;
+        private Label label_pre_conv;
         private NumericUpDown num_field_y;
+
+        internal PalletteView View { get => _view; private set => _view = value; }
+        public Color[] Palette { get => _palette; private set => _palette = value; }
 
         private void InitializeComponent()
         {
@@ -27,11 +40,13 @@ namespace Gronk2000YCbCr422Converter
             this.label_y = new System.Windows.Forms.Label();
             this.label_cb = new System.Windows.Forms.Label();
             this.label_cr = new System.Windows.Forms.Label();
-            this.combo_method = new System.Windows.Forms.ComboBox();
-            this.label_method = new System.Windows.Forms.Label();
+            this.combo_post_conv = new System.Windows.Forms.ComboBox();
+            this.label_post_conv = new System.Windows.Forms.Label();
             this.num_field_cr = new System.Windows.Forms.NumericUpDown();
             this.num_field_cb = new System.Windows.Forms.NumericUpDown();
             this.num_field_y = new System.Windows.Forms.NumericUpDown();
+            this.combo_pre_conv = new System.Windows.Forms.ComboBox();
+            this.label_pre_conv = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_y)).BeginInit();
@@ -43,7 +58,7 @@ namespace Gronk2000YCbCr422Converter
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pallette_panel.Location = new System.Drawing.Point(6, 19);
             this.pallette_panel.Name = "pallette_panel";
-            this.pallette_panel.Size = new System.Drawing.Size(516, 60);
+            this.pallette_panel.Size = new System.Drawing.Size(516, 86);
             this.pallette_panel.TabIndex = 0;
             // 
             // label_bits
@@ -86,29 +101,34 @@ namespace Gronk2000YCbCr422Converter
             this.label_cr.TabIndex = 7;
             this.label_cr.Text = "Cr";
             // 
-            // combo_method
+            // combo_post_conv
             // 
-            this.combo_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.combo_method.FormattingEnabled = true;
-            this.combo_method.Location = new System.Drawing.Point(615, 58);
-            this.combo_method.Name = "combo_method";
-            this.combo_method.Size = new System.Drawing.Size(120, 21);
-            this.combo_method.TabIndex = 8;
+            this.combo_post_conv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.combo_post_conv.FormattingEnabled = true;
+            this.combo_post_conv.Location = new System.Drawing.Point(615, 58);
+            this.combo_post_conv.Name = "combo_post_conv";
+            this.combo_post_conv.Size = new System.Drawing.Size(120, 21);
+            this.combo_post_conv.TabIndex = 8;
             // 
-            // label_method
+            // label_post_conv
             // 
-            this.label_method.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_method.AutoSize = true;
-            this.label_method.Location = new System.Drawing.Point(528, 61);
-            this.label_method.Name = "label_method";
-            this.label_method.Size = new System.Drawing.Size(74, 13);
-            this.label_method.TabIndex = 9;
-            this.label_method.Text = "Conv. Method";
+            this.label_post_conv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_post_conv.AutoSize = true;
+            this.label_post_conv.Location = new System.Drawing.Point(528, 61);
+            this.label_post_conv.Name = "label_post_conv";
+            this.label_post_conv.Size = new System.Drawing.Size(74, 13);
+            this.label_post_conv.TabIndex = 9;
+            this.label_post_conv.Text = "Post. Conv.";
             // 
             // num_field_cr
             // 
             this.num_field_cr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.num_field_cr.Location = new System.Drawing.Point(699, 32);
+            this.num_field_cr.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.num_field_cr.Name = "num_field_cr";
             this.num_field_cr.Size = new System.Drawing.Size(36, 20);
             this.num_field_cr.TabIndex = 1;
@@ -117,6 +137,11 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.num_field_cb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.num_field_cb.Location = new System.Drawing.Point(657, 32);
+            this.num_field_cb.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.num_field_cb.Name = "num_field_cb";
             this.num_field_cb.Size = new System.Drawing.Size(36, 20);
             this.num_field_cb.TabIndex = 2;
@@ -125,9 +150,33 @@ namespace Gronk2000YCbCr422Converter
             // 
             this.num_field_y.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.num_field_y.Location = new System.Drawing.Point(615, 32);
+            this.num_field_y.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             this.num_field_y.Name = "num_field_y";
             this.num_field_y.Size = new System.Drawing.Size(36, 20);
             this.num_field_y.TabIndex = 3;
+            // 
+            // combo_pre_conv
+            // 
+            this.combo_pre_conv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.combo_pre_conv.FormattingEnabled = true;
+            this.combo_pre_conv.Location = new System.Drawing.Point(615, 84);
+            this.combo_pre_conv.Name = "combo_pre_conv";
+            this.combo_pre_conv.Size = new System.Drawing.Size(120, 21);
+            this.combo_pre_conv.TabIndex = 8;
+            // 
+            // label_pre_conv
+            // 
+            this.label_pre_conv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_pre_conv.AutoSize = true;
+            this.label_pre_conv.Location = new System.Drawing.Point(528, 85);
+            this.label_pre_conv.Name = "label_pre_conv";
+            this.label_pre_conv.Size = new System.Drawing.Size(74, 13);
+            this.label_pre_conv.TabIndex = 9;
+            this.label_pre_conv.Text = "Pre. Conv.";
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_cb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_field_y)).EndInit();
@@ -135,13 +184,40 @@ namespace Gronk2000YCbCr422Converter
 
         }
 
-        Label l = new Label();
+        private void SelectedPreConvChanged(object sender, EventArgs args)
+        {
+            settings.pre_conv = (ColorConverter.PRE_CONV)((ComboBox)sender).SelectedIndex;
+            UpdatePalette();
+        }
 
-        public PalletteGroupBox(String header, ColorCompPair[] compPair)
+        private void SelectedPostConvChanged(object sender, EventArgs args)
+        {
+            settings.post_conv = (ColorConverter.POST_CONV) ((ComboBox)sender).SelectedIndex;
+            UpdatePalette();
+        }
+
+        private void ComponentBitsChanged(object sender, EventArgs args)
+        {
+            if ((num_field_y.Value + num_field_cb.Value + num_field_cr.Value) == 8)
+            {
+                this.num_field_y.BackColor = this.num_field_cb.BackColor = this.num_field_cr.BackColor = NumericUpDown.DefaultBackColor;
+                this.settings.Y_bits = (int) this.num_field_y.Value;
+                this.settings.Cb_bits = (int) this.num_field_cb.Value;
+                this.settings.Cr_bits = (int) this.num_field_cr.Value;
+                UpdatePalette();
+
+            }
+            else
+            {
+                this.num_field_y.BackColor = this.num_field_cb.BackColor = this.num_field_cr.BackColor = Color.FromKnownColor(KnownColor.ControlDark);
+            }
+        }
+
+        public PalletteGroupBox(String header, Color[] palette, ColorConverter.ConversionSettings settings)
         {
             this.Location = new System.Drawing.Point(6, 6);
             this.Width = 741;
-            this.Height = 86;
+            this.Height = 112;
             this.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
             InitializeComponent();
@@ -151,22 +227,64 @@ namespace Gronk2000YCbCr422Converter
             this.Controls.Add(label_cb);
             this.Controls.Add(label_cr);
             this.Controls.Add(label_bits);
-            this.Controls.Add(label_method);
+            this.Controls.Add(label_post_conv);
             this.Controls.Add(num_field_y);
             this.Controls.Add(num_field_cb);
             this.Controls.Add(num_field_cr);
-            this.Controls.Add(combo_method);
+            this.Controls.Add(combo_post_conv);
+            this.Controls.Add(combo_pre_conv);
+            this.Controls.Add(label_pre_conv);
 
-            this.Text = header;            
-            
-            PalletteView view = new PalletteView(compPair);
-            this.pallette_panel.Controls.Add(view);
-            view.Dock = DockStyle.Fill;
-            
-            this.Controls.Add(l);
+            this.Text = header;
+            this.Width = 500;
 
-            this.Refresh();
+            this.settings = settings;
 
+            this.num_field_y.Value = settings.Y_bits;
+            this.num_field_cb.Value = settings.Cb_bits;
+            this.num_field_cr.Value = settings.Cr_bits;
+
+            this.num_field_y.ValueChanged += ComponentBitsChanged;
+            this.num_field_cb.ValueChanged += ComponentBitsChanged;
+            this.num_field_cr.ValueChanged += ComponentBitsChanged;
+
+            this.combo_post_conv.SelectionChangeCommitted += SelectedPostConvChanged;
+            for (int i = 0; i < Enum.GetValues(typeof(ColorConverter.POST_CONV)).Length; i++)
+            {
+                this.combo_post_conv.Items.Add((object)Enum.GetNames(typeof(ColorConverter.POST_CONV))[i]);
+            }
+            this.combo_post_conv.SelectedIndex = (int) settings.post_conv;
+
+            this.combo_pre_conv.SelectionChangeCommitted += SelectedPreConvChanged;
+            for (int i = 0; i < Enum.GetValues(typeof(ColorConverter.PRE_CONV)).Length; i++)
+            {
+                this.combo_pre_conv.Items.Add((object)Enum.GetNames(typeof(ColorConverter.PRE_CONV))[i]);
+            }
+            this.combo_pre_conv.SelectedIndex = (int)settings.pre_conv;
+
+            View = new PalletteView();
+            UpdatePalette(palette);
+            this.pallette_panel.Controls.Add(View);
+            View.Dock = DockStyle.Fill;
+        }
+        public void UpdatePalette(Color[] palette = null)
+        {
+            if (palette == null) palette = this.Palette;
+            else this.Palette = palette;
+
+            View.UpdatePallette(GenerateCompPairs(palette, settings));
+        }
+
+        public static ColorCompPair[] GenerateCompPairs(Color[] palette, ColorConverter.ConversionSettings settings)
+        {
+            ColorCompPair[] compPairs = new ColorCompPair[palette.Length];
+
+            for (int i = 0; i < palette.Length; i++)
+            {
+                compPairs[i] = new ColorCompPair(palette[i], ColorConverter.Convert(palette[i], settings));
+            }
+
+            return compPairs;
         }
     }
 }

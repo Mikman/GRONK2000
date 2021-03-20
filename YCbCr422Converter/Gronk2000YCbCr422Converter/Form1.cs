@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
 
 namespace Gronk2000YCbCr422Converter
 {
@@ -15,19 +16,14 @@ namespace Gronk2000YCbCr422Converter
     {
         public const byte ycbcr_red = 0b01010111, ycbcr_green = 0b10010000, ycbcr_white = 0b11101010, ycbcr_yellow = 0b11010010, ycbcr_badr = 0b00100110; // 87, 144, 234, 210, 38
 
-        private Color[] palette = new Color[] { Color.Red, Color.FromArgb(0, 255, 0), Color.Blue, Color.Black, Color.White, Color.Yellow, Color.Brown, Color.Cyan, Color.Orange, Color.Pink, Color.SandyBrown };
-
         string filePath;
         string fileContent;
 
-        public enum CONV_METHOD
-        {
-            NONE,
-            M2,
-            J,
-            COMBI,
-            J2
-        }
+        private List<Color> paletteColors = new List<Color>() { Color.Black, Color.FromArgb(192, 192, 192), Color.FromArgb(128, 128, 128), Color.FromArgb(64, 64, 64), Color.White, Color.FromArgb(255, 0, 0), Color.FromArgb(255, 153, 0), Color.FromArgb(204, 255, 0), Color.FromArgb(51, 255, 0), Color.FromArgb(0, 255, 102), Color.FromArgb(0, 255, 255), Color.FromArgb(0, 102, 255), Color.FromArgb(51, 0, 255), Color.FromArgb(204, 0, 255), Color.FromArgb(255, 0, 153) };
+
+        private List<PalletteGroupBox> _palettesGroups;
+
+        internal List<PalletteGroupBox> PaletteGroups { get { if (_palettesGroups == null) _palettesGroups = new List<PalletteGroupBox>(); return _palettesGroups; } set => _palettesGroups = value; }
 
         public Form1()
         {
@@ -61,174 +57,127 @@ namespace Gronk2000YCbCr422Converter
             }
         }
 
-        static Color YCbCrToRGB(byte yCbCr, CONV_METHOD conv = CONV_METHOD.M2)
+        private void AddPaletteGroup(string header, Color[] col, ColorConverter.ConversionSettings settings)
         {
-            // https://en.wikipedia.org/wiki/YCbCr#ITU-R_BT.601_conversion
-            // Y (4 bit) | Cb (2 bit) | Cr (2 bit)
-            int Y, Cb, Cr;
-            Y = ((int)  (yCbCr & 0xF0));
-            Cb = ((int) ((yCbCr << 4) & 0b11000000));
-            Cr = ((int) ((yCbCr << 6) & 0b11000000));
+            PalletteGroupBox box = new PalletteGroupBox(header, col, settings);
 
-            switch (conv)
-            {
-                case CONV_METHOD.M2:
-                    Y = (int) ((float) Y * (255f / 240f));
-                    Cb = (int) ((float) Cb * (255f / 192f));
-                    Cr = (int) ((float) Cr * (255f / 192f));
-                    break;
-                case CONV_METHOD.J:
-                    Cb |= 32;
-                    Cr |= 32;
-                    break;
-                case CONV_METHOD.COMBI:
-                    Y = (int)((float) Y * (255f / 240f));
-                    Cb |= 32;
-                    Cr |= 32;
-                    break;
-                case CONV_METHOD.J2:
-                    Y |= 0b1000;
-                    Cb |= 32;
-                    Cr |= 32;
-                    break;
-                default: break;
+            // Add row and move add button
+            this.table_pallettes.RowCount += 1;
+            this.table_pallettes.Controls.Remove(panel_add);
+            this.table_pallettes.Controls.Add(panel_add, 0, this.table_pallettes.RowCount - 1);
+
+            this.table_pallettes.Controls.Add(box);
+            box.Dock = DockStyle.Fill;
+
+            box.View.PaletteChanged += PaletteChanged;
+            
+            PaletteGroups.Add(box);
+        }
+
+        private void RemovePaletteGroup()
+        {
+            // Unsubscribe PaletteChanged eventhandler
+        }
+
+        private void PaletteChanged(object sender, PaletteColorChangedEventArgs args)
+        {
+            if (!args.colorAdded && paletteColors.Count > 1) {
+                if (PaletteColorRemove(args.col)) UpdatePaletteColors();
             }
-            
-            
-            int R, G, B;
-            R = Clamp((int)((298.082f * Y) / 256 + (408.583f * Cr) / 256 - 222.921), 0, 255);
-            G = Clamp((int)((298.082f * Y) / 256 - (100.291f * Cb) / 256 - (208.120f * Cr) / 256 + 135.576), 0, 255);
-            B = Clamp((int)((298.082f * Y) / 256 + (516.412f * Cb) / 256 - 276.836), 0, 255);
+            else
+            {
 
-            return Color.FromArgb(R, G, B);
+                if (color_picker.ShowDialog() == DialogResult.OK)
+                {
+                    if (PaletteColorAdd(color_picker.Color)) UpdatePaletteColors();
+                    else SystemSounds.Asterisk.Play();
+                }
+                else return;
+            }
+
+            Console.WriteLine("Colors updated");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public bool PaletteColorAdd(Color col)
         {
-
+            if (!paletteColors.Contains(col))
+            {
+                paletteColors.Add(col);
+                return true;
+            }
+            return false;
         }
 
-        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        public bool PaletteColorRemove(Color col)
         {
-
+            return paletteColors.Remove(col);
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        public void UpdatePaletteColors()
         {
-
+            foreach (PalletteGroupBox box in PaletteGroups)
+            {
+                box.UpdatePalette(paletteColors.ToArray());
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int width = 640, height = 480;
-            Bitmap img = new Bitmap(width, height);
+            //int width = 640, height = 480;
+            //Bitmap img = new Bitmap(width, height);
 
-            int colors = palette.Length;
-            int paletteCount = 5;
+            //int colors = PalletteView.Palette.Length;
+            //int paletteCount = 5;
 
-            int sampleWidth = width / colors;
-            int paletteHeight = height / paletteCount;
+            //int sampleWidth = width / colors;
+            //int paletteHeight = height / paletteCount;
 
-            Label l = new Label();
-            l.Name = "Label32";
-            l.Text = "Hejsa";
-            l.Location = new Point(50, 50);
-            l.Size = new System.Drawing.Size(100, 100);
-            l.AutoSize = true;
-            l.BringToFront();
-            
-            this.Controls.Add(l);
+            //for (int x = 0; x < width; x++)
+            //{
+            //    for (int y = 0; y < height; y++)
+            //    {
+            //        Color col = PalletteView.Palette[Clamp(x / sampleWidth, 0, colors - 1)];
 
-            //PalletteView palletteView = new PalletteView(null);
-            //palletteView.Dock = DockStyle.Fill;
-            //pallette_panel0.Controls.Add(palletteView);
+            //        int paletteNum = Clamp(y / paletteHeight, 0, paletteCount - 1);
 
-            PalletteGroupBox box = new PalletteGroupBox("Number 1", null);
-            tabPage1.Controls.Add(box);
+            //        CONV_METHOD method = (CONV_METHOD) paletteNum;
 
+            //        if (y >= paletteNum * paletteHeight + paletteHeight / 2) col = YCbCrToRGB(RgbToYCbCr(col), method);
+            //        if (y % paletteHeight < 3) col = Color.Black;
 
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    Color col = palette[Clamp(x / sampleWidth, 0, colors - 1)];
-
-                    int paletteNum = Clamp(y / paletteHeight, 0, paletteCount - 1);
-
-                    CONV_METHOD method = (CONV_METHOD) paletteNum;
-
-                    if (y >= paletteNum * paletteHeight + paletteHeight / 2) col = YCbCrToRGB(RgbToYCbCr(col), method);
-                    if (y % paletteHeight < 3) col = Color.Black;
-
-                    img.SetPixel(x, y, col);
-                }
-            }
+            //        img.SetPixel(x, y, col);
+            //    }
+            //}
 
             //pictureBox1.Image = img;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        static int Clamp(int input, int min, int max)
-        {
-            if (input > max) input = max;
-            if (input < min) input = min;
-            return input;
-        }
-
-        static byte RgbToYCbCr(Color rgb)
-        {
-            int R = rgb.R, G = rgb.G, B = rgb.B;
-
-            byte Y, Cb, Cr;
-            Y =  (byte) (16 + ((65.481f * (float) R + 128.553f * (float) G + 24.966f * (float) B) / 255f));
-            Cb = (byte) (128 + ((-37.797f * (float) R - 74.203f * (float) G + 112f * (float) B) / 255f));
-            Cr = (byte) (128 + ((112f * (float) R - 93.786f * (float) G - 18.214f * (float) B) / 255f));
-
-            Y &= 0xF0;
-            Cb &= 0b11000000;
-            Cr &= 0b11000000;
-
-            return (byte) (Y | (Cb >> 4) | (Cr >> 6));
-        }
-
-        private class RgbYcbcrPair
-        {
-            private readonly Color rgb_original;
-            private readonly Color rgb_converted;
-            private readonly byte YCbCr;
-
             
-
-            public RgbYcbcrPair(Color rgb, CONV_METHOD conv = CONV_METHOD.M2)
-            {
-                rgb_original = rgb;
-                YCbCr = RgbToYCbCr(rgb_original);
-                rgb_converted = YCbCrToRGB(YCbCr, conv);
-            }
-
-            //public RgbYcbcrPair(int r, int g, int b)
-            //{
-            //    RgbYcbcrPair(Color.FromArgb(r, g, b));
-            //}
         }
 
-        public struct ConversionSettings
+        private void table_pallettes_Paint(object sender, PaintEventArgs e)
         {
-            public readonly int Y_bits, Cb_bits, Cr_bits;
-            public readonly CONV_METHOD method;
 
-            public ConversionSettings(CONV_METHOD method, int Y_bits = 4, int Cb_bits = 2, int Cr_bits = 2)
+        }
+
+        private void btn_pallette_add_Click(object sender, EventArgs e)
+        {
+            Color[] palette = this.paletteColors.ToArray();
+
+            AddPaletteGroup("Palette" + PaletteGroups.Count, paletteColors.ToArray(), ColorConverter.ConversionSettings.Default);
+        }
+
+        public class PaletteColorChangedEventArgs : EventArgs
+        {
+            public readonly Color col;
+            public readonly bool colorAdded;
+
+            public PaletteColorChangedEventArgs(Color col, bool colorAdded)
             {
-                if ((Y_bits + Cb_bits + Cr_bits) != 8) throw new System.ArgumentException("YCbCr bit components must add up to 8.");
-
-                this.Y_bits = Y_bits;
-                this.Cb_bits = Cb_bits;
-                this.Cr_bits = Cr_bits;
-                this.method = method;
+                this.col = col;
+                this.colorAdded = colorAdded;
             }
         }
     }

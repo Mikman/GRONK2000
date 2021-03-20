@@ -10,15 +10,33 @@ namespace Gronk2000YCbCr422Converter
 {
     class PalletteView : TableLayoutPanel
     {
+        public event EventHandler<Form1.PaletteColorChangedEventArgs> PaletteChanged;
+
+        private void OnPaletteChanged(Form1.PaletteColorChangedEventArgs args)
+        {
+            PaletteChanged?.Invoke(this, args);
+        }
+
+        private void ColorMouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) OnPaletteChanged(new Form1.PaletteColorChangedEventArgs(Color.Empty, true));
+            else if (e.Button == MouseButtons.Right)
+            {
+                PictureBox box;
+
+                if (sender.GetType() == typeof(PictureBox)) box = (PictureBox)sender;
+                else return;
+
+                OnPaletteChanged(new Form1.PaletteColorChangedEventArgs(box.BackColor, false));
+            }
+        }
 
         public void UpdatePallette(ColorCompPair[] pallette)
         {
-            this.Controls.Clear();
+            RemovePalette();
+
             this.RowCount = 2;
             this.ColumnCount = pallette.Length;
-
-            this.RowStyles.Clear();
-            this.ColumnStyles.Clear();
 
             for (int i = 0; i < 2; i++)
             {
@@ -29,10 +47,25 @@ namespace Gronk2000YCbCr422Converter
             {
                 PictureBox boxOg = CreateColorSample(pallette[i].original);
                 this.Controls.Add(boxOg, i, 0);
+
+                boxOg.MouseClick += ColorMouseClick;
+
                 PictureBox boxConv = CreateColorSample(pallette[i].converted);
                 this.Controls.Add(boxConv, i, 1);
                 this.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f/pallette.Length));
             }
+        }
+
+        public void RemovePalette()
+        {
+            foreach (Control cntrl in this.Controls)
+            {
+                cntrl.MouseClick -= ColorMouseClick;
+            }
+
+            this.Controls.Clear();
+            this.RowStyles.Clear();
+            this.ColumnStyles.Clear();
         }
 
         private PictureBox CreateColorSample(Color color)
@@ -46,9 +79,9 @@ namespace Gronk2000YCbCr422Converter
         }
 
 
-        public PalletteView(ColorCompPair[] pallette)
+        public PalletteView(ColorCompPair[] pallette = null)
         {
-            UpdatePallette(new ColorCompPair[] { new ColorCompPair(Color.Red, Color.DarkRed), new ColorCompPair(Color.Green, Color.DarkGreen), new ColorCompPair(Color.Blue, Color.DarkBlue) });
+            if (pallette != null) UpdatePallette(pallette);
         }
     }
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGA_RAM_test
-Fri Mar 19 14:55:25 2021
+Sun Mar 21 20:33:23 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -46,7 +46,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Mar 19 14:55:25 2021       ;
+; Analysis & Synthesis Status     ; Successful - Sun Mar 21 20:33:22 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGA_RAM_test                               ;
 ; Top-level Entity Name           ; CamToRAM                                    ;
@@ -319,7 +319,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -329,7 +329,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Mar 19 14:55:08 2021
+    Info: Processing started: Sun Mar 21 20:33:06 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
@@ -346,36 +346,35 @@ Info (12021): Found 2 design units, including 1 entities, in source file camtora
     Info (12023): Found entity 1: CamToRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 5
 Info (12127): Elaborating entity "CamToRAM" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at CamToRAM.vhd(17): used implicit default value for signal "LEDs" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 17
-Warning (10036): Verilog HDL or VHDL warning at CamToRAM.vhd(27): object "nVSYNC" assigned a value but never read File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 27
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(89): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 89
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(90): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 90
 Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(91): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 91
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(92): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 92
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(93): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 93
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(94): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 94
+Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(95): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 95
 Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(96): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 96
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(97): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 97
-Warning (10492): VHDL Process Statement warning at CamToRAM.vhd(98): signal "preArray" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 98
-Warning (10631): VHDL Process Statement warning at CamToRAM.vhd(87): inferring latch(es) for signal or variable "postArray", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Warning (10631): VHDL Process Statement warning at CamToRAM.vhd(85): inferring latch(es) for signal or variable "postArray", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
 Warning (10034): Output port "OE" at CamToRAM.vhd(15) has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 15
-Info (10041): Inferred latch for "postArray[0][0]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][1]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][2]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][3]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][4]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][5]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][6]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[0][7]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][0]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][1]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][2]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][3]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][4]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][5]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][6]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-Info (10041): Inferred latch for "postArray[1][7]" at CamToRAM.vhd(87) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+Info (10041): Inferred latch for "postArray[0][0]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][1]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][2]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][3]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][4]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][5]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][6]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[0][7]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][0]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][1]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][2]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][3]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][4]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][5]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][6]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+Info (10041): Inferred latch for "postArray[1][7]" at CamToRAM.vhd(85) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
 Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
-    Info (13026): Duplicate LATCH primitive "postArray[0][0]" merged with LATCH primitive "postArray[1][0]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-    Info (13026): Duplicate LATCH primitive "postArray[0][1]" merged with LATCH primitive "postArray[1][1]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-    Info (13026): Duplicate LATCH primitive "postArray[0][2]" merged with LATCH primitive "postArray[1][2]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
-    Info (13026): Duplicate LATCH primitive "postArray[0][3]" merged with LATCH primitive "postArray[1][3]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 87
+    Info (13026): Duplicate LATCH primitive "postArray[0][0]" merged with LATCH primitive "postArray[1][0]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+    Info (13026): Duplicate LATCH primitive "postArray[0][1]" merged with LATCH primitive "postArray[1][1]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+    Info (13026): Duplicate LATCH primitive "postArray[0][2]" merged with LATCH primitive "postArray[1][2]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
+    Info (13026): Duplicate LATCH primitive "postArray[0][3]" merged with LATCH primitive "postArray[1][3]" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 85
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "RESET" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 8
     Warning (13410): Pin "PWDN" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 8
@@ -404,10 +403,10 @@ Info (21057): Implemented 195 device resources after synthesis - the final resou
     Info (21058): Implemented 13 input pins
     Info (21059): Implemented 43 output pins
     Info (21061): Implemented 139 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 4879 megabytes
-    Info: Processing ended: Fri Mar 19 14:55:25 2021
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 30 warnings
+    Info: Peak virtual memory: 4884 megabytes
+    Info: Processing ended: Sun Mar 21 20:33:23 2021
     Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:33
+    Info: Total CPU time (on all processors): 00:00:31
 
 

@@ -96,7 +96,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  TIM2->CCR1 = 2500; // Capture compare reg
+  TIM2->CCR1 = 2500;
 
   /* USER CODE END 2 */
 

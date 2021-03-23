@@ -546,22 +546,3 @@ Reason: (18) Could not verify ST device! Abort connection.
 !SUBENTRY 2 com.st.stm32cube.ide.mcu.debug.stlink 4 0 2021-03-18 13:36:39.426
 !MESSAGE Error in initializing ST-LINK device.
 Reason: (18) Could not verify ST device! Abort connection.
-!SESSION 2021-03-19 12:57:01.800 -----------------------------------------------
-eclipse.buildId=Version 1.6.0
-java.version=11.0.9.1
-java.vendor=AdoptOpenJDK
-BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=da_DK
-Framework arguments:  -keyring /Users/kaspergronkjaer/.eclipse_keyring
-Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/kaspergronkjaer/.eclipse_keyring
-
-!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-03-19 12:57:38.858
-!MESSAGE Log4j initialized with config file /Users/kaspergronkjaer/Documents/GitHub/GRONK2000/GPS/.metadata/.log4j.xml
-
-!ENTRY org.eclipse.core.net 1 0 2021-03-19 12:57:43.226
-!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
-
-!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-03-19 12:57:46.953
-!MESSAGE Started RMI Server, listening on port 41337
-
-!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-03-19 12:57:47.364
-!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties

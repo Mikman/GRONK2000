@@ -25,16 +25,37 @@
 
 #include "stdio.h"
 #include "string.h"
+#include <stdlib.h>
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+typedef struct GPS_FIX_DATA {
+	uint8_t HOURS;
+	uint8_t MIN;
+	uint8_t SEC;
+	float LAT;
+	char LAT_DIR;
+	float LON;
+	char LON_DIR;
+	uint8_t QUALITY;
+	uint8_t SATS;
+	float HDOP;
+	float ALTITUDE;
+	float H_GEOID;
+	uint8_t CHECK;
+};
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define GPS_SECTIONS 15
+#define GPS_SEC_LENGTH 15
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -64,17 +85,12 @@ static void MX_USART1_UART_Init(void);
 
 
 
-float readGPS(){
+int8_t readGPS(struct GPS_FIX_DATA *data){
 
-	float timeUTC = 0.0;
-	float longitude = 0.0;
-	float latitude = 0.0;
-	float height = 0.0;
+	int flag = 1;
+	//HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
 
-	int flag = 0;
-	HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
-
-	for (int i = 0 ; i < sizeof(rawData) || flag == 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
+	for (int i = 0 ; i < sizeof(rawData) && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
 		if (rawData[i] == '$') {
 			char formatTest[6] = { 0 }; // String for format comparison, i.e. $GPGGA
 			int check = 5; // Something else than 0 just for safety, since 0 means correct match
@@ -98,38 +114,72 @@ float readGPS(){
 				}
 			}
 		}
-
 	}
 
 	if (flag != 1){
 
-		return 0.0; // No data available
+		return 0; // No data available
 
 	}else {
 
-		for (int i = 0 ; i < sizeof(GPSData) ; i = i + 1){
+		//                                  Format, time   ,  Latitude  ,  Longitude
+		char testString[sizeof(GPSData)] = "GPGGA,085350.00,5702.98823,N,00954.55932,E,1,06,1.23,10.7,M,42.4,M,,*6D\r\n";
 
-			if (GPSData[i] == ','){
-
-				char concatTime[] = {0};
-
-				for ( i = i + 1 ; i < sizeof(GPSData) || GPSData[i] == ',' ; i = i + 1){
-
-
-					strcat(concatTime, GPSData[i]);
-
-				}
-			}
+		for (uint8_t i = 0; i < sizeof(testString); i++) {
+			GPSData[i] = testString[i];
 		}
 
 
+		// Divide GPSData string up in individual sections, each one in its own array sections[i]
+		uint8_t sectionNum = 0, sectionChar = 0;
 
+		char sections[GPS_SECTIONS][GPS_SEC_LENGTH] = { 0 };
+
+		for (uint16_t i = 0; i < sizeof(GPSData); i++) {
+
+			if (GPSData[i] == ',') {
+				sectionNum++;
+				sectionChar = 0;
+			}
+			else {
+				sections[sectionNum][sectionChar] = GPSData[i];
+				sectionChar++;
+			}
+		}
+
+		// Convert gps data from sections[i] into GPS_FIX_DATA struct
+
+		char h[3] = {0}, m[3] = {0}, s[3] = {0};
+
+		strncpy(h, sections[1], 2);
+		strncpy(m, sections[1] + 2, 2);
+		strncpy(s, sections[1] + 4, 2);
+
+		data->HOURS = 	atoi(h);
+		data->MIN = 	atoi(m);
+		data->SEC = 	atoi(s);
+
+		data->LAT = 	atof(sections[2]);
+		data->LAT_DIR = sections[3][0];
+		data->LON = 	atof(sections[4]);
+		data->LON_DIR =	sections[5][0];
+		data->QUALITY = atoi(sections[6]);
+		data->SATS = 	atoi(sections[7]);
+		data->HDOP = 	atof(sections[8]);
+		data->ALTITUDE=	atof(sections[9]);
+		data->H_GEOID =	atof(sections[11]);
+
+		char ck[3] = { sections[14][1], sections[14][2], 0};
+
+		char *eptr;
+		data->CHECK	=	strtol(ck, &eptr, 16);
+
+
+
+		sectionChar++;
 	}
-
-
-
-
 }
+
 
 
 
@@ -182,7 +232,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 readGPS();
+	 struct GPS_FIX_DATA data = { 0 };
+
+	 readGPS(&data);
 
 
 	 HAL_Delay(1000);

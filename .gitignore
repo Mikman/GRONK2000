@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+GPS/STM32_GPS/Debug/*
+*.mk

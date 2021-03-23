@@ -32,7 +32,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
-typedef struct GPS_FIX_DATA {
+typedef struct {
 	uint8_t HOURS;
 	uint8_t MIN;
 	uint8_t SEC;
@@ -45,13 +45,15 @@ typedef struct GPS_FIX_DATA {
 	float HDOP;
 	float ALTITUDE;
 	float H_GEOID;
-	uint8_t CHECK;
-};
+} GPS_FIX_DATA;
 
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define GPS_BUFSIZE 512
+#define GPS_DATASIZE 100
 
 #define GPS_SECTIONS 15
 #define GPS_SEC_LENGTH 15
@@ -70,8 +72,8 @@ UART_HandleTypeDef huart1;
 
 	char GPSFormat[6] = "$GPGGA";
 
-	uint8_t rawData[255] = {0};
-	uint8_t GPSData[255] = {0};
+	uint8_t rawData[GPS_BUFSIZE] = {0};
+	uint8_t GPSData[GPS_BUFSIZE] = {0};
 
 
 
@@ -85,24 +87,24 @@ static void MX_USART1_UART_Init(void);
 
 
 
-int8_t readGPS(struct GPS_FIX_DATA *data){
+int8_t readGPS(GPS_FIX_DATA *data){
 
-	int flag = 1;
-	//HAL_UART_Receive(&huart1, rawData , 255, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
+	int flag = 0;
+	HAL_UART_Receive(&huart1, rawData , GPS_BUFSIZE, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
 
-	for (int i = 0 ; i < sizeof(rawData) && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
+	for (uint16_t i = 0 ; i < GPS_BUFSIZE && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
 		if (rawData[i] == '$') {
 			char formatTest[6] = { 0 }; // String for format comparison, i.e. $GPGGA
 			int check = 5; // Something else than 0 just for safety, since 0 means correct match
 
-			for (int x = 0; x < 6; x = x + 1) {  // Loops over the next 6 characters and puts then in an array to check for the desired format
+			for (uint8_t x = 0; x < 6; x = x + 1) {  // Loops over the next 6 characters and puts then in an array to check for the desired format
 				formatTest[x] = rawData[i + x];
 				check = strcmp(formatTest, GPSFormat);
 
 				if (check == 0) {
 
 					uint8_t counter = 0;
-					for (i = i + 1; i < sizeof(rawData); i = i + 1) { // loops until a '$' is found.
+					for (i = i + 1; i < GPS_BUFSIZE; i = i + 1) { // loops until a '$' is found.
 						if (rawData[i] != '$') {
 							GPSData[counter] = rawData[i]; // Desired data format (GPGGA) is passed into another array
 							counter = counter + 1;
@@ -116,26 +118,25 @@ int8_t readGPS(struct GPS_FIX_DATA *data){
 		}
 	}
 
-	if (flag != 1){
+	if (flag != 1) {
 
-		return 0; // No data available
+		return 0; // No data available / Invalid data
 
-	}else {
+	} else {
 
-		//                                  Format, time   ,  Latitude  ,  Longitude
-		char testString[sizeof(GPSData)] = "GPGGA,085350.00,5702.98823,N,00954.55932,E,1,06,1.23,10.7,M,42.4,M,,*6D\r\n";
+		uint8_t cksum_received = 0; // Check sum of received data
 
-		for (uint8_t i = 0; i < sizeof(testString); i++) {
-			GPSData[i] = testString[i];
+		for (uint16_t i = 0; i < GPS_DATASIZE; i++) {
+			if (GPSData[i] == '*') break;
+			cksum_received ^= GPSData[i];
 		}
-
 
 		// Divide GPSData string up in individual sections, each one in its own array sections[i]
 		uint8_t sectionNum = 0, sectionChar = 0;
 
 		char sections[GPS_SECTIONS][GPS_SEC_LENGTH] = { 0 };
 
-		for (uint16_t i = 0; i < sizeof(GPSData); i++) {
+		for (uint16_t i = 0; i < GPS_DATASIZE; i++) {
 
 			if (GPSData[i] == ',') {
 				sectionNum++;
@@ -172,11 +173,10 @@ int8_t readGPS(struct GPS_FIX_DATA *data){
 		char ck[3] = { sections[14][1], sections[14][2], 0};
 
 		char *eptr;
-		data->CHECK	=	strtol(ck, &eptr, 16);
+		uint8_t cksum_sent	=	strtol(ck, &eptr, 16);
 
-
-
-		sectionChar++;
+		if (cksum_sent == cksum_received) return 1;
+		else return -1;
 	}
 }
 
@@ -224,18 +224,15 @@ int main(void)
 
 
 
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 struct GPS_FIX_DATA data = { 0 };
+	 GPS_FIX_DATA data = { 0 };
 
-	 readGPS(&data);
-
+	 int8_t result = readGPS(&data);
 
 	 HAL_Delay(1000);
 

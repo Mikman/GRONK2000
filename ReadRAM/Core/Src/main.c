@@ -45,6 +45,8 @@ CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
 struct Queue queueRAM = {0, 0, {0}};
+struct Queue queueRx = {0, 0, {0}};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,20 +86,15 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN_Init();
+  HAL_CAN_Start(&hcan);
+
   /* USER CODE BEGIN 2 */
-
-  /*
-  unsigned int pinSetting = 0b0100;
-
-  GPIOA->CRL = 0;
-  GPIOA->CRL |= (pinSetting << 0) | (pinSetting << 4) | (pinSetting << 8) | (pinSetting << 12)
-		  | (pinSetting << 16) | (pinSetting << 20) | (pinSetting << 24) | (pinSetting << 28);
-*/
 
   /* USER CODE END 2 */
 
@@ -159,6 +156,26 @@ static void MX_CAN_Init(void)
 {
 
   /* USER CODE BEGIN CAN_Init 0 */
+	CAN_FilterTypeDef CanFilter;
+	  CanFilter.FilterIdHigh = 0x0000;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
+	  CanFilter.FilterIdLow = 0x0010;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
+	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
+	  CanFilter.FilterActivation = ENABLE;					// Vi aktiverer filteret
+	  CanFilter.FilterBank = 0;								// Vi vælger filter 0 ud af 14 mulige filtre
+	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
+
+	  CAN_TxHeaderTypeDef CanTxHeader;
+	  CanTxHeader.DLC = Max_Data;							// Der kommer Max_Data = 8 bit som data i beskeden
+	  CanTxHeader.ExtId = 0x00000010;						//
+	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit itl forskel fra standard på 16 bit
+	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
+	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
+
+	  CAN_RxHeaderTypeDef CanRxHeader;
+	  CanRxHeader.DLC = Max_Data;
+	  CanRxHeader.ExtId = 0x00000010;
+	  CanRxHeader.IDE = CAN_ID_EXT;
+	  CanRxHeader.RTR = CAN_RTR_DATA;
 
   /* USER CODE END CAN_Init 0 */
 
@@ -167,10 +184,10 @@ static void MX_CAN_Init(void)
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 16;
-  hcan.Init.Mode = CAN_MODE_SILENT_LOOPBACK;
+  hcan.Init.Mode = CAN_MODE_LOOPBACK;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_1TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_8TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_8TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -182,7 +199,7 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-
+  	  HAL_CAN_ConfigFilter(&hcan, &CanFilter);
   /* USER CODE END CAN_Init 2 */
 
 }
@@ -240,6 +257,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 		//Kode der implementerer en cirkel buffer
 		EnterQueue(&queueRAM, (uint8_t) GPIOA->IDR &0xFF); // Sætter dataen på PA0-7 ind i køen.
+	}
+}
+
+
+void sendImageData(uint32_t mailbox) {
+	uint8_t dataFromQueue;
+	if (isTxMessagePending(&hcan, mailbox) == 0) { // Hvis der ikke allerede er en byte der er i mailbox'en
+		if (LeaveQueue(&queueRam, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, mailbox); // Send en byte over CAN
+		}
+	}
+}
+
+void receiveImageData() {
+	uint8_t buffer;
+	if (!QueueEmpty(&queueRx)) {
+		HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, buffer);
+		EnterQueue(&queueRx, buffer);
 	}
 }
 

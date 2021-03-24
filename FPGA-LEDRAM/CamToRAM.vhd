@@ -21,7 +21,7 @@ end CamToRAM;
 
 architecture Behavioral of CamToRAM is
 
-signal ticks, addr, i: integer := 0;
+signal ticks, XCLKticks, addr, i: integer := 0;
 signal currentImage: boolean;
 signal counting, wantAnImage: boolean := false;
 signal nVSYNC: STD_LOGIC;
@@ -39,7 +39,7 @@ begin
 	address <= std_logic_vector(to_unsigned(addr, address'length));
 
 	-- Constant assignments for camera
-	XCLK <= '1' when ((ticks mod 4) < 2) else '0';
+	XCLK <= '1' when ((XCLKticks mod 4) < 2) else '0';
 	RESET <= '1';
 	PWDN <= '0';
 
@@ -103,6 +103,12 @@ begin
 	process(clk)
 	begin
 		if (clk'event and clk='1') then
+			
+			if (  XCLKticks = 3) then
+				XCLKticks <= 0;
+			else
+				XCLKticks <= XCLKticks + 1;
+			end if;
 			
 			-- Decisions based on ticks
 			if (ticks > 15) then

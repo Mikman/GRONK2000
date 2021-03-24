@@ -50,3 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+FPGA-LEDRAM\db\
+FPGA-LEDRAM\incremental_db\
+FPGA-LEDRAM\output_files\
+FPGA-LEDRAM\.qsys_edit\

@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Sun Mar 21 20:33:22 2021
-Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Analysis & Synthesis Status : Successful - Tue Mar 23 15:54:04 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 Revision Name : FPGA_RAM_test
-Top-level Entity Name : CamToRAM
+Top-level Entity Name : FPGA_LEDRAM
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 105
-Total pins : 56
+Total registers : 19
+Total pins : 42
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0

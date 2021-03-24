@@ -117,6 +117,12 @@ begin
 				XCLKticks <= XCLKticks + 1;
 			end if;
 			
+			if (  XCLKticks = 3) then
+				XCLKticks <= 0;
+			else
+				XCLKticks <= XCLKticks + 1;
+			end if;
+			
 			-- Decisions based on ticks
 			if (ticks > 15) then
 				ticks <= 0;

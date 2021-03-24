@@ -16,7 +16,8 @@ uint8_t GPSData[GPS_BUFSIZE] = {0};
 int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 
 	int flag = 0;
-	HAL_UART_Receive(uart, rawData , GPS_BUFSIZE, HAL_MAX_DELAY); // Reads incoming UART transmission and blocks the CPU until 255 bytes is received.
+
+	HAL_UART_Receive_DMA(uart, rawData, GPS_BUFSIZE);
 
 	for (uint16_t i = 0 ; i < GPS_BUFSIZE && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
 		if (rawData[i] == '$') {
@@ -75,6 +76,12 @@ int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 		}
 
 		// Convert gps data from sections[i] into GPS_FIX_DATA struct
+		char ck[3] = { sections[14][1], sections[14][2], 0};
+
+		char *eptr;
+		uint8_t cksum_sent	=	strtol(ck, &eptr, 16);
+
+		if (cksum_sent != cksum_received) return -1;
 
 		char h[3] = {0}, m[3] = {0}, s[3] = {0};
 
@@ -95,14 +102,7 @@ int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 		data->HDOP = 	atof(sections[8]);
 		data->ALTITUDE=	atof(sections[9]);
 		data->H_GEOID =	atof(sections[11]);
-
-		char ck[3] = { sections[14][1], sections[14][2], 0};
-
-		char *eptr;
-		uint8_t cksum_sent	=	strtol(ck, &eptr, 16);
-
-		if (cksum_sent == cksum_received) return 1;
-		else return -1;
+		return 1;
 	}
 }
 

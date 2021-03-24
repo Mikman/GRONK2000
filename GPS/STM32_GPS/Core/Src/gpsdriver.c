@@ -106,6 +106,7 @@ int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 	}
 }
 
+
 int8_t convertToString(GPS_FIX_DATA *data, char *str) {
 	return 0;
 }

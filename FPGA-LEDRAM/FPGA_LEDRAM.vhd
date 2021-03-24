@@ -12,7 +12,10 @@ entity FPGA_LEDRAM is
 		CS, WE, OE: out STD_LOGIC;
 		CS_SW, WE_SW, OE_SW, addr_SW: in STD_LOGIC;
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0)
-		);
+		
+	);
+		
+		
 end FPGA_LEDRAM;
 
 architecture Behavioral of FPGA_LEDRAM is
@@ -29,7 +32,7 @@ architecture Behavioral of FPGA_LEDRAM is
 		process(addr_SW)
 		begin
 			if (addr_SW'event and addr_SW = '0') then
-				i <= i + 1;
+				i <= i + 1000;
 			end if;
 		end process;
 		

@@ -1,5 +1,13 @@
 EDA Netlist Writer report for FPGA_RAM_test
+<<<<<<< Updated upstream
 Tue Mar 23 15:54:42 2021
+=======
+<<<<<<< HEAD
+Wed Mar 24 11:32:13 2021
+=======
+Tue Mar 23 15:54:42 2021
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -36,9 +44,21 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
+<<<<<<< Updated upstream
 ; EDA Netlist Writer Status ; Successful - Tue Mar 23 15:54:42 2021 ;
 ; Revision Name             ; FPGA_RAM_test                         ;
 ; Top-level Entity Name     ; FPGA_LEDRAM                           ;
+=======
+<<<<<<< HEAD
+; EDA Netlist Writer Status ; Successful - Wed Mar 24 11:32:13 2021 ;
+; Revision Name             ; FPGA_RAM_test                         ;
+; Top-level Entity Name     ; Arduino_RAM_reader                    ;
+=======
+; EDA Netlist Writer Status ; Successful - Tue Mar 23 15:54:42 2021 ;
+; Revision Name             ; FPGA_RAM_test                         ;
+; Top-level Entity Name     ; FPGA_LEDRAM                           ;
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 ; Family                    ; Cyclone V                             ;
 ; Simulation Files Creation ; Failed                                ;
 +---------------------------+---------------------------------------+
@@ -71,6 +91,18 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    Info: Processing started: Wed Mar 24 11:32:11 2021
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4714 megabytes
+    Info: Processing ended: Wed Mar 24 11:32:13 2021
+    Info: Elapsed time: 00:00:02
+=======
+>>>>>>> Stashed changes
     Info: Processing started: Tue Mar 23 15:54:41 2021
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -78,6 +110,7 @@ Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4723 megabytes
     Info: Processing ended: Tue Mar 23 15:54:42 2021
     Info: Elapsed time: 00:00:01
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
     Info: Total CPU time (on all processors): 00:00:01
 
 

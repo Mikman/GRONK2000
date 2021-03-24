@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 |FPGA_LEDRAM
+=======
+<<<<<<< HEAD
+|Arduino_RAM_reader
+=======
+|FPGA_LEDRAM
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 address[0] << i[0].DB_MAX_OUTPUT_PORT_TYPE
 address[1] << i[1].DB_MAX_OUTPUT_PORT_TYPE
 address[2] << i[2].DB_MAX_OUTPUT_PORT_TYPE
@@ -18,6 +26,15 @@ address[15] << i[15].DB_MAX_OUTPUT_PORT_TYPE
 address[16] << i[16].DB_MAX_OUTPUT_PORT_TYPE
 address[17] << i[17].DB_MAX_OUTPUT_PORT_TYPE
 address[18] << i[18].DB_MAX_OUTPUT_PORT_TYPE
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+CS << <GND>
+WE << WE_SW.DB_MAX_OUTPUT_PORT_TYPE
+OE << <GND>
+WE_SW => WE.DATAIN
+=======
+>>>>>>> Stashed changes
 CS << CS_SW.DB_MAX_OUTPUT_PORT_TYPE
 WE << WE_SW.DB_MAX_OUTPUT_PORT_TYPE
 OE << OE_SW.DB_MAX_OUTPUT_PORT_TYPE
@@ -56,6 +73,10 @@ addr_SW => i[28].CLK
 addr_SW => i[29].CLK
 addr_SW => i[30].CLK
 addr_SW => i[31].CLK
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 LEDs[0] << LEDs[0].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[1] << LEDs[1].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[2] << LEDs[2].DB_MAX_OUTPUT_PORT_TYPE
@@ -64,5 +85,43 @@ LEDs[4] << LEDs[4].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[5] << LEDs[5].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[6] << LEDs[6].DB_MAX_OUTPUT_PORT_TYPE
 LEDs[7] << LEDs[7].DB_MAX_OUTPUT_PORT_TYPE
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+addrInc => i[0].CLK
+addrInc => i[1].CLK
+addrInc => i[2].CLK
+addrInc => i[3].CLK
+addrInc => i[4].CLK
+addrInc => i[5].CLK
+addrInc => i[6].CLK
+addrInc => i[7].CLK
+addrInc => i[8].CLK
+addrInc => i[9].CLK
+addrInc => i[10].CLK
+addrInc => i[11].CLK
+addrInc => i[12].CLK
+addrInc => i[13].CLK
+addrInc => i[14].CLK
+addrInc => i[15].CLK
+addrInc => i[16].CLK
+addrInc => i[17].CLK
+addrInc => i[18].CLK
+addrInc => i[19].CLK
+addrInc => i[20].CLK
+addrInc => i[21].CLK
+addrInc => i[22].CLK
+addrInc => i[23].CLK
+addrInc => i[24].CLK
+addrInc => i[25].CLK
+addrInc => i[26].CLK
+addrInc => i[27].CLK
+addrInc => i[28].CLK
+addrInc => i[29].CLK
+addrInc => i[30].CLK
+addrInc => i[31].CLK
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 
 

@@ -1,5 +1,13 @@
 Assembler report for FPGA_RAM_test
+<<<<<<< Updated upstream
 Tue Mar 23 15:54:33 2021
+=======
+<<<<<<< HEAD
+Wed Mar 24 11:32:02 2021
+=======
+Tue Mar 23 15:54:33 2021
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -10,8 +18,18 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
+<<<<<<< Updated upstream
   5. Assembler Device Options: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/output_files/FPGA_RAM_test.sof
   6. Assembler Device Options: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/output_files/FPGA_RAM_test.pof
+=======
+<<<<<<< HEAD
+  5. Assembler Device Options: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.sof
+  6. Assembler Device Options: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.pof
+=======
+  5. Assembler Device Options: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/output_files/FPGA_RAM_test.sof
+  6. Assembler Device Options: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/output_files/FPGA_RAM_test.pof
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
   7. Assembler Messages
 
 
@@ -39,9 +57,21 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
+<<<<<<< Updated upstream
 ; Assembler Status      ; Successful - Tue Mar 23 15:54:33 2021 ;
 ; Revision Name         ; FPGA_RAM_test                         ;
 ; Top-level Entity Name ; FPGA_LEDRAM                           ;
+=======
+<<<<<<< HEAD
+; Assembler Status      ; Successful - Wed Mar 24 11:32:02 2021 ;
+; Revision Name         ; FPGA_RAM_test                         ;
+; Top-level Entity Name ; Arduino_RAM_reader                    ;
+=======
+; Assembler Status      ; Successful - Tue Mar 23 15:54:33 2021 ;
+; Revision Name         ; FPGA_RAM_test                         ;
+; Top-level Entity Name ; FPGA_LEDRAM                           ;
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 ; Family                ; Cyclone V                             ;
 ; Device                ; 5CEBA4F23C7                           ;
 +-----------------------+---------------------------------------+
@@ -54,6 +84,40 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
++----------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                              ;
++----------------------------------------------------------------------------------------+
+; File Name                                                                              ;
++----------------------------------------------------------------------------------------+
+; C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.sof ;
+; C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.pof ;
++----------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.sof ;
++----------------+-------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                         ;
++----------------+-------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x004E3D38                                                                                      ;
+; Checksum       ; 0x004E3D38                                                                                      ;
++----------------+-------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/output_files/FPGA_RAM_test.pof ;
++--------------------+---------------------------------------------------------------------------------------------+
+; Option             ; Setting                                                                                     ;
++--------------------+---------------------------------------------------------------------------------------------+
+; JTAG usercode      ; 0x00000000                                                                                  ;
+; Checksum           ; 0x74B54413                                                                                  ;
+; Compression Ratio  ; 3                                                                                           ;
++--------------------+---------------------------------------------------------------------------------------------+
+=======
+>>>>>>> Stashed changes
 +-------------------------------------------------------------------------------------+
 ; Assembler Generated Files                                                           ;
 +-------------------------------------------------------------------------------------+
@@ -83,6 +147,10 @@ https://fpgasoftware.intel.com/eula.
 ; Checksum           ; 0x74B64EA1                                                                               ;
 ; Compression Ratio  ; 3                                                                                        ;
 +--------------------+------------------------------------------------------------------------------------------+
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 
 
 +--------------------+
@@ -91,14 +159,35 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+<<<<<<< Updated upstream
     Info: Processing started: Tue Mar 23 15:54:28 2021
+=======
+<<<<<<< HEAD
+    Info: Processing started: Wed Mar 24 11:31:56 2021
+=======
+    Info: Processing started: Tue Mar 23 15:54:28 2021
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    Info: Peak virtual memory: 4821 megabytes
+    Info: Processing ended: Wed Mar 24 11:32:02 2021
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:06
+=======
+>>>>>>> Stashed changes
     Info: Peak virtual memory: 4832 megabytes
     Info: Processing ended: Tue Mar 23 15:54:33 2021
     Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:05
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 
 

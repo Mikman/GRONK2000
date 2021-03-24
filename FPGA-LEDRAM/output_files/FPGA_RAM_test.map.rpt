@@ -1,5 +1,13 @@
 Analysis & Synthesis report for FPGA_RAM_test
+<<<<<<< Updated upstream
 Tue Mar 23 15:54:04 2021
+=======
+<<<<<<< HEAD
+Wed Mar 24 11:31:27 2021
+=======
+Tue Mar 23 15:54:04 2021
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -44,6 +52,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
+<<<<<<< Updated upstream
 ; Analysis & Synthesis Status     ; Successful - Tue Mar 23 15:54:04 2021       ;
 ; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                   ; FPGA_RAM_test                               ;
@@ -52,6 +61,27 @@ https://fpgasoftware.intel.com/eula.
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 19                                          ;
 ; Total pins                      ; 42                                          ;
+=======
+<<<<<<< HEAD
+; Analysis & Synthesis Status     ; Successful - Wed Mar 24 11:31:27 2021       ;
+; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                   ; FPGA_RAM_test                               ;
+; Top-level Entity Name           ; Arduino_RAM_reader                          ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 19                                          ;
+; Total pins                      ; 40                                          ;
+=======
+; Analysis & Synthesis Status     ; Successful - Tue Mar 23 15:54:04 2021       ;
+; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                   ; FPGA_RAM_test                               ;
+; Top-level Entity Name           ; FPGA_LEDRAM                                 ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 19                                          ;
+; Total pins                      ; 42                                          ;
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -70,7 +100,15 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CEBA4F23C7        ;                    ;
+<<<<<<< Updated upstream
 ; Top-level entity name                                                           ; FPGA_LEDRAM        ; FPGA_RAM_test      ;
+=======
+<<<<<<< HEAD
+; Top-level entity name                                                           ; Arduino_RAM_reader ; FPGA_RAM_test      ;
+=======
+; Top-level entity name                                                           ; FPGA_LEDRAM        ; FPGA_RAM_test      ;
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Optimization Technique                                                          ; Speed              ; Balanced           ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
@@ -168,6 +206,18 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                          ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                   ; Library ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
+; Arduino_RAM_reader.vhd           ; yes             ; User VHDL File  ; C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd ;         ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------+---------+
+=======
+>>>>>>> Stashed changes
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Source Files Read                                                                                                                ;
 +----------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
@@ -175,6 +225,10 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
 ; FPGA_LEDRAM.vhd                  ; yes             ; User VHDL File  ; C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd ;         ;
 +----------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 
 
 +-------------------------------------------------------------+
@@ -193,6 +247,29 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;               ;
 ; Dedicated logic registers                   ; 19            ;
 ;                                             ;               ;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+; I/O pins                                    ; 40            ;
+;                                             ;               ;
+; Total DSP Blocks                            ; 0             ;
+;                                             ;               ;
+; Maximum fan-out node                        ; addrInc~input ;
+; Maximum fan-out                             ; 19            ;
+; Total fan-out                               ; 151           ;
+; Average fan-out                             ; 1.20          ;
++---------------------------------------------+---------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                           ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name        ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
+; |Arduino_RAM_reader        ; 19 (19)             ; 19 (19)                   ; 0                 ; 0          ; 40   ; 0            ; |Arduino_RAM_reader ; Arduino_RAM_reader ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
+=======
+>>>>>>> Stashed changes
 ; I/O pins                                    ; 42            ;
 ;                                             ;               ;
 ; Total DSP Blocks                            ; 0             ;
@@ -211,6 +288,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; |FPGA_LEDRAM               ; 19 (19)             ; 19 (19)                   ; 0                 ; 0          ; 42   ; 0            ; |FPGA_LEDRAM        ; FPGA_LEDRAM ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -247,6 +325,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; arriav_ff             ; 19                          ;
 ;     plain             ; 19                          ;
 ; arriav_io_obuf        ; 8                           ;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+; arriav_lcell_comb     ; 20                          ;
+;     arith             ; 18                          ;
+;         1 data inputs ; 17                          ;
+;         2 data inputs ; 1                           ;
+;     normal            ; 2                           ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 1                           ;
+; boundary_port         ; 40                          ;
+;                       ;                             ;
+; Max LUT depth         ; 2.70                        ;
+; Average LUT depth     ; 1.57                        ;
+=======
+>>>>>>> Stashed changes
 ; arriav_lcell_comb     ; 19                          ;
 ;     arith             ; 18                          ;
 ;         1 data inputs ; 17                          ;
@@ -257,6 +351,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;                       ;                             ;
 ; Max LUT depth         ; 2.70                        ;
 ; Average LUT depth     ; 1.55                        ;
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 +-----------------------+-----------------------------+
 
 
@@ -275,11 +373,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+<<<<<<< Updated upstream
     Info: Processing started: Tue Mar 23 15:53:53 2021
+=======
+<<<<<<< HEAD
+    Info: Processing started: Wed Mar 24 11:31:11 2021
+=======
+    Info: Processing started: Tue Mar 23 15:53:53 2021
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGA_RAM_test -c FPGA_RAM_test
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file de0_cv_golden_top.v
+<<<<<<< Updated upstream
     Info (12023): Found entity 1: DE0_CV_golden_top File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/DE0_CV_golden_top.v Line: 54
 Info (12021): Found 2 design units, including 1 entities, in source file fpga_ledram.vhd
     Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 18
@@ -288,6 +395,66 @@ Info (12021): Found 2 design units, including 1 entities, in source file multipl
     Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
     Info (12023): Found entity 1: multipleByteProgram File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file camtoram.vhd
+=======
+<<<<<<< HEAD
+    Info (12023): Found entity 1: DE0_CV_golden_top File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/DE0_CV_golden_top.v Line: 54
+Info (12021): Found 2 design units, including 1 entities, in source file fpga_ledram.vhd
+    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 21
+    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file multiplebyteprogram.vhd
+    Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
+    Info (12023): Found entity 1: multipleByteProgram File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file camtoram.vhd
+    Info (12022): Found design unit 1: CamToRAM-Behavioral File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/CamToRAM.vhd Line: 22
+    Info (12023): Found entity 1: CamToRAM File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/CamToRAM.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file arduino_ram_reader.vhd
+    Info (12022): Found design unit 1: Arduino_RAM_reader-Behavioral File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 22
+    Info (12023): Found entity 1: Arduino_RAM_reader File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 8
+Info (12127): Elaborating entity "Arduino_RAM_reader" for the top level hierarchy
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "RAMdata[0]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[1]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[2]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[3]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[4]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[5]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[6]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+    Warning (13040): bidirectional pin "RAMdata[7]" has no driver File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 11
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "CS" is stuck at GND File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 12
+    Warning (13410): Pin "OE" is stuck at GND File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 12
+Info (286030): Timing-Driven Synthesis is running
+Warning (14632): Output pin "LEDs[0]" driven by bidirectional pin "RAMdata[0]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[1]" driven by bidirectional pin "RAMdata[1]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[2]" driven by bidirectional pin "RAMdata[2]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[3]" driven by bidirectional pin "RAMdata[3]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[4]" driven by bidirectional pin "RAMdata[4]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[5]" driven by bidirectional pin "RAMdata[5]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[6]" driven by bidirectional pin "RAMdata[6]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Warning (14632): Output pin "LEDs[7]" driven by bidirectional pin "RAMdata[7]" cannot be tri-stated File: C:/Users/Sophu/Documents/GitHub/GRONK-STM32/FPGA-LEDRAM/Arduino_RAM_reader.vhd Line: 14
+Info (17049): 13 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 59 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 30 output pins
+    Info (21060): Implemented 8 bidirectional pins
+    Info (21061): Implemented 19 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 21 warnings
+    Info: Peak virtual memory: 4846 megabytes
+    Info: Processing ended: Wed Mar 24 11:31:27 2021
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:34
+=======
+    Info (12023): Found entity 1: DE0_CV_golden_top File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/DE0_CV_golden_top.v Line: 54
+Info (12021): Found 2 design units, including 1 entities, in source file fpga_ledram.vhd
+    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 18
+    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/FPGA_LEDRAM.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file multiplebyteprogram.vhd
+    Info (12022): Found design unit 1: multipleByteProgram-Behavorial File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 16
+    Info (12023): Found entity 1: multipleByteProgram File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/multipleByteProgram.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file camtoram.vhd
+>>>>>>> Stashed changes
     Info (12022): Found design unit 1: CamToRAM-Behavioral File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 22
     Info (12023): Found entity 1: CamToRAM File: C:/Users/1234/Documents/GitHub/GRONK2000/FPGA-LEDRAM/CamToRAM.vhd Line: 5
 Info (12127): Elaborating entity "FPGA_LEDRAM" for the top level hierarchy
@@ -322,5 +489,9 @@ Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
     Info: Processing ended: Tue Mar 23 15:54:04 2021
     Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:23
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
 
 

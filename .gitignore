@@ -2,3 +2,8 @@ FPGA-LEDRAM/db/*
 FPGA-LEDRAM/incremental_db/*
 FPGA-LEDRAM/output_files/*
 FPGA-LEDRAM/.qsys_edit/*
+FPGAgatherer/db/*
+FPGAgatherer/incremental_db/*
+FPGAgatherer/output_files/*
+FPGAgatherer/.qsys_edit/*
+

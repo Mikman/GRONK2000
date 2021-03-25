@@ -2594,3 +2594,895 @@ In file included from ../Core/Src/main.c:26:
       |    ^~~~~~~~~~~~~~~~
 make: *** [Core/Src/subdir.mk:42: Core/Src/main.o] Error 1
 "make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:26:34 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, &dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, &dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+Finished building: ReadRAM.list
+ 
+ 
+12:27:20 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+12:55:09 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+12:55:11 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+12:55:35 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+12:58:19 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+13:00:30 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:286:57: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |                                                         ^~~~~~~~~~~~
+      |                                                         |
+      |                                                         uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:289:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  289 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:292:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  292 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:286:4: warning: 'randoMailBox' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:03:55 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+13:06:29 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+13:08:32 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
+      |                                     ^~~~~~~~~~~~~
+      |                                     |
+      |                                     unsigned int
+../Core/Src/main.c:286:57: note: in expansion of macro 'CAN_TX_MAILBOX0'
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, CAN_TX_MAILBOX0);
+      |                                                         ^~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
+      |                                     ^~~~~~~~~~~~~
+      |                                     |
+      |                                     unsigned int
+../Core/Src/main.c:289:59: note: in expansion of macro 'CAN_TX_MAILBOX0'
+  289 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, CAN_TX_MAILBOX0);
+      |                                                           ^~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
+      |                                     ^~~~~~~~~~~~~
+      |                                     |
+      |                                     unsigned int
+../Core/Src/main.c:292:59: note: in expansion of macro 'CAN_TX_MAILBOX0'
+  292 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, CAN_TX_MAILBOX0);
+      |                                                           ^~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:283:11: warning: unused variable 'randoMailBox' [-Wunused-variable]
+  283 |  uint32_t randoMailBox;
+      |           ^~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:10:03 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:286:57: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |                                                         ^~~~~~~~~~~~
+      |                                                         |
+      |                                                         uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:289:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  289 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:292:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  292 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:286:4: warning: 'randoMailBox' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7908	     52	   1732	   9692	   25dc	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:12:20 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:286:57: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |                                                         ^~~~~~~~~~~~
+      |                                                         |
+      |                                                         uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:289:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  289 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:292:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  292 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:286:4: warning: 'randoMailBox' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7904	     52	   1732	   9688	   25d8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:13:26 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
+  279 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:286:57: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |                                                         ^~~~~~~~~~~~
+      |                                                         |
+      |                                                         uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:289:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  289 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:292:59: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  292 |      HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, randoMailBox);
+      |                                                           ^~~~~~~~~~~~
+      |                                                           |
+      |                                                           uint32_t {aka long unsigned int}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'uint32_t' {aka 'long unsigned int'}
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
+  285 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  302 |    return 0;
+      |           ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  305 |  return 1;
+      |         ^
+../Core/Src/main.c:297:6: note: declared here
+  297 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:286:4: warning: 'randoMailBox' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  286 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7904	     52	   1732	   9688	   25d8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:14:05 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7904	     52	   1732	   9688	   25d8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+13:18:50 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:269:6: warning: conflicting types for 'sendImageData'
+  269 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:272:29: warning: passing argument 2 of 'LeaveQueue' from incompatible pointer type [-Wincompatible-pointer-types]
+  272 |   if (LeaveQueue(&queueRAM, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
+      |                             ^~~~~~~~~~~~~~
+      |                             |
+      |                             uint8_t (*)[1] {aka unsigned char (*)[1]}
+In file included from ../Core/Src/main.c:26:
+../Core/Src/circle_queue.h:22:42: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[1]' {aka 'unsigned char (*)[1]'}
+   22 | int LeaveQueue(struct Queue *q, uint8_t *data);
+      |                                 ~~~~~~~~~^~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
+      |                                     ^~~~~~~~~~~~~
+      |                                     |
+      |                                     unsigned int
+../Core/Src/main.c:273:61: note: in expansion of macro 'CAN_TX_MAILBOX0'
+  273 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, CAN_TX_MAILBOX0); // Send en byte over CAN
+      |                                                             ^~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
+  308 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+13:20:29 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:269:6: warning: conflicting types for 'sendImageData'
+  269 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
+  109 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:273:29: warning: passing argument 2 of 'LeaveQueue' from incompatible pointer type [-Wincompatible-pointer-types]
+  273 |   if (LeaveQueue(&queueRAM, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
+      |                             ^~~~~~~~~~~~~~
+      |                             |
+      |                             uint8_t (*)[1] {aka unsigned char (*)[1]}
+In file included from ../Core/Src/main.c:26:
+../Core/Src/circle_queue.h:22:42: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[1]' {aka 'unsigned char (*)[1]'}
+   22 | int LeaveQueue(struct Queue *q, uint8_t *data);
+      |                                 ~~~~~~~~~^~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
+      |                                     ^~~~~~~~~~~~~
+      |                                     |
+      |                                     unsigned int
+../Core/Src/main.c:274:61: note: in expansion of macro 'CAN_TX_MAILBOX0'
+  274 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, CAN_TX_MAILBOX0); // Send en byte over CAN
+      |                                                             ^~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
+  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:309:6: warning: conflicting types for 'receiveImageData'
+  309 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
+  110 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 

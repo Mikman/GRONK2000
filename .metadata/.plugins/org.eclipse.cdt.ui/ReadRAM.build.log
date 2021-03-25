@@ -1,70 +1,10 @@
-13:20:29 **** Incremental Build of configuration Debug for project ReadRAM ****
+16:10:24 **** Incremental Build of configuration Debug for project ReadRAM ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
-  109 |    sendImageData();
-      |    ^~~~~~~~~~~~~
-../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
-  110 |    receiveImageData();
-      |    ^~~~~~~~~~~~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:269:6: warning: conflicting types for 'sendImageData'
-  269 | void sendImageData() {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
-  109 |    sendImageData();
-      |    ^~~~~~~~~~~~~
-../Core/Src/main.c: In function 'sendImageData':
-../Core/Src/main.c:273:29: warning: passing argument 2 of 'LeaveQueue' from incompatible pointer type [-Wincompatible-pointer-types]
-  273 |   if (LeaveQueue(&queueRAM, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
-      |                             ^~~~~~~~~~~~~~
-      |                             |
-      |                             uint8_t (*)[1] {aka unsigned char (*)[1]}
-In file included from ../Core/Src/main.c:26:
-../Core/Src/circle_queue.h:22:42: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[1]' {aka 'unsigned char (*)[1]'}
-   22 | int LeaveQueue(struct Queue *q, uint8_t *data);
-      |                                 ~~~~~~~~~^~~~
-In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
-                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
-                 from ../Core/Inc/main.h:31,
-                 from ../Core/Src/main.c:21:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:454:37: warning: passing argument 4 of 'HAL_CAN_AddTxMessage' makes pointer from integer without a cast [-Wint-conversion]
-  454 | #define CAN_TX_MAILBOX0             (0x00000001U)  /*!< Tx Mailbox 0  */
-      |                                     ^~~~~~~~~~~~~
-      |                                     |
-      |                                     unsigned int
-../Core/Src/main.c:274:61: note: in expansion of macro 'CAN_TX_MAILBOX0'
-  274 |    HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, CAN_TX_MAILBOX0); // Send en byte over CAN
-      |                                                             ^~~~~~~~~~~~~~~
-In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
-                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
-                 from ../Core/Inc/main.h:31,
-                 from ../Core/Src/main.c:21:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:679:122: note: expected 'uint32_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int'
-  679 | HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
-      |                                                                                                                ~~~~~~~~~~^~~~~~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:309:6: warning: conflicting types for 'receiveImageData'
-  309 | void receiveImageData() {
-      |      ^~~~~~~~~~~~~~~~
-../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
-  110 |    receiveImageData();
-      |    ^~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ReadRAM.elf
- 
-arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
-arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
 arm-none-eabi-size   ReadRAM.elf 
    text	   data	    bss	    dec	    hex	filename
-   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+   7796	     52	   1732	   9580	   256c	ReadRAM.elf
 Finished building: default.size.stdout
  
-Finished building: ReadRAM.bin
- 
-Finished building: ReadRAM.list
- 
 
-13:20:30 Build Finished. 0 errors, 6 warnings. (took 866ms)
+16:10:25 Build Finished. 0 errors, 0 warnings. (took 252ms)
 

@@ -46,6 +46,7 @@ CAN_HandleTypeDef hcan;
 /* USER CODE BEGIN PV */
 struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
 struct Queue queueRx = {0, 0, {0}};
+#define PACKAGE_SIZE 8
 
 CAN_FilterTypeDef CanFilter;
 CAN_TxHeaderTypeDef CanTxHeader;
@@ -95,8 +96,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN_Init();
-  HAL_CAN_Start(&hcan);
-
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -105,10 +104,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	 sendImageData();
+	 receiveImageData();
     /* USER CODE END WHILE */
-	  sendImageData();
-	  receiveImageData();
+
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
@@ -169,14 +170,14 @@ static void MX_CAN_Init(void)
 	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
 
 
-	  CanTxHeader.DLC = 8;									// Der kommer 1 byte som data i beskeden
+	  CanTxHeader.DLC = PACKAGE_SIZE;									// Der kommer 1 byte som data i beskeden
 	  CanTxHeader.ExtId = 0x00000010;						// 32 bit ID
 	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
 
 
-	  CanRxHeader.DLC = 8;
+	  CanRxHeader.DLC = PACKAGE_SIZE;
 	  CanRxHeader.ExtId = 0x00000010;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
@@ -197,7 +198,7 @@ static void MX_CAN_Init(void)
   hcan.Init.AutoWakeUp = DISABLE;
   hcan.Init.AutoRetransmission = DISABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
-  hcan.Init.TransmitFifoPriority = ENABLE; // Denne er sat til enable, da transmissionen dermed sker som FIFO (til forskel fra "laveste mailbox først", som vi ikke har kontrol over)
+  hcan.Init.TransmitFifoPriority = ENABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
   {
     Error_Handler();
@@ -266,37 +267,40 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 
 
-void sendImageData() {
-	uint8_t dataFromQueue[1] = {0};
-	if (HAL_CAN_IsTxMessagePending(&hcan, CAN_TX_MAILBOX0 ) == 0) { // Hvis der ikke allerede er en byte i mailbox'en
-		//(CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2))
-		if (LeaveQueue(&queueRAM, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
-			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, CAN_TX_MAILBOX0); // Send en byte over CAN
-		}
-	}
-}
 
 /*
 void sendImageData() {
-	uint8_t dataToMB0[1] = {0};
-	uint8_t dataToMB1[8] = {0};
-	uint8_t dataToMB2[8] = {0};
-	uint32_t randoMailBox;
-	if (HAL_CAN_IsTxMessagePending(&hcan, (CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2)) == 0) {
+	uint8_t dataFromQueue[1] = {0};
+	uint32_t pMailbox;
+	if (HAL_CAN_IsTxMessagePending(&hcan, CAN_TX_MAILBOX0 ) == 0) { // Hvis der ikke allerede er en byte i mailbox'en
+		//(CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2))
+		if (LeaveQueue(&queueRAM, dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, &pMailbox); // Send en byte over CAN
+		}
+	}
+}
+*/
+
+void sendImageData() {
+	if (HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) == 0) {
+		uint8_t dataToMB0[PACKAGE_SIZE] = {0};
+		uint8_t dataToMB1[PACKAGE_SIZE] = {0};
+		uint8_t dataToMB2[PACKAGE_SIZE] = {0};
+		uint32_t randoMailBox;
 		if (fillDataArray(&queueRAM, dataToMB0)) {
-			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, randoMailBox);
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox);
 		}
 		if (fillDataArray(&queueRAM, dataToMB1)) {
-					HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, randoMailBox);
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox);
 		}
 		if (fillDataArray(&queueRAM, dataToMB2)) {
-					HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, randoMailBox);
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox);
 		}
 	}
 }
 
 void fillDataArray(struct Queue *source, uint8_t *data) {
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < PACKAGE_SIZE; i++) {
 		if (LeaveQueue(source, data + i)) { //Gemmer en byte fra source til data. Flere bytes gemmes ved at inkrementere data (som jo er en pointer til hvert element i data[])
 			continue;
 		} else {
@@ -305,12 +309,14 @@ void fillDataArray(struct Queue *source, uint8_t *data) {
 	}
 	return 1;
 }
-*/
+
 void receiveImageData() {
-	uint8_t buffer[8] = {0};
+	uint8_t buffer[PACKAGE_SIZE] = {0};
 	if (!QueueFull(&queueRx)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
 		HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-		EnterQueue(&queueRx, buffer[0]); // Læg buffer ind i modtager-queuen
+		for(int i = 0; i < PACKAGE_SIZE; i++){
+		EnterQueue(&queueRx, buffer[i]); // Læg buffer ind i modtager-queuen
+		}
 	}
 }
 

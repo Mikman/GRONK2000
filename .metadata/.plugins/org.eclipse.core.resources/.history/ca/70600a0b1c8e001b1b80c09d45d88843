@@ -269,19 +269,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 void sendImageData() {
-	uint8_t dataToMB0[PACKAGE_SIZE] = {0};
-	uint8_t dataToMB1[PACKAGE_SIZE] = {0};
-	uint8_t dataToMB2[PACKAGE_SIZE] = {0};
-	uint32_t randoMailBox;
-	if (fillDataArray(&queueRAM, dataToMB0)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox);
-	}
-	if (fillDataArray(&queueRAM, dataToMB1)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox);
-	}
-	if (fillDataArray(&queueRAM, dataToMB2)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox);
-	}
+	//if (HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) == 0) {
+		uint8_t dataToMB0[PACKAGE_SIZE] = {0};
+		uint8_t dataToMB1[PACKAGE_SIZE] = {0};
+		uint8_t dataToMB2[PACKAGE_SIZE] = {0};
+		uint32_t randoMailBox;
+		if (fillDataArray(&queueRAM, dataToMB0)) {
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox);
+		}
+		if (fillDataArray(&queueRAM, dataToMB1)) {
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox);
+		}
+		if (fillDataArray(&queueRAM, dataToMB2)) {
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox);
+		}
+	//}
 }
 
 void fillDataArray(struct Queue *source, uint8_t *data) {

@@ -4947,3 +4947,10 @@ arm-none-eabi-size   ReadRAM.elf
    7796	     52	   1732	   9580	   256c	ReadRAM.elf
 Finished building: default.size.stdout
  
+08:49:15 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7796	     52	   1732	   9580	   256c	ReadRAM.elf
+Finished building: default.size.stdout
+ 

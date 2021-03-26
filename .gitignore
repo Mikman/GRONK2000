@@ -54,3 +54,4 @@ dkms.conf
 
 .metadata/*
 AAUSAT6-OBC/.settings/*
+AAUSAT6-OBC/Debug/*

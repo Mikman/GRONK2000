@@ -44,7 +44,7 @@
 CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
-struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+struct Queue queueRAM = {0, 0, {0}};
 struct Queue queueRx = {0, 0, {0}};
 #define PACKAGE_SIZE 8
 
@@ -170,18 +170,18 @@ static void MX_CAN_Init(void)
 	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
 
 
-	  CanTxHeader.DLC = PACKAGE_SIZE;									// Der kommer 1 byte som data i beskeden
+	  CanTxHeader.DLC = PACKAGE_SIZE;						// Der kommer 8 byte som data i beskeden
 	  CanTxHeader.ExtId = 0x00000010;						// 32 bit ID
 	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
 
-
+/*
 	  CanRxHeader.DLC = PACKAGE_SIZE;
 	  CanRxHeader.ExtId = 0x00000010;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
-
+*/
   /* USER CODE END CAN_Init 0 */
 
   /* USER CODE BEGIN CAN_Init 1 */
@@ -189,7 +189,7 @@ static void MX_CAN_Init(void)
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
   hcan.Init.Prescaler = 16;
-  hcan.Init.Mode = CAN_MODE_LOOPBACK;
+  hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan.Init.TimeSeg1 = CAN_BS1_8TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_8TQ;
@@ -206,7 +206,7 @@ static void MX_CAN_Init(void)
   /* USER CODE BEGIN CAN_Init 2 */
   HAL_CAN_Start(&hcan);
   HAL_CAN_ConfigFilter(&hcan, &CanFilter);
-  HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
+  //HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
 
   /* USER CODE END CAN_Init 2 */
 
@@ -264,7 +264,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	if(GPIO_Pin == GPIO_PIN_0){
 
 		//Kode der implementerer en cirkel buffer
-		EnterQueue(&queueRAM, (uint8_t) GPIOA->IDR &0xFF); // Sætter dataen på PA0-7 ind i køen.
+		for (int i = 0; i<8; i++){
+			EnterQueue(&queueRAM,(uint8_t) 15);
+		}
+		for (int i = 0; i<8; i++){
+			EnterQueue(&queueRAM,(uint8_t) 27);
+		}
+		for (int i = 0; i<8; i++){
+			EnterQueue(&queueRAM,(uint8_t) 102);
+		}
+		//EnterQueue(&queueRAM, (uint8_t) GPIOA->IDR &0xFF); // Sætter dataen på PA0-7 ind i køen.
 	}
 }
 

@@ -4957,3 +4957,1456 @@ Finished building: default.size.stdout
  
 =======
 >>>>>>> parent of ed05af2 (Igang med at sende 24 bytes af gangen)
+09:02:06 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:107:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:268:6: warning: conflicting types for 'sendImageData'
+  268 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:107:3: note: previous implicit declaration of 'sendImageData' was here
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:274:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:286:6: warning: conflicting types for 'fillDataArray'
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:274:7: note: previous implicit declaration of 'fillDataArray' was here
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:291:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  291 |    return 0;
+      |           ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:294:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  294 |  return 1;
+      |         ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'receiveImageData'
+  297 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'receiveImageData' was here
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7796	     52	   1732	   9580	   256c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+Finished building: ReadRAM.list
+ 
+ 
+09:02:33 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7796	     52	   1732	   9580	   256c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+09:08:51 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:107:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:268:6: warning: conflicting types for 'sendImageData'
+  268 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:107:3: note: previous implicit declaration of 'sendImageData' was here
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:274:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:272:11: warning: unused variable 'dataToMB2' [-Wunused-variable]
+  272 |   uint8_t dataToMB2[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:286:6: warning: conflicting types for 'fillDataArray'
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:274:7: note: previous implicit declaration of 'fillDataArray' was here
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:291:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  291 |    return 0;
+      |           ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:294:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  294 |  return 1;
+      |         ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'receiveImageData'
+  297 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'receiveImageData' was here
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+Finished building: ReadRAM.list
+ 
+ 
+09:09:32 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+09:09:58 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7764	     52	   1732	   9548	   254c	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+09:14:03 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:107:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:268:6: warning: conflicting types for 'sendImageData'
+  268 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:107:3: note: previous implicit declaration of 'sendImageData' was here
+  107 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:274:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:286:6: warning: conflicting types for 'fillDataArray'
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:274:7: note: previous implicit declaration of 'fillDataArray' was here
+  274 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:291:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  291 |    return 0;
+      |           ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:294:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  294 |  return 1;
+      |         ^
+../Core/Src/main.c:286:6: note: declared here
+  286 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:297:6: warning: conflicting types for 'receiveImageData'
+  297 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'receiveImageData' was here
+  108 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7708	     52	   1732	   9492	   2514	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+Finished building: ReadRAM.list
+ 
+ 
+09:45:31 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:109:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:269:6: warning: conflicting types for 'sendImageData'
+  269 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'sendImageData' was here
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:275:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  275 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:287:6: warning: conflicting types for 'fillDataArray'
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:275:7: note: previous implicit declaration of 'fillDataArray' was here
+  275 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:292:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  292 |    return 0;
+      |           ^
+../Core/Src/main.c:287:6: note: declared here
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:295:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  295 |  return 1;
+      |         ^
+../Core/Src/main.c:287:6: note: declared here
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:298:6: warning: conflicting types for 'receiveImageData'
+  298 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:109:3: note: previous implicit declaration of 'receiveImageData' was here
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7856	     52	   1732	   9640	   25a8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+09:46:43 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:109:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:269:6: warning: conflicting types for 'sendImageData'
+  269 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'sendImageData' was here
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:275:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  275 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:287:6: warning: conflicting types for 'fillDataArray'
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:275:7: note: previous implicit declaration of 'fillDataArray' was here
+  275 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:292:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  292 |    return 0;
+      |           ^
+../Core/Src/main.c:287:6: note: declared here
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:295:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  295 |  return 1;
+      |         ^
+../Core/Src/main.c:287:6: note: declared here
+  287 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:298:6: warning: conflicting types for 'receiveImageData'
+  298 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:109:3: note: previous implicit declaration of 'receiveImageData' was here
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7856	     52	   1732	   9640	   25a8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
+09:56:57 **** Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o"
+arm-none-eabi-gcc -mcpu=cortex-m3 -g3 -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f103c8tx.d" -MT"Core/Startup/startup_stm32f103c8tx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Startup/startup_stm32f103c8tx.o" "../Core/Startup/startup_stm32f103c8tx.s"
+arm-none-eabi-gcc "../Core/Src/circle_queue.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/circle_queue.d" -MT"Core/Src/circle_queue.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/circle_queue.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  108 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:109:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  109 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:254:6: warning: conflicting types for 'sendImageData'
+  254 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:108:4: note: previous implicit declaration of 'sendImageData' was here
+  108 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:260:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  260 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:272:6: warning: conflicting types for 'fillDataArray'
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:260:7: note: previous implicit declaration of 'fillDataArray' was here
+  260 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:277:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  277 |    return 0;
+      |           ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:280:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  280 |  return 1;
+      |         ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:283:6: warning: conflicting types for 'receiveImageData'
+  283 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:109:4: note: previous implicit declaration of 'receiveImageData' was here
+  109 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f1xx.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f1xx.d" -MT"Core/Src/system_stm32f1xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f1xx.o"
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-size   STM32CAN.elf 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+09:59:53 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7856	     52	   1732	   9640	   25a8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+10:00:10 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:00:48 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:01:00 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:02:03 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:02:16 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:07:21 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_hal_msp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_hal_msp.d" -MT"Core/Src/stm32f1xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_hal_msp.o"
+../Core/Src/main.c:46:8: error: variable 'queueRAM' has initializer but incomplete type
+   46 | struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+      |        ^~~~~
+../Core/Src/main.c:46:26: warning: excess elements in struct initializer
+   46 | struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+      |                          ^
+../Core/Src/main.c:46:26: note: (near initialization for 'queueRAM')
+../Core/Src/main.c:46:29: warning: excess elements in struct initializer
+   46 | struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+      |                             ^~
+../Core/Src/main.c:46:29: note: (near initialization for 'queueRAM')
+../Core/Src/main.c:46:33: error: extra brace group at end of initializer
+   46 | struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+      |                                 ^
+../Core/Src/main.c:46:33: note: (near initialization for 'queueRAM')
+../Core/Src/main.c:46:33: warning: excess elements in struct initializer
+../Core/Src/main.c:46:33: note: (near initialization for 'queueRAM')
+../Core/Src/main.c:47:8: error: variable 'queueRx' has initializer but incomplete type
+   47 | struct Queue queueRx = {0, 0, {0}};
+      |        ^~~~~
+../Core/Src/main.c:47:25: warning: excess elements in struct initializer
+   47 | struct Queue queueRx = {0, 0, {0}};
+      |                         ^
+../Core/Src/main.c:47:25: note: (near initialization for 'queueRx')
+../Core/Src/main.c:47:28: warning: excess elements in struct initializer
+   47 | struct Queue queueRx = {0, 0, {0}};
+      |                            ^
+../Core/Src/main.c:47:28: note: (near initialization for 'queueRx')
+../Core/Src/main.c:47:31: error: extra brace group at end of initializer
+   47 | struct Queue queueRx = {0, 0, {0}};
+      |                               ^
+../Core/Src/main.c:47:31: note: (near initialization for 'queueRx')
+../Core/Src/main.c:47:31: warning: excess elements in struct initializer
+../Core/Src/main.c:47:31: note: (near initialization for 'queueRx')
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:105:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  105 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  106 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:247:3: warning: implicit declaration of function 'EnterQueue' [-Wimplicit-function-declaration]
+  247 |   EnterQueue(&queueRAM, (uint8_t) GPIOA->IDR &0xFF); // Sætter dataen på PA0-7 ind i køen.
+      |   ^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:251:6: warning: conflicting types for 'sendImageData'
+  251 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:105:4: note: previous implicit declaration of 'sendImageData' was here
+  105 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:257:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  257 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:269:6: warning: conflicting types for 'fillDataArray'
+  269 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:257:7: note: previous implicit declaration of 'fillDataArray' was here
+  257 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:271:7: warning: implicit declaration of function 'LeaveQueue' [-Wimplicit-function-declaration]
+  271 |   if (LeaveQueue(source, data + i)) { //Gemmer en byte fra source til data. Flere bytes gemmes ved at inkrementere data (som jo er en pointer til hvert element i data[])
+      |       ^~~~~~~~~~
+../Core/Src/main.c:274:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  274 |    return 0;
+      |           ^
+../Core/Src/main.c:269:6: note: declared here
+  269 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:277:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  277 |  return 1;
+      |         ^
+../Core/Src/main.c:269:6: note: declared here
+  269 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:280:6: warning: conflicting types for 'receiveImageData'
+  280 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'receiveImageData' was here
+  106 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'receiveImageData':
+../Core/Src/main.c:282:7: warning: implicit declaration of function 'QueueFull' [-Wimplicit-function-declaration]
+  282 |  if (!QueueFull(&queueRx)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
+      |       ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:46:14: error: storage size of 'queueRAM' isn't known
+   46 | struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+      |              ^~~~~~~~
+../Core/Src/main.c:47:14: error: storage size of 'queueRx' isn't known
+   47 | struct Queue queueRx = {0, 0, {0}};
+      |              ^~~~~~~
+make: *** [Core/Src/subdir.mk:39: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:07:59 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f1xx_it.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f1xx_it.d" -MT"Core/Src/stm32f1xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f1xx_it.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f1xx.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f1xx.d" -MT"Core/Src/system_stm32f1xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f1xx.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:270:6: warning: conflicting types for 'fillDataArray'
+  270 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:275:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  275 |    return 0;
+      |           ^
+../Core/Src/main.c:270:6: note: declared here
+  270 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:278:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  278 |  return 1;
+      |         ^
+../Core/Src/main.c:270:6: note: declared here
+  270 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:281:6: warning: conflicting types for 'receiveImageData'
+  281 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+Finished building: STM32CAN.list
+ 
+ 
+10:08:07 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:08:13 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:08:35 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:11:25 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:13:02 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:16:39 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:16:57 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:17:49 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:17:56 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7856	     52	   1732	   9640	   25a8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+10:19:15 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:20:33 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:21:53 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:22:02 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7856	     52	   1732	   9640	   25a8	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+10:22:24 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:22:57 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:24:31 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:25:28 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:28:16 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:28:34 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7292	     52	   1732	   9076	   2374	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:30:11 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:30:47 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:33:56 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+Finished building: STM32CAN.list
+ 
+ 
+10:37:16 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'receiveImageData':
+../Core/Src/main.c:285:66: error: expected expression before ']' token
+  285 |   HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, buffer[]); // Modtag beskeden og læg den i buffer
+      |                                                                  ^
+make: *** [Core/Src/subdir.mk:39: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:37:36 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'receiveImageData':
+../Core/Src/main.c:285:59: warning: passing argument 4 of 'HAL_CAN_GetRxMessage' from incompatible pointer type [-Wincompatible-pointer-types]
+  285 |   HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, &buffer); // Modtag beskeden og læg den i buffer
+      |                                                           ^~~~~~~
+      |                                                           |
+      |                                                           uint8_t (*)[8] {aka unsigned char (*)[8]}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:684:120: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[8]' {aka 'unsigned char (*)[8]'}
+  684 | HAL_StatusTypeDef HAL_CAN_GetRxMessage(CAN_HandleTypeDef *hcan, uint32_t RxFifo, CAN_RxHeaderTypeDef *pHeader, uint8_t aData[]);
+      |                                                                                                                ~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:39:06 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'receiveImageData':
+../Core/Src/main.c:285:59: warning: passing argument 4 of 'HAL_CAN_GetRxMessage' makes pointer from integer without a cast [-Wint-conversion]
+  285 |   HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, *buffer); // Modtag beskeden og læg den i buffer
+      |                                                           ^~~~~~~
+      |                                                           |
+      |                                                           uint8_t {aka unsigned char}
+In file included from ../Core/Inc/stm32f1xx_hal_conf.h:257,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h:684:120: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
+  684 | HAL_StatusTypeDef HAL_CAN_GetRxMessage(CAN_HandleTypeDef *hcan, uint32_t RxFifo, CAN_RxHeaderTypeDef *pHeader, uint8_t aData[]);
+      |                                                                                                                ~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:41:13 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7308	     52	   1732	   9092	   2384	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:45:10 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:253:6: warning: conflicting types for 'sendImageData'
+  253 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:259:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  259 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:268:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  268 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:272:6: warning: conflicting types for 'fillDataArray'
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:259:7: note: previous implicit declaration of 'fillDataArray' was here
+  259 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:277:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  277 |    return 0;
+      |           ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:280:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  280 |  return 1;
+      |         ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:283:6: warning: conflicting types for 'receiveImageData'
+  283 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7316	     52	   1732	   9100	   238c	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:47:06 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:252:6: warning: conflicting types for 'sendImageData'
+  252 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:258:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:267:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  267 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'fillDataArray'
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:258:7: note: previous implicit declaration of 'fillDataArray' was here
+  258 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:276:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  276 |    return 0;
+      |           ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:279:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  279 |  return 1;
+      |         ^
+../Core/Src/main.c:271:6: note: declared here
+  271 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:282:6: warning: conflicting types for 'receiveImageData'
+  282 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7716	     52	   1732	   9500	   251c	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:48:03 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:106:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:107:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:253:6: warning: conflicting types for 'sendImageData'
+  253 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:106:4: note: previous implicit declaration of 'sendImageData' was here
+  106 |    sendImageData();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:259:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  259 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:268:11: warning: unused variable 'dataToMB3' [-Wunused-variable]
+  268 |   uint8_t dataToMB3[PACKAGE_SIZE] = {0};
+      |           ^~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:272:6: warning: conflicting types for 'fillDataArray'
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:259:7: note: previous implicit declaration of 'fillDataArray' was here
+  259 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:277:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  277 |    return 0;
+      |           ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:280:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  280 |  return 1;
+      |         ^
+../Core/Src/main.c:272:6: note: declared here
+  272 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:283:6: warning: conflicting types for 'receiveImageData'
+  283 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:107:4: note: previous implicit declaration of 'receiveImageData' was here
+  107 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "STM32CAN.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CAN\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32CAN.elf
+ 
+arm-none-eabi-objdump -h -S  STM32CAN.elf  > "STM32CAN.list"
+arm-none-eabi-objcopy  -O binary  STM32CAN.elf  "STM32CAN.bin"
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7860	     52	   1732	   9644	   25ac	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32CAN.bin
+ 
+Finished building: STM32CAN.list
+ 
+10:49:14 **** Incremental Build of configuration Debug for project STM32CAN ****
+make -j8 all 
+arm-none-eabi-size   STM32CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7860	     52	   1732	   9644	   25ac	STM32CAN.elf
+Finished building: default.size.stdout
+ 
+10:51:04 **** Incremental Build of configuration Debug for project ReadRAM ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:109:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:271:6: warning: conflicting types for 'sendImageData'
+  271 | void sendImageData() {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'sendImageData' was here
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sendImageData':
+../Core/Src/main.c:277:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  277 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:289:6: warning: conflicting types for 'fillDataArray'
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:277:7: note: previous implicit declaration of 'fillDataArray' was here
+  277 |   if (fillDataArray(&queueRAM, dataToMB0)) {
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'fillDataArray':
+../Core/Src/main.c:294:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  294 |    return 0;
+      |           ^
+../Core/Src/main.c:289:6: note: declared here
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:297:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  297 |  return 1;
+      |         ^
+../Core/Src/main.c:289:6: note: declared here
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:300:6: warning: conflicting types for 'receiveImageData'
+  300 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:109:3: note: previous implicit declaration of 'receiveImageData' was here
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7864	     52	   1732	   9648	   25b0	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 

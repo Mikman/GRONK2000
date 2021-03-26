@@ -1,83 +1,65 @@
-<<<<<<< HEAD
-08:49:15 **** Incremental Build of configuration Debug for project ReadRAM ****
-make -j8 all 
-arm-none-eabi-size   ReadRAM.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7796	     52	   1732	   9580	   256c	ReadRAM.elf
-Finished building: default.size.stdout
- 
-
-08:49:15 Build Finished. 0 errors, 0 warnings. (took 598ms)
-=======
-11:51:27 **** Incremental Build of configuration Debug for project ReadRAM ****
+10:51:04 **** Incremental Build of configuration Debug for project ReadRAM ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:109:4: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
-  109 |    sendImageData();
-      |    ^~~~~~~~~~~~~
-../Core/Src/main.c:110:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
-  110 |    receiveImageData();
-      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:108:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:109:3: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
 ../Core/Src/main.c: At top level:
-../Core/Src/main.c:279:6: warning: conflicting types for 'sendImageData'
-  279 | void sendImageData() {
+../Core/Src/main.c:271:6: warning: conflicting types for 'sendImageData'
+  271 | void sendImageData() {
       |      ^~~~~~~~~~~~~
-../Core/Src/main.c:109:4: note: previous implicit declaration of 'sendImageData' was here
-  109 |    sendImageData();
-      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:108:3: note: previous implicit declaration of 'sendImageData' was here
+  108 |   sendImageData();
+      |   ^~~~~~~~~~~~~
 ../Core/Src/main.c: In function 'sendImageData':
-../Core/Src/main.c:285:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
-  285 |   if (fillDataArray(&queueRAM, &dataToMB0)) {
+../Core/Src/main.c:277:7: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
+  277 |   if (fillDataArray(&queueRAM, dataToMB0)) {
       |       ^~~~~~~~~~~~~
 ../Core/Src/main.c: At top level:
-../Core/Src/main.c:297:6: warning: conflicting types for 'fillDataArray'
-  297 | void fillDataArray(struct Queue source, uint8_t data[]) {
+../Core/Src/main.c:289:6: warning: conflicting types for 'fillDataArray'
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
       |      ^~~~~~~~~~~~~
-../Core/Src/main.c:285:7: note: previous implicit declaration of 'fillDataArray' was here
-  285 |   if (fillDataArray(&queueRAM, &dataToMB0)) {
+../Core/Src/main.c:277:7: note: previous implicit declaration of 'fillDataArray' was here
+  277 |   if (fillDataArray(&queueRAM, dataToMB0)) {
       |       ^~~~~~~~~~~~~
 ../Core/Src/main.c: In function 'fillDataArray':
-../Core/Src/main.c:299:18: error: incompatible type for argument 1 of 'LeaveQueue'
-  299 |   if (LeaveQueue(source, data[i])) {
-      |                  ^~~~~~
-      |                  |
-      |                  struct Queue
-In file included from ../Core/Src/main.c:26:
-../Core/Src/circle_queue.h:22:30: note: expected 'struct Queue *' but argument is of type 'struct Queue'
-   22 | int LeaveQueue(struct Queue *q, uint8_t *data);
-      |                ~~~~~~~~~~~~~~^
-../Core/Src/main.c:299:30: warning: passing argument 2 of 'LeaveQueue' makes pointer from integer without a cast [-Wint-conversion]
-  299 |   if (LeaveQueue(source, data[i])) {
-      |                          ~~~~^~~
-      |                              |
-      |                              uint8_t {aka unsigned char}
-In file included from ../Core/Src/main.c:26:
-../Core/Src/circle_queue.h:22:42: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
-   22 | int LeaveQueue(struct Queue *q, uint8_t *data);
-      |                                 ~~~~~~~~~^~~~
-../Core/Src/main.c:302:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  302 |    return 0;
+../Core/Src/main.c:294:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  294 |    return 0;
       |           ^
-../Core/Src/main.c:297:6: note: declared here
-  297 | void fillDataArray(struct Queue source, uint8_t data[]) {
+../Core/Src/main.c:289:6: note: declared here
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
       |      ^~~~~~~~~~~~~
-../Core/Src/main.c:305:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  305 |  return 1;
+../Core/Src/main.c:297:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  297 |  return 1;
       |         ^
-../Core/Src/main.c:297:6: note: declared here
-  297 | void fillDataArray(struct Queue source, uint8_t data[]) {
+../Core/Src/main.c:289:6: note: declared here
+  289 | void fillDataArray(struct Queue *source, uint8_t *data) {
       |      ^~~~~~~~~~~~~
 ../Core/Src/main.c: At top level:
-../Core/Src/main.c:308:6: warning: conflicting types for 'receiveImageData'
-  308 | void receiveImageData() {
+../Core/Src/main.c:300:6: warning: conflicting types for 'receiveImageData'
+  300 | void receiveImageData() {
       |      ^~~~~~~~~~~~~~~~
-../Core/Src/main.c:110:4: note: previous implicit declaration of 'receiveImageData' was here
-  110 |    receiveImageData();
-      |    ^~~~~~~~~~~~~~~~
-make: *** [Core/Src/subdir.mk:42: Core/Src/main.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
+../Core/Src/main.c:109:3: note: previous implicit declaration of 'receiveImageData' was here
+  109 |   receiveImageData();
+      |   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ReadRAM.elf
+ 
+arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
+arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
+arm-none-eabi-size   ReadRAM.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7864	     52	   1732	   9648	   25b0	ReadRAM.elf
+Finished building: default.size.stdout
+ 
+Finished building: ReadRAM.bin
+ 
+Finished building: ReadRAM.list
+ 
 
-11:51:27 Build Failed. 2 errors, 9 warnings. (took 376ms)
->>>>>>> parent of ed05af2 (Igang med at sende 24 bytes af gangen)
+10:51:04 Build Finished. 0 errors, 8 warnings. (took 738ms)
 

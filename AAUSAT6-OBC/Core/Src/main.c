@@ -52,7 +52,7 @@ UART_HandleTypeDef huart1;
 osThreadId_t GPS_Update_DataHandle;
 const osThreadAttr_t GPS_Update_Data_attributes = {
   .name = "GPS_Update_Data",
-  .stack_size = 512 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for TEST_Opgave */
@@ -271,6 +271,8 @@ void StartGPS_Update_Data(void *argument)
 	  int8_t result = readGPS(&huart1, &data);
     osDelay(1000);
   }
+
+  osThreadTerminate(NULL);
   /* USER CODE END 5 */
 }
 
@@ -290,6 +292,9 @@ void Start_TESTOpgave(void *argument)
 	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     osDelay(500);
   }
+
+  osThreadTerminate(NULL);
+
   /* USER CODE END Start_TESTOpgave */
 }
 

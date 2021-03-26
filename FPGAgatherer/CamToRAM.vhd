@@ -39,7 +39,7 @@ begin
 	address <= std_logic_vector(to_unsigned(addr, address'length));
 
 	-- Constant assignments for camera
-	XCLK <= '1' when ((XCLKticks mod 4) < 2) else '0';
+	XCLK <= '1' when (XCLKticks < 2) else '0';
 
 	RESET <= '1';
 	PWDN <= '0';
@@ -48,28 +48,34 @@ begin
 	process(PCLK)
 	begin
 		if (PCLK'event and PCLK = '1') then
-			if (VSYNC ='0' and HREF = '1' and getImagePin = '1') then
+			if (counting) then
 				preArray(i) <= CAMdata;
 				if (i >= 3) then
 					i <= 0;
+							-- First pixel
+					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
+					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
+					postArray(0)(7 downto 0) <= "00010000";
+					
+					--Second pixel
+					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
+					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
+					postArray(1)(7 downto 0) <= "11101011";
 				else
 					i <= i + 1;
 				end if;
-			end if;
-			
-			if (currentImage) then
-				counting <= true;
+
 			else
-				counting <= false;
+				i <= 0;
+				
 			end if;
 
 		end if;
 	end process;
 
-	
-	currentImage <= true when ((VSYNC = '0') and wantAnImage) else false;
+	counting <= true when ((VSYNC = '0') and wantAnImage and HREF = '1') else false;
 
-	process(VSYNC, nVSYNC)
+	process(VSYNC)
 	begin
 		if (VSYNC'event and VSYNC = '0') then
 			if (getImagePin = '1') then
@@ -79,26 +85,6 @@ begin
 			end if;
 		end if;
 	end process;
-
-
-
-
-	process(i)
-	begin
-		if (i = 0) then
-			-- First pixel
-			postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
-			postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
-			postArray(0)(7 downto 4) <= preArray(1)(7 downto 4);
-			
-			--Second pixel
-			postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
-			postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
-			postArray(1)(7 downto 4) <= preArray(3)(7 downto 4);
-		end if;
-	end process;
-	
-	
 	
 	
 	process(clk)
@@ -106,18 +92,6 @@ begin
 		if (clk'event and clk='1') then
 		
 			if (XCLKticks = 3) then
-				XCLKticks <= 0;
-			else
-				XCLKticks <= XCLKticks + 1;
-			end if;
-			
-			if (  XCLKticks = 3) then
-				XCLKticks <= 0;
-			else
-				XCLKticks <= XCLKticks + 1;
-			end if;
-			
-			if (  XCLKticks = 3) then
 				XCLKticks <= 0;
 			else
 				XCLKticks <= XCLKticks + 1;

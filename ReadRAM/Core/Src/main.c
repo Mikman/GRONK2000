@@ -44,7 +44,7 @@
 CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
-struct Queue queueRAM = {0, 24, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
+struct Queue queueRAM = {0, 0, {15, 15, 15, 15, 15, 15, 15, 15, 13, 13, 13, 13, 13, 13, 13, 13, 10, 10, 10, 10, 10, 10, 10, 10, 0}};
 struct Queue queueRx = {0, 0, {0}};
 #define PACKAGE_SIZE 8
 
@@ -266,6 +266,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 
+<<<<<<< HEAD
 
 
 /*
@@ -276,12 +277,21 @@ void sendImageData() {
 		//(CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2))
 		if (LeaveQueue(&queueRAM, dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
 			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, &pMailbox); // Send en byte over CAN
+=======
+/*
+void sendImageData() {
+	uint8_t dataFromQueue[1] = {0};
+	if (HAL_CAN_IsTxMessagePending(&hcan, (CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2)) == 0) { // Hvis der ikke allerede er en byte i mailbox'en
+		if (LeaveQueue(&queueRAM, &dataFromQueue)) { // Hvis den cirkulære buffer ikke er tom, fjern en byte
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataFromQueue, NULL); // Send en byte over CAN
+>>>>>>> parent of ed05af2 (Igang med at sende 24 bytes af gangen)
 		}
 	}
 }
 */
 
 void sendImageData() {
+<<<<<<< HEAD
 	if (HAL_CAN_GetRxFifoFillLevel(&hcan, CAN_RX_FIFO0) == 0) {
 		uint8_t dataToMB0[PACKAGE_SIZE] = {0};
 		uint8_t dataToMB1[PACKAGE_SIZE] = {0};
@@ -295,13 +305,34 @@ void sendImageData() {
 		}
 		if (fillDataArray(&queueRAM, dataToMB2)) {
 			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox);
+=======
+	uint8_t dataToMB0[8] = {0};
+	uint8_t dataToMB1[8] = {0};
+	uint8_t dataToMB2[8] = {0};
+
+	if (HAL_CAN_IsTxMessagePending(&hcan, (CAN_TX_MAILBOX0 | CAN_TX_MAILBOX1 | CAN_TX_MAILBOX2)) == 0) {
+		if (fillDataArray(&queueRAM, &dataToMB0)) {
+			HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, NULL);
+		}
+		if (fillDataArray(&queueRAM, &dataToMB1)) {
+					HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, NULL);
+		}
+		if (fillDataArray(&queueRAM, &dataToMB2)) {
+					HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, NULL);
+>>>>>>> parent of ed05af2 (Igang med at sende 24 bytes af gangen)
 		}
 	}
 }
 
+<<<<<<< HEAD
 void fillDataArray(struct Queue *source, uint8_t *data) {
 	for (int i = 0; i < PACKAGE_SIZE; i++) {
 		if (LeaveQueue(source, data + i)) { //Gemmer en byte fra source til data. Flere bytes gemmes ved at inkrementere data (som jo er en pointer til hvert element i data[])
+=======
+void fillDataArray(struct Queue source, uint8_t data[]) {
+	for (int i = 0; i < 8; i++) {
+		if (LeaveQueue(source, data[i])) {
+>>>>>>> parent of ed05af2 (Igang med at sende 24 bytes af gangen)
 			continue;
 		} else {
 			return 0;

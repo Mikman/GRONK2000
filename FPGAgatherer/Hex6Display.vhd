@@ -1,0 +1,17 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Hex6Display is
+	port (
+		DISP : in STD_LOGIC_VECTOR(6*8 downto 0); -- 6 hex digits
+		
+		EN : in STD_LOGIC;
+		
+		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX2 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX3 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX4 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX5 : out STD_LOGIC_VECTOR(6 downto 0);
+	);
+end Hex6Display;

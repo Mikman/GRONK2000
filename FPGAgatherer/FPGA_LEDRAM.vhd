@@ -4,7 +4,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_STD.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
-use work.SevenSegDisplayTypes.ALL;
+use work.SevenSegDisplayTypes.ALL; -- Needed for Seven Segment Display
 
 entity FPGA_LEDRAM is
 	port (

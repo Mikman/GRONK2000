@@ -1,0 +1,38 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity 7SegDigit is
+	port (
+		Digit 	: in unsigned(3 downto 0);
+		EN 		: in STD_LOGIC;
+		Dot 		: in STD_LOGIC;
+		Segments : out STD_LOGIC_VECTOR(7 downto 0));
+		
+end 7SegDigit;
+
+
+architecture Behavioral of 7SegDigit is
+	
+	
+	
+begin
+
+	process (Digit, EN, Dot)
+	
+	begin
+		
+		if (EN = '1') then
+			
+			case Digit is
+				
+				when 1 => Segments <= (others => '1');
+				when others => Segments <= (others => '0');
+			
+		else
+			
+			Segments <= (others => '1');
+	
+	end process;
+	
+end Behavioral;
+	

@@ -8,32 +8,46 @@
 
 #include "gpsdriver.h"
 
-char GPSFormat[6] = "$GPGGA";
+char GPSFormat[7] = "$GPGGA";
 
 uint8_t rawData[GPS_BUFSIZE] = {0};
-uint8_t GPSData[GPS_BUFSIZE] = {0};
+uint8_t holdData[GPS_BUFSIZE] = {0};
+uint8_t GPSData[GPS_DATASIZE] = {0};
 
 int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 
 	int flag = 0;
-	//DMA1_Channel5->CNDTR
+
 	HAL_UART_Receive_DMA(uart, rawData, GPS_BUFSIZE);
 
+	for (uint16_t i = 0; i < GPS_BUFSIZE; i++) {
+		holdData[i] = rawData[i];
+	}
+
+	uint16_t dmaCounter = DMA1_Channel5->CNDTR;
+
+	uint16_t index = GPS_BUFSIZE - dmaCounter;
+
 	for (uint16_t i = 0 ; i < GPS_BUFSIZE && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'
-		if (rawData[i] == '$') {
-			char formatTest[6] = { 0 }; // String for format comparison, i.e. $GPGGA
+		if (holdData[i] == '$') {
+			char formatTest[7] = { 0 }; // String for format comparison, i.e. $GPGGA
 			int check = 5; // Something else than 0 just for safety, since 0 means correct match
 
 			for (uint8_t x = 0; x < 6; x = x + 1) {  // Loops over the next 6 characters and puts then in an array to check for the desired format
-				formatTest[x] = rawData[i + x];
+				formatTest[x] = holdData[i + x];
 				check = strcmp(formatTest, GPSFormat);
 
 				if (check == 0) {
 
+					// This checks to see if the DMA was writing in the middle of the area we expect our message to be
+					if (((index >= i) || (i >= GPS_BUFSIZE - GPS_DATASIZE)) && index < (i + GPS_DATASIZE) % GPS_BUFSIZE) {
+						break;
+					}
+
 					uint8_t counter = 0;
 					for (i = i + 1; i < GPS_BUFSIZE; i = i + 1) { // loops until a '$' is found.
-						if (rawData[i] != '$') {
-							GPSData[counter] = rawData[i]; // Desired data format (GPGGA) is passed into another array
+						if (holdData[i] != '$') {
+							GPSData[counter] = holdData[i]; // Desired data format (GPGGA) is passed into another array
 							counter = counter + 1;
 						} else {
 							flag = 1;

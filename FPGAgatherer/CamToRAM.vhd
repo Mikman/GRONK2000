@@ -24,7 +24,6 @@ architecture Behavioral of CamToRAM is
 signal ticks, XCLKticks, addr, i: integer := 0;
 signal currentImage: boolean;
 signal counting, wantAnImage: boolean := false;
-signal nVSYNC: STD_LOGIC;
 
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 type postEditBuffer is array(1 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
@@ -32,6 +31,9 @@ signal preArray: preEditBuffer;
 signal postArray: postEditBuffer;
 
 begin
+
+	postArray(0)(7 downto 0) <= "11111111";
+	postArray(1)(7 downto 0) <= "01010101";
 	
 	-- Constant assignments for RAM
 	CS <= '0';
@@ -45,33 +47,33 @@ begin
 	PWDN <= '0';
 
 
-	process(PCLK)
-	begin
-		if (PCLK'event and PCLK = '1') then
-			if (counting) then
-				preArray(i) <= CAMdata;
-				if (i >= 3) then
-					i <= 0;
-							-- First pixel
-					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
-					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
-					postArray(0)(7 downto 0) <= "00010000";
-					
-					--Second pixel
-					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
-					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
-					postArray(1)(7 downto 0) <= "11101011";
-				else
-					i <= i + 1;
-				end if;
-
-			else
-				i <= 0;
-				
-			end if;
-
-		end if;
-	end process;
+--	process(PCLK)
+--	begin
+--		if (PCLK'event and PCLK = '1') then
+--			if (counting) then
+--				preArray(i) <= CAMdata;
+--				if (i > 3) then
+--					i <= 0;
+--							-- First pixel
+--					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
+--					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
+--					postArray(0)(7 downto 0) <= "10101010";
+--					
+--					--Second pixel
+--					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
+--					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
+--					postArray( 1)(7 downto 0) <= "01010101";
+--				else
+--					i <= i + 1;
+--				end if;
+--
+--			else
+--				i <= 0;
+--				
+--			end if;
+--
+--		end if;
+--	end process;
 
 	counting <= true when ((VSYNC = '0') and wantAnImage and HREF = '1') else false;
 

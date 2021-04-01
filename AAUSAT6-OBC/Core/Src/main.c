@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "gpsdriver.h"
+#include "DCMotorDriver.h"
 
 /* USER CODE END Includes */
 
@@ -46,6 +47,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim2;
+
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
 
@@ -63,6 +66,13 @@ const osThreadAttr_t TEST_Opgave_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for DCMotorTask */
+osThreadId_t DCMotorTaskHandle;
+const osThreadAttr_t DCMotorTask_attributes = {
+  .name = "DCMotorTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -72,8 +82,10 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_TIM2_Init(void);
 void StartGPS_Update_Data(void *argument);
 void Start_TESTOpgave(void *argument);
+void StartMotor(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -115,6 +127,7 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART1_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -144,6 +157,9 @@ int main(void)
 
   /* creation of TEST_Opgave */
   TEST_OpgaveHandle = osThreadNew(Start_TESTOpgave, NULL, &TEST_Opgave_attributes);
+
+  /* creation of DCMotorTask */
+  DCMotorTaskHandle = osThreadNew(StartMotor, NULL, &DCMotorTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -204,6 +220,55 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 5000;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+  HAL_TIM_MspPostInit(&htim2);
+
 }
 
 /**
@@ -282,11 +347,14 @@ GPS_FIX_DATA data = { 0 };
 void StartGPS_Update_Data(void *argument)
 {
   /* USER CODE BEGIN 5 */
+
+	gps_init(&huart1, hdma_usart1_rx.Instance);
+
   /* Infinite loop */
   for(;;)
   {
-	  int8_t result = readGPS(&huart1, &data);
-	  osDelay(100);
+	  int8_t result = readGPS(&data);
+	  osDelay(1000);
   }
 
   osThreadTerminate(NULL);
@@ -313,6 +381,40 @@ void Start_TESTOpgave(void *argument)
   osThreadTerminate(NULL);
 
   /* USER CODE END Start_TESTOpgave */
+}
+
+/* USER CODE BEGIN Header_StartMotor */
+/**
+* @brief Function implementing the DCMotorTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartMotor */
+void StartMotor(void *argument)
+{
+
+  /* USER CODE BEGIN StartMotor */
+	motor_init(&htim2, TIM_CHANNEL_1);
+
+  /* Infinite loop */
+  for(;;)
+  {
+	motor_start(80);
+	osDelay(5000);
+	motor_setPwm(50);
+
+    osDelay(5000);
+
+    motor_setPwm(35);
+    osDelay(5000);
+    motor_setPwm(100);
+    osDelay(5000);
+    motor_stop();
+    osDelay(5000);
+
+  }
+  osThreadTerminate(NULL);
+  /* USER CODE END StartMotor */
 }
 
  /**

@@ -10,11 +10,19 @@
 
 char GPSFormat[7] = "$GPGGA";
 
+UART_HandleTypeDef *uart;
+DMA_Channel_TypeDef *dma;
+
 uint8_t rawData[GPS_BUFSIZE] = {0};
 uint8_t holdData[GPS_BUFSIZE] = {0};
 uint8_t GPSData[GPS_DATASIZE] = {0};
 
-int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
+void gps_init(UART_HandleTypeDef *huart, DMA_Channel_TypeDef *dmac) {
+	uart = huart;
+	dma = dmac;
+}
+
+int8_t readGPS(GPS_FIX_DATA *data){
 
 	int flag = 0;
 
@@ -24,7 +32,7 @@ int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 		holdData[i] = rawData[i];
 	}
 
-	uint16_t dmaCounter = DMA1_Channel5->CNDTR;
+	uint16_t dmaCounter = dma->CNDTR;
 
 	uint16_t index = GPS_BUFSIZE - dmaCounter;
 

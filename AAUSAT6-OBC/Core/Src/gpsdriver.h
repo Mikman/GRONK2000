@@ -26,9 +26,9 @@ typedef struct {
 	uint8_t HOURS;
 	uint8_t MIN;
 	uint8_t SEC;
-	float LAT;
+	float LAT; 		// DDMM.mmmm
 	char LAT_DIR;
-	float LON;
+	float LON; 		// DDDMM.mmmm
 	char LON_DIR;
 	uint8_t QUALITY;
 	uint8_t SATS;
@@ -38,13 +38,18 @@ typedef struct {
 } GPS_FIX_DATA;
 
 /**
- * Read GPGGA data (GPA-data) from the given UART peripheral, and assign received data to the GPS_FIX_DATA pointer.
+ *
+ */
+void gps_init(UART_HandleTypeDef *huart, DMA_Channel_TypeDef *dmac);
+
+/**
+ * Read GPGGA data (GPA-data) from the UART peripheral, and assign received data to the GPS_FIX_DATA pointer.
  * Function returns:
  *   1: Succesful data received
  *  -1: Error in transmission
  *   0: No valid data received
  */
-int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data);
+int8_t readGPS(GPS_FIX_DATA *data);
 
 int8_t convertToString(GPS_FIX_DATA *data, char *str);
 

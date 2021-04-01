@@ -9,7 +9,7 @@ use work.SevenSegDisplayTypes.ALL; -- Needed for Seven Segment Display
 entity Arduino_RAM_reader is
 	port (
 		address: out STD_LOGIC_VECTOR(18 downto 0);
-		RAMdata: inout STD_LOGIC_VECTOR(7 downto 0); -- Evt. ret til kun input, da vi alligevel ikke driver den
+		RAMdata: in STD_LOGIC_VECTOR(7 downto 0); -- Evt. ret til kun input, da vi alligevel ikke driver den
 		CS, WE, OE: out STD_LOGIC;
 		WE_SW: in STD_LOGIC;
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0);
@@ -39,8 +39,12 @@ architecture Behavioral of Arduino_RAM_reader is
 		process(addrInc, reset)
 		begin
 			if (addrInc'event and addrInc = '1') then
-			
+				
 				i <= i + 1;
+				
+				if (reset = '1') then
+					i <= 0;
+				end if;
 				
 			end if;
 		end process;

@@ -176,27 +176,27 @@ static void MX_CAN_Init(void)
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
 
-/*
+
 	  CanRxHeader.DLC = PACKAGE_SIZE;
 	  CanRxHeader.ExtId = 0x00000010;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
-*/
+
   /* USER CODE END CAN_Init 0 */
 
   /* USER CODE BEGIN CAN_Init 1 */
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 16;
+  hcan.Init.Prescaler = 9;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_8TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_7TQ;
   hcan.Init.TimeSeg2 = CAN_BS2_8TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = ENABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
@@ -204,10 +204,11 @@ static void MX_CAN_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN_Init 2 */
-  HAL_CAN_Start(&hcan);
+
+  __HAL_RCC_CAN1_CLK_ENABLE();
   HAL_CAN_ConfigFilter(&hcan, &CanFilter);
   //HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
-
+  HAL_CAN_Start(&hcan);
   /* USER CODE END CAN_Init 2 */
 
 }
@@ -230,6 +231,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -251,6 +255,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PB12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
@@ -262,7 +273,7 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if(GPIO_Pin == GPIO_PIN_0){
-
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_12);
 		//Kode der implementerer en cirkel buffer
 		for (int i = 0; i<8; i++){
 			EnterQueue(&queueRAM,(uint8_t) 15);
@@ -282,14 +293,26 @@ void sendImageData() {
 	uint8_t dataToMB1[PACKAGE_SIZE] = {0};
 	uint8_t dataToMB2[PACKAGE_SIZE] = {0};
 	uint32_t randoMailBox;
+	uint8_t hej;
 	if (fillDataArray(&queueRAM, dataToMB0)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox);
+		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox) != HAL_OK) {
+			Error_Handler();
+		}
+		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox) == 1) {
+			hej = 1;
+		}
 	}
 	if (fillDataArray(&queueRAM, dataToMB1)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox);
+		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox) != HAL_OK) {
+			Error_Handler();
+		}
+		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox));
 	}
 	if (fillDataArray(&queueRAM, dataToMB2)) {
-		HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox);
+		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox) != HAL_OK) {
+			Error_Handler();
+		}
+		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox));
 	}
 }
 

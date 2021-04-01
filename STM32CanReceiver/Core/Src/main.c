@@ -45,7 +45,7 @@ CAN_HandleTypeDef hcan1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-//CAN_FilterTypeDef CanFilter;
+CAN_FilterTypeDef CanFilter;
 CAN_RxHeaderTypeDef CanRxHeader;
 
 struct Queue queueCANRX ={0,0,{0}};
@@ -105,7 +105,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	 uint8_t hejsa = 0;
+	  receiveImageData();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -183,19 +183,18 @@ static void MX_CAN1_Init(void)
 {
 
   /* USER CODE BEGIN CAN1_Init 0 */
-	/*
+
 	  CanFilter.FilterIdHigh = 0x0000;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
 	  CanFilter.FilterIdLow = 0x0010;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
 	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
 	  CanFilter.FilterActivation = ENABLE;					// Vi aktiverer filteret
 	  CanFilter.FilterBank = 0;								// Vi vælger filter 0 ud af 14 mulige filtre
 	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
-	*/
+
 	  CanRxHeader.DLC = PACKAGE_SIZE;
 	  CanRxHeader.ExtId = 0x00000010;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
-
   /* USER CODE END CAN1_Init 0 */
 
   /* USER CODE BEGIN CAN1_Init 1 */
@@ -219,8 +218,8 @@ static void MX_CAN1_Init(void)
   }
   /* USER CODE BEGIN CAN1_Init 2 */
   	HAL_CAN_Start(&hcan1);
-    //HAL_CAN_ConfigFilter(&hcan1, &CanFilter);
-    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_ConfigFilter(&hcan1, &CanFilter);
+    //HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN1_Init 2 */
 
 }

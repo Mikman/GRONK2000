@@ -16,7 +16,7 @@ uint8_t GPSData[GPS_BUFSIZE] = {0};
 int8_t readGPS(UART_HandleTypeDef *uart, GPS_FIX_DATA *data){
 
 	int flag = 0;
-
+	//DMA1_Channel5->CNDTR
 	HAL_UART_Receive_DMA(uart, rawData, GPS_BUFSIZE);
 
 	for (uint16_t i = 0 ; i < GPS_BUFSIZE && flag != 1 ; i = i + 1){ // Looking for start of data format indicated as '$'

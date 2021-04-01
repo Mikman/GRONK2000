@@ -47,6 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
+DMA_HandleTypeDef hdma_usart1_rx;
 
 /* Definitions for GPS_Update_Data */
 osThreadId_t GPS_Update_DataHandle;
@@ -69,6 +70,7 @@ const osThreadAttr_t TEST_Opgave_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
 void StartGPS_Update_Data(void *argument);
 void Start_TESTOpgave(void *argument);
@@ -111,6 +113,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
@@ -237,6 +240,22 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -250,7 +269,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+GPS_FIX_DATA data = { 0 };
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartGPS_Update_Data */
@@ -266,10 +285,8 @@ void StartGPS_Update_Data(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  GPS_FIX_DATA data = { 0 };
-
 	  int8_t result = readGPS(&huart1, &data);
-    osDelay(1000);
+	  osDelay(1000);
   }
 
   osThreadTerminate(NULL);

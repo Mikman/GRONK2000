@@ -105,7 +105,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  receiveImageData();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -184,8 +184,11 @@ static void MX_CAN1_Init(void)
 
   /* USER CODE BEGIN CAN1_Init 0 */
 
+	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
 	  CanFilter.FilterIdHigh = 0x0000;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
 	  CanFilter.FilterIdLow = 0x0010;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
+	  CanFilter.FilterMaskIdHigh = 0x0000;					// Maskens 16 MSB
+	  CanFilter.FilterMaskIdLow = 0x0000;					// Maskens 16 LSB
 	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
 	  CanFilter.FilterActivation = ENABLE;					// Vi aktiverer filteret
 	  CanFilter.FilterBank = 0;								// Vi vælger filter 0 ud af 14 mulige filtre
@@ -195,16 +198,18 @@ static void MX_CAN1_Init(void)
 	  CanRxHeader.ExtId = 0x00000010;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
+	  CanRxHeader.FilterMatchIndex = 0x00;
   /* USER CODE END CAN1_Init 0 */
 
   /* USER CODE BEGIN CAN1_Init 1 */
+	  __HAL_RCC_CAN1_CLK_ENABLE();
 
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
-  hcan1.Init.Prescaler = 32;
+  hcan1.Init.Prescaler = 18;
   hcan1.Init.Mode = CAN_MODE_NORMAL;
   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan1.Init.TimeSeg1 = CAN_BS1_8TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_7TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_8TQ;
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
@@ -217,9 +222,10 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
-  	HAL_CAN_Start(&hcan1);
+
     HAL_CAN_ConfigFilter(&hcan1, &CanFilter);
-    //HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_Start(&hcan1);
   /* USER CODE END CAN1_Init 2 */
 
 }
@@ -289,7 +295,8 @@ static void MX_GPIO_Init(void)
 void receiveImageData() {
 	uint8_t buffer[PACKAGE_SIZE] = {0};
 	if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
-		HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
+		// RxFIFOLevel skal nok lige tilføjes
+		HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO1, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
 		for(int i = 0; i < PACKAGE_SIZE; i++){
 		EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
 		}

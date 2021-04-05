@@ -105,6 +105,7 @@ int main(void)
   while (1)
   {
 	 sendImageData();
+	 //receiveImageData();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -201,7 +202,7 @@ static void MX_CAN_Init(void)
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = ENABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
@@ -300,7 +301,7 @@ void sendImageData() {
 	uint32_t randoMailBox;
 	uint8_t hej;
 	if (fillDataArray(&queueRAM, dataToMB0)) {
-		if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 3) {
+		if (HAL_CAN_GetTxMailBoxesFreeLevel(&hcan) > 0) {
 			if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox) != HAL_OK) {
 						Error_Handler();
 			}

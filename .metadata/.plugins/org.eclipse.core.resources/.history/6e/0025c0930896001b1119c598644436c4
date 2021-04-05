@@ -105,6 +105,7 @@ int main(void)
   while (1)
   {
 	 sendImageData();
+	 //receiveImageData();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -173,15 +174,15 @@ static void MX_CAN_Init(void)
 	  */
 
 	  CanTxHeader.DLC = PACKAGE_SIZE;						// Der kommer 8 byte som data i beskeden
-	  CanTxHeader.ExtId = 0x000010;							// 32 bit ID
-	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit
+	  CanTxHeader.ExtId = 0x0010;							// 16 bit ID
+	  CanTxHeader.IDE = CAN_ID_STD;							// Vi har et standard ID = 16 bit til forskel fra extended på 32 bit
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
 
 	  /*
 	  CanRxHeader.DLC = PACKAGE_SIZE;
-	  CanRxHeader.ExtId = 0x000010;
-	  CanRxHeader.IDE = CAN_ID_EXT;
+	  CanRxHeader.ExtId = 0x0010;
+	  CanRxHeader.IDE = CAN_ID_STD;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
 	  */
 
@@ -201,7 +202,7 @@ static void MX_CAN_Init(void)
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = ENABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
@@ -300,13 +301,10 @@ void sendImageData() {
 	uint32_t randoMailBox;
 	uint8_t hej;
 	if (fillDataArray(&queueRAM, dataToMB0)) {
-		if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 3) {
-			if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox) != HAL_OK) {
-						Error_Handler();
-			}
+		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox) != HAL_OK) {
+			Error_Handler();
 		}
-
-		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox) == 1) {
+		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox)) {
 			hej = 1;
 		}
 	}

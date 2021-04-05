@@ -32,14 +32,18 @@ static const uint8_t MPU_TempReg = 0x41;
 static const uint8_t MPU_GyroOut = 0x43;
 static const uint8_t MPU_AccelOut = 0x3B;
 
+typedef struct {
+	float x;
+	float y;
+	float z;
+} Axes3;
+
 HAL_StatusTypeDef MPU_Init(I2C_HandleTypeDef * I2C_handler);
 
 float MPU_Read_Temp();
 
-float MPU_Read_Gyro(char axis);
+Axes3 MPU_Read_Gyro();
 
-float MPU_Read_Accel(char axis);
-
-
+Axes3 MPU_Read_Accel();
 
 #endif /* SRC_MPU6050_DRIVER_H_ */

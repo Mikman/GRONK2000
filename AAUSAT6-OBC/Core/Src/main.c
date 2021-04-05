@@ -26,6 +26,7 @@
 
 #include "gpsdriver.h"
 #include "DCMotorDriver.h"
+#include "mpu6050_driver.h"
 
 /* USER CODE END Includes */
 
@@ -481,7 +482,9 @@ void startMpu6050(void *argument)
   for(;;)
   {
 	 float temp = MPU_Read_Temp();
-    osDelay(10000);
+	 Axes3 accel = MPU_Read_Accel();
+	 Axes3 gyro = MPU_Read_Gyro();
+	 osDelay(10000);
 
   }
   /* USER CODE END startMpu6050 */

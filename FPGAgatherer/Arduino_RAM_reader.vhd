@@ -32,7 +32,7 @@ architecture Behavioral of Arduino_RAM_reader is
 		LEDs(7 downto 0) <= RAMdata(7 downto 0);
 		--RAMdata <= "00000000";
 		CS <= '0';
-		WE <= WE_SW;
+		WE <= '1';
 		OE <= '0';
 		
 		
@@ -41,10 +41,6 @@ architecture Behavioral of Arduino_RAM_reader is
 			if (addrInc'event and addrInc = '1') then
 				
 				i <= i + 1;
-				
-				if (reset = '1') then
-					i <= 0;
-				end if;
 				
 			end if;
 		end process;

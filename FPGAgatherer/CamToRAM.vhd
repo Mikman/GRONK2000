@@ -55,7 +55,7 @@ begin
 					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
 					--postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
-					postArray(0)(7 downto 0) <= "01010101";
+					postArray(0)(7 downto 0) <= "11111111";
 					
 					--Second pixel
 					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);

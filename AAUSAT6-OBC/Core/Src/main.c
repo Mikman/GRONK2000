@@ -47,6 +47,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+
 TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart1;
@@ -73,6 +75,13 @@ const osThreadAttr_t DCMotorTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for taskMpu6050 */
+osThreadId_t taskMpu6050Handle;
+const osThreadAttr_t taskMpu6050_attributes = {
+  .name = "taskMpu6050",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -83,9 +92,11 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_I2C1_Init(void);
 void StartGPS_Update_Data(void *argument);
 void Start_TESTOpgave(void *argument);
 void StartMotor(void *argument);
+void startMpu6050(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -128,6 +139,7 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_TIM2_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -160,6 +172,9 @@ int main(void)
 
   /* creation of DCMotorTask */
   DCMotorTaskHandle = osThreadNew(StartMotor, NULL, &DCMotorTask_attributes);
+
+  /* creation of taskMpu6050 */
+  taskMpu6050Handle = osThreadNew(startMpu6050, NULL, &taskMpu6050_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -220,6 +235,40 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
 }
 
 /**
@@ -330,6 +379,7 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
 }
 
@@ -392,7 +442,6 @@ void Start_TESTOpgave(void *argument)
 /* USER CODE END Header_StartMotor */
 void StartMotor(void *argument)
 {
-
   /* USER CODE BEGIN StartMotor */
 	motor_init(&htim2, TIM_CHANNEL_1);
 
@@ -415,6 +464,27 @@ void StartMotor(void *argument)
   }
   osThreadTerminate(NULL);
   /* USER CODE END StartMotor */
+}
+
+/* USER CODE BEGIN Header_startMpu6050 */
+/**
+* @brief Function implementing the taskMpu6050 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_startMpu6050 */
+void startMpu6050(void *argument)
+{
+  /* USER CODE BEGIN startMpu6050 */
+	HAL_StatusTypeDef status = MPU_Init(&hi2c1);
+  /* Infinite loop */
+  for(;;)
+  {
+	 float temp = MPU_Read_Temp();
+    osDelay(10000);
+
+  }
+  /* USER CODE END startMpu6050 */
 }
 
  /**

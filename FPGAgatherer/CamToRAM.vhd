@@ -21,7 +21,7 @@ end CamToRAM;
 
 architecture Behavioral of CamToRAM is
 
-signal ticks, XCLKticks, addr, i: integer := 0;
+signal ticks, XCLKticks, addr, i : integer := 0;
 signal currentImage: boolean;
 signal counting, wantAnImage: boolean := false;
 
@@ -31,9 +31,6 @@ signal preArray: preEditBuffer;
 signal postArray: postEditBuffer;
 
 begin
-
-	postArray(0)(7 downto 0) <= "11111111";
-	postArray(1)(7 downto 0) <= "01010101";
 	
 	-- Constant assignments for RAM
 	CS <= '0';
@@ -47,33 +44,35 @@ begin
 	PWDN <= '0';
 
 
---	process(PCLK)
---	begin
---		if (PCLK'event and PCLK = '1') then
---			if (counting) then
---				preArray(i) <= CAMdata;
---				if (i > 3) then
---					i <= 0;
---							-- First pixel
---					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
---					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
---					postArray(0)(7 downto 0) <= "10101010";
---					
---					--Second pixel
---					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
---					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
---					postArray( 1)(7 downto 0) <= "01010101";
---				else
---					i <= i + 1;
---				end if;
---
---			else
---				i <= 0;
---				
---			end if;
---
---		end if;
---	end process;
+	process(PCLK)
+	begin
+		if (PCLK'event and PCLK = '1') then
+			if (counting) then
+				preArray(i) <= CAMdata;
+				if (i = 3) then
+					i <= 0;
+							-- First pixel
+					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
+					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
+					--postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
+					postArray(0)(7 downto 0) <= "01010101";
+					
+					--Second pixel
+					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
+					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
+					--postArray( 1)(7 downto 0) <= preArray(3)(7 downto 0);
+					postArray(1)(7 downto 0) <= "10101010";
+				else
+					i <= i + 1;
+				end if;
+
+			else
+				i <= 0;
+				
+			end if;
+
+		end if;
+	end process;
 
 	counting <= true when ((VSYNC = '0') and wantAnImage and HREF = '1') else false;
 
@@ -100,27 +99,46 @@ begin
 			end if;
 			
 			-- Decisions based on ticks
-			if (ticks > 15) then
-				ticks <= 0;
-			end if;
-			
-			if (ticks mod 8 = 0) then
-				addr <= addr + 1;
-			end if;
-			
-			if (ticks < 8) then
-				RAMdata <= postArray(0);
-			else
-				RAMdata <= postArray(1);
-			end if;
 			
 			-- Incrementing ticks or resetting ticks and addr
-			if (counting) then
-				ticks <= ticks + 1;
-			else
+			
+			if (ticks = 15) then
+			--kør koden igen, men sæt til 0 bagefter
+			
+				if (ticks mod 8 = 0) then
+					addr <= addr + 1;
+				end if;
+				
+				if (ticks < 8) then
+					RAMdata <= postArray(1);
+				else
+					RAMdata <= postArray(0);
+				end if;
+				
 				ticks <= 0;
-				addr <= 0;
+				
+				
+			else 
+			
+				if (ticks mod 8 = 0) then
+					addr <= addr + 1;
+				end if;
+				
+				if (ticks < 8) then
+					RAMdata <= postArray(1);
+				else
+					RAMdata <= postArray(0);
+				end if;
+				
+				if (counting) then
+					ticks <= ticks + 1;
+				else
+					ticks <= 0;
+					addr <= 0;
+				end if;
+				
 			end if;
+			
 		end if;
 	end process;
 	

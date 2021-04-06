@@ -14,7 +14,6 @@ entity Arduino_RAM_reader is
 		WE_SW: in STD_LOGIC;
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0);
 		addrInc: in STD_LOGIC;
-		reset : in STD_LOGIC; -- Key1
 		
 		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
@@ -36,7 +35,7 @@ architecture Behavioral of Arduino_RAM_reader is
 		OE <= '0';
 		
 		
-		process(addrInc, reset)
+		process(addrInc)
 		begin
 			if (addrInc'event and addrInc = '1') then
 				

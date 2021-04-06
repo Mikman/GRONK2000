@@ -21,8 +21,10 @@ end CamToRAM;
 
 architecture Behavioral of CamToRAM is
 
-signal ticks, XCLKticks, addr, i : integer := 0;
+signal ticks, XCLKticks, i : integer := 0;
+signal addr: integer range 0 to 512000 :=0;
 signal currentImage: boolean;
+signal currentLine: boolean := true;
 signal counting, wantAnImage: boolean := false;
 
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
@@ -39,6 +41,8 @@ begin
 
 	-- Constant assignments for camera
 	XCLK <= '1' when (XCLKticks < 2) else '0';
+	
+	currentLine <= false when (VSYNC = '0') else true;
 
 	RESET <= '1';
 	PWDN <= '0';
@@ -54,14 +58,14 @@ begin
 							-- First pixel
 					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
-					--postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
-					postArray(0)(7 downto 0) <= "11111111";
+					postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
+					--postArray(0)(7 downto 0) <= "11111111";
 					
 					--Second pixel
 					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
-					--postArray( 1)(7 downto 0) <= preArray(3)(7 downto 0);
-					postArray(1)(7 downto 0) <= "10101010";
+					postArray( 1)(7 downto 0) <= preArray(3)(7 downto 0);
+					--postArray(1)(7 downto 0) <= "10101010";
 				else
 					i <= i + 1;
 				end if;
@@ -79,11 +83,13 @@ begin
 	process(VSYNC)
 	begin
 		if (VSYNC'event and VSYNC = '0') then
+			
 			if (getImagePin = '1') then
 				wantAnImage <= true;
 			else
 				wantAnImage <= false;
 			end if;
+			
 		end if;
 	end process;
 	
@@ -118,7 +124,7 @@ begin
 				ticks <= 0;
 				
 				
-			else 
+			elsif(counting) then 
 			
 				if (ticks mod 8 = 0) then
 					addr <= addr + 1;
@@ -130,12 +136,12 @@ begin
 					RAMdata <= postArray(0);
 				end if;
 				
-				if (counting) then
-					ticks <= ticks + 1;
-				else
-					ticks <= 0;
-					addr <= 0;
-				end if;
+				ticks <= ticks + 1;
+				
+			elsif(currentLine) then
+			
+				addr <= 0;
+				ticks <= 0;
 				
 			end if;
 			

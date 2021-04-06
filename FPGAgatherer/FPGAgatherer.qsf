@@ -36,7 +36,7 @@
 #
 # -------------------------------------------------------------------------- #
 
-
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CEBA4F23C7
 set_global_assignment -name TOP_LEVEL_ENTITY Arduino_RAM_reader
@@ -157,6 +157,9 @@ set_location_assignment PIN_T14 -to HEX5[2]
 set_location_assignment PIN_P14 -to HEX5[3]
 set_location_assignment PIN_W19 -to HEX5[6]
 set_location_assignment PIN_W9 -to reset
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name ENABLE_DRC_SETTINGS OFF
+set_global_assignment -name SDC_FILE FPGAgatherer.sdc
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK3_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK4_50

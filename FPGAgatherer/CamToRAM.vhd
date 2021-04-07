@@ -58,14 +58,14 @@ begin
 							-- First pixel
 					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
-					postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
-					--postArray(0)(7 downto 0) <= "11111111";
+					--postArray(0)(7 downto 4) <= preArray(1)(7 downto 4);
+					postArray(0)(7 downto 0) <= "11111111";
 					
 					--Second pixel
 					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
-					postArray( 1)(7 downto 0) <= preArray(3)(7 downto 0);
-					--postArray(1)(7 downto 0) <= "10101010";
+					--postArray( 1)(7 downto 4) <= preArray(3)(7 downto 4);
+					postArray(1)(7 downto 0) <= "00000010";
 				else
 					i <= i + 1;
 				end if;
@@ -142,6 +142,7 @@ begin
 			
 				addr <= 0;
 				ticks <= 0;
+				
 				
 			end if;
 			

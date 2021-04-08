@@ -6,8 +6,9 @@ entity CamToRAM is
 	port (
 		-- Camera I/O
 		XCLK, RESET, PWDN: out STD_LOGIC;
-		HREF, VSYNC, PCLK, getImagePin: in STD_LOGIC;
+		HREF, VSYNC, PCLK, getImagePin, configPin: in STD_LOGIC;
 		CAMdata: in STD_LOGIC_VECTOR(7 downto 0);
+		SIOC, SIOD : out STD_LOGIC;
 		
 		-- RAM I/O
 		address: out STD_LOGIC_VECTOR(18 downto 0);
@@ -21,10 +22,11 @@ end CamToRAM;
 
 architecture Behavioral of CamToRAM is
 
-signal ticks, XCLKticks, i : integer := 0;
-signal addr: integer range 0 to 512000 :=0;
+signal ticks, XCLKticks, i: integer := 0;
+signal addr, configClkCounter: integer range 0 to 512000 :=0;
+
 signal currentImage: boolean;
-signal currentLine: boolean := true;
+signal currentLine, SIOCbool: boolean := true;
 signal counting, wantAnImage: boolean := false;
 
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
@@ -41,9 +43,12 @@ begin
 
 	-- Constant assignments for camera
 	XCLK <= '1' when (XCLKticks < 2) else '0';
-	
+	SIOC <= '1' when (SIOCbool = true) else '0';
 	currentLine <= false when (VSYNC = '0') else true;
-
+	
+	
+	
+	
 	RESET <= '1';
 	PWDN <= '0';
 
@@ -58,14 +63,14 @@ begin
 							-- First pixel
 					--postArray(0)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(0)(3 downto 2) <= preArray(2)(7 downto 6);
-					--postArray(0)(7 downto 4) <= preArray(1)(7 downto 4);
-					postArray(0)(7 downto 0) <= "11111111";
+					postArray(0)(7 downto 0) <= preArray(1)(7 downto 0);
+					--postArray(0)(7 downto 0) <= "11111111";
 					
 					--Second pixel
 					--postArray(1)(1 downto 0) <= preArray(0)(7 downto 6);
 					--postArray(1)(3 downto 2) <= preArray(2)(7 downto 6);
-					--postArray( 1)(7 downto 4) <= preArray(3)(7 downto 4);
-					postArray(1)(7 downto 0) <= "00000010";
+					postArray( 1)(7 downto 0) <= preArray(3)(7 downto 0);
+					--postArray(1)(7 downto 0) <= "00000010";
 				else
 					i <= i + 1;
 				end if;
@@ -93,11 +98,39 @@ begin
 		end if;
 	end process;
 	
+	process(clk)
+	begin
+		if (clk'event and clk='1') then
+		--Her programmerer vi SCCB til kamera.
+			if (configPin = '1') then
+				
+				if (configClkCounter = 999) then
+					configClkCounter <= 0;
+					if (SIOCbool = false) then
+						SIOCbool <= true;
+					else 
+					
+						--opdater SIOD
+						SIOCbool <= false;
+					end if;
+					
+				else 
+					configClkCounter <= configClkCounter + 1;
+					
+				end if;
+	
+			else 
+				SIOCbool <= true;
+				configClkCounter <= 0;
+			end if;		
+			
+		end if;
+	end process;
 	
 	process(clk)
 	begin
 		if (clk'event and clk='1') then
-		
+			
 			if (XCLKticks = 3) then
 				XCLKticks <= 0;
 			else

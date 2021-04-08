@@ -1,10 +1,31 @@
-15:36:49 **** Incremental Build of configuration Debug for project CanReceiver ****
+16:11:12 **** Incremental Build of configuration Debug for project CanReceiver ****
 make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:4: warning: implicit declaration of function 'receiveImageData' [-Wimplicit-function-declaration]
+  108 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:306:6: warning: conflicting types for 'receiveImageData'
+  306 | void receiveImageData() {
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:108:4: note: previous implicit declaration of 'receiveImageData' was here
+  108 |    receiveImageData();
+      |    ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "CanReceiver.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\STM32CanReceiver\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CanReceiver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CanReceiver.elf
+ 
+arm-none-eabi-objdump -h -S  CanReceiver.elf  > "CanReceiver.list"
+arm-none-eabi-objcopy  -O binary  CanReceiver.elf  "CanReceiver.bin"
 arm-none-eabi-size   CanReceiver.elf 
    text	   data	    bss	    dec	    hex	filename
-  14312	     20	   1844	  16176	   3f30	CanReceiver.elf
+  14392	     20	   1844	  16256	   3f80	CanReceiver.elf
 Finished building: default.size.stdout
  
+Finished building: CanReceiver.bin
+ 
+Finished building: CanReceiver.list
+ 
 
-15:36:49 Build Finished. 0 errors, 0 warnings. (took 379ms)
+16:11:14 Build Finished. 0 errors, 2 warnings. (took 1s.663ms)
 

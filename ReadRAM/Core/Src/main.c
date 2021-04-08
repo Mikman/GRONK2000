@@ -160,30 +160,12 @@ static void MX_CAN_Init(void)
 {
 
   /* USER CODE BEGIN CAN_Init 0 */
-	  /*
-	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
-	  CanFilter.FilterIdHigh = 0x0000;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
-	  CanFilter.FilterIdLow = 0x0010;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
-	  CanFilter.FilterMaskIdHigh = 0x0000;					// Maskens 16 MSB
-	  CanFilter.FilterMaskIdLow = 0x0000;					// Maskens 16 LSB
-	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
-	  CanFilter.FilterActivation = ENABLE;					// Vi aktiverer filteret
-	  CanFilter.FilterBank = 0;								// Vi vælger filter 0 ud af 14 mulige filtre
-	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
-	  */
 
 	  CanTxHeader.DLC = PACKAGE_SIZE;						// Der kommer 8 byte som data i beskeden
-	  CanTxHeader.ExtId = 0x000010;							// 32 bit ID
-	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit
+	  CanTxHeader.ExtId = 0x13579BDF;						// 32 bit ID (29 er identifier)
+	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
-
-	  /*
-	  CanRxHeader.DLC = PACKAGE_SIZE;
-	  CanRxHeader.ExtId = 0x000010;
-	  CanRxHeader.IDE = CAN_ID_EXT;
-	  CanRxHeader.RTR = CAN_RTR_DATA;
-	  */
 
   /* USER CODE END CAN_Init 0 */
 
@@ -201,7 +183,7 @@ static void MX_CAN_Init(void)
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = ENABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
@@ -289,7 +271,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		for (int i = 0; i<8; i++){
 			EnterQueue(&queueRAM,(uint8_t) 102);
 		}
-		//EnterQueue(&queueRAM, (uint8_t) GPIOA->IDR &0xFF); // Sætter dataen på PA0-7 ind i køen.
 	}
 }
 

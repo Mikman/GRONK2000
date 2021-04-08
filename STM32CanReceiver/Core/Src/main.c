@@ -79,7 +79,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -97,7 +97,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,7 +105,16 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  receiveImageData();
+	  /*if (queueCANRX.queue[0] == 15) {
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+	  }
+	  if (queueCANRX.queue[8] == 27) {
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+	  	  }
+	  if (queueCANRX.queue[16] == 102) {
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+	  	  }*/
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -183,16 +192,18 @@ static void MX_CAN1_Init(void)
 {
 
   /* USER CODE BEGIN CAN1_Init 0 */
-
+	  uint32_t ext_id = 0x2468ACEF;							// Den største værdi der kan være på MSB er 1
+	  uint32_t mask = 0x0F0F0F0F;
 	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
-	  CanFilter.FilterIdHigh = 0x0000;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
-	  CanFilter.FilterIdLow = 0x0010;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
-	  CanFilter.FilterMaskIdHigh = 0x0000;					// Maskens 16 MSB
-	  CanFilter.FilterMaskIdLow = 0x0000;					// Maskens 16 LSB
+	  CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13;// (ext_id << 3) >> 16;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
+	  CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
+	  CanFilter.FilterMaskIdHigh = (mask & 0x1FFFFFFF) >> 13;// << 5;					// Maskens 16 MSB
+	  CanFilter.FilterMaskIdLow = (mask << 3);// << 5 | 0x10;					// Maskens 16 LSB
 	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
 	  CanFilter.FilterActivation = ENABLE;					// Vi aktiverer filteret
 	  CanFilter.FilterBank = 0;								// Vi vælger filter 0 ud af 14 mulige filtre
 	  CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;	// Vi vælger FIFO0 til forskel for FIFO1
+
 
 	  CanRxHeader.DLC = PACKAGE_SIZE;
 	  CanRxHeader.ExtId = 0x00000010;
@@ -223,8 +234,8 @@ static void MX_CAN1_Init(void)
   }
   /* USER CODE BEGIN CAN1_Init 2 */
 
-    HAL_CAN_ConfigFilter(&hcan1, &CanFilter);
-    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    while (HAL_CAN_ConfigFilter(&hcan1, &CanFilter) != HAL_OK) {}
+    //HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
     HAL_CAN_Start(&hcan1);
   /* USER CODE END CAN1_Init 2 */
 
@@ -280,27 +291,30 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LD3_Pin */
-  GPIO_InitStruct.Pin = LD3_Pin;
+  /*Configure GPIO pins : PB0 LD3_Pin PB6 PB7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
 /* USER CODE BEGIN 4 */
 void receiveImageData() {
 	uint8_t buffer[PACKAGE_SIZE] = {0};
-	if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
-		// RxFIFOLevel skal nok lige tilføjes
-		HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO1, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-		for(int i = 0; i < PACKAGE_SIZE; i++){
-		EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
+	if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+		if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
+			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
+			for(int i = 0; i < PACKAGE_SIZE; i++){
+				EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
+			}
 		}
 	}
+
 }
 /* USER CODE END 4 */
 

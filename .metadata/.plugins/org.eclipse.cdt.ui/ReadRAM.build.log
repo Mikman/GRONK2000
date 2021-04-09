@@ -1,58 +1,10 @@
-16:10:07 **** Incremental Build of configuration Debug for project ReadRAM ****
+14:07:05 **** Incremental Build of configuration Debug for project ReadRAM ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:107:3: warning: implicit declaration of function 'sendImageData' [-Wimplicit-function-declaration]
-  107 |   sendImageData();
-      |   ^~~~~~~~~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:277:6: warning: conflicting types for 'sendImageData'
-  277 | void sendImageData() {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:107:3: note: previous implicit declaration of 'sendImageData' was here
-  107 |   sendImageData();
-      |   ^~~~~~~~~~~~~
-../Core/Src/main.c: In function 'sendImageData':
-../Core/Src/main.c:283:6: warning: implicit declaration of function 'fillDataArray' [-Wimplicit-function-declaration]
-  283 |  if (fillDataArray(&queueRAM, dataToMB0)) {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:282:10: warning: variable 'hej' set but not used [-Wunused-but-set-variable]
-  282 |  uint8_t hej;
-      |          ^~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:308:6: warning: conflicting types for 'fillDataArray'
-  308 | void fillDataArray(struct Queue *source, uint8_t *data) {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:283:6: note: previous implicit declaration of 'fillDataArray' was here
-  283 |  if (fillDataArray(&queueRAM, dataToMB0)) {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c: In function 'fillDataArray':
-../Core/Src/main.c:313:11: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  313 |    return 0;
-      |           ^
-../Core/Src/main.c:308:6: note: declared here
-  308 | void fillDataArray(struct Queue *source, uint8_t *data) {
-      |      ^~~~~~~~~~~~~
-../Core/Src/main.c:316:9: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  316 |  return 1;
-      |         ^
-../Core/Src/main.c:308:6: note: declared here
-  308 | void fillDataArray(struct Queue *source, uint8_t *data) {
-      |      ^~~~~~~~~~~~~
-arm-none-eabi-gcc -o "ReadRAM.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\joach\OneDrive\Dokumenter\Github\GRONK2000\ReadRAM\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ReadRAM.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: ReadRAM.elf
- 
-arm-none-eabi-objdump -h -S  ReadRAM.elf  > "ReadRAM.list"
-arm-none-eabi-objcopy  -O binary  ReadRAM.elf  "ReadRAM.bin"
 arm-none-eabi-size   ReadRAM.elf 
    text	   data	    bss	    dec	    hex	filename
-   7208	     20	   1732	   8960	   2300	ReadRAM.elf
+   6920	     20	   1700	   8640	   21c0	ReadRAM.elf
 Finished building: default.size.stdout
  
-Finished building: ReadRAM.bin
-Finished building: ReadRAM.list
- 
- 
 
-16:10:09 Build Finished. 0 errors, 7 warnings. (took 1s.281ms)
+14:07:05 Build Finished. 0 errors, 0 warnings. (took 400ms)
 

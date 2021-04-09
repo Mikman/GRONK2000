@@ -49,6 +49,14 @@ CAN_FilterTypeDef CanFilter;
 CAN_RxHeaderTypeDef CanRxHeader;
 
 struct Queue queueCANRX ={0,0,{0}};
+struct Queue GPSDATA = {0,0,{0}};
+struct Queue ACCEL = {0,0,{0}};
+struct Queue DCMOTOR = {0,0,{0}};
+uint32_t GPSID = 0x3;
+uint32_t ACCELID = 0x5;
+uint32_t DCMOTORID = 0x7;
+int hej = 0;
+
 #define PACKAGE_SIZE 8
 /* USER CODE END PV */
 
@@ -105,7 +113,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  receiveImageData();
 	  /*if (queueCANRX.queue[0] == 15) {
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
 	  }
@@ -192,8 +199,8 @@ static void MX_CAN1_Init(void)
 {
 
   /* USER CODE BEGIN CAN1_Init 0 */
-	  uint32_t ext_id = 0x2468ACEF;							// Den største værdi der kan være på MSB er 1
-	  uint32_t mask = 0x0F0F0F0F;
+	  uint32_t ext_id = 0x00000000;							// Den største værdi der kan være på MSB er 1
+	  uint32_t mask = 0xFFFFFFE0;
 	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
 	  CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13;// (ext_id << 3) >> 16;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
 	  CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
@@ -206,7 +213,7 @@ static void MX_CAN1_Init(void)
 
 
 	  CanRxHeader.DLC = PACKAGE_SIZE;
-	  CanRxHeader.ExtId = 0x00000010;
+	  CanRxHeader.ExtId = 0x0;
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
 	  CanRxHeader.FilterMatchIndex = 0x00;
@@ -235,7 +242,7 @@ static void MX_CAN1_Init(void)
   /* USER CODE BEGIN CAN1_Init 2 */
 
     while (HAL_CAN_ConfigFilter(&hcan1, &CanFilter) != HAL_OK) {}
-    //HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
     HAL_CAN_Start(&hcan1);
   /* USER CODE END CAN1_Init 2 */
 
@@ -303,20 +310,55 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void receiveImageData() {
+void receiveData() {
 	uint8_t buffer[PACKAGE_SIZE] = {0};
-	if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
+
+	while (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 		if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
+			hej++;
+			placeData(buffer);
+			if (hej > 384) {
+				int dev = 0;
+			}
+			/*
 			for(int i = 0; i < PACKAGE_SIZE; i++){
 				EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
+			}*/
+		}
+	}
+}
+
+void placeData(uint8_t *DataPass) {
+	if (CanRxHeader.ExtId == GPSID)
+	{
+		for(int i = 0; i < PACKAGE_SIZE;i++) {
+			if (!QueueFull(&GPSDATA)) {
+				EnterQueue(&GPSDATA, *(DataPass + i));
+			}
+
+		}
+	}
+	if (CanRxHeader.ExtId == ACCELID) {
+		for(int i = 0; i < PACKAGE_SIZE;i++) {
+			if (!QueueFull(&ACCEL)) {
+				EnterQueue(&ACCEL, *(DataPass + i));
+			}
+		}
+	}
+	if (CanRxHeader.ExtId == DCMOTORID) {
+		for(int i = 0; i < PACKAGE_SIZE;i++) {
+			if (!QueueFull(&DCMOTOR)) {
+				EnterQueue(&DCMOTOR, *(DataPass + i));
 			}
 		}
 	}
 
 }
 /* USER CODE END 4 */
+
+
 
 /**
   * @brief  This function is executed in case of error occurrence.

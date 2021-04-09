@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#define SIZE_OF_QUEUE 25
+#define SIZE_OF_QUEUE 1024
 
 struct Queue {
 	uint16_t pointRD, pointWR;

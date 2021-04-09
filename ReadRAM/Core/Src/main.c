@@ -98,13 +98,36 @@ int main(void)
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_Delay(30000);
+  uint8_t tESTdATA[1024];
+  	 for (int i = 0; i < 1024; i++) {
+  		 tESTdATA[i] = i % 256;
+  	 }
+  /*	if(GPIO_Pin == GPIO_PIN_0){
+  		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_12);
+  		//Kode der implementerer en cirkel buffer
+  		for (int i = 0; i<8; i++){
+  			EnterQueue(&queueRAM,(uint8_t) 15);
+  		}
+  		for (int i = 0; i<8; i++){
+  			EnterQueue(&queueRAM,(uint8_t) 27);
+  		}
+  		for (int i = 0; i<8; i++){
+  			EnterQueue(&queueRAM,(uint8_t) 102);
+  		}
+  	}
+  	*/
+  	sendData(0x3, 1024, tESTdATA);
+  	sendData(0x5, 1024, tESTdATA);
+  	sendData(0x7, 1024, tESTdATA);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 sendImageData();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -162,7 +185,7 @@ static void MX_CAN_Init(void)
   /* USER CODE BEGIN CAN_Init 0 */
 
 	  CanTxHeader.DLC = PACKAGE_SIZE;						// Der kommer 8 byte som data i beskeden
-	  CanTxHeader.ExtId = 0x13579BDF;						// 32 bit ID (29 er identifier)
+	  CanTxHeader.ExtId = 0x00000000;						// 32 bit ID (29 er identifier)
 	  CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
 	  CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
 	  CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
@@ -259,7 +282,11 @@ static void MX_GPIO_Init(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_0){
+	 uint8_t tESTdATA[1024];
+	 for (int i = 0; i < 1024; i++) {
+		 tESTdATA[i] = i % 256;
+	 }
+/*	if(GPIO_Pin == GPIO_PIN_0){
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_12);
 		//Kode der implementerer en cirkel buffer
 		for (int i = 0; i<8; i++){
@@ -272,39 +299,44 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			EnterQueue(&queueRAM,(uint8_t) 102);
 		}
 	}
+	*/
+	sendData(0x3, 1024, tESTdATA);
+	sendData(0x5, 1024, tESTdATA);
+	sendData(0x7, 1024, tESTdATA);
 }
 
-void sendImageData() {
-	uint8_t dataToMB0[PACKAGE_SIZE] = {0};
-	uint8_t dataToMB1[PACKAGE_SIZE] = {0};
-	uint8_t dataToMB2[PACKAGE_SIZE] = {0};
+void sendData(uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray) {
+	uint8_t dataToMB[PACKAGE_SIZE] = {0};
 	uint32_t randoMailBox;
-	uint8_t hej;
-	if (fillDataArray(&queueRAM, dataToMB0)) {
-		if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 3) {
-			if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB0, &randoMailBox) != HAL_OK) {
-						Error_Handler();
+	CanTxHeader.ExtId = TxID;
+if (numOfBytes % PACKAGE_SIZE == 0)
+{
+	for (int i = 0; i < numOfBytes/PACKAGE_SIZE; i++) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {}
+		if (messageSplitter(dataArray, dataToMB, i)) {
+			if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB, &randoMailBox) != HAL_OK) {
+				Error_Handler();
 			}
 		}
+	}
 
-		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox) == 1) {
-			hej = 1;
-		}
-	}
-	if (fillDataArray(&queueRAM, dataToMB1)) {
-		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB1, &randoMailBox) != HAL_OK) {
-			Error_Handler();
-		}
-		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox));
-	}
-	if (fillDataArray(&queueRAM, dataToMB2)) {
-		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, dataToMB2, &randoMailBox) != HAL_OK) {
-			Error_Handler();
-		}
-		while (HAL_CAN_IsTxMessagePending(&hcan, randoMailBox));
-	}
 }
+else {return 0;}
 
+}
+void messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t position)
+{
+
+
+
+	for(int i=0 ; i < PACKAGE_SIZE; i++)
+	{
+		*(destinationArray + i) = *(sourceArray + (position * 8) + i);
+
+
+}
+return 1;
+}
 void fillDataArray(struct Queue *source, uint8_t *data) {
 	for (int i = 0; i < PACKAGE_SIZE; i++) {
 		if (LeaveQueue(source, data + i)) { //Gemmer en byte fra source til data. Flere bytes gemmes ved at inkrementere data (som jo er en pointer til hvert element i data[])
@@ -314,16 +346,6 @@ void fillDataArray(struct Queue *source, uint8_t *data) {
 		}
 	}
 	return 1;
-}
-
-void receiveImageData() {
-	uint8_t buffer[PACKAGE_SIZE] = {0};
-	if (!QueueFull(&queueRx)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
-		HAL_CAN_GetRxMessage(&hcan, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-		for(int i = 0; i < PACKAGE_SIZE; i++){
-		EnterQueue(&queueRx, buffer[i]); // Læg buffer ind i modtager-queuen
-		}
-	}
 }
 
 /* USER CODE END 4 */

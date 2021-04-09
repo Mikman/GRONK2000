@@ -1,8 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use work.SevenSegDisplayTypes.ALL; -- Needed for Seven Segment Display
 
-entity CamToRAM is
+entity ImageCapture is
 	port (
 		-- Camera I/O
 		XCLK, RESET, PWDN: out STD_LOGIC;
@@ -12,17 +14,29 @@ entity CamToRAM is
 		
 		-- RAM I/O
 		address: out STD_LOGIC_VECTOR(18 downto 0);
-		RAMdata: out STD_LOGIC_VECTOR(7 downto 0);
+		RAMdata: inout STD_LOGIC_VECTOR(7 downto 0);
 		WE, OE: buffer STD_LOGIC;
 		CS: buffer STD_LOGIC;
-		LEDs: out STD_LOGIC_VECTOR(9 downto 0);
-		clk: in STD_LOGIC
+		clk: in STD_LOGIC;
+		
+		LEDs: out STD_LOGIC_VECTOR(7 downto 0);
+		addrInc: in STD_LOGIC;
+		
+		transferPin : in STD_LOGIC;
+		
+		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX2 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX3 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX4 : out STD_LOGIC_VECTOR(6 downto 0);
+		HEX5 : out STD_LOGIC_VECTOR(6 downto 0)
 	);
-end CamToRAM;
+end ImageCapture;
 
-architecture Behavioral of CamToRAM is
+architecture Behavioral of ImageCapture is
 
 signal ticks, XCLKticks, i: integer := 0;
+signal j: integer := 0;
 signal addr, configClkCounter: integer range 0 to 512000 :=0;
 
 signal currentImage: boolean;
@@ -38,7 +52,7 @@ begin
 	
 	-- Constant assignments for RAM
 	CS <= '0';
-	WE <= '0' when ((ticks mod 8) >= 1) else '1';
+	WE <= '0' when ((ticks mod 8) >= 1 AND transferPin = '0') else '1';
 	address <= std_logic_vector(to_unsigned(addr, address'length));
 
 	-- Constant assignments for camera
@@ -46,11 +60,22 @@ begin
 	SIOC <= '1' when (SIOCbool = true) else '0';
 	currentLine <= false when (VSYNC = '0') else true;
 	
+	LEDs(7 downto 0) <= RAMdata(7 downto 0);
+	
 	
 	
 	
 	RESET <= '1';
 	PWDN <= '0';
+	
+		process(addrInc)
+	begin
+		if (addrInc'event and addrInc = '1') then
+				
+			j <= j + 1;
+				
+		end if;
+	end process;
 
 
 	process(PCLK)
@@ -101,6 +126,7 @@ begin
 	process(clk)
 	begin
 		if (clk'event and clk='1') then
+			
 		--Her programmerer vi SCCB til kamera.
 			if (configPin = '1') then
 				
@@ -181,5 +207,21 @@ begin
 			
 		end if;
 	end process;
+	
+			-- Initialize 6 digit 7 segment display, showing i as a decimal number
+		Display : entity work.SevenSegDisplay
+		
+		generic map (
+			MODE => DEC_MODE)
+		
+		port map (
+			NUM => j,
+			EN => '1',
+			HEX(0) => HEX0,
+			HEX(1) => HEX1,
+			HEX(2) => HEX2,
+			HEX(3) => HEX3,
+			HEX(4) => HEX4,
+			HEX(5) => HEX5);
 	
 end Behavioral;

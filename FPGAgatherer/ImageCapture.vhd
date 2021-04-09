@@ -60,8 +60,6 @@ begin
 	SIOC <= '1' when (SIOCbool = true) else '0';
 	currentLine <= false when (VSYNC = '0') else true;
 	
-	LEDs(7 downto 0) <= RAMdata(7 downto 0);
-	
 	
 	
 	
@@ -70,10 +68,13 @@ begin
 	
 		process(addrInc)
 	begin
-		if (addrInc'event and addrInc = '1') then
+		if (transferPin = '1') then
+			if (addrInc'event and addrInc = '1') then
 				
-			j <= j + 1;
-				
+	
+				j <= j + 1;
+					
+			end if;
 		end if;
 	end process;
 
@@ -156,57 +157,64 @@ begin
 	process(clk)
 	begin
 		if (clk'event and clk='1') then
-			
-			if (XCLKticks = 3) then
-				XCLKticks <= 0;
+		
+			if ( transferPin = '1' ) then 
+				addr <= j;
+				LEDs(7 downto 0) <= RAMdata(7 downto 0);
+				
 			else
-				XCLKticks <= XCLKticks + 1;
-			end if;
 			
-			-- Decisions based on ticks
-			
-			-- Incrementing ticks or resetting ticks and addr
-			
-			if (ticks = 15) then
-			--kør koden igen, men sæt til 0 bagefter
-			
-				if (ticks mod 8 = 0) then
-					addr <= addr + 1;
-				end if;
-				
-				if (ticks < 8) then
-					RAMdata <= postArray(1);
+				if (XCLKticks = 3) then
+					XCLKticks <= 0;
 				else
-					RAMdata <= postArray(0);
+					XCLKticks <= XCLKticks + 1;
 				end if;
 				
-				ticks <= 0;
+				-- Decisions based on ticks
 				
+				-- Incrementing ticks or resetting ticks and addr
 				
-			elsif(counting) then 
-			
-				if (ticks mod 8 = 0) then
-					addr <= addr + 1;
+				if (ticks = 15) then
+				--kør koden igen, men sæt til 0 bagefter
+				
+					if (ticks mod 8 = 0) then
+						addr <= addr + 1;
+					end if;
+					
+					if (ticks < 8) then
+						RAMdata <= postArray(1);
+					else
+						RAMdata <= postArray(0);
+					end if;
+					
+					ticks <= 0;
+					
+					
+				elsif(counting) then 
+				
+					if (ticks mod 8 = 0) then
+						addr <= addr + 1;
+					end if;
+					
+					if (ticks < 8) then
+						RAMdata <= postArray(1);
+					else
+						RAMdata <= postArray(0);
+					end if;
+					
+					ticks <= ticks + 1;
+					
+				elsif(currentLine) then
+				
+					addr <= 0;
+					ticks <= 0;
+					
+					
 				end if;
-				
-				if (ticks < 8) then
-					RAMdata <= postArray(1);
-				else
-					RAMdata <= postArray(0);
-				end if;
-				
-				ticks <= ticks + 1;
-				
-			elsif(currentLine) then
-			
-				addr <= 0;
-				ticks <= 0;
-				
-				
 			end if;
-			
 		end if;
 	end process;
+
 	
 			-- Initialize 6 digit 7 segment display, showing i as a decimal number
 		Display : entity work.SevenSegDisplay

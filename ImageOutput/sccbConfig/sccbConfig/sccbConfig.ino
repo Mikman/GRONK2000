@@ -15,6 +15,10 @@ void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
 Wire.begin();
+
+// YCbCr
+configReg(0x12, 0x80); //Software reset 
+/* FOR RGB
 configReg(0x12, 0x84); //Software reset and configure RGB format
 configReg(0x40, 0xD0); //Opsætter fuldt RBG output fra (0-255) og RGB 565
 configReg(0x1E, 0x8);  //Flip image vertically
@@ -39,9 +43,11 @@ configReg(0x5e, 0x0e); // -||-
 configReg(0x6d, 0x55); // -||-
 configReg(0x6f, 0x9e); // -||-
 
+*/
+
 //Receive one transmission.
 Wire.beginTransmission(0x21); 
-Wire.write(0x40);  // Read-from address
+Wire.write(0x12);  // Read-from address
 Wire.endTransmission();
 Wire.requestFrom(0x21, 1);
 while (Wire.available() == 0);  //block till u get something

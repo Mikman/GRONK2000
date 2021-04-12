@@ -79,23 +79,25 @@ begin
 	end process;
 
 
-	process(PCLK)
+	process(PCLK) -- Da der kontinuerligt bliver lagt data over på RAM, så bliver de første to pixels fyldt med bras og sendt
 	begin
 		if (PCLK'event and PCLK = '1') then
 			if (counting) then
 				preArray(i) <= CAMdata;
 				if (i = 3) then
 					i <= 0;
-							-- First pixel
-					postArray(0)(7 downto 5) <= preArray(0)(7 downto 5);
-					postArray(0)(4 downto 2) <= preArray(0)(2 downto 0);
-					postArray(0)(1 downto 0) <= preArray(1)(4 downto 3);
+					-- First pixel
+					--postArray(0) <= preArray(1);
+					postArray(0)(7 downto 4) <= preArray(1)(7 downto 4);
+					postArray(0)(3 downto 2) <= preArray(0)(7 downto 6);
+					postArray(0)(1 downto 0) <= preArray(2)(7 downto 6);
 					--postArray(0)(7 downto 0) <= "11111111";
 					
 					--Second pixel
-					postArray(1)(7 downto 5) <= preArray(2)(7 downto 5);
-					postArray(1)(4 downto 2) <= preArray(2)(2 downto 0);
-					postArray(1)(1 downto 0) <= preArray(3)(4 downto 3);
+					--postArray(1) <= preArray(3);
+					postArray(1)(7 downto 4) <= preArray(3)(7 downto 4);
+					postArray(1)(3 downto 2) <= preArray(0)(7 downto 6);
+					postArray(1)(1 downto 0) <= preArray(2)(7 downto 6);
 					--postArray(1)(7 downto 0) <= "00000010";
 				else
 					i <= i + 1;

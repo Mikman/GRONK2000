@@ -18,6 +18,11 @@ Wire.begin();
 
 // YCbCr
 configReg(0x12, 0x80); //Software reset 
+
+configReg(0x1E, 0x10);  //Flip image vertically
+configReg(0x13, 0x81); //Auto gain enable, White balance enable, Auto exposure enable
+//configReg(0x3f, 0x01); //Edge enhancement factor 
+
 /* FOR RGB
 configReg(0x12, 0x84); //Software reset and configure RGB format
 configReg(0x40, 0xD0); //Opsætter fuldt RBG output fra (0-255) og RGB 565
@@ -46,13 +51,18 @@ configReg(0x6f, 0x9e); // -||-
 */
 
 //Receive one transmission.
-Wire.beginTransmission(0x21); 
-Wire.write(0x12);  // Read-from address
+Wire.beginTransmission(0x21); // slave id
+Wire.write(0x01);  // Read-from address
 Wire.endTransmission();
 Wire.requestFrom(0x21, 1);
+
+Serial.println("Waits for SCCB comm.");
+
 while (Wire.available() == 0);  //block till u get something
 while (Wire.available())
   Serial.println(Wire.read(), HEX);
+
+Serial.println("Done!");
 }
 
 

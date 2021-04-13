@@ -87,7 +87,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -105,23 +105,19 @@ int main(void)
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+ // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	 if( HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+
+		 int flag = 1;
+	 }
     /* USER CODE END WHILE */
-	  /*if (queueCANRX.queue[0] == 15) {
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-	  }
-	  if (queueCANRX.queue[8] == 27) {
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
-	  	  }
-	  if (queueCANRX.queue[16] == 102) {
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-	  	  }*/
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -202,8 +198,8 @@ static void MX_CAN1_Init(void)
 	  uint32_t ext_id = 0x00000000;							// Den største værdi der kan være på MSB er 1
 	  uint32_t mask = 0xFFFFFFE0;
 	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
-	  CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13;// (ext_id << 3) >> 16;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
-	  CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;						// Da vi har 32 bit ID, er dette de 16 LSB af ID
+	  CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13; // (ext_id << 3) >> 16;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
+	  CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;	// Da vi har 32 bit ID, er dette de 16 LSB af ID
 	  CanFilter.FilterMaskIdHigh = (mask & 0x1FFFFFFF) >> 13;// << 5;					// Maskens 16 MSB
 	  CanFilter.FilterMaskIdLow = (mask << 3);// << 5 | 0x10;					// Maskens 16 LSB
 	  CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;		// ID er et 32 bit-tal
@@ -300,6 +296,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin : PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PB0 LD3_Pin PB6 PB7 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -357,8 +359,6 @@ void placeData(uint8_t *DataPass) {
 
 }
 /* USER CODE END 4 */
-
-
 
 /**
   * @brief  This function is executed in case of error occurrence.

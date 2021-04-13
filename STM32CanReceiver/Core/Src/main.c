@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "circle_queue.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -105,6 +106,15 @@ int main(void)
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
+	void transmitData(struct Queue *Data)
+	{
+	char str[3] = {0};
+	uint8_t tempo = 0;
+	 LeaveQueue(&Data, &tempo);
+	 sprintf(&str, "%d", &tempo);
+	 HAL_UART_Transmit(&huart2, &str, strlen(str),100);
+
+}
  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
@@ -112,9 +122,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 if( HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
+		 transmitData(&GPSDATA);
 
-		 int flag = 1;
 	 }
     /* USER CODE END WHILE */
 
@@ -294,7 +304,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|LD3_Pin|GPIO_PIN_7, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PA6 */
   GPIO_InitStruct.Pin = GPIO_PIN_6;
@@ -302,11 +312,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 LD3_Pin PB6 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pins : PB0 LD3_Pin PB7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }

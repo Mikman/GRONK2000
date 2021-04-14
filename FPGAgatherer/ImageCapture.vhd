@@ -22,7 +22,7 @@ entity ImageCapture is
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0);
 		addrInc: in STD_LOGIC;
 		
-		transferPin : in STD_LOGIC;
+		transferPin: in STD_LOGIC;
 		
 		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
@@ -75,7 +75,10 @@ begin
 				j <= j + 1;
 					
 			end if;
+		else
+			j <= 0;
 		end if;
+		
 	end process;
 
 
@@ -86,19 +89,33 @@ begin
 				preArray(i) <= CAMdata;
 				if (i = 3) then
 					i <= 0;
-					-- First pixel
-					--postArray(0) <= preArray(1);
-					postArray(0)(7 downto 4) <= preArray(1)(7 downto 4);
-					postArray(0)(3 downto 2) <= preArray(0)(7 downto 6);
-					postArray(0)(1 downto 0) <= preArray(2)(7 downto 6);
-					--postArray(0)(7 downto 0) <= "11111111";
 					
-					--Second pixel
-					--postArray(1) <= preArray(3);
-					postArray(1)(7 downto 4) <= preArray(3)(7 downto 4);
-					postArray(1)(3 downto 2) <= preArray(0)(7 downto 6);
-					postArray(1)(1 downto 0) <= preArray(2)(7 downto 6);
-					--postArray(1)(7 downto 0) <= "00000010";
+					-- Greyscale
+					--postArray(0) <= preArray(1); -- 8 bit Y
+					--postArray(1) <= preArray(3); -- 8 bit Y
+					
+					
+					-- RGB565 (half horizontal resolution)
+					--postArray(0) <= preArray(0);
+					--postArray(1) <= preArray(1);
+					
+					
+					
+					-- YCbCr (heavy compression)
+					--postArray(0)(7 downto 4) <= preArray(1)(7 downto 4); -- 4 bit Y
+					--postArray(0)(3 downto 2) <= preArray(0)(7 downto 6); -- 2 bit Cb
+					--postArray(0)(1 downto 0) <= preArray(2)(7 downto 6); -- 2 bit Cr
+					--postArray(1)(7 downto 4) <= preArray(3)(7 downto 4); -- 4 bit Y
+					--postArray(1)(3 downto 2) <= preArray(0)(7 downto 6); -- 2 bit Cb
+					--postArray(1)(1 downto 0) <= preArray(2)(7 downto 6); -- 2 bit Cr
+					
+					
+					-- YCbCr (half horizontal resolution)
+					postArray(0)(7 downto 0) <= preArray(1)(7 downto 0); -- 8 bit Y (half width)
+					postArray(1)(7 downto 4) <= preArray(0)(7 downto 4); -- 4 bit Cb (half width)
+					postArray(1)(3 downto 0) <= preArray(2)(7 downto 4); -- 4 bit Cr (half width)
+					
+					
 				else
 					i <= i + 1;
 				end if;

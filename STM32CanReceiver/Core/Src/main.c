@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "circle_queue.h"
 #include "stdio.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,6 +34,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define PACKAGE_SIZE 8
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,12 +56,29 @@ struct Queue queueCANRX ={0,0,{0}};
 struct Queue GPSDATA = {0,0,{0}};
 struct Queue ACCEL = {0,0,{0}};
 struct Queue DCMOTOR = {0,0,{0}};
-uint32_t GPSID = 0x3;
+uint32_t GPS_ID1 = 0x1;
+uint32_t GPS_ID2 = 0x2;
+uint32_t GPS_ID3 = 0x3;
+uint32_t GPS_ID4 = 0x4;
+
 uint32_t ACCELID = 0x5;
 uint32_t DCMOTORID = 0x7;
 int hej = 0;
 
-#define PACKAGE_SIZE 8
+// Modtaget GPS data fra CubeSAT
+float GPS_LAT = 29.222;
+char GPS_LAT_DIR = 'S';
+float GPS_LON = 55.55;
+char GPS_LON_DIR = 'W';
+uint32_t GPS_QUALITY = 0;
+uint32_t GPS_HOURS = 0;
+uint32_t GPS_MINUTES = 0;
+uint32_t GPS_SEC = 0;
+uint32_t GPS_HDOP = 0;
+float GPS_ALTITUDE = 0.;
+uint32_t GPS_H_GEOID = 0;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,7 +111,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  sendGPS();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -114,7 +134,7 @@ int main(void)
   while (1)
   {
 	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
-		 transmitData(&DCMOTOR);
+		 transmitData(&GPSDATA);
 
 	 }
     /* USER CODE END WHILE */
@@ -339,8 +359,60 @@ void receiveData() {
 	}
 }
 
+void sendGPS(){
+	char str[15] = {0};
+	sprintf(str, "%s", "Coordinates: " );
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_LAT_DIR);
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", GPS_LAT);
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", " , " );
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_LON_DIR);
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", GPS_LON);
+	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);
+
+
+
+}
+
+void placeData_1( uint8_t *DataPass){
+
+		if(CanRxHeader.ExtId == GPS_ID1){ // [LAT_DIR, LAT]
+		    memcpy(&GPS_LAT, &DataPass[1], sizeof(GPS_LAT));
+		    GPS_LAT_DIR = DataPass[0];
+		}
+
+		if(CanRxHeader.ExtId == GPS_ID2){ // [LON_DIR, LON]
+			memcpy(&GPS_LON, &DataPass[1], sizeof(GPS_LON));
+			GPS_LON_DIR = DataPass[0];
+		}
+
+		if(CanRxHeader.ExtId == GPS_ID3){// [QUALITY, HOURS, MINUTES, SEC, HDOP]
+			GPS_QUALITY = DataPass[0];
+			GPS_HOURS = DataPass[1];
+			GPS_MINUTES = DataPass[2];
+			GPS_SEC = DataPass[3];
+			memcpy(&GPS_HDOP, &DataPass[4], sizeof(GPS_HDOP));
+		}
+
+		if(CanRxHeader.ExtId == GPS_ID4){// [ALTITUDE, H_GEOID]
+			memcpy(&GPS_ALTITUDE, &DataPass[0], sizeof(GPS_ALTITUDE));
+			memcpy(&GPS_H_GEOID, &DataPass[4], sizeof(GPS_H_GEOID));
+		}
+
+}
+
 void placeData(uint8_t *DataPass) {
-	if (CanRxHeader.ExtId == GPSID)
+	if (CanRxHeader.ExtId == GPS_ID4)
 	{
 		for(int i = 0; i < PACKAGE_SIZE;i++) {
 			if (!QueueFull(&GPSDATA)) {

@@ -56,20 +56,30 @@ struct Queue queueCANRX ={0,0,{0}};
 struct Queue GPSDATA = {0,0,{0}};
 struct Queue ACCEL = {0,0,{0}};
 struct Queue DCMOTOR = {0,0,{0}};
+
+//GPS DATA ID'S
 uint32_t GPS_ID1 = 0x1;
 uint32_t GPS_ID2 = 0x2;
 uint32_t GPS_ID3 = 0x3;
 uint32_t GPS_ID4 = 0x4;
 
-uint32_t ACCELID = 0x5;
-uint32_t DCMOTORID = 0x7;
+//MPU DATA ID'S
+uint32_t MPU_ID5 = 0X5;
+uint32_t MPU_ID6 = 0X6;
+uint32_t MPU_ID7 = 0X7;
+uint32_t MPU_ID8 = 0X8;
+
+uint32_t MOTOR_ID9 = 0X9;
+
+//uint32_t ACCELID = 0x5;
+//uint32_t DCMOTORID = 0x7;
 int hej = 0;
 
-// Modtaget GPS data fra CubeSAT
-float GPS_LAT = 29.222;
-char GPS_LAT_DIR = 'S';
-float GPS_LON = 55.55;
-char GPS_LON_DIR = 'W';
+// Recieved GPS data from CubeSAT
+float GPS_LAT = 0.;
+char GPS_LAT_DIR = '$';
+float GPS_LON = 0.;
+char GPS_LON_DIR = '$';
 uint32_t GPS_QUALITY = 0;
 uint32_t GPS_HOURS = 0;
 uint32_t GPS_MINUTES = 0;
@@ -77,6 +87,18 @@ uint32_t GPS_SEC = 0;
 uint32_t GPS_HDOP = 0;
 float GPS_ALTITUDE = 0.;
 uint32_t GPS_H_GEOID = 0;
+
+//Recieved MPU data from CubeSAT
+float MPU_ACCELX = 0.;
+float MPU_ACCELY = 0.;
+float MPU_ACCELZ = 0.;
+float MPU_GYROX = 0.;
+float MPU_GYROY = 0.;
+float MPU_GYROZ = 0.;
+float MPU_TEMP = 0.;
+
+//Recieved MOTOR data from CubeSAT
+uint8_t MOTOR_DUTYCYCLE = 0;
 
 
 /* USER CODE END PV */
@@ -111,7 +133,6 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  sendGPS();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -134,7 +155,9 @@ int main(void)
   while (1)
   {
 	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
-		 transmitData(&GPSDATA);
+		 //transmitData(&GPSDATA);
+		 HAL_Delay(200);
+		 sendMPU();
 
 	 }
     /* USER CODE END WHILE */
@@ -346,11 +369,7 @@ void receiveData() {
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 		if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-			hej++;
-			placeData(buffer);
-			if (hej > 384) {
-				int dev = 0;
-			}
+			placeData_1(buffer);
 			/*
 			for(int i = 0; i < PACKAGE_SIZE; i++){
 				EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
@@ -359,32 +378,160 @@ void receiveData() {
 	}
 }
 
-void sendGPS(){
+void sendMOTOR(){
+	char str[5] = {0};
+	// MOTOR
+	sprintf(str, "%s", "Motor duty cycle: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%d", MOTOR_DUTYCYCLE);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+}
+
+void sendMPU() {
 	char str[15] = {0};
-	sprintf(str, "%s", "Coordinates: " );
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+
+	// ACCCEL
+	sprintf(str, "%s", "Accel_X: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_ACCELX);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Accel_Y: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_ACCELY);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Accel_Z: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_ACCELZ);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+
+	// GYRO
+	sprintf(str, "%s", "Gyro_X: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_GYROX);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Gyro_Y: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_GYROY);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Gyro_Z: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_GYROZ);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+
+	//TEMP
+	sprintf(str, "%s", "Temperature: " );
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%f", MPU_TEMP);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+
+}
+
+void sendGPS(){
+
+	char str[15] = {0};
+	sprintf(str, "%s", "Coordinates: " );					//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
 	sprintf(str, "%c", GPS_LAT_DIR);
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
 	sprintf(str, "%f", GPS_LAT);
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
 	sprintf(str, "%s", " , " );
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
 	sprintf(str, "%c", GPS_LON_DIR);
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
 	sprintf(str, "%f", GPS_LON);
-	HAL_UART_Transmit(&huart2, str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
 
-
+	sprintf(str, "%s", "Quality: ");						//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_QUALITY);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Time: ");							//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_HOURS);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, ":", 2, 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_MINUTES);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, ":", 2, 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_SEC);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "Altitude: " );						//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_ALTITUDE);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "HDOP: " );							//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_HDOP);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
+	memset(str, 0, sizeof str);
+	sprintf(str, "%s", "H_Geoid: " );						//Header
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	memset(str, 0, sizeof str);
+	sprintf(str, "%c", GPS_H_GEOID);
+	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
 
 }
 
 void placeData_1( uint8_t *DataPass){
+
+	//PLACE GPS DATA
 
 		if(CanRxHeader.ExtId == GPS_ID1){ // [LAT_DIR, LAT]
 		    memcpy(&GPS_LAT, &DataPass[1], sizeof(GPS_LAT));
@@ -409,10 +556,33 @@ void placeData_1( uint8_t *DataPass){
 			memcpy(&GPS_H_GEOID, &DataPass[4], sizeof(GPS_H_GEOID));
 		}
 
+	// PLACE MPU DATA
+		if(CanRxHeader.ExtId == MPU_ID5){// [ACCELX, ACCELY]
+			memcpy(&MPU_ACCELX, &DataPass[0], sizeof(MPU_ACCELX));
+			memcpy(&MPU_ACCELY, &DataPass[4], sizeof(MPU_ACCELY));
+		}
+		if(CanRxHeader.ExtId == MPU_ID6){// [ACCELZ, GYROX]
+			memcpy(&MPU_ACCELZ, &DataPass[0], sizeof(MPU_ACCELZ));
+			memcpy(&MPU_GYROX, &DataPass[4], sizeof(MPU_GYROX));
+		}
+		if(CanRxHeader.ExtId == MPU_ID7){// [GYROY, GYROZ]
+			memcpy(&MPU_GYROY, &DataPass[0], sizeof(MPU_GYROY));
+			memcpy(&MPU_GYROZ, &DataPass[4], sizeof(MPU_GYROZ));
+		}
+		if(CanRxHeader.ExtId == MPU_ID8){// [TEMP]
+			memcpy(&MPU_TEMP, &DataPass[0], sizeof(MPU_TEMP));
+		}
+
+	// PLACE DUTY CYCLE
+		if(CanRxHeader.ExtId == MOTOR_ID9){// [DUTYCYCLE]
+			memcpy(&MOTOR_DUTYCYCLE, &DataPass[0], sizeof(MOTOR_DUTYCYCLE));
+		}
+
 }
 
+/*
 void placeData(uint8_t *DataPass) {
-	if (CanRxHeader.ExtId == GPS_ID4)
+	if (CanRxHeader.ExtId == 0x03)
 	{
 		for(int i = 0; i < PACKAGE_SIZE;i++) {
 			if (!QueueFull(&GPSDATA)) {
@@ -437,6 +607,7 @@ void placeData(uint8_t *DataPass) {
 	}
 
 }
+*/
 
 void transmitData(struct Queue *Data)
 {

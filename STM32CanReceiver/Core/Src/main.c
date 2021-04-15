@@ -69,7 +69,12 @@ uint32_t MPU_ID6 = 0X6;
 uint32_t MPU_ID7 = 0X7;
 uint32_t MPU_ID8 = 0X8;
 
+
+//MOTOR DATA ID
 uint32_t MOTOR_ID9 = 0X9;
+
+//WATCHDOG DATA ID
+uint32_t WATCHDOG_ID10 = 0X0A;
 
 //uint32_t ACCELID = 0x5;
 //uint32_t DCMOTORID = 0x7;
@@ -578,6 +583,14 @@ void placeData_1( uint8_t *DataPass){
 	// PLACE DUTY CYCLE
 		if(CanRxHeader.ExtId == MOTOR_ID9){// [DUTYCYCLE]
 			memcpy(&MOTOR_DUTYCYCLE, &DataPass[0], sizeof(MOTOR_DUTYCYCLE));
+		}
+
+
+	//WATCHDOG
+		if(CanRxHeader.ExtId == WATCHDOG_ID10){// [WATCHDOG]
+			char str[15] = {0};
+			sprintf(str, "%s", "WATCHDOG" );
+			HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 		}
 
 }

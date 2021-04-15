@@ -2,7 +2,8 @@
 
 TIM_HandleTypeDef * htim;
 uint32_t timer_channel = 0;
-
+uint32_t CaptureDCMotor = 0;
+uint32_t ARR = 0;
 void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel) {
 	htim = htimer;
 	timer_channel = channel;
@@ -10,6 +11,8 @@ void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel) {
 }
 
 void motor_setPwm(uint8_t dutycycle) {
+	CaptureDCMotor = htim->Instance->CCR1;
+	ARR = htim->Instance->ARR;
 	htim->Instance->CCR1 = (htim->Instance->ARR/100)*dutycycle;
 }
 

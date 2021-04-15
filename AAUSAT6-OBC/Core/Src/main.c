@@ -27,6 +27,8 @@
 #include "gpsdriver.h"
 #include "DCMotorDriver.h"
 #include "mpu6050_driver.h"
+#include "Transmit_driver.h"
+
 
 /* USER CODE END Includes */
 
@@ -37,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define PACKAGE_SIZE 8
 
 
 /* USER CODE END PD */
@@ -48,6 +50,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan;
+
 I2C_HandleTypeDef hi2c1;
 
 TIM_HandleTypeDef htim2;
@@ -83,7 +87,20 @@ const osThreadAttr_t taskMpu6050_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for Transmitting */
+osThreadId_t TransmittingHandle;
+const osThreadAttr_t Transmitting_attributes = {
+  .name = "Transmitting",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
 /* USER CODE BEGIN PV */
+uint8_t tESTdATA[1024];
+//CAN_FilterTypeDef CanFilter;
+CAN_TxHeaderTypeDef CanTxHeader;
+CAN_RxHeaderTypeDef CanRxHeader;
+
+
 
 /* USER CODE END PV */
 
@@ -94,10 +111,12 @@ static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_CAN_Init(void);
 void StartGPS_Update_Data(void *argument);
 void Start_TESTOpgave(void *argument);
 void StartMotor(void *argument);
 void startMpu6050(void *argument);
+void TransmittingSize(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -125,6 +144,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  HAL_CAN_Start(&hcan);
 
   /* USER CODE END Init */
 
@@ -141,7 +161,16 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM2_Init();
   MX_I2C1_Init();
+  MX_CAN_Init();
   /* USER CODE BEGIN 2 */
+
+
+  for (int i = 0; i < 1024; i++) {
+  	tESTdATA[i] = i % 256;
+  }
+
+
+
 
   /* USER CODE END 2 */
 
@@ -176,6 +205,9 @@ int main(void)
 
   /* creation of taskMpu6050 */
   taskMpu6050Handle = osThreadNew(startMpu6050, NULL, &taskMpu6050_attributes);
+
+  /* creation of Transmitting */
+  TransmittingHandle = osThreadNew(TransmittingSize, NULL, &Transmitting_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -215,10 +247,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -227,15 +262,58 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief CAN Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN_Init(void)
+{
+
+  /* USER CODE BEGIN CAN_Init 0 */
+	CanTxHeader.DLC = PACKAGE_SIZE;						// Der kommer 8 byte som data i beskeden
+	CanTxHeader.ExtId = 0x00000000;						// 32 bit ID (29 er identifier)
+	CanTxHeader.IDE = CAN_ID_EXT;							// Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
+	CanTxHeader.RTR = CAN_RTR_DATA;						// Vi sender data
+	CanTxHeader.TransmitGlobalTime = DISABLE;				// Der skal IKKE sendes et timestamp med hver besked
+
+  /* USER CODE END CAN_Init 0 */
+
+  /* USER CODE BEGIN CAN_Init 1 */
+
+  /* USER CODE END CAN_Init 1 */
+  hcan.Instance = CAN1;
+  hcan.Init.Prescaler = 9;
+  hcan.Init.Mode = CAN_MODE_NORMAL;
+  hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_7TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_8TQ;
+  hcan.Init.TimeTriggeredMode = DISABLE;
+  hcan.Init.AutoBusOff = DISABLE;
+  hcan.Init.AutoWakeUp = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
+  hcan.Init.ReceiveFifoLocked = DISABLE;
+  hcan.Init.TransmitFifoPriority = ENABLE;
+  if (HAL_CAN_Init(&hcan) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN_Init 2 */
+  HAL_CAN_Start(&hcan);
+
+  /* USER CODE END CAN_Init 2 */
+
 }
 
 /**
@@ -379,6 +457,7 @@ static void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
@@ -484,10 +563,40 @@ void startMpu6050(void *argument)
 	 float temp = MPU_Read_Temp();
 	 Axes3 accel = MPU_Read_Accel();
 	 Axes3 gyro = MPU_Read_Gyro();
-	 osDelay(10000);
+	 osDelay(900);
 
   }
   /* USER CODE END startMpu6050 */
+}
+
+/* USER CODE BEGIN Header_TransmittingSize */
+/**
+* @brief Function implementing the Transmitting thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_TransmittingSize */
+void TransmittingSize(void *argument)
+{
+  /* USER CODE BEGIN TransmittingSize */
+  /* Infinite loop */
+  for(;;)
+  {
+
+	  osDelay(1000);
+	//sendGPS(&hcan, &CanTxHeader);
+	sendMCU(&hcan, &CanTxHeader);
+	//sendDCMotor(&hcan, &CanTxHeader);
+
+
+
+	/*sendData(&hcan, 0x3, 1024, tESTdATA, &CanTxHeader);
+	sendData(&hcan, 0x5, 1024, tESTdATA, &CanTxHeader);
+	sendData(&hcan, 0x7, 1024, tESTdATA, &CanTxHeader);
+    osDelay(100);
+  }
+   USER CODE END TransmittingSize */
+}
 }
 
  /**

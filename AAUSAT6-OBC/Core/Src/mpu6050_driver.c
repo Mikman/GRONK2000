@@ -1,5 +1,10 @@
 #include "mpu6050_driver.h"
 
+	float tempVal = 0.0;
+	Axes3 resultGyro = { 0 };
+	Axes3 resultAccel = { 0 };
+
+
 I2C_HandleTypeDef * hi2c;
 
 HAL_StatusTypeDef MPU_Init(I2C_HandleTypeDef * I2C_handler){
@@ -47,7 +52,7 @@ float MPU_Read_Temp(){
 	// Enumeration of possible errors
 	HAL_StatusTypeDef returnValue;
 	int16_t rawTempVal;
-	float tempVal = 0.0;
+
 
 	uint8_t tempBuf[2];
 	 tempBuf[0] = MPU_TempReg;
@@ -70,7 +75,7 @@ Axes3 MPU_Read_Gyro(){
 	int16_t rawGyroData_Y = 0;
 	int16_t rawGyroData_Z = 0;
 
-	Axes3 result = { 0 };
+
 
 	float sensitivity = 0.0f;
 
@@ -89,11 +94,13 @@ Axes3 MPU_Read_Gyro(){
 	 rawGyroData_Y = ((int16_t)gyroBuf[2] << 8 | gyroBuf[3]);
 	 rawGyroData_Z = ((int16_t)gyroBuf[4] << 8 | gyroBuf[5]);
 
-	 result.x = (float)rawGyroData_X/sensitivity;
-	 result.y = (float)rawGyroData_Y/sensitivity;
-	 result.z = (float)rawGyroData_Z/sensitivity;
+	 resultGyro.x = (float)rawGyroData_X/sensitivity;
+	 resultGyro.y = (float)rawGyroData_Y/sensitivity;
+	 resultGyro.z = (float)rawGyroData_Z/sensitivity;
 
-	 return result;
+
+
+	 return resultGyro;
 }
 
 
@@ -102,7 +109,6 @@ Axes3 MPU_Read_Accel(){
 	int16_t rawAccelData_Y;
 	int16_t rawAccelData_Z;
 
-	Axes3 result = { 0 };
 
 	float sensitivity;
 
@@ -121,11 +127,11 @@ Axes3 MPU_Read_Accel(){
 	 rawAccelData_Y = ((int16_t)accelBuf[2] << 8 | accelBuf[3]);
 	 rawAccelData_Z = ((int16_t)accelBuf[4] << 8 | accelBuf[5]);
 
-	 result.x = (float)rawAccelData_X/sensitivity;
-	 result.y = (float)rawAccelData_Y/sensitivity;
-	 result.z = (float)rawAccelData_Z/sensitivity;
+	 resultAccel.x = (float)rawAccelData_X/sensitivity;
+	 resultAccel.y = (float)rawAccelData_Y/sensitivity;
+	 resultAccel.z = (float)rawAccelData_Z/sensitivity;
 
-	 return result;
+	 return resultAccel;
 }
 
 

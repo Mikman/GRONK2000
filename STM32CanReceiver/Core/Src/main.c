@@ -80,13 +80,13 @@ float GPS_LAT = 0.;
 char GPS_LAT_DIR = '$';
 float GPS_LON = 0.;
 char GPS_LON_DIR = '$';
-uint32_t GPS_QUALITY = 0;
-uint32_t GPS_HOURS = 0;
-uint32_t GPS_MINUTES = 0;
-uint32_t GPS_SEC = 0;
-uint32_t GPS_HDOP = 0;
+uint8_t GPS_QUALITY = 0;
+uint8_t GPS_HOURS = 0;
+uint8_t GPS_MINUTES = 0;
+uint8_t GPS_SEC = 0;
+float GPS_HDOP = 0;
 float GPS_ALTITUDE = 0.;
-uint32_t GPS_H_GEOID = 0;
+float GPS_H_GEOID = 0;
 
 //Recieved MPU data from CubeSAT
 float MPU_ACCELX = 0.;
@@ -158,6 +158,8 @@ int main(void)
 		 //transmitData(&GPSDATA);
 		 HAL_Delay(200);
 		 sendMPU();
+		 sendGPS();
+		 //sendMOTOR();
 
 	 }
     /* USER CODE END WHILE */
@@ -482,7 +484,7 @@ void sendGPS(){
 	sprintf(str, "%s", "Quality: ");						//Header
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_QUALITY);
+	sprintf(str, "%u", GPS_QUALITY);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
@@ -490,15 +492,15 @@ void sendGPS(){
 	sprintf(str, "%s", "Time: ");							//Header
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_HOURS);
+	sprintf(str, "%u", GPS_HOURS);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, ":", 2, 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_MINUTES);
+	sprintf(str, "%u", GPS_MINUTES);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, ":", 2, 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_SEC);
+	sprintf(str, "%", GPS_SEC);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
@@ -506,7 +508,7 @@ void sendGPS(){
 	sprintf(str, "%s", "Altitude: " );						//Header
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_ALTITUDE);
+	sprintf(str, "%f", GPS_ALTITUDE);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
@@ -514,7 +516,7 @@ void sendGPS(){
 	sprintf(str, "%s", "HDOP: " );							//Header
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_HDOP);
+	sprintf(str, "%f", GPS_HDOP);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
@@ -522,7 +524,7 @@ void sendGPS(){
 	sprintf(str, "%s", "H_Geoid: " );						//Header
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_H_GEOID);
+	sprintf(str, "%f", GPS_H_GEOID);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return

@@ -505,7 +505,7 @@ void sendGPS(){
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, ":", 2, 100);
 	memset(str, 0, sizeof str);
-	sprintf(str, "%", GPS_SEC);
+	sprintf(str, "%u", GPS_SEC);
 	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
 	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
 	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
@@ -591,6 +591,8 @@ void placeData_1( uint8_t *DataPass){
 			char str[15] = {0};
 			sprintf(str, "%s", "WATCHDOG" );
 			HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+			HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
+			HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
 		}
 
 }

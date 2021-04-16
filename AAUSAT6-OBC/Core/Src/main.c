@@ -28,6 +28,7 @@
 #include "DCMotorDriver.h"
 #include "mpu6050_driver.h"
 #include "Transmit_driver.h"
+#include "camera.h"
 
 
 /* USER CODE END Includes */
@@ -55,6 +56,7 @@ CAN_HandleTypeDef hcan;
 I2C_HandleTypeDef hi2c1;
 
 TIM_HandleTypeDef htim2;
+DMA_HandleTypeDef hdma_tim2_ch3;
 
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
@@ -99,7 +101,7 @@ uint8_t tESTdATA[1024];
 //CAN_FilterTypeDef CanFilter;
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
-
+CAM_HandleTypeDef hcam;
 
 
 /* USER CODE END PV */
@@ -369,12 +371,16 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
+  htim2.Init.Prescaler = 6;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 5000;
+  htim2.Init.Period = 120;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_OC_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -389,6 +395,19 @@ static void MX_TIM2_Init(void)
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_ACTIVE;
+  sConfigOC.Pulse = 60;
+  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  __HAL_TIM_ENABLE_OCxPRELOAD(&htim2, TIM_CHANNEL_2);
+  sConfigOC.OCMode = TIM_OCMODE_TIMING;
+  sConfigOC.Pulse = 0;
+  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
   }
@@ -442,6 +461,9 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
   /* DMA1_Channel5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
@@ -595,8 +617,7 @@ void TransmittingSize(void *argument)
 	sendData(&hcan, 0x7, 1024, tESTdATA, &CanTxHeader);
     osDelay(100);
   }
-   USER CODE END TransmittingSize */
-}
+  /* USER CODE END TransmittingSize */
 }
 
  /**

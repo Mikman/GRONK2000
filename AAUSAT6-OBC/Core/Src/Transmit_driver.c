@@ -82,10 +82,10 @@ void sendGPS(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader){
 
 
 	//SendData();
-			sendData(&handler, Array1ID, PACKAGE_SIZE, ID1Array,  &transmitHeader);
-			sendData(&handler, Array2ID, PACKAGE_SIZE, &ID2Array,  &transmitHeader);
-			sendData(&handler, Array3ID, PACKAGE_SIZE, &ID3Array,  &transmitHeader);
-			sendData(&handler, Array4ID, PACKAGE_SIZE, &ID4Array,  &transmitHeader);
+			sendData(handler, Array1ID, PACKAGE_SIZE, &ID1Array,  transmitHeader);
+			sendData(handler, Array2ID, PACKAGE_SIZE, &ID2Array,  transmitHeader);
+			sendData(handler, Array3ID, PACKAGE_SIZE, &ID3Array,  transmitHeader);
+			sendData(handler, Array4ID, PACKAGE_SIZE, &ID4Array,  transmitHeader);
 
 
 }

@@ -124,6 +124,11 @@ void TransmittingSize(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void WatchdogHandler(){
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+	HAL_Delay(10);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+}
 
 /* USER CODE END 0 */
 
@@ -163,14 +168,6 @@ int main(void)
   MX_I2C1_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-
-
-  for (int i = 0; i < 1024; i++) {
-  	tESTdATA[i] = i % 256;
-  }
-
-
-
 
   /* USER CODE END 2 */
 
@@ -455,11 +452,32 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PA3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
 }
 
@@ -504,7 +522,11 @@ void Start_TESTOpgave(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  //HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
+
+
+	//  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3))
+
     osDelay(500);
   }
 
@@ -584,7 +606,7 @@ void TransmittingSize(void *argument)
   {
 
 	  osDelay(1000);
-	//sendGPS(&hcan, &CanTxHeader);
+	sendGPS(&hcan, &CanTxHeader);
 	sendMCU(&hcan, &CanTxHeader);
 	//sendDCMotor(&hcan, &CanTxHeader);
 
@@ -594,9 +616,9 @@ void TransmittingSize(void *argument)
 	sendData(&hcan, 0x5, 1024, tESTdATA, &CanTxHeader);
 	sendData(&hcan, 0x7, 1024, tESTdATA, &CanTxHeader);
     osDelay(100);
+    */
   }
-   USER CODE END TransmittingSize */
-}
+  /* USER CODE END TransmittingSize */
 }
 
  /**

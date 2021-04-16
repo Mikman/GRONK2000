@@ -91,8 +91,8 @@ begin
 					i <= 0;
 					
 					-- Greyscale
-					--postArray(0) <= preArray(1); -- 8 bit Y
-					--postArray(1) <= preArray(3); -- 8 bit Y
+					postArray(0) <= preArray(1); -- 8 bit Y
+					postArray(1) <= preArray(3); -- 8 bit Y
 					
 					
 					-- RGB565 (half horizontal resolution)
@@ -111,9 +111,9 @@ begin
 					
 					
 					-- YCbCr (half horizontal resolution)
-					postArray(0)(7 downto 0) <= preArray(1)(7 downto 0); -- 8 bit Y (half width)
-					postArray(1)(7 downto 4) <= preArray(0)(7 downto 4); -- 4 bit Cb (half width)
-					postArray(1)(3 downto 0) <= preArray(2)(7 downto 4); -- 4 bit Cr (half width)
+					--postArray(0)(7 downto 0) <= preArray(1)(7 downto 0); -- 8 bit Y (half width)
+					--postArray(1)(7 downto 4) <= preArray(0)(7 downto 4); -- 4 bit Cb (half width)
+					--postArray(1)(3 downto 0) <= preArray(2)(7 downto 4); -- 4 bit Cr (half width)
 					
 					
 				else

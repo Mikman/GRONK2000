@@ -39,7 +39,7 @@
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CEBA4F23C7
-set_global_assignment -name TOP_LEVEL_ENTITY FPGA_LEDRAM
+set_global_assignment -name TOP_LEVEL_ENTITY ImageCapture
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:12:15  MARCH 25, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -106,7 +106,7 @@ set_location_assignment PIN_R15 -to RAMdata[4]
 set_location_assignment PIN_P18 -to RAMdata[5]
 set_location_assignment PIN_K19 -to RAMdata[6]
 set_location_assignment PIN_K17 -to RAMdata[7]
-set_location_assignment PIN_AB12 -to getImagePin
+set_location_assignment PIN_G16 -to getImagePin
 set_location_assignment PIN_J18 -to PWDN
 set_location_assignment PIN_H18 -to RESET
 set_location_assignment PIN_A12 -to addrInc
@@ -163,7 +163,7 @@ set_global_assignment -name SDC_FILE FPGAgatherer.sdc
 set_location_assignment PIN_F15 -to SIOC
 set_location_assignment PIN_J17 -to SIOD
 set_global_assignment -name VHDL_FILE ImageCapture.vhd
-set_location_assignment PIN_AB13 -to transferPin
+set_location_assignment PIN_G15 -to transferPin
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

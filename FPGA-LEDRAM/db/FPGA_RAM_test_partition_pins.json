@@ -1,0 +1,297 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "address[0]",
+					"strict" : false
+				},
+				{
+					"name" : "address[1]",
+					"strict" : false
+				},
+				{
+					"name" : "address[2]",
+					"strict" : false
+				},
+				{
+					"name" : "address[3]",
+					"strict" : false
+				},
+				{
+					"name" : "address[4]",
+					"strict" : false
+				},
+				{
+					"name" : "address[5]",
+					"strict" : false
+				},
+				{
+					"name" : "address[6]",
+					"strict" : false
+				},
+				{
+					"name" : "address[7]",
+					"strict" : false
+				},
+				{
+					"name" : "address[8]",
+					"strict" : false
+				},
+				{
+					"name" : "address[9]",
+					"strict" : false
+				},
+				{
+					"name" : "address[10]",
+					"strict" : false
+				},
+				{
+					"name" : "address[11]",
+					"strict" : false
+				},
+				{
+					"name" : "address[12]",
+					"strict" : false
+				},
+				{
+					"name" : "address[13]",
+					"strict" : false
+				},
+				{
+					"name" : "address[14]",
+					"strict" : false
+				},
+				{
+					"name" : "address[15]",
+					"strict" : false
+				},
+				{
+					"name" : "address[16]",
+					"strict" : false
+				},
+				{
+					"name" : "address[17]",
+					"strict" : false
+				},
+				{
+					"name" : "address[18]",
+					"strict" : false
+				},
+				{
+<<<<<<< Updated upstream
+					"name" : "CS",
+=======
+<<<<<<< HEAD
+					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[6]",
+					"strict" : false
+				},
+				{
+=======
+					"name" : "CS",
+					"strict" : false
+				},
+				{
+					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "OE",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[6]",
+					"strict" : false
+				},
+				{
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+					"name" : "LEDs[7]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[0]",
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+					"strict" : false
+				},
+				{
+					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "OE",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[4]",
+					"strict" : false
+				},
+				{
+<<<<<<< Updated upstream
+					"name" : "LEDs[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[7]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[5]",
+					"strict" : false
+				},
+				{
+=======
+					"name" : "WE_SW",
+					"strict" : false
+				},
+				{
+					"name" : "addrInc",
+=======
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[5]",
+					"strict" : false
+				},
+				{
+>>>>>>> Stashed changes
+					"name" : "RAMdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[7]",
+					"strict" : false
+				},
+				{
+					"name" : "CS_SW",
+					"strict" : false
+				},
+				{
+					"name" : "WE_SW",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SW",
+					"strict" : false
+				},
+				{
+					"name" : "addr_SW",
+<<<<<<< Updated upstream
+=======
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
+					"strict" : false
+				}
+			]
+		}
+	]
+}

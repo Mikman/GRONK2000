@@ -33,10 +33,9 @@ void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
 	cam->status = WAITING;
 }
 
-
 void CAM_update(CAM_HandleTypeDef *cam) {
 	if (cam->status == READY) {
-		if (y < cam->pic->height) {
+		if (cam->pic->y < cam->pic->height) {
 			CAM_startLineTransfer(cam);
 		} else {
 			cam->pic->x = 0;
@@ -70,7 +69,7 @@ void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 
 	while(cam->pic->x < cam->pic->width) { // Gentag indtil hele linjen er sendt / hele bufferen er tømt
 		// Når der er plads, put dem i køen
-		if (CAN_queuePackage(CAN_ID_DATA, destination + cam->pic->x, 8)) {
+		if (CAN_queuePackage(CAN_ID_DATA, cam->destination + cam->pic->x, 8)) {
 			// Inkrementer x-positionen i Picture
 			cam->pic->x += 8;
 		}
@@ -87,10 +86,15 @@ void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 	cam->status = READY;
 }
 
-void CAM_setReg(CAM_HandleTypeDef *cam, int reg_addr, int value) {
-
+void CAM_setReg(CAM_HandleTypeDef *cam, uint8_t reg_addr, uint8_t value) {
+	uint8_t addrAndValue[2] = {reg_addr, value};
+	HAL_I2C_Master_Transmit(hi2c, (cam->I2C_Address<<1), addrAndValue, 2, HAL_MAX_DELAY);
 }
 
-void CAM_getReg(int reg_addr) {
+uint8_t CAM_getReg(CAM_HandleTypeDef *cam, int reg_addr) {
+	uint8_t value;
+	HAL_I2C_Master_Transmit(hi2c, (cam->I2C_Address<<1), &reg_addr, 1, HAL_MAX_DELAY);
+	HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, &value, 1, HAL_MAX_DELAY);
 
+	return value;
 }

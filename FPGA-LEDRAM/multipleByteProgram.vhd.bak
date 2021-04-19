@@ -1,0 +1,18 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_STD.ALL;
+
+entity multipleByteProgram is
+begin
+	port (
+		address: out STD_LOGIC_VECTOR(18 downto 0);
+		data: in STD_LOGIC_VECTOR(7 downto 0);
+		CS, WE, OE: out STD_LOGIC;
+		writebtm: in STD_LOGIC
+	);
+end multipleByteProgram;
+
+architecture Behavorial of multipleByteProgram is
+begin
+	
+		

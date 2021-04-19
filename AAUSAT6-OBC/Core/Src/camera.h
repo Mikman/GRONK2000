@@ -2,7 +2,7 @@
  * camera.h
  *
  *  Created on: Apr 16, 2021
- *      Author: joach
+ *      Author: joachim
  */
 
 #ifndef CAMERA_H_
@@ -21,8 +21,9 @@ typedef struct {
 	uint32_t requestDataChannel;
 	Picture pic;
 	CAM_STATUS status;
-	uint8_t *destination;
 	uint8_t *source;
+	uint8_t *destination;
+	uint8_t I2C_Address;
 } CAM_HandleTypeDef;
 
 enum CAM_STATUS {
@@ -33,13 +34,13 @@ enum CAM_STATUS {
 };
 
 void CAM_init(CAM_HandleTypeDef *cam);
-void CAM_update();
+void CAM_update(CAM_HandleTypeDef *cam);
 void CAM_setReg(CAM_HandleTypeDef *cam, int reg_addr, int value);
 void CAM_getReg(int reg_addr);
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam);
-void CAM_stopLineTransfer();
-void CAM_takePicture();
-void CAM_toOutputQueue();
+void CAM_stopLineTransfer(CAM_HandleTypeDef *cam);
+void CAM_takePicture(CAM_HandleTypeDef *cam);
+void CAM_toOutputQueue(CAM_HandleTypeDef *cam);
 
 
 #endif /* CAMERA_H_ */

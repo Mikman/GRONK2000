@@ -98,10 +98,12 @@ const osThreadAttr_t Transmitting_attributes = {
 };
 /* USER CODE BEGIN PV */
 uint8_t tESTdATA[1024];
+uint8_t cameraData[640];
 //CAN_FilterTypeDef CanFilter;
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAM_HandleTypeDef hcam;
+Picture pic1;
 
 
 /* USER CODE END PV */
@@ -126,6 +128,17 @@ void TransmittingSize(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void CAM_Handle_Init(CAM_HandleTypeDef *cam) {
+	cam->I2C_Address = 0x21;
+	cam->destination = cameraData;
+	cam->hdma = &hdma_tim2_ch3;
+	cam->pic = &pic1;
+	cam->requestDataTimer = &htim2;
+	cam->requestDataChannel = TIM_CHANNEL_2;
+	cam->source = GPIOB->ODR & 0x0000F00F; // PB15 - PB12 + PB3 - PB0
+	cam->status = STANDBY;
+	cam->I2C_Handler = &hi2c1;
+}
 
 /* USER CODE END 0 */
 
@@ -147,6 +160,8 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   HAL_CAN_Start(&hcan);
+  CAM_Handle_Init(&hcam);
+
 
   /* USER CODE END Init */
 
@@ -166,13 +181,14 @@ int main(void)
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
 
-
+  CAM_init(&hcam);
+  CAM_getReg(&hcam, 0x12); // Software reset, YUV mode
+  CAM_getReg(&hcam, 0x1E);
+  CAM_getReg(&hcam, 0x13);
+  CAM_getReg(&hcam, 0x3F);
   for (int i = 0; i < 1024; i++) {
   	tESTdATA[i] = i % 256;
   }
-
-
-
 
   /* USER CODE END 2 */
 
@@ -477,16 +493,27 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
+  /*Configure GPIO pins : PB0 PB1 PB2 PB12
+                           PB13 PB14 PB15 PB3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_12
+                          |GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
 GPS_FIX_DATA data = { 0 };
+
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartGPS_Update_Data */
@@ -605,6 +632,7 @@ void TransmittingSize(void *argument)
   for(;;)
   {
 
+
 	  osDelay(1000);
 	//sendGPS(&hcan, &CanTxHeader);
 	sendMCU(&hcan, &CanTxHeader);
@@ -615,7 +643,7 @@ void TransmittingSize(void *argument)
 	/*sendData(&hcan, 0x3, 1024, tESTdATA, &CanTxHeader);
 	sendData(&hcan, 0x5, 1024, tESTdATA, &CanTxHeader);
 	sendData(&hcan, 0x7, 1024, tESTdATA, &CanTxHeader);
-    osDelay(100);
+    osDelay(100);*/
   }
   /* USER CODE END TransmittingSize */
 }

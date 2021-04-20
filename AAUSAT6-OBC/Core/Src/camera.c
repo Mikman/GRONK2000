@@ -17,7 +17,7 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 	// init DMA
-	while (cam->requestDataTimer->Instance->CNT <= 60) {}
+	while (cam->requestDataTimer->Instance->CNT <=  60) {}
 	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
 	HAL_TIM_OC_Start(cam->requestDataTimer, cam->requestDataChannel);
 
@@ -43,7 +43,7 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->status = STANDBY;
 		}
 	} else if (cam->status == WAITING) {
-		CAM_toOutputQueue();
+		CAM_toOutputQueue(cam);
 	}
 }
 
@@ -88,13 +88,14 @@ void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 
 void CAM_setReg(CAM_HandleTypeDef *cam, uint8_t reg_addr, uint8_t value) {
 	uint8_t addrAndValue[2] = {reg_addr, value};
-	HAL_I2C_Master_Transmit(hi2c, (cam->I2C_Address<<1), addrAndValue, 2, HAL_MAX_DELAY);
+	uint8_t adressentest = cam->I2C_Address<<1;
+	HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), addrAndValue, 2, HAL_MAX_DELAY);
 }
 
-uint8_t CAM_getReg(CAM_HandleTypeDef *cam, int reg_addr) {
-	uint8_t value;
-	HAL_I2C_Master_Transmit(hi2c, (cam->I2C_Address<<1), &reg_addr, 1, HAL_MAX_DELAY);
-	HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, &value, 1, HAL_MAX_DELAY);
+int CAM_getReg(CAM_HandleTypeDef *cam, int reg_addr) {
+	int buf[1] = {reg_addr};
+	HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), buf, 1, HAL_MAX_DELAY);
+	HAL_I2C_Master_Receive(cam->I2C_Handler, (cam->I2C_Address<<1) | 0x01, buf, 1, HAL_MAX_DELAY);
 
-	return value;
+	return buf[0];
 }

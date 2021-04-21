@@ -99,8 +99,37 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_I2C_Master_Transmit(&hi2c1, Adressen<<1, bufferen, 2, HAL_MAX_DELAY);
-	  int dev = 0;
+	  HAL_StatusTypeDef returnValue = HAL_OK;
+	  uint8_t initializationBuffer[5] = {0};
+
+	  initializationBuffer[0] = 0x1B;
+	  initializationBuffer[1] = 0x18; // Sets the full scale to +-2000 degrees per second
+	  returnValue = HAL_I2C_Master_Transmit(&hi2c1, (0x68<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+
+	  	int16_t rawGyroData_X = 0;
+		int16_t rawGyroData_Y = 0;
+		int16_t rawGyroData_Z = 0;
+
+
+
+		float sensitivity = 131.0;
+
+
+		 uint8_t gyroBuf[10];
+		 gyroBuf[0] = 0x43;
+		 HAL_I2C_Master_Transmit(&hi2c1, (0x68<<1), gyroBuf, 1, HAL_MAX_DELAY);
+		 HAL_I2C_Master_Receive(&hi2c1, (0x68<<1) | 0x01, gyroBuf, 6, HAL_MAX_DELAY);
+
+		 // Data composition from raw data
+		 rawGyroData_X = ((int16_t)gyroBuf[0] << 8 | gyroBuf[1]);
+		 rawGyroData_Y = ((int16_t)gyroBuf[2] << 8 | gyroBuf[3]);
+		 rawGyroData_Z = ((int16_t)gyroBuf[4] << 8 | gyroBuf[5]);
+
+		 float resultGyrox = (float)rawGyroData_X/sensitivity;
+		 float resultGyroy = (float)rawGyroData_Y/sensitivity;
+		 float resultGyroz = (float)rawGyroData_Z/sensitivity;
+
+	  	int dev = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -1,12 +1,12 @@
-Fitter Status : Successful - Mon Apr 19 13:04:55 2021
+Fitter Status : Successful - Wed Apr 21 14:19:06 2021
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : FPGAgatherer
 Top-level Entity Name : ImageCapture
 Family : Cyclone V
 Device : 5CEBA4F23C7
 Timing Models : Final
-Logic utilization (in ALMs) : 2,678 / 18,480 ( 14 % )
-Total registers : 213
+Logic utilization (in ALMs) : 2,681 / 18,480 ( 15 % )
+Total registers : 212
 Total pins : 101 / 224 ( 45 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 3,153,920 ( 0 % )

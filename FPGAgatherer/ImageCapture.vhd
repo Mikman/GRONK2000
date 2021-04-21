@@ -48,6 +48,9 @@ type postEditBuffer is array(1 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 signal preArray: preEditBuffer;
 signal postArray: postEditBuffer;
 
+signal VSYNC_falling: boolean := false;
+signal saveNextImage: boolean := false;
+
 begin
 	
 	-- Constant assignments for RAM
@@ -132,16 +135,30 @@ begin
 
 	process(VSYNC)
 	begin
-		if (VSYNC'event and VSYNC = '0') then
+		if (VSYNC = '0') then
 			
-			if (getImagePin = '1') then
+			if (saveNextImage = true) then
 				wantAnImage <= true;
 			else
 				wantAnImage <= false;
 			end if;
+			VSYNC_falling <= true;
 			
+		else
+			VSYNC_falling <= false;
 		end if;
 	end process;
+	
+	process(getImagePin, VSYNC_falling)
+	begin
+		if (VSYNC_falling = true) then 
+			saveNextImage <= false; 
+		elsif (getImagePin = '1') then 
+			saveNextImage <= true;
+			
+		end if; 
+	end process; 
+	
 	
 	process(clk)
 	begin
@@ -233,6 +250,8 @@ begin
 			end if;
 		end if;
 	end process;
+	
+
 
 	
 			-- Initialize 6 digit 7 segment display, showing i as a decimal number

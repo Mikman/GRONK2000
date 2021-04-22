@@ -13,10 +13,13 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 	CAM_setReg(cam, 0x1E, 0x31); // Flip image vertically and mirror image
 	CAM_setReg(cam, 0x13, 0x81); // Fast algorithm and auto exposure enable
 	CAM_setReg(cam, 0x3F, 0x01); // Edge enhancement factor
+	CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
+
 
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, SET);
 	// init DMA
 	while (cam->requestDataTimer->Instance->CNT <=  60) {}
 	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
@@ -26,6 +29,7 @@ void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 }
 
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, RESET);
 	// abort DMA
 	HAL_DMA_Abort_IT(cam->hdma);
 	while (cam->requestDataTimer->Instance->CNT <= 60) {}
@@ -55,13 +59,15 @@ void CAM_takePicture(CAM_HandleTypeDef *cam) {
 	if (cam->status == STANDBY) {
 
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-		HAL_Delay(500);
+
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		HAL_Delay(50);
+		cam->status = READY;
 
 	}
 }
 
-int CAN_queuePackage(uint32_t ID, uint8_t *data, uint32_t DLC);
+int CAN_queuePackage(uint32_t ID, uint8_t *data, uint32_t DLC) {}
 
 void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 	// Vent og placer pixel-koordinat-pakke i CAN-køen
@@ -81,7 +87,7 @@ void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 		}
 		else
 		{
-			osDelay(1);
+			HAL_Delay(1);
 		}
 	}
 

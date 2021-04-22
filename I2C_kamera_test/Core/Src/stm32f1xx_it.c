@@ -23,6 +23,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "camera.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,7 +59,7 @@
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_tim2_ch3;
 /* USER CODE BEGIN EV */
-
+extern CAM_HandleTypeDef hcam;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -209,7 +210,8 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE END DMA1_Channel1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_tim2_ch3);
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-
+  CAM_stopLineTransfer(&hcam);
+  int dev = 0;
   /* USER CODE END DMA1_Channel1_IRQn 1 */
 }
 

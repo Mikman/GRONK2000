@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGAgatherer
-Wed Apr 21 14:14:46 2021
+Thu Apr 22 16:02:51 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -13,27 +13,26 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. User-Specified and Inferred Latches
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Inverted Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Parameter Settings for User Entity Instance: SevenSegDisplay:Display
- 14. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod0
- 15. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod1
- 16. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div0
- 17. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod2
- 18. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div1
- 19. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod3
- 20. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div2
- 21. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod4
- 22. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div3
- 23. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod5
- 24. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div4
- 25. Port Connectivity Checks: "SevenSegDisplay:Display"
- 26. Post-Synthesis Netlist Statistics for Top Partition
- 27. Elapsed Time Per Partition
- 28. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: SevenSegDisplay:Display
+ 13. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod0
+ 14. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod1
+ 15. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div0
+ 16. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod2
+ 17. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div1
+ 18. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod3
+ 19. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div2
+ 20. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod4
+ 21. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div3
+ 22. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod5
+ 23. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div4
+ 24. Port Connectivity Checks: "SevenSegDisplay:Display"
+ 25. Post-Synthesis Netlist Statistics for Top Partition
+ 26. Elapsed Time Per Partition
+ 27. Analysis & Synthesis Messages
 
 
 
@@ -59,14 +58,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Apr 21 14:14:46 2021       ;
+; Analysis & Synthesis Status     ; Successful - Thu Apr 22 16:02:50 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGAgatherer                                ;
 ; Top-level Entity Name           ; ImageCapture                                ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 207                                         ;
-; Total pins                      ; 101                                         ;
+; Total registers                 ; 209                                         ;
+; Total pins                      ; 105                                         ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -183,10 +182,7 @@ refer to the applicable agreement for further details.
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
 ;     Processor 4            ;   0.0%      ;
-;     Processor 5            ;   0.0%      ;
-;     Processor 6            ;   0.0%      ;
-;     Processor 7            ;   0.0%      ;
-;     Processor 8            ;   0.0%      ;
+;     Processors 5-8         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -230,23 +226,23 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Estimate of Logic utilization (ALMs needed) ; 2660      ;
 ;                                             ;           ;
-; Combinational ALUT usage for logic          ; 5282      ;
+; Combinational ALUT usage for logic          ; 5281      ;
 ;     -- 7 input functions                    ; 0         ;
 ;     -- 6 input functions                    ; 33        ;
 ;     -- 5 input functions                    ; 39        ;
 ;     -- 4 input functions                    ; 1521      ;
-;     -- <=3 input functions                  ; 3689      ;
+;     -- <=3 input functions                  ; 3688      ;
 ;                                             ;           ;
-; Dedicated logic registers                   ; 207       ;
+; Dedicated logic registers                   ; 209       ;
 ;                                             ;           ;
-; I/O pins                                    ; 101       ;
+; I/O pins                                    ; 105       ;
 ;                                             ;           ;
 ; Total DSP Blocks                            ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 119       ;
-; Total fan-out                               ; 17527     ;
-; Average fan-out                             ; 3.08      ;
+; Total fan-out                               ; 17534     ;
+; Average fan-out                             ; 3.07      ;
 +---------------------------------------------+-----------+
 
 
@@ -255,7 +251,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                         ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                   ; Entity Name         ; Library Name ;
 +----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |ImageCapture                                      ; 5282 (209)          ; 207 (207)                 ; 0                 ; 0          ; 101  ; 0            ; |ImageCapture                                                                                                                         ; ImageCapture        ; work         ;
+; |ImageCapture                                      ; 5281 (208)          ; 209 (209)                 ; 0                 ; 0          ; 105  ; 0            ; |ImageCapture                                                                                                                         ; ImageCapture        ; work         ;
 ;    |SevenSegDisplay:Display|                       ; 5073 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display                                                                                                 ; SevenSegDisplay     ; work         ;
 ;       |SevenSegDigit:\genDigits:0:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
 ;       |SevenSegDigit:\genDigits:1:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
@@ -311,18 +307,6 @@ refer to the applicable agreement for further details.
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                               ;
-+----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
-+----------------------------------------------------+---------------------+------------------------+
-; wantAnImage                                        ; VSYNC               ; yes                    ;
-; saveNextImage                                      ; GND                 ; yes                    ;
-; Number of user-specified and inferred latches = 2  ;                     ;                        ;
-+----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
-
-
 +------------------------------------------------------------+
 ; Registers Removed During Synthesis                         ;
 +---------------------------------------+--------------------+
@@ -338,10 +322,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 207   ;
+; Total registers                              ; 209   ;
 ; Number of registers using Synchronous Clear  ; 134   ;
 ; Number of registers using Synchronous Load   ; 19    ;
-; Number of registers using Asynchronous Clear ; 24    ;
+; Number of registers using Asynchronous Clear ; 25    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 123   ;
 ; Number of registers using Preset             ; 0     ;
@@ -354,7 +338,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
 ; SIOCbool                               ; 2       ;
-; Total number of inverted registers = 1 ;         ;
+; saveNextImage                          ; 2       ;
+; Total number of inverted registers = 2 ;         ;
 +----------------------------------------+---------+
 
 
@@ -648,13 +633,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 207                         ;
-;     CLR               ; 24                          ;
+; arriav_ff             ; 209                         ;
+;     CLR               ; 25                          ;
 ;     ENA               ; 40                          ;
 ;     ENA SCLR          ; 64                          ;
 ;     ENA SCLR SLD      ; 19                          ;
 ;     SCLR              ; 51                          ;
-;     plain             ; 9                           ;
+;     plain             ; 10                          ;
 ; arriav_io_obuf        ; 8                           ;
 ; arriav_lcell_comb     ; 5291                        ;
 ;     arith             ; 2404                        ;
@@ -665,16 +650,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;         4 data inputs ; 903                         ;
 ;     normal            ; 2809                        ;
 ;         0 data inputs ; 2                           ;
-;         1 data inputs ; 8                           ;
+;         1 data inputs ; 10                          ;
 ;         2 data inputs ; 1688                        ;
-;         3 data inputs ; 421                         ;
+;         3 data inputs ; 419                         ;
 ;         4 data inputs ; 618                         ;
 ;         5 data inputs ; 39                          ;
 ;         6 data inputs ; 33                          ;
 ;     shared            ; 78                          ;
 ;         0 data inputs ; 6                           ;
 ;         1 data inputs ; 72                          ;
-; boundary_port         ; 101                         ;
+; boundary_port         ; 105                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 77.50                       ;
 ; Average LUT depth     ; 55.20                       ;
@@ -686,7 +671,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:14     ;
+; Top            ; 00:00:23     ;
 +----------------+--------------+
 
 
@@ -696,7 +681,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Apr 21 14:14:21 2021
+    Info: Processing started: Thu Apr 22 16:02:12 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file sevensegdigit.vhd
@@ -716,18 +701,13 @@ Info (12021): Found 2 design units, including 1 entities, in source file arduino
     Info (12022): Found design unit 1: Arduino_RAM_reader-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 27
     Info (12023): Found entity 1: Arduino_RAM_reader File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file imagecapture.vhd
-    Info (12022): Found design unit 1: ImageCapture-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 36
+    Info (12022): Found design unit 1: ImageCapture-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 39
     Info (12023): Found entity 1: ImageCapture File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 7
 Info (12127): Elaborating entity "ImageCapture" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at ImageCapture.vhd(13): used implicit default value for signal "SIOD" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 13
-Warning (10492): VHDL Process Statement warning at ImageCapture.vhd(74): signal "transferPin" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 74
-Warning (10492): VHDL Process Statement warning at ImageCapture.vhd(140): signal "saveNextImage" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 140
-Warning (10631): VHDL Process Statement warning at ImageCapture.vhd(136): inferring latch(es) for signal or variable "wantAnImage", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 136
-Warning (10631): VHDL Process Statement warning at ImageCapture.vhd(152): inferring latch(es) for signal or variable "saveNextImage", which holds its previous value in one or more paths through the process File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 152
+Warning (10492): VHDL Process Statement warning at ImageCapture.vhd(79): signal "transferPin" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 79
 Warning (10034): Output port "OE" at ImageCapture.vhd(18) has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 18
-Info (10041): Inferred latch for "saveNextImage" at ImageCapture.vhd(152) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 152
-Info (10041): Inferred latch for "wantAnImage" at ImageCapture.vhd(136) File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 136
-Info (12128): Elaborating entity "SevenSegDisplay" for hierarchy "SevenSegDisplay:Display" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 258
+Info (12128): Elaborating entity "SevenSegDisplay" for hierarchy "SevenSegDisplay:Display" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 259
 Info (12128): Elaborating entity "SevenSegDigit" for hierarchy "SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 53
 Info (278001): Inferred 11 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod0" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
@@ -844,32 +824,32 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/sign
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_03f.tdf
     Info (12023): Found entity 1: alt_u_div_03f File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_03f.tdf Line: 22
 Warning (13034): The following nodes have both tri-state and non-tri-state drivers
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[0]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[1]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[2]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[3]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[4]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[5]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[6]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[7]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[0]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[1]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[2]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[3]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[4]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[5]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[6]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[7]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
 Info (13060): One or more bidirectional pins are fed by always enabled tri-state buffers
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[0]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[1]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[2]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[3]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[4]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[5]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[6]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[7]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[0]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[1]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[2]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[3]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[4]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[5]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[6]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[7]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
 Warning (13009): TRI or OPNDRN buffers permanently enabled
-    Warning (13010): Node "RAMdata[0]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[1]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[2]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[3]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[4]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[5]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[6]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
-    Warning (13010): Node "RAMdata[7]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 195
+    Warning (13010): Node "RAMdata[0]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[1]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[2]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[3]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[4]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[5]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[6]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
+    Warning (13010): Node "RAMdata[7]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 196
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "RESET" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
     Warning (13410): Pin "PWDN" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
@@ -877,18 +857,20 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "OE" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 18
     Warning (13410): Pin "CS" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 19
 Info (286030): Timing-Driven Synthesis is running
+Critical Warning (18061): Ignored Power-Up Level option on the following registers
+    Critical Warning (18010): Register saveNextImage will power up to High File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 155
 Info (17049): 8 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 5423 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5427 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 16 input pins
-    Info (21059): Implemented 77 output pins
+    Info (21059): Implemented 81 output pins
     Info (21060): Implemented 8 bidirectional pins
     Info (21061): Implemented 5322 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 30 warnings
-    Info: Peak virtual memory: 4951 megabytes
-    Info: Processing ended: Wed Apr 21 14:14:46 2021
-    Info: Elapsed time: 00:00:25
-    Info: Total CPU time (on all processors): 00:00:36
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 29 warnings
+    Info: Peak virtual memory: 4966 megabytes
+    Info: Processing ended: Thu Apr 22 16:02:51 2021
+    Info: Elapsed time: 00:00:39
+    Info: Total CPU time (on all processors): 00:00:53
 
 

@@ -24,6 +24,9 @@ entity ImageCapture is
 		
 		transferPin: in STD_LOGIC;
 		
+		testGetImagePin, testVSYNC_falling, testWantAnImage, testSaveNextImage: out STD_LOGIC;
+		
+		
 		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX2 : out STD_LOGIC_VECTOR(6 downto 0);
@@ -63,8 +66,10 @@ begin
 	SIOC <= '1' when (SIOCbool = true) else '0';
 	currentLine <= false when (VSYNC = '0') else true;
 	
-	
-	
+	testGetImagePin <= '1' when (getImagePin = '1') else '0';
+	testVSYNC_falling <= '1' when (VSYNC = '1') else '0';
+	testWantAnImage <= '1' when (wantAnImage = true) else '0';
+	testSaveNextImage <= '1' when (saveNextImage = true) else '0';
 	
 	RESET <= '1';
 	PWDN <= '0';
@@ -135,26 +140,22 @@ begin
 
 	process(VSYNC)
 	begin
-		if (VSYNC = '0') then
+		if (VSYNC'event and VSYNC = '0') then
 			
 			if (saveNextImage = true) then
 				wantAnImage <= true;
 			else
 				wantAnImage <= false;
 			end if;
-			VSYNC_falling <= true;
-			
-		else
-			VSYNC_falling <= false;
 		end if;
 	end process;
 	
-	process(getImagePin, VSYNC_falling)
+	process(getImagePin, VSYNC)
 	begin
-		if (VSYNC_falling = true) then 
-			saveNextImage <= false; 
-		elsif (getImagePin = '1') then 
-			saveNextImage <= true;
+		if (getImagePin = '1') then 
+			saveNextImage <= true; 
+		elsif (VSYNC'event and VSYNC = '0') then 
+			saveNextImage <= false;
 			
 		end if; 
 	end process; 

@@ -103,8 +103,17 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-CAM_Handle_Init(&hcam);
-CAM_init(&hcam);
+  HAL_TIM_Base_Start(&htim2);
+  CAM_Handle_Init(&hcam);
+  CAM_init(&hcam);
+
+  CAM_getReg(&hcam, 0x12);
+  CAM_getReg(&hcam, 0x1E);
+  CAM_getReg(&hcam, 0x13);
+  CAM_getReg(&hcam, 0x3F);
+  CAM_getReg(&hcam, 0x71);
+
+  CAM_takePicture(&hcam);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,10 +121,7 @@ CAM_init(&hcam);
   while (1)
   {
 
-	  CAM_getReg(&hcam, 0x12);
-	  CAM_getReg(&hcam, 0x1E);
-	  CAM_getReg(&hcam, 0x13);
-	  CAM_getReg(&hcam, 0x3F);
+	CAM_update(&hcam);
 
     /* USER CODE END WHILE */
 
@@ -216,9 +222,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 6;
+  htim2.Init.Prescaler = 6 -1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 120;
+  htim2.Init.Period = 120 -1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_OC_Init(&htim2) != HAL_OK)
@@ -231,9 +237,9 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_ACTIVE;
+  sConfigOC.OCMode = TIM_OCMODE_TOGGLE;
   sConfigOC.Pulse = 60;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
@@ -242,6 +248,7 @@ static void MX_TIM2_Init(void)
   __HAL_TIM_ENABLE_OCxPRELOAD(&htim2, TIM_CHANNEL_2);
   sConfigOC.OCMode = TIM_OCMODE_TIMING;
   sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
@@ -279,12 +286,23 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC14 */
+  GPIO_InitStruct.Pin = GPIO_PIN_14;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA5 */
   GPIO_InitStruct.Pin = GPIO_PIN_5;
@@ -292,6 +310,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB10 PB11
+                           PB12 PB13 PB14 PB15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
@@ -304,7 +330,7 @@ void CAM_Handle_Init(CAM_HandleTypeDef *cam) {
 	cam->pic = &pic1;
 	cam->requestDataTimer = &htim2;
 	cam->requestDataChannel = TIM_CHANNEL_2;
-	cam->source = GPIOB->ODR & 0x0000F00F; // PB15 - PB12 + PB3 - PB0
+	cam->source = GPIOB->ODR & 0x0000FC03; // PB15 - PB10 + PB1 + PB0
 	cam->status = STANDBY;
 	cam->I2C_Handler = &hi2c1;
 

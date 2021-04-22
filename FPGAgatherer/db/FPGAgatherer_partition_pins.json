@@ -124,6 +124,22 @@
 					"strict" : false
 				},
 				{
+					"name" : "testGetImagePin",
+					"strict" : false
+				},
+				{
+					"name" : "testVSYNC_falling",
+					"strict" : false
+				},
+				{
+					"name" : "testWantAnImage",
+					"strict" : false
+				},
+				{
+					"name" : "testSaveNextImage",
+					"strict" : false
+				},
+				{
 					"name" : "HEX0[0]",
 					"strict" : false
 				},
@@ -328,6 +344,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "getImagePin",
+					"strict" : false
+				},
+				{
+					"name" : "VSYNC",
+					"strict" : false
+				},
+				{
 					"name" : "clk",
 					"strict" : false
 				},
@@ -340,15 +364,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "VSYNC",
-					"strict" : false
-				},
-				{
 					"name" : "addrInc",
-					"strict" : false
-				},
-				{
-					"name" : "getImagePin",
 					"strict" : false
 				},
 				{

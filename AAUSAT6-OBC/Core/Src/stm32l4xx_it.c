@@ -56,6 +56,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern CAN_HandleTypeDef hcan1;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim7;
 
@@ -164,8 +165,6 @@ void DebugMon_Handler(void)
 /**
   * @brief This function handles EXTI line3 interrupt.
   */
-void WatchdogHandler(void); // Function prototype
-
 void EXTI3_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI3_IRQn 0 */
@@ -191,6 +190,20 @@ void DMA1_Channel5_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel5_IRQn 1 */
 
   /* USER CODE END DMA1_Channel5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles CAN1 RX0 interrupt.
+  */
+void CAN1_RX0_IRQHandler(void)
+{
+  /* USER CODE BEGIN CAN1_RX0_IRQn 0 */
+
+  /* USER CODE END CAN1_RX0_IRQn 0 */
+  HAL_CAN_IRQHandler(&hcan1);
+  /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
+  receiveData();
+  /* USER CODE END CAN1_RX0_IRQn 1 */
 }
 
 /**

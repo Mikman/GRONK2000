@@ -90,7 +90,9 @@ const osThreadAttr_t taskParTcl_attributes = {
 
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
+CAN_FilterTypeDef CanFilter;
 struct Queue queueCANRX ={0,0,{0}};
+GPS_FIX_DATA data = { 0 };
 
 /* USER CODE END PV */
 
@@ -131,6 +133,10 @@ void receiveData() {
     }
 }
 
+void placeData_1(uint8_t *p){
+
+}
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -155,6 +161,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -172,6 +179,8 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_CAN_Start(&hcan1);
 
   /* USER CODE END 2 */
 
@@ -216,15 +225,17 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  osKernelStart();
+  //osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  gps_init(&huart1, hdma_usart1_rx.Instance);
   while (1)
   {
     /* USER CODE END WHILE */
 
+	  int8_t result = readGPS(&data);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -304,6 +315,30 @@ static void MX_CAN1_Init(void)
 
   /* USER CODE BEGIN CAN1_Init 0 */
 
+	uint32_t ext_id = 0x00000000;                            // Den største værdi der kan være på MSB er 1
+	uint32_t mask = 0xFFFFFFE0;
+	CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;            // Vi vælger at bruge mask mode
+	CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13; // (ext_id << 3) >> 16;                        // Da vi har 32 bit ID, er dette de 16 MSB af ID
+	CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;    // Da vi har 32 bit ID, er dette de 16 LSB af ID
+	CanFilter.FilterMaskIdHigh = (mask & 0x1FFFFFFF) >> 13;// << 5;                    // Maskens 16 MSB
+	CanFilter.FilterMaskIdLow = (mask << 3);// << 5 | 0x10;                    // Maskens 16 LSB
+	CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;        // ID er et 32 bit-tal
+	CanFilter.FilterActivation = ENABLE;                    // Vi aktiverer filteret
+	CanFilter.FilterBank = 0;                                // Vi vælger filter 0 ud af 14 mulige filtre
+	CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;    // Vi vælger FIFO0 til forskel for FIFO1
+
+	CanTxHeader.DLC = PACKAGE_SIZE;                        // Der kommer 8 byte som data i beskeden
+	CanTxHeader.ExtId = 0x00000000;                        // 32 bit ID (29 er identifier)
+	CanTxHeader.IDE = CAN_ID_EXT;                            // Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
+	CanTxHeader.RTR = CAN_RTR_DATA;                        // Vi sender data
+	CanTxHeader.TransmitGlobalTime = DISABLE;                // Der skal IKKE sendes et timestamp med hver besked
+
+  CanRxHeader.DLC = PACKAGE_SIZE;
+  CanRxHeader.ExtId = 0x0;
+  CanRxHeader.IDE = CAN_ID_EXT;
+  CanRxHeader.RTR = CAN_RTR_DATA;
+  CanRxHeader.FilterMatchIndex = 0x00;
+
   /* USER CODE END CAN1_Init 0 */
 
   /* USER CODE BEGIN CAN1_Init 1 */
@@ -326,6 +361,9 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+  while (HAL_CAN_ConfigFilter(&hcan1, &CanFilter) != HAL_OK) {}
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+  HAL_CAN_Start(&hcan1);
 
   /* USER CODE END CAN1_Init 2 */
 
@@ -533,7 +571,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-GPS_FIX_DATA data = { 0 };
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_task_gps */
@@ -551,8 +588,10 @@ void task_gps(void *argument)
 
 	/* Infinite loop */
 	for (;;) {
-		int8_t result = readGPS(&data);
+		//sendGPS(&hcan1, &CanTxHeader);
+		//int8_t result = readGPS(&data);
 		osDelay(1000);
+
 	}
 
 	osThreadTerminate(NULL);

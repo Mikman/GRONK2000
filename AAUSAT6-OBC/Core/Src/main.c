@@ -230,12 +230,12 @@ int main(void)
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  gps_init(&huart1, hdma_usart1_rx.Instance);
+  //gps_init(&huart1, hdma_usart1_rx.Instance);
   while (1)
   {
     /* USER CODE END WHILE */
-
-	  int8_t result = readGPS(&data);
+	  //sendGPS(&hcan1, &CanTxHeader);
+	  //int8_t result = readGPS(&data);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

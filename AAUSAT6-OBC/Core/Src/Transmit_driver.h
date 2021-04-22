@@ -8,7 +8,7 @@
 #ifndef SRC_TRANSMIT_DRIVER_H_
 #define SRC_TRANSMIT_DRIVER_H_
 
-#include "stm32f1xx_hal.h"
+#include "stm32l4xx_hal.h"
 #include "string.h"
 #include "stdio.h"
 #include "gpsdriver.h"

@@ -24,6 +24,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "gpsdriver.h"
+#include "DCMotorDriver.h"
+#include "mpu6050_driver.h"
+#include "Transmit_driver.h"
+#include "partcl_driver.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,6 +85,9 @@ const osThreadAttr_t taskParTcl_attributes = {
   .priority = (osPriority_t) osPriorityLow,
 };
 /* USER CODE BEGIN PV */
+
+CAN_TxHeaderTypeDef CanTxHeader;
+CAN_RxHeaderTypeDef CanRxHeader;
 
 /* USER CODE END PV */
 
@@ -499,7 +508,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+GPS_FIX_DATA data = { 0 };
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_task_gps */
@@ -509,15 +518,19 @@ static void MX_GPIO_Init(void)
   * @retval None
   */
 /* USER CODE END Header_task_gps */
-void task_gps(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END 5 */
+void task_gps(void *argument) {
+	/* USER CODE BEGIN 5 */
+
+	gps_init(&huart1, hdma_usart1_rx.Instance);
+
+	/* Infinite loop */
+	for (;;) {
+		int8_t result = readGPS(&data);
+		osDelay(1000);
+	}
+
+	osThreadTerminate(NULL);
+	/* USER CODE END 5 */
 }
 
 /* USER CODE BEGIN Header_task_dcmotor */
@@ -527,15 +540,28 @@ void task_gps(void *argument)
 * @retval None
 */
 /* USER CODE END Header_task_dcmotor */
-void task_dcmotor(void *argument)
-{
-  /* USER CODE BEGIN task_dcmotor */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END task_dcmotor */
+void task_dcmotor(void *argument) {
+	/* USER CODE BEGIN StartMotor */
+	motor_init(&htim2, TIM_CHANNEL_1);
+
+	/* Infinite loop */
+	for (;;) {
+		motor_start(80);
+		osDelay(5000);
+		motor_setPwm(50);
+
+		osDelay(5000);
+
+		motor_setPwm(35);
+		osDelay(5000);
+		motor_setPwm(100);
+		osDelay(5000);
+		motor_stop();
+		osDelay(5000);
+
+	}
+	osThreadTerminate(NULL);
+	/* USER CODE END StartMotor */
 }
 
 /* USER CODE BEGIN Header_task_mpu6050 */
@@ -545,15 +571,18 @@ void task_dcmotor(void *argument)
 * @retval None
 */
 /* USER CODE END Header_task_mpu6050 */
-void task_mpu6050(void *argument)
-{
-  /* USER CODE BEGIN task_mpu6050 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END task_mpu6050 */
+void task_mpu6050(void *argument) {
+	/* USER CODE BEGIN task_mpu6050 */
+	HAL_StatusTypeDef status = MPU_Init(&hi2c1);
+	/* Infinite loop */
+	for (;;) {
+		float temp = MPU_Read_Temp();
+		Axes3 accel = MPU_Read_Accel();
+		Axes3 gyro = MPU_Read_Gyro();
+		osDelay(900);
+
+	}
+	/* USER CODE END task_mpu6050 */
 }
 
 /* USER CODE BEGIN Header_task_partcl */
@@ -566,9 +595,12 @@ void task_mpu6050(void *argument)
 void task_partcl(void *argument)
 {
   /* USER CODE BEGIN task_partcl */
+	partcl_init();
+
   /* Infinite loop */
   for(;;)
   {
+	  partcl_update();
     osDelay(1);
   }
   /* USER CODE END task_partcl */

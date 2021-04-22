@@ -29,6 +29,7 @@
 #include "mpu6050_driver.h"
 #include "Transmit_driver.h"
 #include "partcl_driver.h"
+#include "circle_queue.h"
 
 /* USER CODE END Includes */
 
@@ -39,6 +40,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define PACKAGE_SIZE 8
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -88,6 +90,7 @@ const osThreadAttr_t taskParTcl_attributes = {
 
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
+struct Queue queueCANRX ={0,0,{0}};
 
 /* USER CODE END PV */
 
@@ -105,6 +108,28 @@ void task_mpu6050(void *argument);
 void task_partcl(void *argument);
 
 /* USER CODE BEGIN PFP */
+
+void WatchdogHandler(){
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+	HAL_Delay(10);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+}
+
+void receiveData() {
+    uint8_t buffer[PACKAGE_SIZE] = {0};
+
+    while (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+        if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
+            HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
+            placeData_1(buffer);
+            /*
+            for(int i = 0; i < PACKAGE_SIZE; i++){
+                EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
+            }*/
+        }
+    }
+}
 
 /* USER CODE END PFP */
 
@@ -518,8 +543,9 @@ GPS_FIX_DATA data = { 0 };
   * @retval None
   */
 /* USER CODE END Header_task_gps */
-void task_gps(void *argument) {
-	/* USER CODE BEGIN 5 */
+void task_gps(void *argument)
+{
+  /* USER CODE BEGIN 5 */
 
 	gps_init(&huart1, hdma_usart1_rx.Instance);
 
@@ -530,7 +556,7 @@ void task_gps(void *argument) {
 	}
 
 	osThreadTerminate(NULL);
-	/* USER CODE END 5 */
+  /* USER CODE END 5 */
 }
 
 /* USER CODE BEGIN Header_task_dcmotor */
@@ -540,28 +566,15 @@ void task_gps(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_task_dcmotor */
-void task_dcmotor(void *argument) {
-	/* USER CODE BEGIN StartMotor */
-	motor_init(&htim2, TIM_CHANNEL_1);
-
-	/* Infinite loop */
-	for (;;) {
-		motor_start(80);
-		osDelay(5000);
-		motor_setPwm(50);
-
-		osDelay(5000);
-
-		motor_setPwm(35);
-		osDelay(5000);
-		motor_setPwm(100);
-		osDelay(5000);
-		motor_stop();
-		osDelay(5000);
-
-	}
-	osThreadTerminate(NULL);
-	/* USER CODE END StartMotor */
+void task_dcmotor(void *argument)
+{
+  /* USER CODE BEGIN task_dcmotor */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END task_dcmotor */
 }
 
 /* USER CODE BEGIN Header_task_mpu6050 */
@@ -571,8 +584,9 @@ void task_dcmotor(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_task_mpu6050 */
-void task_mpu6050(void *argument) {
-	/* USER CODE BEGIN task_mpu6050 */
+void task_mpu6050(void *argument)
+{
+  /* USER CODE BEGIN task_mpu6050 */
 	HAL_StatusTypeDef status = MPU_Init(&hi2c1);
 	/* Infinite loop */
 	for (;;) {
@@ -582,7 +596,7 @@ void task_mpu6050(void *argument) {
 		osDelay(900);
 
 	}
-	/* USER CODE END task_mpu6050 */
+  /* USER CODE END task_mpu6050 */
 }
 
 /* USER CODE BEGIN Header_task_partcl */

@@ -164,6 +164,8 @@ void DebugMon_Handler(void)
 /**
   * @brief This function handles EXTI line3 interrupt.
   */
+void WatchdogHandler(void); // Function prototype
+
 void EXTI3_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI3_IRQn 0 */
@@ -171,6 +173,8 @@ void EXTI3_IRQHandler(void)
   /* USER CODE END EXTI3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
   /* USER CODE BEGIN EXTI3_IRQn 1 */
+
+  WatchdogHandler();
 
   /* USER CODE END EXTI3_IRQn 1 */
 }

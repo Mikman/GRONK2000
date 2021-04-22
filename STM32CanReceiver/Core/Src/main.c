@@ -51,7 +51,6 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 CAN_FilterTypeDef CanFilter;
 CAN_RxHeaderTypeDef CanRxHeader;
-CAN_TxHeaderTypeDef CanTxHeader;
 
 struct Queue queueCANRX ={0,0,{0}};
 struct Queue GPSDATA = {0,0,{0}};
@@ -136,8 +135,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
-	HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
   /* USER CODE END Init */
@@ -159,15 +157,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-
   while (1)
   {
-	 int sendDataArray[PACKAGE_SIZE] = {2, 2, 2, 2, 2, 2, 2, 2};
 	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
 		 //transmitData(&GPSDATA);
 		 HAL_Delay(200);
-		 sendData(&hcan1, 0x40, PACKAGE_SIZE, &sendDataArray, &CanTxHeader);
+		 sendMPU();
+		 sendGPS();
 		 //sendMOTOR();
 
 	 }
@@ -268,15 +264,7 @@ static void MX_CAN1_Init(void)
 	  CanRxHeader.IDE = CAN_ID_EXT;
 	  CanRxHeader.RTR = CAN_RTR_DATA;
 	  CanRxHeader.FilterMatchIndex = 0x00;
-
-	  CanTxHeader.DLC = PACKAGE_SIZE;
-	  CanTxHeader.ExtId = 0x00000000;
-	  CanTxHeader.IDE = CAN_ID_EXT;
-	  CanTxHeader.RTR = CAN_RTR_DATA;
-	  CanTxHeader.TransmitGlobalTime = DISABLE;
   /* USER CODE END CAN1_Init 0 */
-
-
 
   /* USER CODE BEGIN CAN1_Init 1 */
 	  __HAL_RCC_CAN1_CLK_ENABLE();
@@ -291,9 +279,9 @@ static void MX_CAN1_Init(void)
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
   hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = ENABLE;
+  hcan1.Init.AutoRetransmission = DISABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
-  hcan1.Init.TransmitFifoPriority = ENABLE;
+  hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
   {
     Error_Handler();
@@ -385,6 +373,7 @@ void receiveData() {
 	uint8_t buffer[PACKAGE_SIZE] = {0};
 
 	while (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 		if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
 			placeData_1(buffer);

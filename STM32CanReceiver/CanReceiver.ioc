@@ -1,7 +1,6 @@
 #MicroXplorer Configuration settings - do not modify
 Mcu.Family=STM32L4
 ProjectManager.MainLocation=Core/Src
-CAN1.NART=ENABLE
 RCC.USART1Freq_Value=72000000
 PA15\ (JTDI).GPIOParameters=GPIO_Label
 RCC.SAI1Freq_Value=4571428.571428572
@@ -114,11 +113,10 @@ RCC.MSI_VALUE=4000000
 PA14\ (JTCK-SWCLK).Mode=Serial_Wire
 RCC.PLLQoutputFreq_Value=72000000
 ProjectManager.ProjectFileName=CanReceiver.ioc
-CAN1.TXFP=ENABLE
 Mcu.PinsNb=15
 ProjectManager.NoMain=false
 RCC.LPUARTFreq_Value=32000000
-CAN1.IPParameters=CalculateTimeQuantum,CalculateTimeBit,CalculateBaudRate,RFLM,BS1,BS2,Prescaler,TXFP,NART
+CAN1.IPParameters=CalculateTimeQuantum,CalculateTimeBit,CalculateBaudRate,RFLM,BS1,BS2,Prescaler
 RCC.SWPMI1Freq_Value=72000000
 PB6.GPIO_PuPd=GPIO_PULLDOWN
 CAN1.CalculateBaudRate=250000

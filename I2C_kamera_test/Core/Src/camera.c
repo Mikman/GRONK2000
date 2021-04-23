@@ -19,17 +19,17 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, SET);
 	// init DMA
 	while (cam->requestDataTimer->Instance->CNT <=  60) {}
-	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
 	HAL_TIM_OC_Start(cam->requestDataTimer, cam->requestDataChannel);
+	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
+	__HAL_DMA_DISABLE_IT(cam->hdma, DMA_IT_HT);
+
 
 	cam->status = RECEIVING;
 }
 
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, RESET);
 	// abort DMA
 	HAL_DMA_Abort_IT(cam->hdma);
 	while (cam->requestDataTimer->Instance->CNT <= 60) {}
@@ -46,6 +46,7 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->pic->x = 0;
 			cam->pic->y = 0;
 			cam->status = STANDBY;
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, RESET);
 		}
 	} else if (cam->status == WAITING) {
 		CAM_toOutputQueue(cam);
@@ -58,11 +59,12 @@ void CAM_takePicture(CAM_HandleTypeDef *cam) {
 	// Hvis ikke vi er ved at sende et billede, pulsér getImagePin på FPGA
 	if (cam->status == STANDBY) {
 
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
 
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
 		HAL_Delay(50);
 		cam->status = READY;
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, SET);
 
 	}
 }

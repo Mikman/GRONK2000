@@ -33,7 +33,7 @@ typedef struct {
 	uint32_t requestDataChannel;
 	Picture *pic;
 	enum CAM_STATUS status;
-	uint8_t *source;
+	uint32_t *source;
 	uint8_t *destination;
 	uint8_t I2C_Address;
 	I2C_HandleTypeDef *I2C_Handler;

@@ -89,6 +89,7 @@ const osThreadAttr_t taskParTCL_attributes = {
 /* USER CODE BEGIN PV */
 struct Queue queueCANRX ={0,0,{0}};
 
+
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAN_FilterTypeDef CanFilter;
@@ -344,6 +345,11 @@ static void MX_CAN1_Init(void)
       /* Notification Error */
       Error_Handler();
   }
+  if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+    {
+        /* Notification Error */
+        Error_Handler();
+    }
 
   /*##-5- Activate CAN BUSOFF notification ###################################*/
 	if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_BUSOFF) != HAL_OK)
@@ -351,6 +357,17 @@ static void MX_CAN1_Init(void)
       /* Notification Error */
       Error_Handler();
   }
+
+
+	void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
+		int i = 0;
+	}
+	void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
+		int i = 0;
+	}
+	void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
+		int i = 0;
+	}
 	/*
   while (HAL_CAN_ConfigFilter(&hcan1, &CanFilter) != HAL_OK) {}
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
@@ -596,9 +613,11 @@ void task_gps(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
+	uint8_t testArray[PACKAGE_SIZE] = {0};
   for(;;)
   {
-    osDelay(1);
+	sendData(&hcan1, 0x1, PACKAGE_SIZE, testArray, &CanTxHeader);
+    osDelay(10000);
   }
   /* USER CODE END 5 */
 }

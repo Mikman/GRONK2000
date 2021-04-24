@@ -30,6 +30,7 @@
 #include "Transmit_driver.h"
 #include "partcl_driver.h"
 #include "circle_queue.h"
+#include "stdbool.h"
 
 /* USER CODE END Includes */
 
@@ -41,6 +42,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define PACKAGE_SIZE 8
+#define CAN_TX_BUFFER_SIZE 150
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -88,6 +90,12 @@ const osThreadAttr_t taskParTCL_attributes = {
 };
 /* USER CODE BEGIN PV */
 struct Queue queueCANRX ={0,0,{0}};
+
+struct StructQueue CAN_TX_QUEUE = {0, 0};
+bool CAN_Mailbox0Empty = true;
+bool CAN_Mailbox1Empty = true;
+bool CAN_Mailbox2Empty = true;
+
 
 
 CAN_TxHeaderTypeDef CanTxHeader;

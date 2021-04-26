@@ -158,14 +158,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t sendDataArray[PACKAGE_SIZE] = {1, 2, 4, 8, 16, 32, 64, 128};
+  uint8_t sendDataArray[PACKAGE_SIZE] = {2, 2, 2, 2, 2, 2, 2, 2};
 
   while (1)
   {
 	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
 		 //transmitData(&GPSDATA);
 		 HAL_Delay(200);
-		 sendData(&hcan1, 0x5, PACKAGE_SIZE, sendDataArray,  &CanTxHeader);
+		 sendData(&hcan1, 0x1, PACKAGE_SIZE, sendDataArray,  &CanTxHeader);
 		 //sendMOTOR();
 
 	 }

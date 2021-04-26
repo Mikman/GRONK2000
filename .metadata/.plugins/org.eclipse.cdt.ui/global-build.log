@@ -27948,3 +27948,910 @@ arm-none-eabi-size   CanReceiver.elf
   31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
 Finished building: default.size.stdout
  
+11:23:29 **** Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+11:56:22 **** Incremental Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+13:03:19 **** Incremental Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+14:52:56 **** Incremental Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+14:53:31 **** Incremental Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+14:55:30 **** Incremental Build of configuration Debug for project CanReceiver ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:168:4: warning: implicit declaration of function 'sendData' [-Wimplicit-function-declaration]
+  168 |    sendData(&hcan1, 0x4, PACKAGE_SIZE, sendDataArray,  &CanTxHeader);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'receiveData':
+../Core/Src/main.c:388:4: warning: implicit declaration of function 'placeData_1' [-Wimplicit-function-declaration]
+  388 |    placeData_1(buffer);
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: In function 'sendMOTOR':
+../Core/Src/main.c:401:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  401 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[5]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[5]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:404:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  404 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[5]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[5]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:405:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  405 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:406:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  406 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'sendMPU':
+../Core/Src/main.c:414:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  414 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:417:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  417 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:418:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  418 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:419:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  419 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:422:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  422 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:425:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  425 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:426:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  426 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:427:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  427 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:430:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  430 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:433:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  433 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:434:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  434 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:435:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  435 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:440:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  440 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:443:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  443 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:444:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  444 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:445:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  445 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:448:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  448 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:451:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  451 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:452:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  452 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:453:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  453 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:456:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  456 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:459:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:460:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  460 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:461:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  461 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:466:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  466 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:469:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  469 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:470:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  470 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:471:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  471 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'sendGPS':
+../Core/Src/main.c:479:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  479 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:482:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  482 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:485:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  485 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:488:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  488 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:491:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  491 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:494:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  494 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:495:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  495 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:496:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  496 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:499:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  499 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:502:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  502 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:503:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  503 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:504:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  504 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:507:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  507 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:510:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  510 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:511:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  511 |  HAL_UART_Transmit(&huart2, ":", 2, 100);
+      |                             ^~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:514:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  514 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:515:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  515 |  HAL_UART_Transmit(&huart2, ":", 2, 100);
+      |                             ^~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:518:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  518 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:519:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  519 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:520:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  520 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:523:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  523 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:526:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  526 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:527:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  527 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:528:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  528 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:531:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  531 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:534:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  534 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:535:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  535 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:536:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  536 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:539:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  539 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:542:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  542 |  HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                             ^~~~
+      |                             |
+      |                             char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:543:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  543 |  HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:544:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  544 |  HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:548:6: warning: conflicting types for 'placeData_1'
+  548 | void placeData_1( uint8_t *DataPass){
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:388:4: note: previous implicit declaration of 'placeData_1' was here
+  388 |    placeData_1(buffer);
+      |    ^~~~~~~~~~~
+../Core/Src/main.c: In function 'placeData_1':
+../Core/Src/main.c:602:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  602 |    HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                               ^~~~
+      |                               |
+      |                               char (*)[15]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[15]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:603:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  603 |    HAL_UART_Transmit(&huart2, "\n", 2, 100);    //Newline
+      |                               ^~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:604:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  604 |    HAL_UART_Transmit(&huart2, "\r", 2, 100);    //Carriage return
+      |                               ^~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'transmitData':
+../Core/Src/main.c:646:50: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  646 |   if ((i % 255) == 0) HAL_UART_Transmit(&huart2, "___", 3, 100);
+      |                                                  ^~~~~
+      |                                                  |
+      |                                                  char *
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c:649:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  649 |   HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
+      |                              ^~~~
+      |                              |
+      |                              char (*)[3]
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:449,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:30,
+                 from ../Core/Inc/main.h:31,
+                 from ../Core/Src/main.c:21:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1679:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char (*)[3]'
+ 1679 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'sendMOTOR':
+../Core/Src/main.c:400:16: warning: '%s' directive writing 18 bytes into a region of size 5 [-Wformat-overflow=]
+  400 |  sprintf(str, "%s", "Motor duty cycle: " );
+      |                ^~   ~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:400:2: note: 'sprintf' output 19 bytes into a destination of size 5
+  400 |  sprintf(str, "%s", "Motor duty cycle: " );
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "CanReceiver.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Sophu\Documents\GitHub\GRONK2000\CanReceiver\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CanReceiver.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CanReceiver.elf
+ 
+arm-none-eabi-objdump -h -S  CanReceiver.elf  > "CanReceiver.list"
+arm-none-eabi-objcopy  -O binary  CanReceiver.elf  "CanReceiver.bin"
+arm-none-eabi-size   CanReceiver.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31948	    528	   2944	  35420	   8a5c	CanReceiver.elf
+Finished building: default.size.stdout
+ 
+Finished building: CanReceiver.bin
+ 
+Finished building: CanReceiver.list
+ 

@@ -1427,7 +1427,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t sendDataArray[PACKAGE_SIZE] = {2, 2, 2, 2, 2, 2, 2, 2};
+  uint8_t sendDataArray[PACKAGE_SIZE] = {1, 2, 4, 6, 8, 16, 32, 64};
  8000fce:	4a0c      	ldr	r2, [pc, #48]	; (8001000 <main+0x4c>)
  8000fd0:	463b      	mov	r3, r7
  8000fd2:	e892 0003 	ldmia.w	r2, {r0, r1}
@@ -1446,12 +1446,12 @@ int main(void)
 		 HAL_Delay(200);
  8000fe8:	20c8      	movs	r0, #200	; 0xc8
  8000fea:	f000 fda3 	bl	8001b34 <HAL_Delay>
-		 sendData(&hcan1, 0x1, PACKAGE_SIZE, sendDataArray,  &CanTxHeader);
+		 sendData(&hcan1, 0x4, PACKAGE_SIZE, sendDataArray,  &CanTxHeader);
  8000fee:	463b      	mov	r3, r7
  8000ff0:	4a05      	ldr	r2, [pc, #20]	; (8001008 <main+0x54>)
  8000ff2:	9200      	str	r2, [sp, #0]
  8000ff4:	2208      	movs	r2, #8
- 8000ff6:	2101      	movs	r1, #1
+ 8000ff6:	2104      	movs	r1, #4
  8000ff8:	4804      	ldr	r0, [pc, #16]	; (800100c <main+0x58>)
  8000ffa:	f7ff ff51 	bl	8000ea0 <sendData>
 	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){

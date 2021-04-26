@@ -4,26 +4,26 @@
  *  Created on: Mar 16, 2021
  *      Author: Mikkel
  */
-#include "circle_queue.h"
+#include "circle_queue_struct.h"
 
-int StructQueueFull(struct Queue *q){
-	return (((q->pointWR +1) % SIZE_OF_QUEUE) == q->pointRD);
+int StructQueueFull(struct StructQueue *q){
+	return (((q->pointWR +1) % SIZE_OF_STRUCTQUEUE) == q->pointRD);
 }
 
-int StructQueueEmpty(struct Queue *q){
+int StructQueueEmpty(struct StructQueue *q){
 	return (q->pointWR == q->pointRD);
 }
 
-int EnterStructQueue(struct Queue *q, uint8_t data) {
+int EnterStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data) {
 
-	if (QueueFull(q)) {
+	if (StructQueueFull(q)) {
 		return 0;
 	}
 	else {
-		q->queue[q->pointWR] = data;
+		q->queue[q->pointWR] = *data;
 
 
-		if ((q->pointWR + 1) == SIZE_OF_QUEUE){
+		if ((q->pointWR + 1) == SIZE_OF_STRUCTQUEUE){
 			q->pointWR = 0;
 		}
 		else{
@@ -34,13 +34,13 @@ int EnterStructQueue(struct Queue *q, uint8_t data) {
 	return 1;
 }
 
-int LeaveStructQueue(struct Queue *q, uint8_t *data) {
-	if (QueueEmpty(q)){
+int LeaveStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data) {
+	if (StructQueueEmpty(q)){
 		return 0;
 	}
 	else {
 		*data = q->queue[q->pointRD];
-		if((q->pointRD + 1) ==SIZE_OF_QUEUE){
+		if((q->pointRD + 1) ==SIZE_OF_STRUCTQUEUE){
 			q->pointRD = 0;
 		}
 		else{

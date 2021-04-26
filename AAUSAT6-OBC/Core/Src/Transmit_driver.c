@@ -11,13 +11,16 @@
 #include "gpsdriver.h"
 #include "DCMotorDriver.h"
 #include "mpu6050_driver.h"
+#include "stdbool.h"
 extern GPS_FIX_DATA data;
 extern Axes3 resultGyro;
 extern Axes3 resultAccel;
 extern float tempVal;
 extern uint32_t ARR;
 extern uint32_t CaptureDCMotor;
-
+extern bool CAN_Mailbox0Empty;
+extern bool CAN_Mailbox1Empty;
+extern bool CAN_Mailbox2Empty;
 
 
 /* USER CODE BEGIN PV */
@@ -160,22 +163,40 @@ void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, ui
 	uint8_t dataToMB[PACKAGE_SIZE] = {0};
 	uint32_t randoMailBox;
 	transmitHeader->ExtId = TxID;
+	uint32_t tsr = READ_REG(handler->Instance->TSR);
 
 if (numOfBytes % PACKAGE_SIZE == 0)
 {
 	for (int i = 0; i < numOfBytes/PACKAGE_SIZE; i++) {
-		 HAL_CAN_StateTypeDef state = handler->State;
 		while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {}
 		if (messageSplitter(dataArray, dataToMB, i)) {
 			if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB, &randoMailBox) != HAL_OK) {
 				Error_Handler();
 
 			}
+			if((tsr & CAN_TSR_TME0) != 0U){
+				CAN_Mailbox0Empty = true;
+			}else {
+				CAN_Mailbox0Empty = false;
+
+			}
+			if((tsr & CAN_TSR_TME1) != 0U){
+				CAN_Mailbox1Empty = true;
+			}else {
+				CAN_Mailbox1Empty = false;
+
+			}
+			if((tsr & CAN_TSR_TME2) != 0U){
+				CAN_Mailbox2Empty = true;
+			}else {
+				CAN_Mailbox2Empty = false;
+
+			}
 		}
 	}
 
 }
-else {return 0;}
+else {return;}
 
 }
 

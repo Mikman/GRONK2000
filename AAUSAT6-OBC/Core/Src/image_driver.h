@@ -10,7 +10,7 @@
 
 
 
-
+void image();
 
 
 #endif /* IMAGE_DRIVER_H */

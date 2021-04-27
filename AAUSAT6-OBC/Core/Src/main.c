@@ -90,9 +90,6 @@ const osThreadAttr_t taskParTCL_attributes = {
   .priority = (osPriority_t) osPriorityLow,
 };
 /* USER CODE BEGIN PV */
-struct Queue queueCANRX = {0,0,{0}};
-
-
 
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
@@ -579,8 +576,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 
-
-GPS_FIX_DATA data = { 0 };
 
 
 

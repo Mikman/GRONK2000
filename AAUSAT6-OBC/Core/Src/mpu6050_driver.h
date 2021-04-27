@@ -48,4 +48,6 @@ Axes3 MPU_Read_Gyro();
 
 Axes3 MPU_Read_Accel();
 
+void MPU6050();
+
 #endif /* SRC_MPU6050_DRIVER_H_ */

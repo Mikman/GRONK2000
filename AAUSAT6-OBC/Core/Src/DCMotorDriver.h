@@ -20,4 +20,8 @@ void motor_start(int8_t dutycycle);
 
 void motor_stop();
 
+float motor_dutycycle();
+
+void motor();
+
 #endif /* SRC_DCMOTORDRIVER_H_ */

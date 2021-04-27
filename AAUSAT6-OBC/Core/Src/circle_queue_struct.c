@@ -49,3 +49,11 @@ int LeaveStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data) {
 	}
 	return 1;
 }
+
+int UnreadElements(struct StructQueue *q){
+	if (q->pointRD == q->pointWR){
+		return 1;
+	}else {
+		return 0;
+	}
+}

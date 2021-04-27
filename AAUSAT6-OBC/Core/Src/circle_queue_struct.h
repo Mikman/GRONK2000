@@ -34,5 +34,6 @@ int StructQueueFull(struct StructQueue *q);
 int StructQueueEmpty(struct StructQueue *q);
 int EnterStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data);
 int LeaveStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data);
+int UnreadElements(struct StructQueue *q);
 
 #endif /* CIRCLE_QUEUE_STRUCT */

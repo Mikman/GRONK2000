@@ -31,3 +31,29 @@ void motor_start(int8_t dutycycle) {
 void motor_stop() {
 	HAL_TIM_PWM_Stop(htim, timer_channel);
 }
+
+float motor_dutycycle(){
+	float dutycycle = 0.;
+	dutycycle = (htim->Instance->CCR1)/(htim->Instance->ARR/100);
+	return dutycycle;
+}
+
+void motor(){
+	if(UnreadElements(&MOTOR_CAN_RX_QUEUE)){
+
+
+		LeaveStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA);
+		float dutycycle = motor_dutycycle();
+		//motor_setPwm();
+		//motor_start();
+		//motor_stop()
+
+		//TODO: sort rx data and gather what's requested
+
+		passToCanTX(&MOTOR_DATA);
+
+	}else{
+
+		return;
+	}
+}

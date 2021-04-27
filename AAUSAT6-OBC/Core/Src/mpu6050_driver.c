@@ -137,4 +137,25 @@ Axes3 MPU_Read_Accel(){
 	 return resultAccel;
 }
 
+void MPU6050(){
+	if(UnreadElements(&MPU_CAN_RX_QUEUE)){
+
+		LeaveStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA);
+
+		//TODO: sort rx data and gather what's requested
+
+		//MPU_Read_Accel();
+		//MPU_Read_Gyro();
+		//MPU_Read_Temp();
+
+		// Der er allerede nogle funktioner i Transmit_driver.c
+
+		passToCanTX(&MPU_DATA);
+
+	}else{
+
+		return;
+	}
+}
+
 

@@ -17,6 +17,7 @@ DMA_Channel_TypeDef *dma;
 uint32_t GPS_DATA_ID = 0x2;
 struct CAN_QUEUE_DATA GPS_DATA = {0,{0}};
 struct StructQueue GPS_CAN_RX_QUEUE = {0};
+GPS_FIX_DATA data = { 0 };
 
 
 uint8_t rawData[GPS_BUFSIZE] = {0};
@@ -137,4 +138,22 @@ int8_t readGPS(GPS_FIX_DATA *data){
 
 int8_t convertToString(GPS_FIX_DATA *data, char *str) {
 	return 0;
+}
+
+
+void GPS(){
+	if(UnreadElements(&GPS_CAN_RX_QUEUE)){
+
+		readGPS(&data);
+		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA);
+
+		//TODO: sort rx data and gather what's requested
+		// Der er allerede nogle funktioner i Transmit_driver.c
+
+		passToCanTX(&GPS_DATA);
+
+	}else{
+
+		return;
+	}
 }

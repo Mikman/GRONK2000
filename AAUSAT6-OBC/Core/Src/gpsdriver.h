@@ -55,4 +55,6 @@ int8_t readGPS(GPS_FIX_DATA *data);
 
 int8_t convertToString(GPS_FIX_DATA *data, char *str);
 
+void GPS();
+
 #endif /* SRC_GPSDRIVER_H_ */

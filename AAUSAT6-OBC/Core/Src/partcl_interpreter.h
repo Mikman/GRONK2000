@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "partcl_driver.h"
+#include "DCMotorDriver.h"
 
 #if 0
 #define DBG partcl_printf(sprintf
@@ -131,6 +132,6 @@ void tcl_list_free(tcl_value_t *v);
 
 void tcl_setup();
 
-void tcl_loop();
+void tcl_execute();
 
 #endif /* SRC_PARTCL_INTERPRETER_H_ */

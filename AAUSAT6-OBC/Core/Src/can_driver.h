@@ -32,7 +32,7 @@ void placeData_1(uint8_t *p);
 
 void receiveData();
 
-void passToCanTX(struct CAN_QUEUE_DATA *data);
+int passToCanTX(struct CAN_QUEUE_DATA *data);
 
 
 #endif /* CAN_DRIVER_H */

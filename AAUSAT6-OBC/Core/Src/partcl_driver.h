@@ -10,20 +10,24 @@
 
 #include "stm32l4xx_hal.h"
 #include "partcl_interpreter.h"
-#include <stdio.h>
 #include <string.h>
-#include "circle_queue_struct.h"
+#include <stdlib.h>
 #include "can_driver.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 #define BUF_SIZE_IN 128
 #define BUF_SIZE_OUT 512
 
+#define CAN_ID_PARTCL_INPUT 64
+#define CAN_ID_PARTCL_OUTPUT 65
+
 void partcl_init();
 
-void partcl_update();
+void partcl_execute();
 
 char partcl_getInputChar();
 
-void partcl_printf(char *str);
+void partcl_printf(const char *str);
 
 #endif /* SRC_PARTCL_DRIVER_H_ */

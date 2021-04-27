@@ -7,6 +7,9 @@
 
 #include "partcl_interpreter.h"
 
+
+
+// Iterate through the characters of the next word/structure until a space is reached, and determine if it is a word, part of terminate character or an error occurred.
 int tcl_next(const char *s, size_t n, const char **from, const char **to,
              int *q) {
   unsigned int i = 0;
@@ -59,6 +62,7 @@ int tcl_next(const char *s, size_t n, const char **from, const char **to,
     *from = *to = s + 1;
     return TWORD;
   } else {
+	// Iterate through the rest of the word or structure until you reach a space, unless you're in quotations
     while (i < n && (*q || !tcl_is_space(s[i])) && !tcl_is_special(s[i], *q)) {
       i++;
     }
@@ -70,6 +74,7 @@ int tcl_next(const char *s, size_t n, const char **from, const char **to,
   if (*q) {
     return TPART;
   }
+  // If you have a space or a terminate character it is a word, otherwise iterated characters was only a part.
   return (tcl_is_space(s[i]) || tcl_is_end(s[i])) ? TWORD : TPART;
 }
 
@@ -142,6 +147,7 @@ void tcl_list_free(tcl_value_t *v) {
   free(v);
 }
 
+// Of the words in the statement, pick out word #(index). 0 to get the command word, 1, 2... is for the arguments
 tcl_value_t *tcl_list_at(tcl_value_t *v, int index) {
   int i = 0;
   tcl_each(tcl_string(v), tcl_length(v) + 1, 0) {
@@ -183,8 +189,6 @@ tcl_value_t *tcl_list_append(tcl_value_t *v, tcl_value_t *tail) {
   }
   return v;
 }
-
-typedef int (*tcl_cmd_fn_t)(struct tcl *, tcl_value_t *, void *);
 
 static struct tcl_env *tcl_env_alloc(struct tcl_env *parent) {
   struct tcl_env *env = malloc(sizeof(*env));
@@ -274,26 +278,18 @@ int tcl_subst(struct tcl *tcl, const char *s, size_t len) {
 
 int tcl_eval(struct tcl *tcl, const char *s, size_t len) {
   DBG("eval(%.*s)->\n", (int)len, s);
-  tcl_value_t *list = tcl_list_alloc();
+   tcl_value_t *list = tcl_list_alloc();
   tcl_value_t *cur = NULL;
+
+
   tcl_each(s, len, 1) {
     DBG("tcl_next %d %.*s\n", p.token, (int)(p.to - p.from), p.from);
-    //Serial.print("Eval TCMD: "); Serial.println(p.token);
 
     if (p.token == TERROR) {
-        //Serial.println("eval: FERROR, lexer error");
         return tcl_result(tcl, FERROR, tcl_alloc("", 0));
     } else if (p.token == TWORD) {
-        //Serial.println("Eval siger: vi er en TWORD");
         DBG("token %.*s, length=%d, cur=%p (3.1.1)\n", (int)(p.to - p.from),
             p.from, (int)(p.to - p.from), cur);
-        /*int len = (int) (p.to-p.from);
-          char name[len+1] = {0};
-          memcpy(name, p.from, len);
-
-          Serial.print("Token: "); Serial.println(String(name));
-          Serial.print("length: ");Serial.println(len, DEC);
-          Serial.print("cur: "); Serial.println(cur);*/
         if (cur != NULL) {
           tcl_subst(tcl, p.from, p.to - p.from);
           tcl_value_t *part = tcl_dup(tcl->result);
@@ -305,30 +301,24 @@ int tcl_eval(struct tcl *tcl, const char *s, size_t len) {
         list = tcl_list_append(list, cur);
         tcl_free(cur);
         cur = NULL;
-        //Serial.println("TWORD end");
 
     } else if (p.token == TPART) {
-        //Serial.println("Eval siger: vi er en TPART");
         tcl_subst(tcl, p.from, p.to - p.from);
         tcl_value_t *part = tcl_dup(tcl->result);
         cur = tcl_append(cur, part);
 
     } else if (p.token == TCMD) {
-        //Serial.print("Eval siger: vi er en TCMD og tcl_list_length(list) er: "); Serial.println(tcl_list_length(list));
         if (tcl_list_length(list) == 0) {
           tcl_result(tcl, FNORMAL, tcl_alloc("", 0));
         } else {
           tcl_value_t *cmdname = tcl_list_at(list, 0);
           struct tcl_cmd *cmd = NULL;
           int r = FERROR;
-          //Serial.println("Vi finder en flow error");
           for (cmd = tcl->cmds; cmd != NULL; cmd = cmd->next) {
             if (strcmp(tcl_string(cmdname), tcl_string(cmd->name)) == 0) {
               if (cmd->arity == 0 || cmd->arity == tcl_list_length(list)) {
 
                 r = cmd->fn(tcl, list, cmd->arg);
-                //Serial.print("Funktionen er: "); Serial.println(tcl_string(cmdname));
-                //Serial.print("Returværdien er: "); Serial.println(r, DEC);
                 break;
               }
             }
@@ -341,13 +331,10 @@ int tcl_eval(struct tcl *tcl, const char *s, size_t len) {
         }
         tcl_list_free(list);
         list = tcl_list_alloc();
-    } else {
-        //Serial.println("Default");
-    } // Switch end
-    //Serial.println("Switch end");
+    }
   } // tcl_each end
   tcl_list_free(list);
-  //Serial.println("End normal");
+
   return FNORMAL;
 }
 
@@ -360,7 +347,6 @@ void tcl_register(struct tcl *tcl, const char *name, tcl_cmd_fn_t fn, int arity,
   cmd->arity = arity;
   cmd->next = tcl->cmds;
   tcl->cmds = cmd;
-  //Serial.print("tcl_register has been called for: "); Serial.println(name);
 }
 
 static int tcl_cmd_set(struct tcl *tcl, tcl_value_t *args, void *arg) {
@@ -371,18 +357,7 @@ static int tcl_cmd_set(struct tcl *tcl, tcl_value_t *args, void *arg) {
   tcl_free(var);
   return r;
 }
-//Testkode
-/*
-  static int outputTest(struct tcl *tcl, tcl_value_t *args, void *arg) {
-    (void)arg;
 
-    tcl_value_t *var = tcl_list_at(args, 0);
-    tcl_value_t *val = "121";
-    int r = tcl_result(tcl, FNORMAL, tcl_dup(tcl_var(tcl, var, val)));
-    tcl_free(var);
-    return r;
-  }
-*/
 static int tcl_cmd_subst(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
   tcl_value_t *s = tcl_list_at(args, 1);
@@ -395,18 +370,98 @@ static int tcl_cmd_subst(struct tcl *tcl, tcl_value_t *args, void *arg) {
 static int tcl_cmd_puts(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
   tcl_value_t *text = tcl_list_at(args, 1);
-  //Serial.println(tcl_string(text));
+
   return tcl_result(tcl, FNORMAL, text);
 }
 #endif
+static int osdelay(struct tcl *tcl, tcl_value_t *args, void *arg) {
+  (void)arg;
+  tcl_value_t *delayTime = tcl_list_at(args, 1);
+  int time = atoi(delayTime);
+  tcl_free(delayTime);
+ //os_delay(time);
+  char delayArray[10]={0};
+  char resultString[30] = "Delay has been executed: ";
+  strcat(resultString, itoa(time, delayArray, 10));
+  return tcl_result(tcl, FNORMAL, tcl_dup(resultString));
+}
+
+static int setpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
+  (void)arg;
+  tcl_value_t *argument = tcl_list_at(args, 1);
+  int pwm = atoi(argument);
+  tcl_free(argument);
+  if (pwm > 100 || pwm <0){
+	  return tcl_result(tcl, FNORMAL, tcl_dup("Invalid PWM value"));
+  }
+   //motor_setPwm(pwm);
+  char pwmArray[4]={0};
+  char resultString[30] = "PWM has been executed: ";
+  strcat(resultString, itoa(pwm, pwmArray, 10));
+
+  return tcl_result(tcl, FNORMAL, tcl_dup(resultString));
+}
 
 static int testFunction(struct tcl *tcl, tcl_value_t *args, void *arg) {
+	(void) arg;
+	tcl_value_t *argument = tcl_list_at(args, 1); // Det er garanteret denne der giver memory fejl
+
+	int param = atoi(argument);
+
+	tcl_free(argument);
+
+	char paramArray[4]={0};
+	char resultString[50] = "Print function has been executed: ";
+	strcat(resultString, itoa(param, paramArray, 10));
+	tcl_value_t *t = tcl_dup(resultString);
+	return tcl_result(tcl, FNORMAL, t);
+//	return tcl_result(tcl, FNORMAL, tcl_dup("Hejsa")); // Virker alene
+}
+
+
+static int readpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
-  //Serial.println("Nu er vi i testFunction");
-  tcl_value_t *argument = tcl_list_at(args, 1);
-  int param = atoi(argument);
-  //Serial.print("Argumentet er: "); Serial.println(param);
-  return tcl_result(tcl, FNORMAL, "Print function has been executed");
+  //int pwmVal = readPwm();
+  int pwmVal = 56;
+  char pwmValString[10] = {0};
+  itoa(pwmVal, pwmValString, 10);
+
+
+  tcl_value_t *var = tcl_list_at(args, 1);
+  tcl_value_t *val = tcl_list_at(pwmValString, 0);
+
+
+  int r = tcl_result(tcl, FNORMAL, tcl_dup(tcl_var(tcl, var, val)));
+  tcl_free(var);
+  return r;
+}
+
+
+static int captureimage(struct tcl *tcl, tcl_value_t *args, void *arg) {
+  (void)arg;
+
+	//tcl_value_t *horizontal = tcl_list_at(args, 1);
+	//tcl_value_t *vertical = tcl_list_at(args, 2);
+	//captureImage();
+  //tcl_free(horizontal);
+  //tcl_free(vertical);
+	char imageStringVal [30] = "Image has been captured!";
+
+	return tcl_result(tcl, FNORMAL, tcl_dup(imageStringVal));
+}
+
+static int readtemp(struct tcl *tcl, tcl_value_t *args, void *arg) {
+	(void) arg;
+
+	float tempVal = 26.78; //Eftertjek at den rigtige temperatur ligger her.
+	char tempValString[10] = { 0 };
+	itoa((int) tempVal, tempValString, 10);
+
+	tcl_value_t *var = tcl_list_at(args, 1);
+	tcl_value_t *val = tcl_list_at(tempValString, 0);
+	int r = tcl_result(tcl, FNORMAL, tcl_dup(tcl_var(tcl, var, val)));
+	tcl_free(var);
+	return r;
 }
 
 static int tcl_user_proc(struct tcl *tcl, tcl_value_t *args, void *arg) {
@@ -594,9 +649,13 @@ void tcl_init(struct tcl *tcl) {
 #endif
 
 
-  //Random functions that are called via partcl.
-  tcl_register(tcl, "testFunc", testFunction, 2, NULL);
-  // tcl_register(tcl, "testOutput", outputTest, 0, NULL);
+  // Custom GRONK command implementations
+  tcl_register(tcl, "setPWM", setpwm, 2, NULL);
+  tcl_register(tcl, "tF", testFunction, 2, NULL);
+  tcl_register(tcl, "readTemp", readtemp, 2, NULL);
+  tcl_register(tcl, "readPWM", readpwm, 2, NULL);
+  tcl_register(tcl, "captureImage", captureimage, 3, NULL);
+  tcl_register(tcl, "osDelay", osdelay, 2, NULL);
 }
 
 void tcl_destroy(struct tcl *tcl) {
@@ -621,59 +680,55 @@ struct tcl tcl;
 char *buf;
 
 void tcl_setup() {
-  //Serial.begin(115200);
-  buflen = CHUNK; // deklarere en int variabel med 2048 bytes plads.
-  buf = malloc(buflen); // deklare en pointer der bliver givet en buflen som er gemt i heap.
-  i = 0; // ez ez
-  inp = 0;
-  tcl_init(&tcl); // vi får en masse hardcore info
-  //Serial.println("TCl has been initialized");
+  buflen = CHUNK; 		// Program size is 128 characters
+  buf = malloc(buflen); // Allocate memory to store program in
+  memset(buf, 0, buflen); // Set program memory to all 0
+  i = 0; 				// Set program character counter
+  inp = 0; 				// Last read character from input buffer
+  tcl_init(&tcl); 		// Initialize TCL struct, allocate memory and initialize Tcl functions
 }
 
 int counter = 0;
 
-void tcl_loop() {
+void tcl_execute() {
 
 	for (;;) {
 		if (i > buflen - 1) { // for størrelsen af buflen skal følgende forkomme:
-		  //Serial.print("Trying to reallocate for: "); Serial.println(buflen + CHUNK);
-		  buf = realloc(buf, buflen += CHUNK);  // vi re-allokere 2048 nye bytes til buf... for whatever the reason
-		  //Serial.println("Reallocation succesful");
+			buf = realloc(buf, buflen += CHUNK); // vi re-allokere 2048 nye bytes til buf... for whatever the reason
 		}
 
 		inp = partcl_getInputChar();
 
-		if (inp == 0) break;
+		if (inp == 0)
+			break;
 
 		buf[i++] = inp;
 
-		tcl_each(buf, i, 1) {
-		  if (p.token == TERROR && (p.to - buf) != i) {
-			memset(buf, 0, buflen);
-			//Serial.println("1. statement");
-			i = 0;
-			break;
-		  } else if (p.token == TCMD && *(p.from) != '\0') {
-			//Serial.println("2. statement");
-			int r = tcl_eval(&tcl, buf, strlen(buf));
-			if (r != FERROR) {
-				counter++; // Denne bliver overskrevet efter den bliver 44
-			  //partcl_printf(sprintf("result> %.*s\n", tcl_length(tcl.result),
-			  //       tcl_string(tcl.result)));
-				partcl_printf(tcl_string(tcl.result));
-				partcl_printf("Boejse!");
-			} else {
-				partcl_printf("?!");
-			}
+		tcl_each(buf, i, 1)
+		{
+			if (p.token == TERROR && (p.to - buf) != i) {
+				memset(buf, 0, buflen);
+				i = 0;
+				break;
+			} else if (p.token == TCMD && *(p.from) != '\0') {
+				counter++;
+				int r = tcl_eval(&tcl, buf, strlen(buf));
+				if (r != FERROR) {
+					partcl_printf(tcl_string(tcl.result));
+				} else {
+					partcl_printf("?!");
+				}
 
-			memset(buf, 0, buflen);
-			i = 0;
-			break;
-		  }
+				memset(buf, 0, buflen);
+				i = 0;
+				break;
+			}
 		}
+
 	}
 
-	free(buf);
+	free(buf); // Free ParTcl program memory
+	tcl_destroy(&tcl); // Free ParTcl internal loaded commands, variables, structures etc.
 
 	if (i) {
 		partcl_printf("incomplete input\n");

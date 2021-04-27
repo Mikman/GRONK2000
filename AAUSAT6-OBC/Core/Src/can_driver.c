@@ -81,11 +81,12 @@ void receiveData() {
     }
 }
 
-void passToCanTX(struct CAN_QUEUE_DATA *data){
+int passToCanTX(struct CAN_QUEUE_DATA *data){
 	if (CAN_Mailbox0Empty || CAN_Mailbox1Empty || CAN_Mailbox2Empty){
 		sendData(can1, data->ID, PACKAGE_SIZE, data->data, TxHeader);
+		return 1; // Succesful transmission is assumed
 	}else {
-		EnterStructQueue(&CAN_TX_QUEUE, data);
+		return EnterStructQueue(&CAN_TX_QUEUE, data);
 	}
 }
 
@@ -116,7 +117,7 @@ void placeData_1(uint8_t *p){
 
 			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA);
 		}
-	else if(RxHeader->ExtId == PARTCL_DATA_ID){
+	else if(RxHeader->ExtId == CAN_ID_PARTCL_INPUT){
 			PARTCL_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				PARTCL_DATA.data[i] = p[i];

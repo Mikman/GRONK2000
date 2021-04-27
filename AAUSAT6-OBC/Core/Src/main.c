@@ -653,7 +653,9 @@ void task_partcl(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  partcl_init();	// Reset and initialize
+	  partcl_execute();	// Interpret and execute educational commands
+	  taskYIELD();		// Go to another task when done
   }
   /* USER CODE END task_partcl */
 }

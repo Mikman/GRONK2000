@@ -80,15 +80,15 @@ void sendGPS(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader){
 
 
 	// Formattering af ID4Array(); [
-			floatTo4UIntArray(data.ALTITUDE, &ID4Array);
+			floatTo4UIntArray(data.ALTITUDE, ID4Array);
 			floatTo4UIntArray(data.H_GEOID, &ID4Array[4]);
 
 
 	//SendData();
-			sendData(handler, Array1ID, PACKAGE_SIZE, &ID1Array,  transmitHeader);
-			sendData(handler, Array2ID, PACKAGE_SIZE, &ID2Array,  transmitHeader);
-			sendData(handler, Array3ID, PACKAGE_SIZE, &ID3Array,  transmitHeader);
-			sendData(handler, Array4ID, PACKAGE_SIZE, &ID4Array,  transmitHeader);
+			sendData(handler, Array1ID, PACKAGE_SIZE, ID1Array,  transmitHeader);
+			sendData(handler, Array2ID, PACKAGE_SIZE, ID2Array,  transmitHeader);
+			sendData(handler, Array3ID, PACKAGE_SIZE, ID3Array,  transmitHeader);
+			sendData(handler, Array4ID, PACKAGE_SIZE, ID4Array,  transmitHeader);
 
 
 }
@@ -110,28 +110,28 @@ uint8_t ID8Array[8] = {0};
 
 //Formatering for ID5Array(); [resultAccel.x, resultAccel.y]
 
-floatTo4UIntArray(resultAccel.x, &ID5Array);
+floatTo4UIntArray(resultAccel.x, ID5Array);
 floatTo4UIntArray(resultAccel.y, &ID5Array[4]);
 
 //Fomratering for ID6Array(); [resultAccel.Z, resultGyro.x]
-floatTo4UIntArray(resultAccel.z, &ID6Array);
+floatTo4UIntArray(resultAccel.z, ID6Array);
 floatTo4UIntArray(resultGyro.x, &ID6Array[4]);
 
 //Formatering for ID7Array(); [ResultGyro.y, resultGyro.z]
-floatTo4UIntArray(resultGyro.y, &ID7Array);
+floatTo4UIntArray(resultGyro.y, ID7Array);
 floatTo4UIntArray(resultGyro.z, &ID7Array[4]);
 
 //Formatering for ID8Array();  [temperatur, 0000 4 gange]
-floatTo4UIntArray(tempVal,&ID8Array);
+floatTo4UIntArray(tempVal,ID8Array);
 for (int i = 0; i < 3; i++ ) {
 			ID8Array[i+4] = 0;
 }
 
 //SendData();
-			sendData(handler, Array5ID, PACKAGE_SIZE, &ID5Array,  transmitHeader);
-			sendData(handler, Array6ID, PACKAGE_SIZE, &ID6Array,  transmitHeader);
-			sendData(handler, Array7ID, PACKAGE_SIZE, &ID7Array,  transmitHeader);
-			sendData(handler, Array8ID, PACKAGE_SIZE, &ID8Array,  transmitHeader);
+			sendData(handler, Array5ID, PACKAGE_SIZE, ID5Array,  transmitHeader);
+			sendData(handler, Array6ID, PACKAGE_SIZE, ID6Array,  transmitHeader);
+			sendData(handler, Array7ID, PACKAGE_SIZE, ID7Array,  transmitHeader);
+			sendData(handler, Array8ID, PACKAGE_SIZE, ID8Array,  transmitHeader);
 
 
 
@@ -151,7 +151,7 @@ void sendDCMotor(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader
 
 
 	}
-	sendData(&handler, Array9ID, PACKAGE_SIZE, &ID9Array,  &transmitHeader);
+	sendData(handler, Array9ID, PACKAGE_SIZE, ID9Array,  &transmitHeader);
 
 
 

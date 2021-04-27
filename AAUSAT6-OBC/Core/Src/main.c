@@ -153,6 +153,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
   /* USER CODE END 2 */
 
@@ -487,7 +488,7 @@ static void MX_USART1_UART_Init(void)
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.Mode = UART_MODE_RX;
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
@@ -515,6 +516,7 @@ static void MX_DMA_Init(void)
   /* DMA1_Channel5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+  HAL_DMA_Init(&hdma_usart1_rx);
 
 }
 
@@ -596,8 +598,11 @@ void task_gps(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
+	gps_init(&huart1, hdma_usart1_rx.Instance);
+	GPS_FIX_DATA test ={0};
   for(;;)
   {
+	readGPS(&test);
 
     osDelay(10000);
   }

@@ -12,6 +12,8 @@
 #include "partcl_interpreter.h"
 #include <stdio.h>
 #include <string.h>
+#include "circle_queue_struct.h"
+#include "can_driver.h"
 
 #define BUF_SIZE_IN 128
 #define BUF_SIZE_OUT 512

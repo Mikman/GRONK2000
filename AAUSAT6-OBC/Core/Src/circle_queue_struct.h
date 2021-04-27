@@ -4,7 +4,16 @@
  *  Created on: Mar 16, 2021
  *      Author: Mikkel
  */
+
+#ifndef CIRCLE_QUEUE_STRUCT_H
+#define CIRCLE_QUEUE_STRUCT_H
+
+
 #include <stdint.h>
+#include "stdio.h"
+#include "string.h"
+#include <stdlib.h>
+#include "stm32l4xx_hal.h"
 
 #define SIZE_OF_STRUCTQUEUE 160
 #define PACKAGE_SIZE 8
@@ -26,4 +35,4 @@ int StructQueueEmpty(struct StructQueue *q);
 int EnterStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data);
 int LeaveStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data);
 
-
+#endif /* CIRCLE_QUEUE_STRUCT */

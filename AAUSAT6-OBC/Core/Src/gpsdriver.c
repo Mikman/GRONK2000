@@ -13,6 +13,12 @@ char GPSFormat[7] = "$GPGGA";
 UART_HandleTypeDef *uart;
 DMA_Channel_TypeDef *dma;
 
+
+uint32_t GPS_DATA_ID = 0x2;
+struct CAN_QUEUE_DATA GPS_DATA = {0,{0}};
+struct StructQueue GPS_CAN_RX_QUEUE = {0};
+
+
 uint8_t rawData[GPS_BUFSIZE] = {0};
 uint8_t holdData[GPS_BUFSIZE] = {0};
 uint8_t GPSData[GPS_DATASIZE] = {0};

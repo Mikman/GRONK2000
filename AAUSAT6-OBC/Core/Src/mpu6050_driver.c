@@ -1,5 +1,8 @@
 #include "mpu6050_driver.h"
 
+	uint32_t MPU_DATA_ID = 0x1;
+	struct CAN_QUEUE_DATA MPU_DATA = {0,{0}};
+	struct StructQueue MPU_CAN_RX_QUEUE = {0};
 	float tempVal = 0.0;
 	Axes3 resultGyro = { 0 };
 	Axes3 resultAccel = { 0 };

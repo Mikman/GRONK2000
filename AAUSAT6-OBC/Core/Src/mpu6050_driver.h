@@ -12,6 +12,8 @@
 
 #include "string.h"
 #include "stdio.h"
+#include "circle_queue_struct.h"
+#include "can_driver.h"
 
 // I2C device addresses
 static const uint8_t MPU_Address = 0x68;

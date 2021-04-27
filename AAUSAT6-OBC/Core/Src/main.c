@@ -31,6 +31,7 @@
 #include "partcl_driver.h"
 #include "circle_queue.h"
 #include "circle_queue_struct.h"
+#include "can_driver.h"
 #include "stdbool.h"
 
 /* USER CODE END Includes */
@@ -91,34 +92,7 @@ const osThreadAttr_t taskParTCL_attributes = {
 /* USER CODE BEGIN PV */
 struct Queue queueCANRX = {0,0,{0}};
 
-struct StructQueue CAN_TX_QUEUE = {0, 0, {0, {0}}};
-struct CAN_QUEUE_DATA CAN_TX_QUEUE_DATA = {0,{0}};
 
-struct StructQueue MPU_CAN_RX_QUEUE = {0, 0, {0, {0}}};
-struct StructQueue GPS_CAN_RX_QUEUE = {0, 0, {0, {0}}};
-struct StructQueue MOTOR_CAN_RX_QUEUE = {0, 0, {0, {0}}};
-struct StructQueue PARTCL_CAN_RX_QUEUE = {0, 0, {0, {0}}};
-struct StructQueue IMAGE_CAN_RX_QUEUE = {0, 0, {0, {0}}};
-
-
-uint32_t MPU_DATA_ID = 0x1;
-struct CAN_QUEUE_DATA MPU_DATA = {0,{0}};
-
-uint32_t GPS_DATA_ID = 0x2;
-struct CAN_QUEUE_DATA GPS_DATA = {0,{0}};
-
-uint32_t MOTOR_DATA_ID = 0x3;
-struct CAN_QUEUE_DATA MOTOR_DATA = {0,{0}};
-
-uint32_t PARTCL_DATA_ID = 0x4;
-struct CAN_QUEUE_DATA PARTCL_DATA = {0,{0}};
-
-uint32_t IMAGE_DATA_ID = 0x5;
-struct CAN_QUEUE_DATA IMAGE_DATA = {0,{0}};
-
-bool CAN_Mailbox0Empty = true;
-bool CAN_Mailbox1Empty = true;
-bool CAN_Mailbox2Empty = true;
 
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
@@ -603,101 +577,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox0Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
 
-void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox1Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
-void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox2Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
 
 
 GPS_FIX_DATA data = { 0 };
 
-void placeData_1(uint8_t *p){
-	if(CanRxHeader.ExtId == MPU_DATA_ID){
-		MPU_DATA.ID = CanRxHeader.ExtId;
-		for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-			MPU_DATA.data[i] = p[i];
-		}
-
-		EnterStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA);
-	}
-	else if(CanRxHeader.ExtId == GPS_DATA_ID){
-			GPS_DATA.ID = CanRxHeader.ExtId;
-			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				GPS_DATA.data[i] = p[i];
-			}
-
-			EnterStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA);
-		}
-	else if(CanRxHeader.ExtId == MOTOR_DATA_ID){
-			MOTOR_DATA.ID = CanRxHeader.ExtId;
-			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				MOTOR_DATA.data[i] = p[i];
-			}
-
-			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA);
-		}
-	else if(CanRxHeader.ExtId == PARTCL_DATA_ID){
-			PARTCL_DATA.ID = CanRxHeader.ExtId;
-			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				PARTCL_DATA.data[i] = p[i];
-			}
-
-			EnterStructQueue(&PARTCL_CAN_RX_QUEUE, &PARTCL_DATA);
-		}
-	else if(CanRxHeader.ExtId == IMAGE_DATA_ID){
-			IMAGE_DATA.ID = CanRxHeader.ExtId;
-			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				IMAGE_DATA.data[i] = p[i];
-			}
-
-			EnterStructQueue(&IMAGE_CAN_RX_QUEUE, &IMAGE_DATA);
-		}
-}
-
-void receiveData() {
-    uint8_t buffer[PACKAGE_SIZE] = {0};
-
-    while (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
-        if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
-            HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-            placeData_1(buffer);
-            /*
-            for(int i = 0; i < PACKAGE_SIZE; i++){
-                EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
-            }*/
-        }
-    }
-}
 
 
-void passToCanTX(struct CAN_QUEUE_DATA *data, struct StructQueue *queue){
-	if (CAN_Mailbox0Empty || CAN_Mailbox1Empty || CAN_Mailbox2Empty){
-		sendData(&hcan1, data->ID, PACKAGE_SIZE, data->data, &CanTxHeader);
-	}else {
-		EnterStructQueue(queue, data);
-	}
-}
+
+
+
 
 /* USER CODE END 4 */
 
@@ -712,21 +601,9 @@ void task_gps(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-	uint8_t testArray[PACKAGE_SIZE] = {0};
   for(;;)
   {
-	  struct CAN_QUEUE_DATA text = {2, {0}};
-	  text.ID = 10;
 
-	  for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-		  text.data[i]= i;
-	  }
-
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
     osDelay(10000);
   }
   /* USER CODE END 5 */

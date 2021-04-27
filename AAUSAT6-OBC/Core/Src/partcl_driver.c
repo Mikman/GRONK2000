@@ -13,6 +13,10 @@ char output[BUF_SIZE_OUT] = {0};
 uint16_t i_read = 0;
 uint16_t o_write = 0;
 
+uint32_t PARTCL_DATA_ID = 0x4;
+struct CAN_QUEUE_DATA PARTCL_DATA = {0,{0}};
+struct StructQueue PARTCL_CAN_RX_QUEUE = {0};
+
 void partcl_init() {
 	tcl_setup();
 }

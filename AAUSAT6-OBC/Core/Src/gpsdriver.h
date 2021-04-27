@@ -12,6 +12,8 @@
 #include "string.h"
 #include <stdlib.h>
 #include "stm32l4xx_hal.h"
+#include "circle_queue_struct.h"
+#include "can_driver.h"
 
 #define GPS_BUFSIZE 512		// Receive buffer size for incoming GPS UART data
 #define GPS_DATASIZE 83		// Buffer size for received GPGGA string

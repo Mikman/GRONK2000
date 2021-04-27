@@ -14,6 +14,7 @@
 #include "gpsdriver.h"
 #include "mpu6050_driver.h"
 #include "DCMotordriver.h"
+#include "circle_queue_struct.h"
 
 
 

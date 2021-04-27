@@ -9,6 +9,8 @@
 #define SRC_DCMOTORDRIVER_H_
 
 #include "main.h"
+#include "circle_queue_struct.h"
+#include "can_driver.h"
 
 void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel);
 

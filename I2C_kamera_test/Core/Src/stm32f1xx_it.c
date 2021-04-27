@@ -60,6 +60,7 @@
 extern DMA_HandleTypeDef hdma_tim2_ch3;
 /* USER CODE BEGIN EV */
 extern CAM_HandleTypeDef hcam;
+extern UART_HandleTypeDef huart1;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -211,7 +212,7 @@ void DMA1_Channel1_IRQHandler(void)
   HAL_DMA_IRQHandler(&hdma_tim2_ch3);
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
   CAM_stopLineTransfer(&hcam);
-  int dev = 0;
+  transmitBuffer();
   /* USER CODE END DMA1_Channel1_IRQn 1 */
 }
 

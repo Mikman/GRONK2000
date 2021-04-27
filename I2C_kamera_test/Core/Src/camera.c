@@ -13,16 +13,15 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 	CAM_setReg(cam, 0x1E, 0x31); // Flip image vertically and mirror image
 	CAM_setReg(cam, 0x13, 0x81); // Fast algorithm and auto exposure enable
 	CAM_setReg(cam, 0x3F, 0x01); // Edge enhancement factor
-	CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
-
-
+	//CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 	// init DMA
 	while (cam->requestDataTimer->Instance->CNT <=  60) {}
-	HAL_TIM_OC_Start(cam->requestDataTimer, cam->requestDataChannel);
-	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
+	HAL_TIM_PWM_Start(cam->requestDataTimer, cam->requestDataChannel);
+	HAL_TIM_OC_Start_DMA(cam->DMATimer, cam->DMAChannel, cam->source, cam->pic->width);
+	//HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
 	__HAL_DMA_DISABLE_IT(cam->hdma, DMA_IT_HT);
 
 
@@ -31,9 +30,10 @@ void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
 	// abort DMA
-	HAL_DMA_Abort_IT(cam->hdma);
+	//HAL_DMA_Abort_IT(cam->hdma);
+	HAL_TIM_OC_Stop_DMA(cam->DMATimer, cam->DMAChannel);
 	while (cam->requestDataTimer->Instance->CNT <= 60) {}
-	HAL_TIM_OC_Stop(cam->requestDataTimer, cam->requestDataChannel);
+	HAL_TIM_PWM_Stop(cam->requestDataTimer, cam->requestDataChannel);
 
 	cam->status = WAITING;
 }
@@ -46,7 +46,7 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->pic->x = 0;
 			cam->pic->y = 0;
 			cam->status = STANDBY;
-			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, RESET);
+			//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, RESET);
 		}
 	} else if (cam->status == WAITING) {
 		CAM_toOutputQueue(cam);
@@ -87,10 +87,12 @@ void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 			// Inkrementer x-positionen i Picture
 			cam->pic->x += 8;
 		}
+		/*
 		else
 		{
 			HAL_Delay(1);
 		}
+		*/
 	}
 
 	// Opdater koordinaterne i Picture

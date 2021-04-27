@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGAgatherer
-Fri Apr 23 09:13:24 2021
+Mon Apr 26 08:54:35 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -58,7 +58,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Apr 23 09:13:24 2021       ;
+; Analysis & Synthesis Status     ; Successful - Mon Apr 26 08:54:34 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGAgatherer                                ;
 ; Top-level Entity Name           ; ImageCapture                                ;
@@ -183,7 +183,9 @@ refer to the applicable agreement for further details.
 ;     Processor 3            ;   0.0%      ;
 ;     Processor 4            ;   0.0%      ;
 ;     Processor 5            ;   0.0%      ;
-;     Processors 6-8         ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -672,7 +674,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:15     ;
+; Top            ; 00:00:23     ;
 +----------------+--------------+
 
 
@@ -682,7 +684,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Apr 23 09:12:52 2021
+    Info: Processing started: Mon Apr 26 08:53:52 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file sevensegdigit.vhd
@@ -869,9 +871,9 @@ Info (21057): Implemented 5427 device resources after synthesis - the final reso
     Info (21060): Implemented 8 bidirectional pins
     Info (21061): Implemented 5322 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 29 warnings
-    Info: Peak virtual memory: 4960 megabytes
-    Info: Processing ended: Fri Apr 23 09:13:25 2021
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:45
+    Info: Peak virtual memory: 4971 megabytes
+    Info: Processing ended: Mon Apr 26 08:54:35 2021
+    Info: Elapsed time: 00:00:43
+    Info: Total CPU time (on all processors): 00:00:55
 
 

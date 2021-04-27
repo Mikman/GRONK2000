@@ -30,7 +30,9 @@ typedef struct {
 typedef struct {
 	DMA_HandleTypeDef *hdma;
 	TIM_HandleTypeDef *requestDataTimer;
+	TIM_HandleTypeDef *DMATimer;
 	uint32_t requestDataChannel;
+	uint32_t DMAChannel;
 	Picture *pic;
 	enum CAM_STATUS status;
 	uint32_t *source;

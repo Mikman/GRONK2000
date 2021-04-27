@@ -17,17 +17,6 @@ struct Queue queueRx = {0, 0, {0}};
 
 /* USER CODE END PV */
 
-/*void floatTo4UIntArray(float floatData, uint8_t *destinationArray){
-	uint8_t *ptr;
-	ptr = (uint8_t *)(&floatData);
-
-	for(int i = 0; i<4; i++){
-		destinationArray[i] = ptr[i];
-	}
-
-}
-*/
-
 void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader) {
 	uint8_t dataToMB[PACKAGE_SIZE] = {0};
 	uint32_t randoMailBox;

@@ -1,4 +1,5 @@
 "Core/Src/Transmit_driver.o"
+"Core/Src/can_driver.o"
 "Core/Src/circle_queue.o"
 "Core/Src/circle_queue_struct.o"
 "Core/Src/main.o"

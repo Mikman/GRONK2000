@@ -27,6 +27,7 @@
 #include "string.h"
 #include "circle_queue_struct.h"
 #include "stdbool.h"
+#include "can_driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,44 +53,10 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* USER CODE BEGIN PV */
-struct Queue queueCANRX = {0,0,{0}};
-
-struct StructQueue CAN_TX_QUEUE = {0};
-struct CAN_QUEUE_DATA CAN_TX_QUEUE_DATA = {0,{0}};
-
-struct StructQueue MPU_CAN_RX_QUEUE = {0};
-struct StructQueue GPS_CAN_RX_QUEUE = {0};
-struct StructQueue MOTOR_CAN_RX_QUEUE = {0};
-struct StructQueue PARTCL_CAN_RX_QUEUE = {0};
-struct StructQueue IMAGE_CAN_RX_QUEUE = {0};
-
-
-uint32_t MPU_DATA_ID = 0x1;
-struct CAN_QUEUE_DATA MPU_DATA = {0,{0}};
-
-uint32_t GPS_DATA_ID = 0x2;
-struct CAN_QUEUE_DATA GPS_DATA = {0,{0}};
-
-uint32_t MOTOR_DATA_ID = 0x3;
-struct CAN_QUEUE_DATA MOTOR_DATA = {0,{0}};
-
-uint32_t PARTCL_DATA_ID = 0x4;
-struct CAN_QUEUE_DATA PARTCL_DATA = {0,{0}};
-
-uint32_t IMAGE_DATA_ID = 0x5;
-struct CAN_QUEUE_DATA IMAGE_DATA = {0,{0}};
-
-bool CAN_Mailbox0Empty = true;
-bool CAN_Mailbox1Empty = true;
-bool CAN_Mailbox2Empty = true;
 
 CAN_FilterTypeDef CanFilter;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAN_TxHeaderTypeDef CanTxHeader;
-
-struct Queue GPSDATA = {0,0,{0}};
-struct Queue ACCEL = {0,0,{0}};
-struct Queue DCMOTOR = {0,0,{0}};
 
 //GPS DATA ID'S
 uint32_t GPS_ID1 = 0x1;
@@ -102,7 +69,6 @@ uint32_t MPU_ID5 = 0X5;
 uint32_t MPU_ID6 = 0X6;
 uint32_t MPU_ID7 = 0X7;
 uint32_t MPU_ID8 = 0X8;
-
 
 //MOTOR DATA ID
 uint32_t MOTOR_ID9 = 0X9;
@@ -122,9 +88,9 @@ uint8_t GPS_QUALITY = 0;
 uint8_t GPS_HOURS = 0;
 uint8_t GPS_MINUTES = 0;
 uint8_t GPS_SEC = 0;
-float GPS_HDOP = 0;
+float GPS_HDOP = 0.;
 float GPS_ALTITUDE = 0.;
-float GPS_H_GEOID = 0;
+float GPS_H_GEOID = 0.;
 
 //Recieved MPU data from CubeSAT
 float MPU_ACCELX = 0.;
@@ -137,7 +103,6 @@ float MPU_TEMP = 0.;
 
 //Recieved MOTOR data from CubeSAT
 uint8_t MOTOR_DUTYCYCLE = 0;
-
 
 /* USER CODE END PV */
 
@@ -159,6 +124,8 @@ static void MX_CAN1_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -185,6 +152,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
+  can_init(&hcan1, &CanRxHeader, &CanTxHeader, &huart2);
  // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
@@ -201,6 +169,8 @@ int main(void)
 		 //sendMOTOR();
 
 	 }
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -410,87 +380,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox0Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
-
-void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox1Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
-void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
-	if (CAN_TX_QUEUE.pointRD == CAN_TX_QUEUE.pointWR){
-		CAN_Mailbox2Empty = true;
-	}else {
-		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(&hcan1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, &CanTxHeader);
-	}
-}
-
-void receiveData() {
-    uint8_t buffer[PACKAGE_SIZE] = {0};
-
-    while (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) > 0) {
-        if (!QueueFull(&queueCANRX)) { // Hvis køen ikke er fuld - Hvis der er en plads til at modtage en besked
-            HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &CanRxHeader, buffer); // Modtag beskeden og læg den i buffer
-            placeData_1(buffer);
-            /*
-            for(int i = 0; i < PACKAGE_SIZE; i++){
-                EnterQueue(&queueCANRX, buffer[i]); // Læg buffer ind i modtager-queuen
-            }*/
-        }
-    }
-}
-
-
-void passToCanTX(struct CAN_QUEUE_DATA *data, struct StructQueue *queue){
-	if (CAN_Mailbox0Empty || CAN_Mailbox1Empty || CAN_Mailbox2Empty){
-		sendData(&hcan1, data->ID, PACKAGE_SIZE, data->data, &CanTxHeader);
-	}else {
-		EnterStructQueue(queue, data);
-	}
-}
 
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_task_gps */
-/**
-  * @brief  Function implementing the taskGPS thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_task_gps */
-void task_gps(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-	  struct CAN_QUEUE_DATA text = {2, {0}};
-	  text.ID = 10;
-
-	  for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-		  text.data[i]= i;
-	  }
-
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-	  passToCanTX(&text, &CAN_TX_QUEUE);
-    osDelay(10000);
-  }
-  /* USER CODE END 5 */
-}
 
 void sendMOTOR(){
 	char str[5] = {0};
@@ -643,66 +534,6 @@ void sendGPS(){
 
 }
 
-void placeData_1( uint8_t *DataPass){
-
-	//PLACE GPS DATA
-
-		if(CanRxHeader.ExtId == GPS_ID1){ // [LAT_DIR, LAT]
-		    memcpy(&GPS_LAT, &DataPass[1], sizeof(GPS_LAT));
-		    GPS_LAT_DIR = DataPass[0];
-		}
-
-		if(CanRxHeader.ExtId == GPS_ID2){ // [LON_DIR, LON]
-			memcpy(&GPS_LON, &DataPass[1], sizeof(GPS_LON));
-			GPS_LON_DIR = DataPass[0];
-		}
-
-		if(CanRxHeader.ExtId == GPS_ID3){// [QUALITY, HOURS, MINUTES, SEC, HDOP]
-			GPS_QUALITY = DataPass[0];
-			GPS_HOURS = DataPass[1];
-			GPS_MINUTES = DataPass[2];
-			GPS_SEC = DataPass[3];
-			memcpy(&GPS_HDOP, &DataPass[4], sizeof(GPS_HDOP));
-		}
-
-		if(CanRxHeader.ExtId == GPS_ID4){// [ALTITUDE, H_GEOID]
-			memcpy(&GPS_ALTITUDE, &DataPass[0], sizeof(GPS_ALTITUDE));
-			memcpy(&GPS_H_GEOID, &DataPass[4], sizeof(GPS_H_GEOID));
-		}
-
-	// PLACE MPU DATA
-		if(CanRxHeader.ExtId == MPU_ID5){// [ACCELX, ACCELY]
-			memcpy(&MPU_ACCELX, &DataPass[0], sizeof(MPU_ACCELX));
-			memcpy(&MPU_ACCELY, &DataPass[4], sizeof(MPU_ACCELY));
-		}
-		if(CanRxHeader.ExtId == MPU_ID6){// [ACCELZ, GYROX]
-			memcpy(&MPU_ACCELZ, &DataPass[0], sizeof(MPU_ACCELZ));
-			memcpy(&MPU_GYROX, &DataPass[4], sizeof(MPU_GYROX));
-		}
-		if(CanRxHeader.ExtId == MPU_ID7){// [GYROY, GYROZ]
-			memcpy(&MPU_GYROY, &DataPass[0], sizeof(MPU_GYROY));
-			memcpy(&MPU_GYROZ, &DataPass[4], sizeof(MPU_GYROZ));
-		}
-		if(CanRxHeader.ExtId == MPU_ID8){// [TEMP]
-			memcpy(&MPU_TEMP, &DataPass[0], sizeof(MPU_TEMP));
-		}
-
-	// PLACE DUTY CYCLE
-		if(CanRxHeader.ExtId == MOTOR_ID9){// [DUTYCYCLE]
-			memcpy(&MOTOR_DUTYCYCLE, &DataPass[0], sizeof(MOTOR_DUTYCYCLE));
-		}
-
-
-	//WATCHDOG
-		if(CanRxHeader.ExtId == WATCHDOG_ID10){// [WATCHDOG]
-			char str[15] = {0};
-			sprintf(str, "%s", "WATCHDOG" );
-			HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-			HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-			HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-		}
-
-}
 
 /*
 void placeData(uint8_t *DataPass) {

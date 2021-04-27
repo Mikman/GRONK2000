@@ -25,7 +25,6 @@ void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, ui
 if (numOfBytes % PACKAGE_SIZE == 0)
 {
 	for (int i = 0; i < numOfBytes/PACKAGE_SIZE; i++) {
-		 HAL_CAN_StateTypeDef state = handler->State;
 		while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {}
 		if (messageSplitter(dataArray, dataToMB, i)) {
 			if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB, &randoMailBox) != HAL_OK) {
@@ -36,7 +35,7 @@ if (numOfBytes % PACKAGE_SIZE == 0)
 	}
 
 }
-else {return 0;}
+else {return;}
 
 }
 

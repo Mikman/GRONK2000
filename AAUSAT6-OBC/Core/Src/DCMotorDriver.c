@@ -6,7 +6,8 @@ uint32_t CaptureDCMotor = 0;
 uint32_t ARR = 0;
 
 uint32_t MOTOR_DATA_ID = 0x3;
-struct CAN_QUEUE_DATA MOTOR_DATA = {0,{0}};
+struct CAN_QUEUE_DATA MOTOR_DATA_RX = {0,{0}};
+struct CAN_QUEUE_DATA MOTOR_DATA_TX = {0,{0}};
 struct StructQueue MOTOR_CAN_RX_QUEUE = {0};
 
 
@@ -30,27 +31,67 @@ void motor_start(int8_t dutycycle) {
 
 void motor_stop() {
 	HAL_TIM_PWM_Stop(htim, timer_channel);
+	//Fast motot stop
+	HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_SET);
 }
 
-float motor_dutycycle(){
+float motor_meassure_dutycycle(){
 	float dutycycle = 0.;
 	dutycycle = (htim->Instance->CCR1)/(htim->Instance->ARR/100);
 	return dutycycle;
 }
 
+uint8_t motor_meassure_direction(){
+	if (HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir1_Pin) && !HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir2_Pin)){
+		return 1;
+	}else if (!HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir1_Pin) && HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir2_Pin)){
+		return 0;
+	}else {
+		return 3;
+	}
+
+}
+
+void motor_direction(int dir){
+	if (dir == 1){
+		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_RESET);
+	}
+	if (dir == 0){
+		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_RESET);
+	}
+
+}
+
 void motor(){
 	if(UnreadElements(&MOTOR_CAN_RX_QUEUE)){
 
+		LeaveStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA_RX);
+		uint8_t direction;
+		float dutycycle;
+		if(MOTOR_DATA_RX.data[4] > 0){
+			dutycycle = motor_meassure_dutycycle();
+			direction = motor_meassure_direction();
+			MOTOR_DATA_TX.ID = 0x9;
 
-		LeaveStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA);
-		float dutycycle = motor_dutycycle();
-		//motor_setPwm();
-		//motor_start();
-		//motor_stop()
+		}
+		if(MOTOR_DATA_RX.data[5] > 0){
+			motor_stop();
+		}
 
-		//TODO: sort rx data and gather what's requested
+		(MOTOR_DATA_RX.data[6] > 0 ? motor_direction(1) : motor_direction(0));
 
-		passToCanTX(&MOTOR_DATA);
+		if ((MOTOR_DATA_RX.data[7] > 0) && (MOTOR_DATA_RX.data[7] >= 100)){
+				motor_start(MOTOR_DATA_RX.data[7]);
+		}
+
+
+		floatTo4UIntArray(dutycycle, MOTOR_DATA_TX.data);
+		MOTOR_DATA_TX.data[5] = direction;
+
+		passToCanTX(&MOTOR_DATA_TX);
 
 	}else{
 

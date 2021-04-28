@@ -15,7 +15,8 @@ DMA_Channel_TypeDef *dma;
 
 
 uint32_t GPS_DATA_ID = 0x2;
-struct CAN_QUEUE_DATA GPS_DATA = {0,{0}};
+struct CAN_QUEUE_DATA GPS_DATA_RX = {0,{0}};
+struct CAN_QUEUE_DATA GPS_DATA_TX = {0,{0}};
 struct StructQueue GPS_CAN_RX_QUEUE = {0};
 GPS_FIX_DATA data = { 0 };
 
@@ -145,12 +146,40 @@ void GPS(){
 	if(UnreadElements(&GPS_CAN_RX_QUEUE)){
 
 		readGPS(&data);
-		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA);
+		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA_RX);
 
-		//TODO: sort rx data and gather what's requested
-		// Der er allerede nogle funktioner i Transmit_driver.c
+		if (GPS_DATA_RX.data[5] > 0){
+			GPS_DATA_TX.ID = 0x4;
+			floatTo4UIntArray(data.ALTITUDE, GPS_DATA_TX.data);
+			floatTo4UIntArray(data.H_GEOID, &GPS_DATA_TX.data[4]);
+			passToCanTX(&GPS_DATA_TX);
+		}
+		if (GPS_DATA_RX.data[6] > 0){
+			GPS_DATA_TX.ID = 0x3;
+			GPS_DATA_TX.data[0] = data.QUALITY;
+			GPS_DATA_TX.data[1] = data.HOURS;
+			GPS_DATA_TX.data[2] = data.MIN;
+			GPS_DATA_TX.data[3] = data.SEC;
+			floatTo4UIntArray(data.HDOP, &GPS_DATA_TX.data[4]);
+			passToCanTX(&GPS_DATA_TX);
+		}
+		if (GPS_DATA_RX.data[7] > 0){
+			GPS_DATA_TX.ID = 0x1;
+			floatTo4UIntArray(data.LAT, &GPS_DATA_TX.data[1]);
+			GPS_DATA_TX.data[0]=(uint8_t) data.LAT_DIR;
+			for (int i = 0; i < 3; i++ ) {
+				GPS_DATA_TX.data[i+5] = 0;
+			}
+			passToCanTX(&GPS_DATA_TX);
 
-		passToCanTX(&GPS_DATA);
+			GPS_DATA_TX.ID = 0x2;
+			floatTo4UIntArray(data.LON, &GPS_DATA_TX.data[1]);
+			GPS_DATA_TX.data[0]=(uint8_t) data.LON_DIR;
+			for (int i = 0; i < 3; i++ ) {
+				GPS_DATA_TX.data[i+5] = 0;
+			}
+			passToCanTX(&GPS_DATA_TX);
+		}
 
 	}else{
 

@@ -60,12 +60,29 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Watchdog_out_Pin GPIO_PIN_7
+#define Watchdog_out_GPIO_Port GPIOA
+#define Address_inc_Pin GPIO_PIN_0
+#define Address_inc_GPIO_Port GPIOB
+#define Get_image_pin_Pin GPIO_PIN_1
+#define Get_image_pin_GPIO_Port GPIOB
+#define DC_motor_Dir1_Pin GPIO_PIN_8
+#define DC_motor_Dir1_GPIO_Port GPIOA
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
+#define DC_motor_PWM_Pin GPIO_PIN_15
+#define DC_motor_PWM_GPIO_Port GPIOA
 #define LD3_Pin GPIO_PIN_3
 #define LD3_GPIO_Port GPIOB
+#define DC_motor_Dir2_Pin GPIO_PIN_4
+#define DC_motor_Dir2_GPIO_Port GPIOB
+#define Transfer_pin_Pin GPIO_PIN_5
+#define Transfer_pin_GPIO_Port GPIOB
+#define Watchdog_ext_int_Pin GPIO_PIN_3
+#define Watchdog_ext_int_GPIO_Port GPIOH
+#define Watchdog_ext_int_EXTI_IRQn EXTI3_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

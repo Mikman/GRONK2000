@@ -1,7 +1,8 @@
 #include "mpu6050_driver.h"
 
 	uint32_t MPU_DATA_ID = 0x1;
-	struct CAN_QUEUE_DATA MPU_DATA = {0,{0}};
+	struct CAN_QUEUE_DATA MPU_DATA_RX = {0,{0}};
+	struct CAN_QUEUE_DATA MPU_DATA_TX = {0,{0}};
 	struct StructQueue MPU_CAN_RX_QUEUE = {0};
 	float tempVal = 0.0;
 	Axes3 resultGyro = { 0 };
@@ -140,17 +141,59 @@ Axes3 MPU_Read_Accel(){
 void MPU6050(){
 	if(UnreadElements(&MPU_CAN_RX_QUEUE)){
 
-		LeaveStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA);
+		LeaveStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA_RX);
 
-		//TODO: sort rx data and gather what's requested
+		if (MPU_DATA_RX.data[7] > 0){
+			MPU_DATA_TX.ID = 0x8;
+			floatTo4UIntArray(MPU_Read_Temp(), MPU_DATA_TX.data);
+			passToCanTX(&MPU_DATA_TX);
+		}
+		if ((MPU_DATA_RX.data[6] > 0) && (MPU_DATA_RX.data[5] > 0) ){
+			//Formatering [resultAccel.x, resultAccel.y]
+			MPU_DATA_TX.ID = 0x5;
+			floatTo4UIntArray(resultAccel.x, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultAccel.y, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
 
-		//MPU_Read_Accel();
-		//MPU_Read_Gyro();
-		//MPU_Read_Temp();
+			//Fomratering [resultAccel.Z, resultGyro.x]
+			MPU_DATA_TX.ID = 0x6;
+			floatTo4UIntArray(resultAccel.z, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultGyro.x, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
 
-		// Der er allerede nogle funktioner i Transmit_driver.c
+			//Formatering [ResultGyro.y, resultGyro.z]
+			MPU_DATA_TX.ID = 0x7;
+			floatTo4UIntArray(resultGyro.y, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultGyro.z, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
+		}else if (MPU_DATA_RX.data[5] > 0) {
 
-		passToCanTX(&MPU_DATA);
+			MPU_DATA_TX.ID = 0x6;
+			floatTo4UIntArray(resultAccel.z, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultGyro.x, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
+
+			//Formatering [ResultGyro.y, resultGyro.z]
+			MPU_DATA_TX.ID = 0x7;
+			floatTo4UIntArray(resultGyro.y, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultGyro.z, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
+
+		}else if (MPU_DATA_RX.data[6] > 0){
+
+			//Formatering [resultAccel.x, resultAccel.y]
+			MPU_DATA_TX.ID = 0x5;
+			floatTo4UIntArray(resultAccel.x, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultAccel.y, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
+
+			//Fomratering [resultAccel.Z, resultGyro.x]
+			MPU_DATA_TX.ID = 0x6;
+			floatTo4UIntArray(resultAccel.z, MPU_DATA_TX.data);
+			floatTo4UIntArray(resultGyro.x, &MPU_DATA_TX.data[4]);
+			passToCanTX(&MPU_DATA_TX);
+
+		}
 
 	}else{
 

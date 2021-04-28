@@ -10,11 +10,15 @@ struct StructQueue CAN_TX_QUEUE = {0};
 struct CAN_QUEUE_DATA CAN_TX_QUEUE_DATA = {0,{0}};
 
 
-extern struct CAN_QUEUE_DATA MPU_DATA;
-extern struct CAN_QUEUE_DATA GPS_DATA;
-extern struct CAN_QUEUE_DATA MOTOR_DATA;
+extern struct CAN_QUEUE_DATA MPU_DATA_RX;
+extern struct CAN_QUEUE_DATA MPU_DATA_TX;
+extern struct CAN_QUEUE_DATA GPS_DATA_RX;
+extern struct CAN_QUEUE_DATA GPS_DATA_TX;
+extern struct CAN_QUEUE_DATA MOTOR_DATA_RX;
+extern struct CAN_QUEUE_DATA MOTOR_DATA_TX;
 extern struct CAN_QUEUE_DATA PARTCL_DATA;
-extern struct CAN_QUEUE_DATA IMAGE_DATA;
+extern struct CAN_QUEUE_DATA IMAGE_DATA_RX;
+extern struct CAN_QUEUE_DATA IMAGE_DATA_TX;
 
 extern struct StructQueue MPU_CAN_RX_QUEUE;
 extern struct StructQueue GPS_CAN_RX_QUEUE;
@@ -94,43 +98,43 @@ int passToCanTX(struct CAN_QUEUE_DATA *data){
 
 void placeData_1(uint8_t *p){
 	if(RxHeader->ExtId == MPU_DATA_ID){
-		MPU_DATA.ID = RxHeader->ExtId;
+		CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 		for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-			MPU_DATA.data[i] = p[i];
+			CAN_TX_QUEUE_DATA.data[i] = p[i];
 		}
 
-		EnterStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA);
+		EnterStructQueue(&MPU_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 	}
 	else if(RxHeader->ExtId == GPS_DATA_ID){
-			GPS_DATA.ID = RxHeader->ExtId;
+			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				GPS_DATA.data[i] = p[i];
+				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
-			EnterStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA);
+			EnterStructQueue(&GPS_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
 	else if(RxHeader->ExtId == MOTOR_DATA_ID){
-			MOTOR_DATA.ID = RxHeader->ExtId;
+			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				MOTOR_DATA.data[i] = p[i];
+				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
-			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &MOTOR_DATA);
+			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
 	else if(RxHeader->ExtId == CAN_ID_PARTCL_INPUT){
-			PARTCL_DATA.ID = RxHeader->ExtId;
+			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				PARTCL_DATA.data[i] = p[i];
+				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
-			EnterStructQueue(&PARTCL_CAN_RX_QUEUE, &PARTCL_DATA);
+			EnterStructQueue(&PARTCL_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
 	else if(RxHeader->ExtId == IMAGE_DATA_ID){
-			IMAGE_DATA.ID = RxHeader->ExtId;
+			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
-				IMAGE_DATA.data[i] = p[i];
+				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
-			EnterStructQueue(&IMAGE_CAN_RX_QUEUE, &IMAGE_DATA);
+			EnterStructQueue(&IMAGE_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
 }

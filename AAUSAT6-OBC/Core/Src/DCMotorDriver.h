@@ -20,7 +20,9 @@ void motor_start(int8_t dutycycle);
 
 void motor_stop();
 
-float motor_dutycycle();
+float motor_meassure_dutycycle();
+
+void motor_direction(int dir);
 
 void motor();
 

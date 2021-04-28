@@ -28,6 +28,7 @@
 #include "circle_queue_struct.h"
 #include "stdbool.h"
 #include "can_driver.h"
+#include "comm_relay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -159,6 +160,17 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   uint8_t sendDataArray[PACKAGE_SIZE] = {1, 2, 4, 8, 16, 32, 64, 128};
+
+  struct CAN_QUEUE_DATA pack = {'#', "$$$@#$@@"};
+
+  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
+  if (to_frame(frame, sizeof(frame), &pack) == -1) {
+	  int err = 1;
+  }
+
+  if (from_frame(frame, &pack) == -1) {
+	  int err = 1;
+  }
 
   while (1)
   {

@@ -29,6 +29,7 @@
 #include "stdbool.h"
 #include "can_driver.h"
 #include "comm_relay.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,65 +52,25 @@
 CAN_HandleTypeDef hcan1;
 
 UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
+DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
+
+int ERR_COUNT = 0;
+
 /* USER CODE BEGIN PV */
 
 CAN_FilterTypeDef CanFilter;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAN_TxHeaderTypeDef CanTxHeader;
 
-//GPS DATA ID'S
-uint32_t GPS_ID1 = 0x1;
-uint32_t GPS_ID2 = 0x2;
-uint32_t GPS_ID3 = 0x3;
-uint32_t GPS_ID4 = 0x4;
-
-//MPU DATA ID'S
-uint32_t MPU_ID5 = 0X5;
-uint32_t MPU_ID6 = 0X6;
-uint32_t MPU_ID7 = 0X7;
-uint32_t MPU_ID8 = 0X8;
-
-//MOTOR DATA ID
-uint32_t MOTOR_ID9 = 0X9;
-
-//WATCHDOG DATA ID
-uint32_t WATCHDOG_ID10 = 0X0A;
-
-//uint32_t ACCELID = 0x5;
-//uint32_t DCMOTORID = 0x7;
-
-// Recieved GPS data from CubeSAT
-float GPS_LAT = 0.;
-char GPS_LAT_DIR = '$';
-float GPS_LON = 0.;
-char GPS_LON_DIR = '$';
-uint8_t GPS_QUALITY = 0;
-uint8_t GPS_HOURS = 0;
-uint8_t GPS_MINUTES = 0;
-uint8_t GPS_SEC = 0;
-float GPS_HDOP = 0.;
-float GPS_ALTITUDE = 0.;
-float GPS_H_GEOID = 0.;
-
-//Recieved MPU data from CubeSAT
-float MPU_ACCELX = 0.;
-float MPU_ACCELY = 0.;
-float MPU_ACCELZ = 0.;
-float MPU_GYROX = 0.;
-float MPU_GYROY = 0.;
-float MPU_GYROZ = 0.;
-float MPU_TEMP = 0.;
-
-//Recieved MOTOR data from CubeSAT
-uint8_t MOTOR_DUTYCYCLE = 0;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_CAN1_Init(void);
 /* USER CODE BEGIN PFP */
@@ -125,8 +86,6 @@ static void MX_CAN1_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-
-
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -150,6 +109,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
@@ -159,28 +119,31 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t sendDataArray[PACKAGE_SIZE] = {1, 2, 4, 8, 16, 32, 64, 128};
 
-  struct CAN_QUEUE_DATA pack = {'#', "$$$@#$@@"};
-
-  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
-  if (to_frame(frame, sizeof(frame), &pack) == -1) {
-	  int err = 1;
-  }
-
-  if (from_frame(frame, &pack) == -1) {
-	  int err = 1;
-  }
+//  struct CAN_QUEUE_DATA pack = {'#', "$$$@#$@@"};
+//
+//  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
+//  if (to_frame(frame, sizeof(frame), &pack) == -1) {
+//	  int err = 1;
+//  }
+//
+//  if (from_frame(frame, &pack) == -1) {
+//	  int err = 1;
+//  }
 
   while (1)
   {
-	 if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6)){
-		 //transmitData(&GPSDATA);
-		 HAL_Delay(200);
-		 sendData(&hcan1, 0x5, PACKAGE_SIZE, sendDataArray, &CanTxHeader);
-		 //sendMOTOR();
+	  struct CAN_QUEUE_DATA package = {0, {0}};
+	  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
 
-	 }
+	  if(CAN_from_queue(&package)) {
+		  if (to_frame(frame, sizeof(frame), &package) == 1) {
+			  // Put in UART transmit buffer
+		  }
+		  else {
+			  ERR_COUNTER++;
+		  }
+	  }
 
 
     /* USER CODE END WHILE */
@@ -354,6 +317,25 @@ static void MX_USART2_UART_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+  /* DMA1_Channel7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -393,203 +375,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
-
-void sendMOTOR(){
-	char str[5] = {0};
-	// MOTOR
-	sprintf(str, "%s", "Motor duty cycle: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%d", MOTOR_DUTYCYCLE);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-}
-
-void sendMPU() {
-	char str[15] = {0};
-
-	// ACCCEL
-	sprintf(str, "%s", "Accel_X: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_ACCELX);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Accel_Y: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_ACCELY);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Accel_Z: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_ACCELZ);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-
-	// GYRO
-	sprintf(str, "%s", "Gyro_X: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_GYROX);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Gyro_Y: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_GYROY);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Gyro_Z: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_GYROZ);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-
-	//TEMP
-	sprintf(str, "%s", "Temperature: " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", MPU_TEMP);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-
-}
-
-void sendGPS(){
-
-	char str[15] = {0};
-	sprintf(str, "%s", "Coordinates: " );					//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_LAT_DIR);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", GPS_LAT);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", " , " );
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%c", GPS_LON_DIR);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", GPS_LON);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-
-	sprintf(str, "%s", "Quality: ");						//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%u", GPS_QUALITY);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Time: ");							//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%u", GPS_HOURS);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, ":", 2, 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%u", GPS_MINUTES);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, ":", 2, 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%u", GPS_SEC);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "Altitude: " );						//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", GPS_ALTITUDE);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "HDOP: " );							//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", GPS_HDOP);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-	memset(str, 0, sizeof str);
-	sprintf(str, "%s", "H_Geoid: " );						//Header
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	memset(str, 0, sizeof str);
-	sprintf(str, "%f", GPS_H_GEOID);
-	HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	HAL_UART_Transmit(&huart2, "\n", 2, 100);				//Newline
-	HAL_UART_Transmit(&huart2, "\r", 2, 100);				//Carriage return
-
-}
-
-
-/*
-void placeData(uint8_t *DataPass) {
-	if (CanRxHeader.ExtId == 0x03)
-	{
-		for(int i = 0; i < PACKAGE_SIZE;i++) {
-			if (!QueueFull(&GPSDATA)) {
-				EnterQueue(&GPSDATA, *(DataPass + i));
-			}
-
-		}
-	}
-	if (CanRxHeader.ExtId == ACCELID) {
-		for(int i = 0; i < PACKAGE_SIZE;i++) {
-			if (!QueueFull(&ACCEL)) {
-				EnterQueue(&ACCEL, *(DataPass + i));
-			}
-		}
-	}
-	if (CanRxHeader.ExtId == DCMOTORID) {
-		for(int i = 0; i < PACKAGE_SIZE;i++) {
-			if (!QueueFull(&DCMOTOR)) {
-				EnterQueue(&DCMOTOR, *(DataPass + i));
-			}
-		}
-	}
-
-}
-*/
-
-void transmitData(struct Queue *Data)
-{
-	int writePointer = Data -> pointWR;
-	int readPointer = Data -> pointRD;
-	char str[3] = {0};
-	uint8_t tempo = 0;
-	int bytesToRead = writePointer - readPointer;
-	for (int i = 0 ; i < bytesToRead ; i++){
-		if ((i % 255) == 0) HAL_UART_Transmit(&huart2, "___", 3, 100);
-		LeaveQueue(Data, &tempo);
-		sprintf(str, "%d", tempo);
-		HAL_UART_Transmit(&huart2, &str, strlen(str), 100);
-	}
-}
 /* USER CODE END 4 */
 
 /**

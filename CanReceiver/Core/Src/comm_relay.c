@@ -34,7 +34,7 @@ int to_frame(char * frame, size_t frame_size, struct CAN_QUEUE_DATA * package) {
 }
 
 int is_special_character(char c) {
-	if ((c == COMM_DEL_START) || (c == COMM_DEL_STOP) || (c == COMM_ESCAPE)) return 1;
+	if ((c == COMM_DEL_START) || (c == COMM_DEL_STOP) || (c == COMM_ESCAPE) || (c == 0)) return 1;
 	return 0;
 }
 

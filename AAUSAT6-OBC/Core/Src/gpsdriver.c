@@ -28,13 +28,12 @@ uint8_t GPSData[GPS_DATASIZE] = {0};
 void gps_init(UART_HandleTypeDef *huart, DMA_Channel_TypeDef *dmac) {
 	uart = huart;
 	dma = dmac;
+	HAL_UART_Receive_DMA(uart, rawData, GPS_BUFSIZE);
 }
 
 int8_t readGPS(GPS_FIX_DATA *data){
 
 	int flag = 0;
-
-	HAL_UART_Receive_DMA(uart, rawData, GPS_BUFSIZE);
 
 	for (uint16_t i = 0; i < GPS_BUFSIZE; i++) {
 		holdData[i] = rawData[i];

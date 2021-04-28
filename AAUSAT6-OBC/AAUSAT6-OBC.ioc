@@ -274,3 +274,4 @@ PB1.GPIOParameters=GPIO_Label
 PA7.Signal=GPIO_Output
 PB4\ (NJTRST).Signal=GPIO_Output
 PA6.Locked=true
+isbadioc=false

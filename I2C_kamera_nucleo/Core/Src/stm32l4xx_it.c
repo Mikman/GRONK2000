@@ -23,6 +23,7 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "camera.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,11 +57,11 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_memtomem_dma1_channel2;
 extern DMA_HandleTypeDef hdma_tim1_ch3;
-extern DMA_HandleTypeDef hdma_tim2_ch3;
 /* USER CODE BEGIN EV */
-extern uint8_t cameraData;
+extern CAM_HandleTypeDef hcam;
+extern TIM_HandleTypeDef htim1;
+extern int dev;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -202,47 +203,16 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles DMA1 channel1 global interrupt.
-  */
-void DMA1_Channel1_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_tim2_ch3);
-  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-  HAL_DMA_Abort_IT(&hdma_tim2_ch3);
-  int dev = 0;
-  /* USER CODE END DMA1_Channel1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles DMA1 channel2 global interrupt.
-  */
-void DMA1_Channel2_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel2_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_memtomem_dma1_channel2);
-  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel2_IRQn 1 */
-}
-
-/**
   * @brief This function handles DMA1 channel7 global interrupt.
   */
 void DMA1_Channel7_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
-
+  CAM_stopLineTransfer(&hcam);
+  transmitBuffer();
   /* USER CODE END DMA1_Channel7_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_tim1_ch3);
   /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
-  HAL_DMA_Abort_IT(&hdma_tim1_ch3);
-  //HAL_DMA_Start_IT(&hdma_tim1_ch3, (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, (uint32_t)640);
-  int dev = 0;
   /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 

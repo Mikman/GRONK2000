@@ -43,15 +43,14 @@
 I2C_HandleTypeDef hi2c1;
 
 TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
 DMA_HandleTypeDef hdma_tim1_ch3;
-DMA_HandleTypeDef hdma_tim2_ch3;
 
-DMA_HandleTypeDef hdma_memtomem_dma1_channel2;
+UART_HandleTypeDef huart1;
+
 /* USER CODE BEGIN PV */
 CAM_HandleTypeDef hcam;
 Picture pic1;
-uint8_t cameraData[640];
+uint8_t cameraData[650] = {87};
 
 /* USER CODE END PV */
 
@@ -59,9 +58,9 @@ uint8_t cameraData[640];
 void SystemClock_Config(void);
 static void MX_DMA_Init(void);
 static void MX_GPIO_Init(void);
-static void MX_TIM2_Init(void);
-static void MX_TIM1_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_TIM1_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 void CAM_Handle_Init(CAM_HandleTypeDef *cam);
 /* USER CODE END PFP */
@@ -100,28 +99,41 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_DMA_Init();
   MX_GPIO_Init();
-  MX_TIM2_Init();
-  MX_TIM1_Init();
   MX_I2C1_Init();
+  MX_TIM1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_I2C_Master_Transmit(&hi2c1, 0x21<<1, cameraData, 1, HAL_MAX_DELAY);
+  //hi2c1.Instance->CR1 |= 0x8000;
+  //if (HAL_I2C_Master_Transmit(&hi2c1, 0x68 << 1, cameraData, 2, HAL_MAX_DELAY) != HAL_OK) {
+	//  int dev = 0;
+  //}
   CAM_Handle_Init(&hcam);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET); // Transfer pin sættes lav
+  //HAL_TIM_PWM_Start(hcam.requestDataTimer, hcam.requestDataChannel); // PWM/addrInc startes
+
   CAM_init(&hcam);
-  HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1);
+
+
+  int a = CAM_getReg(&hcam, 0x12);
+  int b = CAM_getReg(&hcam, 0x1E);
+  int c = CAM_getReg(&hcam, 0x13);
+  int d = CAM_getReg(&hcam, 0x3F);
+  int e = CAM_getReg(&hcam, 0x71);
+
+
+  HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // Random kanal for at timeren altid kører
   __HAL_TIM_ENABLE_DMA(&htim1, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
-  HAL_DMA_Start_IT(htim1.hdma[TIM_DMA_ID_CC3], (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, 640);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET); // Transfer pin sættes høj
+  //HAL_DMA_Start_IT(htim1.hdma[TIM_DMA_ID_CC3], (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, 640);
+
+  CAM_takePicture(&hcam);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  if (htim1.Instance->CNT > 60) {
-	  		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
-
-	  	  }
-	  	  else (HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5, GPIO_PIN_RESET));
+	  CAM_update(&hcam);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -175,7 +187,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -250,6 +263,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 0 */
 
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_OC_InitTypeDef sConfigOC = {0};
   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
@@ -260,10 +274,19 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 6-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 120-1;
+  htim1.Init.Period = 240-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_TIM_OC_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
@@ -290,15 +313,13 @@ static void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_PWM2;
-  sConfigOC.Pulse = 60;
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_TIMING;
-  sConfigOC.Pulse = 0;
-  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  sConfigOC.OCMode = TIM_OCMODE_PWM2;
+  sConfigOC.Pulse = 120-1;
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -325,74 +346,42 @@ static void MX_TIM1_Init(void)
 }
 
 /**
-  * @brief TIM2 Initialization Function
+  * @brief USART1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_TIM2_Init(void)
+static void MX_USART1_UART_Init(void)
 {
 
-  /* USER CODE BEGIN TIM2_Init 0 */
+  /* USER CODE BEGIN USART1_Init 0 */
 
-  /* USER CODE END TIM2_Init 0 */
+  /* USER CODE END USART1_Init 0 */
 
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
+  /* USER CODE BEGIN USART1_Init 1 */
 
-  /* USER CODE BEGIN TIM2_Init 1 */
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
 
-  /* USER CODE END TIM2_Init 1 */
-  htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 65535;
-  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 11-1;
-  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_OC_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_TIMING;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM2;
-  sConfigOC.Pulse = 5;
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_TIMING;
-  sConfigOC.Pulse = 0;
-  if (HAL_TIM_OC_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM2_Init 2 */
-
-  /* USER CODE END TIM2_Init 2 */
-  HAL_TIM_MspPostInit(&htim2);
+  /* USER CODE END USART1_Init 2 */
 
 }
 
 /**
   * Enable DMA controller clock
-  * Configure DMA for memory to memory transfers
-  *   hdma_memtomem_dma1_channel2
   */
 static void MX_DMA_Init(void)
 {
@@ -400,28 +389,7 @@ static void MX_DMA_Init(void)
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
 
-  /* Configure DMA request hdma_memtomem_dma1_channel2 on DMA1_Channel2 */
-  hdma_memtomem_dma1_channel2.Instance = DMA1_Channel2;
-  hdma_memtomem_dma1_channel2.Init.Request = DMA_REQUEST_0;
-  hdma_memtomem_dma1_channel2.Init.Direction = DMA_MEMORY_TO_MEMORY;
-  hdma_memtomem_dma1_channel2.Init.PeriphInc = DMA_PINC_DISABLE;
-  hdma_memtomem_dma1_channel2.Init.MemInc = DMA_MINC_ENABLE;
-  hdma_memtomem_dma1_channel2.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-  hdma_memtomem_dma1_channel2.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-  hdma_memtomem_dma1_channel2.Init.Mode = DMA_NORMAL;
-  hdma_memtomem_dma1_channel2.Init.Priority = DMA_PRIORITY_LOW;
-  if (HAL_DMA_Init(&hdma_memtomem_dma1_channel2) != HAL_OK)
-  {
-    Error_Handler( );
-  }
-
   /* DMA interrupt init */
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* DMA1_Channel2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
   /* DMA1_Channel7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
@@ -443,6 +411,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8|GPIO_PIN_12, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA0 PA1 PA2 PA3
@@ -450,7 +421,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA8 PA12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB4 PB5 */
@@ -466,11 +444,11 @@ static void MX_GPIO_Init(void)
 void CAM_Handle_Init(CAM_HandleTypeDef *cam) {
 	cam->I2C_Address = 0x21;
 	cam->destination = cameraData;
-	cam->hdma = &hdma_tim2_ch3;
+	cam->hdma = &hdma_tim1_ch3;
 	cam->pic = &pic1;
-	cam->requestDataTimer = &htim2;
-	cam->requestDataChannel = TIM_CHANNEL_2;
-	cam->DMATimer = &htim2;
+	cam->requestDataTimer = &htim1;
+	cam->requestDataChannel = TIM_CHANNEL_4;
+	cam->DMATimer = &htim1;
 	cam->DMAChannel = TIM_CHANNEL_3;
 	cam->source = &(GPIOA->IDR);
 	cam->status = STANDBY;
@@ -484,7 +462,7 @@ void CAM_Handle_Init(CAM_HandleTypeDef *cam) {
 }
 
 void transmitBuffer() {
-	//HAL_UART_Transmit(&huart1, cameraData, 640, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, cameraData, 640, HAL_MAX_DELAY);
 }
 /* USER CODE END 4 */
 

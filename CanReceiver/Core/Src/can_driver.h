@@ -23,7 +23,9 @@ void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan);
 
 void CAN_handle_receive();
 
-int CAN_from_queue(struct CAN_QUEUE_DATA * data);
+int CAN_from_rxQueue(struct CAN_QUEUE_DATA * data);
+
+int CAN_to_rxQueue(struct CAN_QUEUE_DATA * data);
 
 void passToCanTX(struct CAN_QUEUE_DATA *data);
 

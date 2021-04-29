@@ -225,7 +225,7 @@ void DMA1_Channel7_IRQHandler(void)
   /* USER CODE END DMA1_Channel7_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_usart2_tx);
   /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
-
+  //if (hdma_usart2_tx.DmaBaseAddress->ISR & (DMA_FLAG_TC1 << (hdma_usart2_tx.ChannelIndex & 0x1CU)) != 0U) uart_dma_XferCpltCallback();
   /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 

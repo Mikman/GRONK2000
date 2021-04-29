@@ -64,8 +64,12 @@ void CAN_handle_receive() {
         }
 }
 
-int CAN_from_queue(struct CAN_QUEUE_DATA * data) {
+int CAN_from_rxQueue(struct CAN_QUEUE_DATA * data) {
 	return LeaveStructQueue(&CAN_RX_QUEUE, data);
+}
+
+int CAN_to_rxQueue(struct CAN_QUEUE_DATA * data) {
+	return EnterStructQueue(&CAN_RX_QUEUE, data);
 }
 
 void passToCanTX(struct CAN_QUEUE_DATA *data){

@@ -29,6 +29,7 @@
 #include "stdbool.h"
 #include "can_driver.h"
 #include "comm_relay.h"
+#include "stdbool.h"
 
 /* USER CODE END Includes */
 
@@ -41,10 +42,13 @@
 /* USER CODE BEGIN PD */
 
 #define PACKAGE_SIZE 8
+#define UART_IN_BUF_SIZE 16
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+
+void uart_transmitFromCanRxQueue();
 
 /* USER CODE END PM */
 
@@ -58,6 +62,14 @@ DMA_HandleTypeDef hdma_usart2_tx;
 /* USER CODE BEGIN PV */
 
 int ERR_COUNT = 0;
+bool uart_tx_ready = 1;
+char frameBuffer[COMM_MAX_FRAME_SIZE + 1] = {0};
+char * nextTxFrame = NULL;
+
+int uart_in_lastStart = -1;
+int uart_in_read_ptr = 0;
+int uart_dma_laps_ahead = 0;
+char uart_in[UART_IN_BUF_SIZE] = {0};
 
 /* USER CODE BEGIN PV */
 
@@ -131,21 +143,18 @@ int main(void)
 //	  int err = 1;
 //  }
 
+  uart_init();
+
+  for (int i = 0; i < 5; i++) {
+	  struct CAN_QUEUE_DATA pack1 = {80, "ABC"};
+	  	  CAN_to_rxQueue(&pack1);
+	  	  struct CAN_QUEUE_DATA pack2 = {81, "DEF"};
+	  	  	  CAN_to_rxQueue(&pack2);
+  }
   while (1)
   {
-	  struct CAN_QUEUE_DATA package = {0, {0}};
-	  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
 
-	  if(CAN_from_queue(&package)) {
-		  if (to_frame(frame, sizeof(frame), &package) == 1) {
-			  // Put in UART transmit buffer
-		  }
-		  else {
-			  ERR_COUNTER++;
-		  }
-	  }
-
-
+	  uart_transmitFromCanRxQueue();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -374,6 +383,85 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void uart_init() {
+	HAL_UART_Receive_DMA(&huart2, uart_in, UART_IN_BUF_SIZE);
+}
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+	HAL_UART_AbortTransmit(&huart2);
+	uart_transmitFromCanRxQueue();
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (++uart_dma_laps_ahead >= 2) {
+		HardFault_Handler();
+	}
+}
+
+void uart_in_read() {
+	int dma_ptr = (UART_IN_BUF_SIZE - huart2.hdmarx->Instance->CNDTR) + UART_IN_BUF_SIZE * uart_dma_laps_ahead;
+	int rel_dis = dma_ptr - uart_in_read_ptr;
+
+	if (rel_dis >= UART_IN_BUF_SIZE) {
+		HardFault_Handler(); // Buffer overflow
+	}
+
+	for (; rel_dis > 0; uart_in_read_ptr++) {
+
+		if (uart_in_read_ptr >= UART_IN_BUF_SIZE) {
+			uart_in_read_ptr = 0;
+			uart_in_lastStart -= UART_IN_BUF_SIZE;
+			uart_dma_laps_ahead--;
+		}
+
+		if (uart_in[uart_in_read_ptr] == COMM_DEL_START) uart_in_lastStart = uart_in_read_ptr;
+		else if (uart_in[uart_in_read_ptr] == COMM_DEL_STOP) {
+
+			int frameLength = uart_in_read_ptr - uart_in_lastStart;
+
+			if (frameLength <= COMM_MAX_FRAME_SIZE) {
+				//uart_in_lastStart = -1; <--------
+				struct CAN_QUEUE_DATA package = {0, {0}};
+				char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
+
+				if (uart_in_lastStart < 0) {
+					memcpy(frame, UART_IN_BUF_SIZE + uart_in_lastStart, -uart_in_lastStart);
+					memcpy(frame - uart_in_lastStart, 0, uart_in_read_ptr);
+				}
+				else memcpy(frame, uart_in + uart_in_lastStart, frameLength);
+
+				if (from_frame(frame, &package)) {
+					passToCanTX(&package);
+				} else {
+					HardFault_Handler();
+				}
+			}
+		}
+	}
+}
+
+void uart_transmitFromCanRxQueue() {
+	if (huart2.gState == HAL_UART_STATE_READY) {
+		struct CAN_QUEUE_DATA package = { 0, { 0 } };
+
+		if (nextTxFrame == NULL && CAN_from_rxQueue(&package)) {
+
+			if (to_frame(frameBuffer, sizeof(frameBuffer), &package) == 1) {
+				// Package is put in frame and transmitted
+				nextTxFrame = frameBuffer;
+			}
+		}
+
+		if (nextTxFrame != NULL && HAL_UART_Transmit_DMA(&huart2,
+				(uint8_t*) nextTxFrame, strlen(frameBuffer)) == HAL_OK) {
+			nextTxFrame = NULL;
+		} else {
+			ERR_COUNT++;
+		}
+	}
+}
+
 
 /* USER CODE END 4 */
 

@@ -789,9 +789,14 @@ void task_partcl(void *argument)
 void task_image(void *argument)
 {
   /* USER CODE BEGIN task_image */
+
+	CAM_init(&hcam);
+	CAM_Handle_Init(&hcam, &hdma_tim1_ch3, &htim1, &hi2c1);
+
   /* Infinite loop */
   for(;;)
   {
+	image();
     osDelay(1);
   }
   /* USER CODE END task_image */

@@ -214,14 +214,21 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  osKernelStart();
+  //osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  struct CAN_QUEUE_DATA package = {'X', "AAAAAAAA"};
+  int i = 0;
   while (1)
   {
+
+	  passToCanTX(&package);
+	  HAL_Delay(5000);
+
+	  package.data[i++]++;
+	  if (i >= 8) i = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

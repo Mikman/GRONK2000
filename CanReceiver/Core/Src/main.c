@@ -42,7 +42,7 @@
 /* USER CODE BEGIN PD */
 
 #define PACKAGE_SIZE 8
-#define UART_IN_BUF_SIZE 32
+#define UART_IN_BUF_SIZE 512
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -135,8 +135,8 @@ int main(void)
 
   while (1)
   {
-	  HAL_Delay(1000);
-	  uart_in_read();
+	  uart_transmitFromCanRxQueue(); 	// CAN IN -> UART OUT
+	  uart_in_read();					// UART IN -> CAN OUT
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -217,7 +217,7 @@ static void MX_CAN1_Init(void)
 
   /* USER CODE BEGIN CAN1_Init 0 */
 	  uint32_t ext_id = 0x00000000;							// Den største værdi der kan være på MSB er 1
-	  uint32_t mask = 0xFFFFFFE0;
+	  uint32_t mask = 0xFFFFFF00;
 	  CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;			// Vi vælger at bruge mask mode
 	  CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13; // (ext_id << 3) >> 16;						// Da vi har 32 bit ID, er dette de 16 MSB af ID
 	  CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;	// Da vi har 32 bit ID, er dette de 16 LSB af ID

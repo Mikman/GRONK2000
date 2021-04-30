@@ -171,6 +171,7 @@ if (numOfBytes % PACKAGE_SIZE == 0)
 		while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {}
 		if (messageSplitter(dataArray, dataToMB, i)) {
 			if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB, &randoMailBox) != HAL_OK) {
+				// todo: Vi skal lave en bedre håndtering af HAL_BUSY, end Error.
 				Error_Handler();
 
 			}

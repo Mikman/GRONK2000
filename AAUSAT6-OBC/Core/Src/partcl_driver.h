@@ -26,6 +26,8 @@ void partcl_init();
 
 void partcl_execute();
 
+void partcl_add_program(char * str, size_t size);
+
 char partcl_getInputChar();
 
 void partcl_printf(const char *str);

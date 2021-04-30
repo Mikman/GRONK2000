@@ -57,7 +57,7 @@ void CAN_handle_receive() {
     while (HAL_CAN_GetRxFifoFillLevel(can1, CAN_RX_FIFO0) > 0) {
             HAL_CAN_GetRxMessage(can1, CAN_RX_FIFO0, RxHeader, buffer); // Modtag beskeden og læg den i buffer
             CAN_RX_QUEUE_DATA.ID = RxHeader->ExtId;
-            for (int i = 0 ; 0 < PACKAGE_SIZE ; i++){
+            for (int i = 0 ; i < PACKAGE_SIZE ; i++){
             	CAN_RX_QUEUE_DATA.data[i] = buffer[i];
             }
             EnterStructQueue(&CAN_RX_QUEUE, &CAN_RX_QUEUE_DATA);

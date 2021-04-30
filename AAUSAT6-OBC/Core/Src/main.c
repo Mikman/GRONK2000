@@ -198,21 +198,14 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  //osKernelStart();
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  struct CAN_QUEUE_DATA package = {'X', "AAAAAAAA"};
-  int i = 0;
   while (1)
   {
 
-	  passToCanTX(&package);
-	  HAL_Delay(5000);
-
-	  package.data[i++]++;
-	  if (i >= 8) i = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -230,15 +223,10 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -279,9 +267,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 /**
@@ -294,7 +279,7 @@ static void MX_CAN1_Init(void)
 
   /* USER CODE BEGIN CAN1_Init 0 */
 	uint32_t ext_id = 0x00000000;                            // Den største værdi der kan være på MSB er 1
-	    uint32_t mask = 0xFFFFFFE0;
+	    uint32_t mask = 0x0;
 	    CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;            // Vi vælger at bruge mask mode
 	    CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13; // (ext_id << 3) >> 16;                        // Da vi har 32 bit ID, er dette de 16 MSB af ID
 	    CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;    // Da vi har 32 bit ID, er dette de 16 LSB af ID
@@ -536,7 +521,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
@@ -664,10 +648,11 @@ void task_mpu6050(void *argument)
 void task_partcl(void *argument)
 {
   /* USER CODE BEGIN task_partcl */
+	char * prg = "tF 1;";
+	partcl_add_program(prg, strlen(prg));
   /* Infinite loop */
   for(;;)
   {
-	  partcl_init();	// Reset and initialize
 	  partcl_execute();	// Interpret and execute educational commands
 	  taskYIELD();		// Go to another task when done
   }

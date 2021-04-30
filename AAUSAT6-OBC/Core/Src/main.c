@@ -33,6 +33,7 @@
 #include "circle_queue_struct.h"
 #include "can_driver.h"
 #include "stdbool.h"
+#include "image_driver.h"
 
 /* USER CODE END Includes */
 
@@ -56,7 +57,9 @@ CAN_HandleTypeDef hcan1;
 
 I2C_HandleTypeDef hi2c1;
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+DMA_HandleTypeDef hdma_tim1_ch3;
 
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
@@ -89,6 +92,13 @@ const osThreadAttr_t taskParTCL_attributes = {
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for taskImage */
+osThreadId_t taskImageHandle;
+const osThreadAttr_t taskImage_attributes = {
+  .name = "taskImage",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* USER CODE BEGIN PV */
 
 CAN_TxHeaderTypeDef CanTxHeader;
@@ -105,10 +115,12 @@ static void MX_USART1_UART_Init(void);
 static void MX_CAN1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_TIM1_Init(void);
 void task_gps(void *argument);
 void task_dcmotor(void *argument);
 void task_mpu6050(void *argument);
 void task_partcl(void *argument);
+void task_image(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -152,6 +164,7 @@ int main(void)
   MX_CAN1_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
@@ -189,6 +202,9 @@ int main(void)
   /* creation of taskParTCL */
   taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
 
+  /* creation of taskImage */
+  taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -223,15 +239,10 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -272,9 +283,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 /**
@@ -420,6 +428,90 @@ static void MX_I2C1_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+  TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 6-1;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 240;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_OC_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM2;
+  sConfigOC.Pulse = 120-1;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_TIMING;
+  sConfigOC.Pulse = 0;
+  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
+  sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+  sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+  sBreakDeadTimeConfig.DeadTime = 0;
+  sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+  sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+  sBreakDeadTimeConfig.BreakFilter = 0;
+  sBreakDeadTimeConfig.Break2State = TIM_BREAK2_DISABLE;
+  sBreakDeadTimeConfig.Break2Polarity = TIM_BREAK2POLARITY_HIGH;
+  sBreakDeadTimeConfig.Break2Filter = 0;
+  sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+  if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+  HAL_TIM_MspPostInit(&htim1);
+
+}
+
+/**
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
@@ -516,6 +608,9 @@ static void MX_DMA_Init(void)
   /* DMA1_Channel5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+  /* DMA1_Channel7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
 
 }
 
@@ -535,30 +630,40 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Watchdog_out_Pin|DC_motor_Dir1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Watchdog_out_GPIO_Port, Watchdog_out_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Address_inc_Pin|Get_image_pin_Pin|LD3_Pin|DC_motor_Dir2_Pin
+  HAL_GPIO_WritePin(MSB3_GPIO_Port, MSB3_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir1_Pin|DC_motor_Dir2_Pin
                           |Transfer_pin_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PA0 PA1 PA2 PA3
-                           PA4 PA5 PA6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
-                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
+  /*Configure GPIO pin : Watchdog_out_Pin */
+  GPIO_InitStruct.Pin = Watchdog_out_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Watchdog_out_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LSB0_Pin LSB1_Pin LSB2_Pin LSB3_Pin
+                           MSB0_Pin MSB1_Pin MSB2_Pin */
+  GPIO_InitStruct.Pin = LSB0_Pin|LSB1_Pin|LSB2_Pin|LSB3_Pin
+                          |MSB0_Pin|MSB1_Pin|MSB2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Watchdog_out_Pin DC_motor_Dir1_Pin */
-  GPIO_InitStruct.Pin = Watchdog_out_Pin|DC_motor_Dir1_Pin;
+  /*Configure GPIO pin : MSB3_Pin */
+  GPIO_InitStruct.Pin = MSB3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(MSB3_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Address_inc_Pin Get_image_pin_Pin LD3_Pin DC_motor_Dir2_Pin
+  /*Configure GPIO pins : Address_inc_Pin Get_image_pin_Pin DC_motor_Dir1_Pin DC_motor_Dir2_Pin
                            Transfer_pin_Pin */
-  GPIO_InitStruct.Pin = Address_inc_Pin|Get_image_pin_Pin|LD3_Pin|DC_motor_Dir2_Pin
+  GPIO_InitStruct.Pin = Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir1_Pin|DC_motor_Dir2_Pin
                           |Transfer_pin_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -665,6 +770,24 @@ void task_partcl(void *argument)
 	  taskYIELD();		// Go to another task when done
   }
   /* USER CODE END task_partcl */
+}
+
+/* USER CODE BEGIN Header_task_image */
+/**
+* @brief Function implementing the taskImage thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_task_image */
+void task_image(void *argument)
+{
+  /* USER CODE BEGIN task_image */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END task_image */
 }
 
  /**

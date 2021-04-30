@@ -23,6 +23,9 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+#include "image_driver.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,10 +60,14 @@
 
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
+extern DMA_HandleTypeDef hdma_tim1_ch3;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim7;
 
+
 /* USER CODE BEGIN EV */
+
+extern CAM_HandleTypeDef hcam;
 
 /* USER CODE END EV */
 
@@ -188,6 +195,21 @@ void DMA1_Channel5_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel5_IRQn 1 */
 
   /* USER CODE END DMA1_Channel5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel7 global interrupt.
+  */
+void DMA1_Channel7_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel7_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim1_ch3);
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
+  CAM_stopLineTransfer(&hcam);
+
+  /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 
 /**

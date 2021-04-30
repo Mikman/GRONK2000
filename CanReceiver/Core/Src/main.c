@@ -42,7 +42,7 @@
 /* USER CODE BEGIN PD */
 
 #define PACKAGE_SIZE 8
-#define UART_IN_BUF_SIZE 16
+#define UART_IN_BUF_SIZE 32
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -126,35 +126,17 @@ int main(void)
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
   can_init(&hcan1, &CanRxHeader, &CanTxHeader, &huart2);
- // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-//  struct CAN_QUEUE_DATA pack = {'#', "$$$@#$@@"};
-//
-//  char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
-//  if (to_frame(frame, sizeof(frame), &pack) == -1) {
-//	  int err = 1;
-//  }
-//
-//  if (from_frame(frame, &pack) == -1) {
-//	  int err = 1;
-//  }
-
   uart_init();
 
-  for (int i = 0; i < 5; i++) {
-	  struct CAN_QUEUE_DATA pack1 = {80, "ABC"};
-	  	  CAN_to_rxQueue(&pack1);
-	  	  struct CAN_QUEUE_DATA pack2 = {81, "DEF"};
-	  	  	  CAN_to_rxQueue(&pack2);
-  }
   while (1)
   {
-
-	  uart_transmitFromCanRxQueue();
+	  HAL_Delay(1000);
+	  uart_in_read();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -395,49 +377,59 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (++uart_dma_laps_ahead >= 2) {
-		HardFault_Handler();
+		ERR_COUNT++;
 	}
 }
 
+
+// $E$4ABC############@@@$1Hejsa@
 void uart_in_read() {
 	int dma_ptr = (UART_IN_BUF_SIZE - huart2.hdmarx->Instance->CNDTR) + UART_IN_BUF_SIZE * uart_dma_laps_ahead;
-	int rel_dis = dma_ptr - uart_in_read_ptr;
 
-	if (rel_dis >= UART_IN_BUF_SIZE) {
-		HardFault_Handler(); // Buffer overflow
+	if (dma_ptr - uart_in_read_ptr >= UART_IN_BUF_SIZE) {
+		ERR_COUNT++; // Buffer overflow
 	}
 
-	for (; rel_dis > 0; uart_in_read_ptr++) {
+	int escapes = 0;
+
+	for (; dma_ptr - uart_in_read_ptr > 0; uart_in_read_ptr++) {
 
 		if (uart_in_read_ptr >= UART_IN_BUF_SIZE) {
 			uart_in_read_ptr = 0;
 			uart_in_lastStart -= UART_IN_BUF_SIZE;
 			uart_dma_laps_ahead--;
+			dma_ptr = (UART_IN_BUF_SIZE - huart2.hdmarx->Instance->CNDTR) + UART_IN_BUF_SIZE * uart_dma_laps_ahead;
 		}
 
-		if (uart_in[uart_in_read_ptr] == COMM_DEL_START) uart_in_lastStart = uart_in_read_ptr;
+		if (uart_in[uart_in_read_ptr] == COMM_DEL_START) {
+			uart_in_lastStart = uart_in_read_ptr;
+			escapes = 0;
+		}
+		else if (uart_in[uart_in_read_ptr] == COMM_ESCAPE) escapes++;
 		else if (uart_in[uart_in_read_ptr] == COMM_DEL_STOP) {
 
-			int frameLength = uart_in_read_ptr - uart_in_lastStart;
+			int frameLength = uart_in_read_ptr - uart_in_lastStart + 1;
 
-			if (frameLength <= COMM_MAX_FRAME_SIZE) {
+			if (frameLength <= COMM_MAX_FRAME_SIZE &&			// Characters can fit in a frame
+					frameLength <= PACKAGE_SIZE + 3 + escapes	// Data can't be as an example be 16 times 'A'
+					/*&& escapes <= 9*/) {							// A frame can't be filled with '#'
 				//uart_in_lastStart = -1; <--------
 				struct CAN_QUEUE_DATA package = {0, {0}};
 				char frame[COMM_MAX_FRAME_SIZE + 1] = {0};
 
 				if (uart_in_lastStart < 0) {
-					memcpy(frame, UART_IN_BUF_SIZE + uart_in_lastStart, -uart_in_lastStart);
-					memcpy(frame - uart_in_lastStart, 0, uart_in_read_ptr);
+					memcpy(frame, uart_in + UART_IN_BUF_SIZE + uart_in_lastStart, -uart_in_lastStart);
+					memcpy(frame - uart_in_lastStart, uart_in, uart_in_read_ptr + 1);
 				}
 				else memcpy(frame, uart_in + uart_in_lastStart, frameLength);
 
-				if (from_frame(frame, &package)) {
+				if (from_frame(frame, &package) == 1) {
 					passToCanTX(&package);
-				} else {
-					HardFault_Handler();
 				}
+				uart_in_lastStart = uart_in_read_ptr - COMM_MAX_FRAME_SIZE;
 			}
 		}
+
 	}
 }
 

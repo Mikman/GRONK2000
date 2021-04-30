@@ -44,10 +44,13 @@ int from_frame(const char * frame, struct CAN_QUEUE_DATA * package) {
 
 	if (frame[0] == COMM_DEL_START) i++;
 
-	for (; i < len && j < PACKAGE_SIZE + 1; i++, j++) {
+	for (; i < len; i++, j++) {
 		char c = 0;
 
-		if (frame[i] == COMM_DEL_START || frame[i] == COMM_DEL_STOP) return -1; // If we meet start or stop delimiter inside frame data, something's wrong.
+		if (j >= PACKAGE_SIZE + 1) return -1;
+
+		if (frame[i] == COMM_DEL_START) return -1; // If we meet start delimiter inside frame data, something's wrong.
+		if (frame[i] == COMM_DEL_STOP) return 1; // If we meet stop delimiter inside frame data, it is just a shorter message.
 
 		if (frame[i] == COMM_ESCAPE) {
 			c = frame[i+1] - 2; // Return the character after the escape character minus 2

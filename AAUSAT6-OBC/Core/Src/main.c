@@ -531,9 +531,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
+  htim2.Init.Prescaler = 720;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4294967295;
+  htim2.Init.Period = 100;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -708,7 +708,7 @@ void task_gps(void *argument)
 	GPS_FIX_DATA test ={0};
   for(;;)
   {
-	//GPS();
+	GPS();
     osDelay(10000);
   }
   /* USER CODE END 5 */
@@ -725,10 +725,12 @@ void task_dcmotor(void *argument)
 {
   /* USER CODE BEGIN task_dcmotor */
 	motor_init(&htim2, TIM_CHANNEL_2);
+	motor_start(0);
+	motor_direction(1);
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+
   }
   /* USER CODE END task_dcmotor */
 }

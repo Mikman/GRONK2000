@@ -394,7 +394,7 @@ static int setpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
   if (pwm > 100 || pwm <0){
 	  return tcl_result(tcl, FNORMAL, tcl_dup("Invalid PWM value"));
   }
-   //motor_setPwm(pwm);
+  motor_setPwm(pwm);
   char pwmArray[4]={0};
   char resultString[30] = "PWM has been executed: ";
   strcat(resultString, itoa(pwm, pwmArray, 10));

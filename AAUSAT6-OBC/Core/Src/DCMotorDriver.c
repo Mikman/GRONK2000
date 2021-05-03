@@ -14,13 +14,12 @@ struct StructQueue MOTOR_CAN_RX_QUEUE = {0};
 void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel) {
 	htim = htimer;
 	timer_channel = channel;
-	motor_setPwm(20);
 }
 
 void motor_setPwm(uint8_t dutycycle) {
-	CaptureDCMotor = htim->Instance->CCR1;
+	if (dutycycle > 100) dutycycle = 100;
 	ARR = htim->Instance->ARR;
-	htim->Instance->CCR1 = (htim->Instance->ARR/100)*dutycycle;
+	htim->Instance->CCR2 = (htim->Instance->ARR/100)*dutycycle;
 }
 
 void motor_start(int8_t dutycycle) {
@@ -32,20 +31,20 @@ void motor_start(int8_t dutycycle) {
 void motor_stop() {
 	HAL_TIM_PWM_Stop(htim, timer_channel);
 	//Fast motot stop
-	HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin, GPIO_PIN_SET);
 }
 
 float motor_meassure_dutycycle(){
 	float dutycycle = 0.;
-	dutycycle = (htim->Instance->CCR1)/(htim->Instance->ARR/100);
+	dutycycle = (htim->Instance->CCR2)/(htim->Instance->ARR/100);
 	return dutycycle;
 }
 
 uint8_t motor_meassure_direction(){
-	if (HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir1_Pin) && !HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir2_Pin)){
+	if (HAL_GPIO_ReadPin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin) && !HAL_GPIO_ReadPin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin)){
 		return 1;
-	}else if (!HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir1_Pin) && HAL_GPIO_ReadPin(GPIOA, DC_motor_Dir2_Pin)){
+	}else if (!HAL_GPIO_ReadPin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin) && HAL_GPIO_ReadPin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin)){
 		return 0;
 	}else {
 		return 3;
@@ -55,12 +54,12 @@ uint8_t motor_meassure_direction(){
 
 void motor_direction(int dir){
 	if (dir == 1){
-		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin, GPIO_PIN_RESET);
 	}
 	if (dir == 0){
-		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir2_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOA, DC_motor_Dir1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin, GPIO_PIN_RESET);
 	}
 
 }

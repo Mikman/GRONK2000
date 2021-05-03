@@ -62,6 +62,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define Watchdog_out_Pin GPIO_PIN_14
 #define Watchdog_out_GPIO_Port GPIOC
+#define DC_motor_Dir1_Pin GPIO_PIN_15
+#define DC_motor_Dir1_GPIO_Port GPIOC
 #define LSB0_Pin GPIO_PIN_0
 #define LSB0_GPIO_Port GPIOA
 #define LSB1_Pin GPIO_PIN_1
@@ -88,10 +90,6 @@ void Error_Handler(void);
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define DC_motor_PWM_Pin GPIO_PIN_15
-#define DC_motor_PWM_GPIO_Port GPIOA
-#define DC_motor_Dir1_Pin GPIO_PIN_3
-#define DC_motor_Dir1_GPIO_Port GPIOB
 #define DC_motor_Dir2_Pin GPIO_PIN_4
 #define DC_motor_Dir2_GPIO_Port GPIOB
 #define Transfer_pin_Pin GPIO_PIN_5

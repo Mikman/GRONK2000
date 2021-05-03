@@ -64,7 +64,6 @@ extern DMA_HandleTypeDef hdma_tim1_ch3;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim7;
 
-
 /* USER CODE BEGIN EV */
 
 extern CAM_HandleTypeDef hcam;

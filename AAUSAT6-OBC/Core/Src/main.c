@@ -214,7 +214,7 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  //osKernelStart();
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
@@ -539,7 +539,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 5000;
+  htim2.Init.Period = 4294967295;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -556,7 +556,7 @@ static void MX_TIM2_Init(void)
   sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -637,21 +637,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(Watchdog_out_GPIO_Port, Watchdog_out_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, Watchdog_out_Pin|DC_motor_Dir1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(MSB3_GPIO_Port, MSB3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir1_Pin|DC_motor_Dir2_Pin
-                          |Transfer_pin_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir2_Pin|Transfer_pin_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : Watchdog_out_Pin */
-  GPIO_InitStruct.Pin = Watchdog_out_Pin;
+  /*Configure GPIO pins : Watchdog_out_Pin DC_motor_Dir1_Pin */
+  GPIO_InitStruct.Pin = Watchdog_out_Pin|DC_motor_Dir1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Watchdog_out_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LSB0_Pin LSB1_Pin LSB2_Pin LSB3_Pin
                            MSB0_Pin MSB1_Pin MSB2_Pin */
@@ -668,10 +667,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(MSB3_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Address_inc_Pin Get_image_pin_Pin DC_motor_Dir1_Pin DC_motor_Dir2_Pin
-                           Transfer_pin_Pin */
-  GPIO_InitStruct.Pin = Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir1_Pin|DC_motor_Dir2_Pin
-                          |Transfer_pin_Pin;
+  /*Configure GPIO pins : Address_inc_Pin Get_image_pin_Pin DC_motor_Dir2_Pin Transfer_pin_Pin */
+  GPIO_InitStruct.Pin = Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir2_Pin|Transfer_pin_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -733,6 +730,7 @@ void task_gps(void *argument)
 void task_dcmotor(void *argument)
 {
   /* USER CODE BEGIN task_dcmotor */
+	motor_init(&htim2, TIM_CHANNEL_2);
   /* Infinite loop */
   for(;;)
   {

@@ -139,6 +139,9 @@ Axes3 MPU_Read_Accel(){
 }
 
 void MPU6050(){
+	tempVal = MPU_Read_Temp();
+	resultAccel = MPU_Read_Accel();
+	resultGyro = MPU_Read_Gyro();
 	if(UnreadElements(&MPU_CAN_RX_QUEUE)){
 
 		LeaveStructQueue(&MPU_CAN_RX_QUEUE, &MPU_DATA_RX);

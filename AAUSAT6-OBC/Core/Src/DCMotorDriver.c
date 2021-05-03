@@ -5,7 +5,7 @@ uint32_t timer_channel = 0;
 uint32_t CaptureDCMotor = 0;
 uint32_t ARR = 0;
 
-uint32_t MOTOR_DATA_ID = 0x3;
+uint32_t MOTOR_DATA_ID = 105;
 struct CAN_QUEUE_DATA MOTOR_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA MOTOR_DATA_TX = {0,{0}};
 struct StructQueue MOTOR_CAN_RX_QUEUE = {0};

@@ -14,7 +14,7 @@ UART_HandleTypeDef *uart;
 DMA_Channel_TypeDef *dma;
 
 
-uint32_t GPS_DATA_ID = 0x2;
+uint32_t GPS_DATA_ID = 101;
 struct CAN_QUEUE_DATA GPS_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA GPS_DATA_TX = {0,{0}};
 struct StructQueue GPS_CAN_RX_QUEUE = {0};
@@ -142,9 +142,10 @@ int8_t convertToString(GPS_FIX_DATA *data, char *str) {
 
 
 void GPS(){
+	readGPS(&data);
 	if(UnreadElements(&GPS_CAN_RX_QUEUE)){
 
-		readGPS(&data);
+
 		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA_RX);
 
 		if (GPS_DATA_RX.data[5] > 0){

@@ -590,13 +590,13 @@ void WatchdogHandler(){
 void task_gps(void *argument)
 {
   /* USER CODE BEGIN 5 */
+
   /* Infinite loop */
 	gps_init(&huart1, hdma_usart1_rx.Instance);
 	GPS_FIX_DATA test ={0};
   for(;;)
   {
-	readGPS(&test);
-
+	//GPS();
     osDelay(10000);
   }
   /* USER CODE END 5 */
@@ -630,9 +630,11 @@ void task_dcmotor(void *argument)
 void task_mpu6050(void *argument)
 {
   /* USER CODE BEGIN task_mpu6050 */
+	MPU_Init(&hi2c1);
   /* Infinite loop */
   for(;;)
   {
+
 	MPU6050();
     osDelay(100);
   }

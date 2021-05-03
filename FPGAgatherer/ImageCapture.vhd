@@ -7,10 +7,9 @@ use work.SevenSegDisplayTypes.ALL; -- Needed for Seven Segment Display
 entity ImageCapture is
 	port (
 		-- Camera I/O
-		XCLK, RESET, PWDN: out STD_LOGIC;
-		HREF, VSYNC, PCLK, getImagePin, configPin: in STD_LOGIC;
+		XCLK, RESET, PWDN, SIOC, SIOD: out STD_LOGIC;
+		HREF, VSYNC, PCLK, getImagePin, transferPin, addrInc: in STD_LOGIC;
 		CAMdata: in STD_LOGIC_VECTOR(7 downto 0);
-		SIOC, SIOD : out STD_LOGIC;
 		
 		-- RAM I/O
 		address: out STD_LOGIC_VECTOR(18 downto 0);
@@ -19,14 +18,8 @@ entity ImageCapture is
 		CS: buffer STD_LOGIC;
 		clk: in STD_LOGIC;
 		
+		-- Test I/O
 		LEDs: out STD_LOGIC_VECTOR(7 downto 0);
-		addrInc: in STD_LOGIC;
-		
-		transferPin: in STD_LOGIC;
-		
-		testGetImagePin, testVSYNC_falling, testWantAnImage, testSaveNextImage: out STD_LOGIC;
-		
-		
 		HEX0 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX1 : out STD_LOGIC_VECTOR(6 downto 0);
 		HEX2 : out STD_LOGIC_VECTOR(6 downto 0);
@@ -38,21 +31,15 @@ end ImageCapture;
 
 architecture Behavioral of ImageCapture is
 
-signal ticks, XCLKticks, i: integer := 0;
-signal j: integer := 0;
-signal addr, configClkCounter: integer range 0 to 512000 :=0;
+signal ticks, XCLKticks, i, j: integer := 0;
+signal addr: integer range 0 to 512000 := 0;
 
-signal currentImage: boolean;
-signal currentLine, SIOCbool: boolean := true;
-signal counting, wantAnImage: boolean := false;
+signal counting, wantAnImage, VSYNC_falling, saveNextImage: boolean := false;
 
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 type postEditBuffer is array(1 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 signal preArray: preEditBuffer;
 signal postArray: postEditBuffer;
-
-signal VSYNC_falling: boolean := false;
-signal saveNextImage: boolean := false;
 
 begin
 	
@@ -63,18 +50,15 @@ begin
 
 	-- Constant assignments for camera
 	XCLK <= '1' when (XCLKticks < 2) else '0';
-	SIOC <= '1' when (SIOCbool = true) else '0';
-	currentLine <= false when (VSYNC = '0') else true;
-	
-	testGetImagePin <= '1' when (getImagePin = '1') else '0';
-	testVSYNC_falling <= '1' when (VSYNC = '1') else '0';
-	testWantAnImage <= '1' when (wantAnImage = true) else '0';
-	testSaveNextImage <= '1' when (saveNextImage = true) else '0';
-	
 	RESET <= '1';
 	PWDN <= '0';
 	
-		process(addrInc)
+	counting <= true when (VSYNC = '0' and wantAnImage and HREF = '1') else false;
+	
+	
+	
+	
+	process(addrInc)
 	begin
 		if (transferPin = '1') then
 			if (addrInc'event and addrInc = '0') then --Reagerer på falling edge af addrInc, da STM32 genererer en falling edge ved CCR = 60
@@ -86,9 +70,9 @@ begin
 		else
 			j <= 0;
 		end if;
-		
 	end process;
 
+	
 
 	process(PCLK) -- Da der kontinuerligt bliver lagt data over på RAM, så bliver de første to pixels fyldt med bras og sendt
 	begin
@@ -136,7 +120,7 @@ begin
 		end if;
 	end process;
 
-	counting <= true when ((VSYNC = '0') and wantAnImage and HREF = '1') else false;
+	
 
 	process(VSYNC)
 	begin
@@ -150,6 +134,8 @@ begin
 		end if;
 	end process;
 	
+	
+	
 	process(getImagePin, VSYNC)
 	begin
 		if (getImagePin = '1') then 
@@ -161,35 +147,6 @@ begin
 	end process; 
 	
 	
-	process(clk)
-	begin
-		if (clk'event and clk='1') then
-			
-		--Her programmerer vi SCCB til kamera.
-			if (configPin = '1') then
-				
-				if (configClkCounter = 999) then
-					configClkCounter <= 0;
-					if (SIOCbool = false) then
-						SIOCbool <= true;
-					else 
-					
-						--opdater SIOD
-						SIOCbool <= false;
-					end if;
-					
-				else 
-					configClkCounter <= configClkCounter + 1;
-					
-				end if;
-	
-			else 
-				SIOCbool <= true;
-				configClkCounter <= 0;
-			end if;		
-			
-		end if;
-	end process;
 	
 	process(clk)
 	begin
@@ -226,7 +183,6 @@ begin
 					
 					ticks <= 0;
 					
-					
 				elsif(counting) then 
 				
 					if (ticks mod 8 = 0) then
@@ -241,12 +197,11 @@ begin
 					
 					ticks <= ticks + 1;
 					
-				elsif(currentLine) then
+				elsif(VSYNC = '1') then
 				
 					addr <= 0;
 					ticks <= 0;
-					
-					
+						
 				end if;
 			end if;
 		end if;
@@ -255,20 +210,20 @@ begin
 
 
 	
-			-- Initialize 6 digit 7 segment display, showing i as a decimal number
-		Display : entity work.SevenSegDisplay
+	-- Initialize 6 digit 7 segment display, showing i as a decimal number
+	Display : entity work.SevenSegDisplay
 		
-		generic map (
-			MODE => DEC_MODE)
+	generic map (
+		MODE => DEC_MODE)
 		
-		port map (
-			NUM => j,
-			EN => '1',
-			HEX(0) => HEX0,
-			HEX(1) => HEX1,
-			HEX(2) => HEX2,
-			HEX(3) => HEX3,
-			HEX(4) => HEX4,
-			HEX(5) => HEX5);
+	port map (
+		NUM => j,
+		EN => '1',
+		HEX(0) => HEX0,
+		HEX(1) => HEX1,
+		HEX(2) => HEX2,
+		HEX(3) => HEX3,
+		HEX(4) => HEX4,
+		HEX(5) => HEX5);
 	
 end Behavioral;

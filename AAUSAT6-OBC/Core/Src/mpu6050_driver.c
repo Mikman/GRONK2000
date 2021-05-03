@@ -1,6 +1,6 @@
 #include "mpu6050_driver.h"
 
-	uint32_t MPU_DATA_ID = 0x1;
+	uint32_t MPU_DATA_ID = 102;
 	struct CAN_QUEUE_DATA MPU_DATA_RX = {0,{0}};
 	struct CAN_QUEUE_DATA MPU_DATA_TX = {0,{0}};
 	struct StructQueue MPU_CAN_RX_QUEUE = {0};

@@ -44,7 +44,7 @@ int from_frame(const char * frame, struct CAN_QUEUE_DATA * package) {
 
 	if (frame[0] == COMM_DEL_START) i++;
 
-	for (; i < len; i++, j++) {
+	for (; i < len - 1; i++, j++) {
 		char c = 0;
 
 		if (j >= PACKAGE_SIZE + 1) return -1;

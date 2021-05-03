@@ -633,7 +633,8 @@ void task_mpu6050(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	MPU6050();
+    osDelay(100);
   }
   /* USER CODE END task_mpu6050 */
 }
@@ -648,7 +649,7 @@ void task_mpu6050(void *argument)
 void task_partcl(void *argument)
 {
   /* USER CODE BEGIN task_partcl */
-	char * prg = "tF 1;";
+	char * prg = "setPWM 55;";
 	partcl_add_program(prg, strlen(prg));
   /* Infinite loop */
   for(;;)

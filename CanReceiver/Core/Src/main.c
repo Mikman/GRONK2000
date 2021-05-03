@@ -70,6 +70,7 @@ int uart_in_lastStart = -1;
 int uart_in_read_ptr = 0;
 int uart_dma_laps_ahead = 0;
 char uart_in[UART_IN_BUF_SIZE] = {0};
+int uart_in_escapes = 0;
 
 /* USER CODE BEGIN PV */
 
@@ -390,8 +391,6 @@ void uart_in_read() {
 		ERR_COUNT++; // Buffer overflow
 	}
 
-	int escapes = 0;
-
 	for (; dma_ptr - uart_in_read_ptr > 0; uart_in_read_ptr++) {
 
 		if (uart_in_read_ptr >= UART_IN_BUF_SIZE) {
@@ -403,15 +402,15 @@ void uart_in_read() {
 
 		if (uart_in[uart_in_read_ptr] == COMM_DEL_START) {
 			uart_in_lastStart = uart_in_read_ptr;
-			escapes = 0;
+			uart_in_escapes = 0;
 		}
-		else if (uart_in[uart_in_read_ptr] == COMM_ESCAPE) escapes++;
+		else if (uart_in[uart_in_read_ptr] == COMM_ESCAPE) uart_in_escapes++;
 		else if (uart_in[uart_in_read_ptr] == COMM_DEL_STOP) {
 
 			int frameLength = uart_in_read_ptr - uart_in_lastStart + 1;
 
 			if (frameLength <= COMM_MAX_FRAME_SIZE &&			// Characters can fit in a frame
-					frameLength <= PACKAGE_SIZE + 3 + escapes	// Data can't be as an example be 16 times 'A'
+					frameLength <= PACKAGE_SIZE + 3 + uart_in_escapes	// Data can't be as an example be 16 times 'A'
 					/*&& escapes <= 9*/) {							// A frame can't be filled with '#'
 				//uart_in_lastStart = -1; <--------
 				struct CAN_QUEUE_DATA package = {0, {0}};

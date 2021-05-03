@@ -2,7 +2,7 @@
  * camera.h
  *
  *  Created on: Apr 16, 2021
- *      Author: joachim
+ *      Author: Michael
  */
 
 #ifndef CAMERA_H_

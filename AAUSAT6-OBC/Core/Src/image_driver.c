@@ -5,7 +5,6 @@ uint32_t IMAGE_DATA_ID = 0x5;
 struct CAN_QUEUE_DATA IMAGE_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA IMAGE_DATA_TX = {0,{0}};
 struct StructQueue IMAGE_CAN_RX_QUEUE = {0};
-CAM_HandleTypeDef hcam;
 Picture pic1;
 uint8_t cameraData[650] = {0};
 
@@ -160,15 +159,17 @@ void CAM_Handle_Init(CAM_HandleTypeDef *cam, DMA_HandleTypeDef *DMA_TimerChannel
 
 
 
-void image(){
+void image(CAM_HandleTypeDef * cam){
 	if(UnreadElements(&IMAGE_CAN_RX_QUEUE)){
 
 		LeaveStructQueue(&IMAGE_CAN_RX_QUEUE, &IMAGE_DATA_RX);
 
-		CAM_takePicture(&hcam);
+		CAM_takePicture(cam);
 
-		while(CAM_STATUS != STANDBY){
-			CAM_update(&hcam);
+		//todo: hcam bliver vist aldrig sat, og bør hellere blive givet som parameter i stedet for global variabel.
+
+		while(cam->status != STANDBY){
+			CAM_update(cam);
 		}
 
 

@@ -104,6 +104,7 @@ const osThreadAttr_t taskImage_attributes = {
 CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAN_FilterTypeDef CanFilter;
+CAM_HandleTypeDef hcam;
 
 /* USER CODE END PV */
 

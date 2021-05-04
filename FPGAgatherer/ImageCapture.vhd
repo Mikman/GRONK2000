@@ -61,11 +61,8 @@ begin
 	process(addrInc)
 	begin
 		if (transferPin = '1') then
-			if (addrInc'event and addrInc = '0') then --Reagerer på falling edge af addrInc, da STM32 genererer en falling edge ved CCR = 60
-				
-	
+			if (addrInc'event and addrInc = '0') then -- Reagerer på falling edge af addrInc, da STM32 genererer en falling edge ved CCR = 120
 				j <= j + 1;
-					
 			end if;
 		else
 			j <= 0;

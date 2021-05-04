@@ -94,9 +94,6 @@ void Error_Handler(void);
 #define DC_motor_Dir2_GPIO_Port GPIOB
 #define Transfer_pin_Pin GPIO_PIN_5
 #define Transfer_pin_GPIO_Port GPIOB
-#define Watchdog_ext_int_Pin GPIO_PIN_3
-#define Watchdog_ext_int_GPIO_Port GPIOH
-#define Watchdog_ext_int_EXTI_IRQn EXTI3_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

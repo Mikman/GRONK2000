@@ -1,0 +1,153 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+<<<<<<< Updated upstream
+Type  : Slow 1100mV 85C Model Setup 'addr_SW'
+Slack : -1.826
+TNS   : -39.952
+
+Type  : Slow 1100mV 85C Model Hold 'addr_SW'
+Slack : 0.227
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.538
+TNS   : -21.297
+
+Type  : Slow 1100mV 0C Model Setup 'addr_SW'
+Slack : -1.951
+TNS   : -42.369
+
+Type  : Slow 1100mV 0C Model Hold 'addr_SW'
+Slack : 0.319
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.538
+TNS   : -21.380
+
+Type  : Fast 1100mV 85C Model Setup 'addr_SW'
+Slack : -0.234
+TNS   : -2.301
+
+Type  : Fast 1100mV 85C Model Hold 'addr_SW'
+Slack : 0.147
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.245
+TNS   : -6.625
+
+Type  : Fast 1100mV 0C Model Setup 'addr_SW'
+Slack : -0.184
+TNS   : -1.346
+
+Type  : Fast 1100mV 0C Model Hold 'addr_SW'
+Slack : 0.153
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.250
+TNS   : -6.771
+=======
+<<<<<<< HEAD
+Type  : Slow 1100mV 85C Model Setup 'addrInc'
+Slack : -1.478
+TNS   : -39.326
+
+Type  : Slow 1100mV 85C Model Hold 'addrInc'
+Slack : 0.446
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'addrInc'
+Slack : -0.538
+TNS   : -29.213
+
+Type  : Slow 1100mV 0C Model Setup 'addrInc'
+Slack : -1.666
+TNS   : -44.340
+
+Type  : Slow 1100mV 0C Model Hold 'addrInc'
+Slack : 0.451
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'addrInc'
+Slack : -0.538
+TNS   : -28.744
+
+Type  : Fast 1100mV 85C Model Setup 'addrInc'
+Slack : -0.122
+TNS   : -0.936
+
+Type  : Fast 1100mV 85C Model Hold 'addrInc'
+Slack : 0.189
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'addrInc'
+Slack : -0.268
+TNS   : -9.656
+
+Type  : Fast 1100mV 0C Model Setup 'addrInc'
+Slack : -0.107
+TNS   : -0.707
+
+Type  : Fast 1100mV 0C Model Hold 'addrInc'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'addrInc'
+Slack : -0.256
+TNS   : -9.207
+=======
+Type  : Slow 1100mV 85C Model Setup 'addr_SW'
+Slack : -1.826
+TNS   : -39.952
+
+Type  : Slow 1100mV 85C Model Hold 'addr_SW'
+Slack : 0.227
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.538
+TNS   : -21.297
+
+Type  : Slow 1100mV 0C Model Setup 'addr_SW'
+Slack : -1.951
+TNS   : -42.369
+
+Type  : Slow 1100mV 0C Model Hold 'addr_SW'
+Slack : 0.319
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.538
+TNS   : -21.380
+
+Type  : Fast 1100mV 85C Model Setup 'addr_SW'
+Slack : -0.234
+TNS   : -2.301
+
+Type  : Fast 1100mV 85C Model Hold 'addr_SW'
+Slack : 0.147
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.245
+TNS   : -6.625
+
+Type  : Fast 1100mV 0C Model Setup 'addr_SW'
+Slack : -0.184
+TNS   : -1.346
+
+Type  : Fast 1100mV 0C Model Hold 'addr_SW'
+Slack : 0.153
+TNS   : 0.000
+>>>>>>> Stashed changes
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'addr_SW'
+Slack : -0.250
+TNS   : -6.771
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+
+------------------------------------------------------------

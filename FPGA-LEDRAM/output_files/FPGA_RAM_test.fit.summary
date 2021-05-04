@@ -1,0 +1,44 @@
+<<<<<<< Updated upstream
+Fitter Status : Successful - Tue Mar 23 15:54:26 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : FPGA_RAM_test
+Top-level Entity Name : FPGA_LEDRAM
+=======
+<<<<<<< HEAD
+Fitter Status : Successful - Wed Mar 24 11:31:54 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : FPGA_RAM_test
+Top-level Entity Name : Arduino_RAM_reader
+=======
+Fitter Status : Successful - Tue Mar 23 15:54:26 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : FPGA_RAM_test
+Top-level Entity Name : FPGA_LEDRAM
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
+Family : Cyclone V
+Device : 5CEBA4F23C7
+Timing Models : Final
+Logic utilization (in ALMs) : 10 / 18,480 ( < 1 % )
+<<<<<<< Updated upstream
+Total registers : 27
+Total pins : 42 / 224 ( 19 % )
+=======
+<<<<<<< HEAD
+Total registers : 36
+Total pins : 40 / 224 ( 18 % )
+=======
+Total registers : 27
+Total pins : 42 / 224 ( 19 % )
+>>>>>>> ecfe7ed449569dbf4516c698b280886dfc203147
+>>>>>>> Stashed changes
+Total virtual pins : 0
+Total block memory bits : 0 / 3,153,920 ( 0 % )
+Total RAM Blocks : 0 / 308 ( 0 % )
+Total DSP Blocks : 0 / 66 ( 0 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0 / 4 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )

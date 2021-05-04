@@ -1,0 +1,385 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "XCLK",
+					"strict" : false
+				},
+				{
+					"name" : "address[0]",
+					"strict" : false
+				},
+				{
+					"name" : "address[1]",
+					"strict" : false
+				},
+				{
+					"name" : "address[2]",
+					"strict" : false
+				},
+				{
+					"name" : "address[3]",
+					"strict" : false
+				},
+				{
+					"name" : "address[4]",
+					"strict" : false
+				},
+				{
+					"name" : "address[5]",
+					"strict" : false
+				},
+				{
+					"name" : "address[6]",
+					"strict" : false
+				},
+				{
+					"name" : "address[7]",
+					"strict" : false
+				},
+				{
+					"name" : "address[8]",
+					"strict" : false
+				},
+				{
+					"name" : "address[9]",
+					"strict" : false
+				},
+				{
+					"name" : "address[10]",
+					"strict" : false
+				},
+				{
+					"name" : "address[11]",
+					"strict" : false
+				},
+				{
+					"name" : "address[12]",
+					"strict" : false
+				},
+				{
+					"name" : "address[13]",
+					"strict" : false
+				},
+				{
+					"name" : "address[14]",
+					"strict" : false
+				},
+				{
+					"name" : "address[15]",
+					"strict" : false
+				},
+				{
+					"name" : "address[16]",
+					"strict" : false
+				},
+				{
+					"name" : "address[17]",
+					"strict" : false
+				},
+				{
+					"name" : "address[18]",
+					"strict" : false
+				},
+				{
+					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDs[7]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[6]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "RAMdata[7]",
+					"strict" : false
+				},
+				{
+					"name" : "transferPin",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "HREF",
+					"strict" : false
+				},
+				{
+					"name" : "VSYNC",
+					"strict" : false
+				},
+				{
+					"name" : "addrInc",
+					"strict" : false
+				},
+				{
+					"name" : "getImagePin",
+					"strict" : false
+				},
+				{
+					"name" : "PCLK",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "CAMdata[7]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

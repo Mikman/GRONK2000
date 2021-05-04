@@ -9,7 +9,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
+-include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include subdir.mk
@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Watchdog
+BUILD_ARTIFACT_NAME := Watchdog-Nucleo
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Watchdog.elf \
+Watchdog-Nucleo.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Watchdog.list \
+Watchdog-Nucleo.list \
 
 OBJCOPY_BIN += \
-Watchdog.bin \
+Watchdog-Nucleo.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Watchdog.elf secondary-outputs
+main-build: Watchdog-Nucleo.elf secondary-outputs
 
 # Tool invocations
-Watchdog.elf: $(OBJS) $(USER_OBJS) C:\Users\Michael\Documents\GitHub\GRONK2000\Watchdog\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Watchdog.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Michael\Documents\GitHub\GRONK2000\Watchdog\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Watchdog.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Watchdog-Nucleo.elf: $(OBJS) $(USER_OBJS) C:\Users\Michael\Documents\GitHub\GRONK2000\Watchdog-Nucleo\STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Watchdog-Nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Michael\Documents\GitHub\GRONK2000\Watchdog-Nucleo\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Watchdog-Nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,13 +71,13 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Watchdog.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Watchdog.list"
+Watchdog-Nucleo.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Watchdog-Nucleo.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Watchdog.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Watchdog.bin"
+Watchdog-Nucleo.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Watchdog-Nucleo.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

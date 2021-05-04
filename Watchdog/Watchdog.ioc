@@ -150,4 +150,3 @@ ProjectManager.DeviceId=STM32F103C8Tx
 VP_TIM4_VS_OPM.Signal=TIM4_VS_OPM
 ProjectManager.LibraryCopy=1
 PA3.Signal=GPIO_Output
-isbadioc=false

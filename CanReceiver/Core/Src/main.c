@@ -383,7 +383,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 
-// $E$4ABC############@@@$1Hejsa@
 void uart_in_read() {
 	int dma_ptr = (UART_IN_BUF_SIZE - huart2.hdmarx->Instance->CNDTR) + UART_IN_BUF_SIZE * uart_dma_laps_ahead;
 
@@ -437,6 +436,8 @@ void uart_transmitFromCanRxQueue() {
 		struct CAN_QUEUE_DATA package = { 0, { 0 } };
 
 		if (nextTxFrame == NULL && CAN_from_rxQueue(&package)) {
+
+			memset(frameBuffer, 0, COMM_MAX_FRAME_SIZE);
 
 			if (to_frame(frameBuffer, sizeof(frameBuffer), &package) == 1) {
 				// Package is put in frame and transmitted

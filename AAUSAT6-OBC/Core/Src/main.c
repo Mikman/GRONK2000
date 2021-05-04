@@ -730,7 +730,16 @@ void task_dcmotor(void *argument)
   /* Infinite loop */
   for(;;)
   {
-
+	  motor_direction(1);
+	  motor_setPwm(100);
+	  osDelay(5000);
+	  motor_setPwm(50);
+	  osDelay(5000);
+	  motor_direction(0);
+	  	  motor_setPwm(100);
+	  	  osDelay(5000);
+	  	  motor_setPwm(50);
+	  	  osDelay(5000);
   }
   /* USER CODE END task_dcmotor */
 }

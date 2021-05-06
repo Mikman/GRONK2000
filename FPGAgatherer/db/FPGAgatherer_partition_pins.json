@@ -4,10 +4,6 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "XCLK",
-					"strict" : false
-				},
-				{
 					"name" : "address[0]",
 					"strict" : false
 				},
@@ -84,7 +80,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "CS",
+					"strict" : false
+				},
+				{
 					"name" : "WE",
+					"strict" : false
+				},
+				{
+					"name" : "OE",
 					"strict" : false
 				},
 				{
@@ -320,63 +324,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "transferPin",
+					"name" : "CS_SW",
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "WE_SW",
 					"strict" : false
 				},
 				{
-					"name" : "HREF",
+					"name" : "OE_SW",
 					"strict" : false
 				},
 				{
-					"name" : "VSYNC",
-					"strict" : false
-				},
-				{
-					"name" : "addrInc",
-					"strict" : false
-				},
-				{
-					"name" : "getImagePin",
-					"strict" : false
-				},
-				{
-					"name" : "PCLK",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[0]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[1]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[2]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[3]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[4]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[5]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[6]",
-					"strict" : false
-				},
-				{
-					"name" : "CAMdata[7]",
+					"name" : "addr_SW",
 					"strict" : false
 				}
 			]

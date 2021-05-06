@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Sun May 02 14:37:04 2021
+Analysis & Synthesis Status : Successful - Thu May 06 11:08:00 2021
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : FPGAgatherer
-Top-level Entity Name : ImageCapture
+Top-level Entity Name : FPGA_LEDRAM
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 189
-Total pins : 100
+Total registers : 24
+Total pins : 84
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0

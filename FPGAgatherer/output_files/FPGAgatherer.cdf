@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(5CEBA4F23) Path("C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/output_files/") File("FPGAgatherer.sof") MfrSpec(OpMask(1));
+		Device PartName(5CEBA4F23) Path("C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/output_files/") File("FPGAgatherer.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

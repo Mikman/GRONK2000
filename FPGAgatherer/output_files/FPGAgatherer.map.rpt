@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FPGAgatherer
-Sun May 02 14:37:04 2021
+Thu May 06 11:08:00 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -15,24 +15,22 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
   9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Parameter Settings for User Entity Instance: SevenSegDisplay:Display
- 13. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod0
- 14. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod1
- 15. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div0
- 16. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod2
- 17. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div1
- 18. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod3
- 19. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div2
- 20. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod4
- 21. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div3
- 22. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod5
- 23. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div4
- 24. Port Connectivity Checks: "SevenSegDisplay:Display"
- 25. Post-Synthesis Netlist Statistics for Top Partition
- 26. Elapsed Time Per Partition
- 27. Analysis & Synthesis Messages
+ 10. Parameter Settings for User Entity Instance: SevenSegDisplay:Display
+ 11. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod0
+ 12. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod1
+ 13. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div0
+ 14. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod2
+ 15. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div1
+ 16. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod3
+ 17. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div2
+ 18. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod4
+ 19. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div3
+ 20. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Mod5
+ 21. Parameter Settings for Inferred Entity Instance: SevenSegDisplay:Display|lpm_divide:Div4
+ 22. Port Connectivity Checks: "SevenSegDisplay:Display"
+ 23. Post-Synthesis Netlist Statistics for Top Partition
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -58,14 +56,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun May 02 14:37:04 2021       ;
+; Analysis & Synthesis Status     ; Successful - Thu May 06 11:08:00 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGAgatherer                                ;
-; Top-level Entity Name           ; ImageCapture                                ;
+; Top-level Entity Name           ; FPGA_LEDRAM                                 ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 189                                         ;
-; Total pins                      ; 100                                         ;
+; Total registers                 ; 24                                          ;
+; Total pins                      ; 84                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -84,7 +82,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CEBA4F23C7        ;                    ;
-; Top-level entity name                                                           ; ImageCapture       ; FPGAgatherer       ;
+; Top-level entity name                                                           ; FPGA_LEDRAM        ; FPGAgatherer       ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; On                 ; Off                ;
 ; Maximum processors allowed for parallel compilation                             ; All                ;                    ;
@@ -171,138 +169,143 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 8           ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 12          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 8           ;
+; Maximum used               ; 12          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
-;     Processors 4-8         ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-12        ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                    ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                ; Library ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
-; SevenSegDigit.vhd                ; yes             ; User VHDL File               ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDigit.vhd          ;         ;
-; SevenSegDisplay.vhd              ; yes             ; User VHDL File               ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd        ;         ;
-; ImageCapture.vhd                 ; yes             ; User VHDL File               ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd           ;         ;
-; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_divide.tdf                       ;         ;
-; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/abs_divider.inc                      ;         ;
-; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/sign_div_unsign.inc                  ;         ;
-; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc                       ;         ;
-; db/lpm_divide_85m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_85m.tdf      ;         ;
-; db/sign_div_unsign_bnh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_bnh.tdf ;         ;
-; db/alt_u_div_s2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_s2f.tdf       ;         ;
-; db/lpm_divide_jbm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_jbm.tdf      ;         ;
-; db/sign_div_unsign_plh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_plh.tdf ;         ;
-; db/alt_u_div_ove.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_ove.tdf       ;         ;
-; db/lpm_divide_mbm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_mbm.tdf      ;         ;
-; db/sign_div_unsign_slh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_slh.tdf ;         ;
-; db/alt_u_div_uve.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_uve.tdf       ;         ;
-; db/lpm_divide_0dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_0dm.tdf      ;         ;
-; db/sign_div_unsign_6nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_6nh.tdf ;         ;
-; db/alt_u_div_i2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_i2f.tdf       ;         ;
-; db/lpm_divide_4dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_4dm.tdf      ;         ;
-; db/sign_div_unsign_anh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_anh.tdf ;         ;
-; db/alt_u_div_q2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_q2f.tdf       ;         ;
-; db/lpm_divide_7dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_7dm.tdf      ;         ;
-; db/sign_div_unsign_dnh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_dnh.tdf ;         ;
-; db/alt_u_div_03f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_03f.tdf       ;         ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                           ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                       ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------+---------+
+; SevenSegDigit.vhd                ; yes             ; User VHDL File               ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDigit.vhd          ;         ;
+; SevenSegDisplay.vhd              ; yes             ; User VHDL File               ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd        ;         ;
+; FPGA_LEDRAM.vhd                  ; yes             ; User VHDL File               ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd            ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_divide.tdf              ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/abs_divider.inc             ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/sign_div_unsign.inc         ;         ;
+; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc              ;         ;
+; db/lpm_divide_85m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_85m.tdf      ;         ;
+; db/sign_div_unsign_bnh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_bnh.tdf ;         ;
+; db/alt_u_div_s2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_s2f.tdf       ;         ;
+; db/lpm_divide_jbm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_jbm.tdf      ;         ;
+; db/sign_div_unsign_plh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_plh.tdf ;         ;
+; db/alt_u_div_ove.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_ove.tdf       ;         ;
+; db/lpm_divide_mbm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_mbm.tdf      ;         ;
+; db/sign_div_unsign_slh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_slh.tdf ;         ;
+; db/alt_u_div_uve.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_uve.tdf       ;         ;
+; db/lpm_divide_0dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_0dm.tdf      ;         ;
+; db/sign_div_unsign_6nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_6nh.tdf ;         ;
+; db/alt_u_div_i2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_i2f.tdf       ;         ;
+; db/lpm_divide_4dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_4dm.tdf      ;         ;
+; db/sign_div_unsign_anh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_anh.tdf ;         ;
+; db/alt_u_div_q2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_q2f.tdf       ;         ;
+; db/lpm_divide_7dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_7dm.tdf      ;         ;
+; db/sign_div_unsign_dnh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_dnh.tdf ;         ;
+; db/alt_u_div_03f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_03f.tdf       ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 2646      ;
-;                                             ;           ;
-; Combinational ALUT usage for logic          ; 5257      ;
-;     -- 7 input functions                    ; 0         ;
-;     -- 6 input functions                    ; 29        ;
-;     -- 5 input functions                    ; 38        ;
-;     -- 4 input functions                    ; 1521      ;
-;     -- <=3 input functions                  ; 3669      ;
-;                                             ;           ;
-; Dedicated logic registers                   ; 189       ;
-;                                             ;           ;
-; I/O pins                                    ; 100       ;
-;                                             ;           ;
-; Total DSP Blocks                            ; 0         ;
-;                                             ;           ;
-; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 99        ;
-; Total fan-out                               ; 17399     ;
-; Average fan-out                             ; 3.08      ;
-+---------------------------------------------+-----------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                                                   ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                                                           ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
+; Estimate of Logic utilization (ALMs needed) ; 2555                                                                                                                            ;
+;                                             ;                                                                                                                                 ;
+; Combinational ALUT usage for logic          ; 5097                                                                                                                            ;
+;     -- 7 input functions                    ; 0                                                                                                                               ;
+;     -- 6 input functions                    ; 12                                                                                                                              ;
+;     -- 5 input functions                    ; 23                                                                                                                              ;
+;     -- 4 input functions                    ; 1513                                                                                                                            ;
+;     -- <=3 input functions                  ; 3549                                                                                                                            ;
+;                                             ;                                                                                                                                 ;
+; Dedicated logic registers                   ; 24                                                                                                                              ;
+;                                             ;                                                                                                                                 ;
+; I/O pins                                    ; 84                                                                                                                              ;
+;                                             ;                                                                                                                                 ;
+; Total DSP Blocks                            ; 0                                                                                                                               ;
+;                                             ;                                                                                                                                 ;
+; Maximum fan-out node                        ; SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider|op_17~1 ;
+; Maximum fan-out                             ; 69                                                                                                                              ;
+; Total fan-out                               ; 16299                                                                                                                           ;
+; Average fan-out                             ; 3.08                                                                                                                            ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                      ;
-+----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; Compilation Hierarchy Node                         ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                   ; Entity Name         ; Library Name ;
-+----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |ImageCapture                                      ; 5257 (184)          ; 189 (189)                 ; 0                 ; 0          ; 100  ; 0            ; |ImageCapture                                                                                                                         ; ImageCapture        ; work         ;
-;    |SevenSegDisplay:Display|                       ; 5073 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display                                                                                                 ; SevenSegDisplay     ; work         ;
-;       |SevenSegDigit:\genDigits:0:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |SevenSegDigit:\genDigits:1:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |SevenSegDigit:\genDigits:2:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:2:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |SevenSegDigit:\genDigits:3:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:3:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |SevenSegDigit:\genDigits:4:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:4:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |SevenSegDigit:\genDigits:5:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:5:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
-;       |lpm_divide:Div0|                            ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_jbm:auto_generated|           ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated                                                   ; lpm_divide_jbm      ; work         ;
-;             |sign_div_unsign_plh:divider|          ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated|sign_div_unsign_plh:divider                       ; sign_div_unsign_plh ; work         ;
-;                |alt_u_div_ove:divider|             ; 223 (223)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_ove:divider ; alt_u_div_ove       ; work         ;
-;       |lpm_divide:Div1|                            ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_mbm:auto_generated|           ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated                                                   ; lpm_divide_mbm      ; work         ;
-;             |sign_div_unsign_slh:divider|          ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider                       ; sign_div_unsign_slh ; work         ;
-;                |alt_u_div_uve:divider|             ; 325 (325)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider|alt_u_div_uve:divider ; alt_u_div_uve       ; work         ;
-;       |lpm_divide:Div2|                            ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_0dm:auto_generated|           ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated                                                   ; lpm_divide_0dm      ; work         ;
-;             |sign_div_unsign_6nh:divider|          ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider                       ; sign_div_unsign_6nh ; work         ;
-;                |alt_u_div_i2f:divider|             ; 367 (367)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider|alt_u_div_i2f:divider ; alt_u_div_i2f       ; work         ;
-;       |lpm_divide:Div3|                            ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_4dm:auto_generated|           ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated                                                   ; lpm_divide_4dm      ; work         ;
-;             |sign_div_unsign_anh:divider|          ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider                       ; sign_div_unsign_anh ; work         ;
-;                |alt_u_div_q2f:divider|             ; 363 (363)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider|alt_u_div_q2f:divider ; alt_u_div_q2f       ; work         ;
-;       |lpm_divide:Div4|                            ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_7dm:auto_generated|           ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated                                                   ; lpm_divide_7dm      ; work         ;
-;             |sign_div_unsign_dnh:divider|          ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider                       ; sign_div_unsign_dnh ; work         ;
-;                |alt_u_div_03f:divider|             ; 310 (310)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider|alt_u_div_03f:divider ; alt_u_div_03f       ; work         ;
-;       |lpm_divide:Mod0|                            ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 707 (707)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod1|                            ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod1                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 751 (751)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod2|                            ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod2                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 684 (684)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod3|                            ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 561 (561)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod4|                            ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 441 (441)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod5|                            ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 299 (299)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-+----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                     ;
++----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                         ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                  ; Entity Name         ; Library Name ;
++----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |FPGA_LEDRAM                                       ; 5097 (24)           ; 24 (24)                   ; 0                 ; 0          ; 84   ; 0            ; |FPGA_LEDRAM                                                                                                                         ; FPGA_LEDRAM         ; work         ;
+;    |SevenSegDisplay:Display|                       ; 5073 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display                                                                                                 ; SevenSegDisplay     ; work         ;
+;       |SevenSegDigit:\genDigits:0:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |SevenSegDigit:\genDigits:1:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |SevenSegDigit:\genDigits:2:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:2:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |SevenSegDigit:\genDigits:3:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:3:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |SevenSegDigit:\genDigits:4:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:4:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |SevenSegDigit:\genDigits:5:SevenSegDisplay| ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:5:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
+;       |lpm_divide:Div0|                            ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_jbm:auto_generated|           ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated                                                   ; lpm_divide_jbm      ; work         ;
+;             |sign_div_unsign_plh:divider|          ; 223 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated|sign_div_unsign_plh:divider                       ; sign_div_unsign_plh ; work         ;
+;                |alt_u_div_ove:divider|             ; 223 (223)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div0|lpm_divide_jbm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_ove:divider ; alt_u_div_ove       ; work         ;
+;       |lpm_divide:Div1|                            ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_mbm:auto_generated|           ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated                                                   ; lpm_divide_mbm      ; work         ;
+;             |sign_div_unsign_slh:divider|          ; 325 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider                       ; sign_div_unsign_slh ; work         ;
+;                |alt_u_div_uve:divider|             ; 325 (325)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider|alt_u_div_uve:divider ; alt_u_div_uve       ; work         ;
+;       |lpm_divide:Div2|                            ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_0dm:auto_generated|           ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated                                                   ; lpm_divide_0dm      ; work         ;
+;             |sign_div_unsign_6nh:divider|          ; 367 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider                       ; sign_div_unsign_6nh ; work         ;
+;                |alt_u_div_i2f:divider|             ; 367 (367)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider|alt_u_div_i2f:divider ; alt_u_div_i2f       ; work         ;
+;       |lpm_divide:Div3|                            ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div3                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4dm:auto_generated|           ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated                                                   ; lpm_divide_4dm      ; work         ;
+;             |sign_div_unsign_anh:divider|          ; 363 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider                       ; sign_div_unsign_anh ; work         ;
+;                |alt_u_div_q2f:divider|             ; 363 (363)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider|alt_u_div_q2f:divider ; alt_u_div_q2f       ; work         ;
+;       |lpm_divide:Div4|                            ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_7dm:auto_generated|           ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated                                                   ; lpm_divide_7dm      ; work         ;
+;             |sign_div_unsign_dnh:divider|          ; 310 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider                       ; sign_div_unsign_dnh ; work         ;
+;                |alt_u_div_03f:divider|             ; 310 (310)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider|alt_u_div_03f:divider ; alt_u_div_03f       ; work         ;
+;       |lpm_divide:Mod0|                            ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 707 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 707 (707)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod1|                            ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 751 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 751 (751)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod1|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod2|                            ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 684 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 684 (684)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod2|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod3|                            ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod3                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 561 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 561 (561)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod4|                            ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 441 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 441 (441)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod5|                            ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod5                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 299 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 299 (299)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FPGA_LEDRAM|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
++----------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -311,7 +314,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------+--------------------+
 ; Register name                         ; Reason for Removal ;
 +---------------------------------------+--------------------+
-; j[24..31]                             ; Lost fanout        ;
+; i[24..31]                             ; Lost fanout        ;
 ; Total Number of Removed Registers = 8 ;                    ;
 +---------------------------------------+--------------------+
 
@@ -321,36 +324,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 189   ;
-; Number of registers using Synchronous Clear  ; 115   ;
-; Number of registers using Synchronous Load   ; 19    ;
-; Number of registers using Asynchronous Clear ; 25    ;
+; Total registers                              ; 24    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 123   ;
+; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; saveNextImage                          ; 1       ;
-; Total number of inverted registers = 1 ;         ;
-+----------------------------------------+---------+
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |ImageCapture|RAMdata[1]~reg0 ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |ImageCapture|i[10]           ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |ImageCapture|ticks[24]       ;
-; 5:1                ; 19 bits   ; 57 LEs        ; 0 LEs                ; 57 LEs                 ; Yes        ; |ImageCapture|addr[0]         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
 
 
 +----------------------------------------------------------------------+
@@ -630,36 +611,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 189                         ;
-;     CLR               ; 25                          ;
-;     ENA               ; 40                          ;
-;     ENA SCLR          ; 64                          ;
-;     ENA SCLR SLD      ; 19                          ;
-;     SCLR              ; 32                          ;
-;     plain             ; 9                           ;
+; arriav_ff             ; 24                          ;
+;     plain             ; 24                          ;
 ; arriav_io_obuf        ; 8                           ;
-; arriav_lcell_comb     ; 5265                        ;
-;     arith             ; 2385                        ;
+; arriav_lcell_comb     ; 5103                        ;
+;     arith             ; 2270                        ;
 ;         0 data inputs ; 290                         ;
-;         1 data inputs ; 234                         ;
+;         1 data inputs ; 119                         ;
 ;         2 data inputs ; 36                          ;
 ;         3 data inputs ; 922                         ;
 ;         4 data inputs ; 903                         ;
-;     normal            ; 2802                        ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 8                           ;
-;         2 data inputs ; 1688                        ;
-;         3 data inputs ; 419                         ;
-;         4 data inputs ; 618                         ;
-;         5 data inputs ; 38                          ;
-;         6 data inputs ; 29                          ;
+;     normal            ; 2755                        ;
+;         1 data inputs ; 7                           ;
+;         2 data inputs ; 1687                        ;
+;         3 data inputs ; 416                         ;
+;         4 data inputs ; 610                         ;
+;         5 data inputs ; 23                          ;
+;         6 data inputs ; 12                          ;
 ;     shared            ; 78                          ;
 ;         0 data inputs ; 6                           ;
 ;         1 data inputs ; 72                          ;
-; boundary_port         ; 100                         ;
+; boundary_port         ; 84                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 77.50                       ;
-; Average LUT depth     ; 55.66                       ;
+; Average LUT depth     ; 58.93                       ;
 +-----------------------+-----------------------------+
 
 
@@ -668,7 +643,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:17     ;
+; Top            ; 00:00:12     ;
 +----------------+--------------+
 
 
@@ -678,61 +653,57 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun May 02 14:36:19 2021
+    Info: Processing started: Thu May 06 11:07:39 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
-Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file sevensegdigit.vhd
-    Info (12022): Found design unit 1: SevenSegDigit-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDigit.vhd Line: 16
-    Info (12023): Found entity 1: SevenSegDigit File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDigit.vhd Line: 5
+    Info (12022): Found design unit 1: SevenSegDigit-Behavioral File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDigit.vhd Line: 16
+    Info (12023): Found entity 1: SevenSegDigit File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDigit.vhd Line: 5
 Info (12021): Found 3 design units, including 1 entities, in source file sevensegdisplay.vhd
-    Info (12022): Found design unit 1: SevenSegDisplayTypes File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 6
-    Info (12022): Found design unit 2: SevenSegDisplay-HexDisp File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 43
-    Info (12023): Found entity 1: SevenSegDisplay File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 25
+    Info (12022): Found design unit 1: SevenSegDisplayTypes File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 6
+    Info (12022): Found design unit 2: SevenSegDisplay-HexDisp File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 43
+    Info (12023): Found entity 1: SevenSegDisplay File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 25
 Info (12021): Found 2 design units, including 1 entities, in source file fpga_ledram.vhd
-    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 25
-    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 9
+    Info (12022): Found design unit 1: FPGA_LEDRAM-Behavioral File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 25
+    Info (12023): Found entity 1: FPGA_LEDRAM File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file camtoram.vhd
-    Info (12022): Found design unit 1: CamToRAM-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/CamToRAM.vhd Line: 23
-    Info (12023): Found entity 1: CamToRAM File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/CamToRAM.vhd Line: 5
+    Info (12022): Found design unit 1: CamToRAM-Behavioral File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/CamToRAM.vhd Line: 23
+    Info (12023): Found entity 1: CamToRAM File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/CamToRAM.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file arduino_ram_reader.vhd
-    Info (12022): Found design unit 1: Arduino_RAM_reader-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 27
-    Info (12023): Found entity 1: Arduino_RAM_reader File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 9
+    Info (12022): Found design unit 1: Arduino_RAM_reader-Behavioral File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 27
+    Info (12023): Found entity 1: Arduino_RAM_reader File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/Arduino_RAM_reader.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file imagecapture.vhd
-    Info (12022): Found design unit 1: ImageCapture-Behavioral File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 32
-    Info (12023): Found entity 1: ImageCapture File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 7
-Info (12127): Elaborating entity "ImageCapture" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at ImageCapture.vhd(10): used implicit default value for signal "SIOC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-Warning (10541): VHDL Signal Declaration warning at ImageCapture.vhd(10): used implicit default value for signal "SIOD" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-Warning (10492): VHDL Process Statement warning at ImageCapture.vhd(63): signal "transferPin" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 63
-Warning (10034): Output port "OE" at ImageCapture.vhd(17) has no driver File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 17
-Info (12128): Elaborating entity "SevenSegDisplay" for hierarchy "SevenSegDisplay:Display" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 214
-Info (12128): Elaborating entity "SevenSegDigit" for hierarchy "SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 53
+    Info (12022): Found design unit 1: ImageCapture-Behavioral File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 32
+    Info (12023): Found entity 1: ImageCapture File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 7
+Info (12127): Elaborating entity "FPGA_LEDRAM" for the top level hierarchy
+Info (12128): Elaborating entity "SevenSegDisplay" for hierarchy "SevenSegDisplay:Display" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 48
+Info (12128): Elaborating entity "SevenSegDigit" for hierarchy "SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 53
 Info (278001): Inferred 11 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod0" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod1" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod0" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod1" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Div0" File: c:/intelfpga_lite/18.1/quartus/libraries/vhdl/wysiwyg/twentynm_components.vhd Line: 4175
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod2" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod2" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Div1" File: c:/intelfpga_lite/18.1/quartus/libraries/vhdl/wysiwyg/twentynm_components.vhd Line: 4175
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod3" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod3" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Div2" File: c:/intelfpga_lite/18.1/quartus/libraries/vhdl/wysiwyg/twentynm_components.vhd Line: 4175
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod4" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod4" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Div3" File: c:/intelfpga_lite/18.1/quartus/libraries/vhdl/wysiwyg/twentynm_components.vhd Line: 4175
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod5" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Mod5" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "SevenSegDisplay:Display|Div4" File: c:/intelfpga_lite/18.1/quartus/libraries/vhdl/wysiwyg/twentynm_components.vhd Line: 4175
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod0" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod0" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod0" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod0" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_85m.tdf
-    Info (12023): Found entity 1: lpm_divide_85m File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_85m.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_85m File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_85m.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_bnh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_bnh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_bnh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_bnh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_bnh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_s2f.tdf
-    Info (12023): Found entity 1: alt_u_div_s2f File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_s2f.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod1" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod1" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (12023): Found entity 1: alt_u_div_s2f File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_s2f.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod1" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod1" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -744,13 +715,13 @@ Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Div0
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_jbm.tdf
-    Info (12023): Found entity 1: lpm_divide_jbm File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_jbm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_jbm File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_jbm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_plh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_plh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_plh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_plh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_plh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_ove.tdf
-    Info (12023): Found entity 1: alt_u_div_ove File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_ove.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod2" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod2" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (12023): Found entity 1: alt_u_div_ove File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_ove.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod2" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod2" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -762,13 +733,13 @@ Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Div1
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_mbm.tdf
-    Info (12023): Found entity 1: lpm_divide_mbm File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_mbm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_mbm File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_mbm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_slh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_slh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_slh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_slh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_slh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_uve.tdf
-    Info (12023): Found entity 1: alt_u_div_uve File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_uve.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod3" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod3" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (12023): Found entity 1: alt_u_div_uve File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_uve.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod3" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod3" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -780,13 +751,13 @@ Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Div2
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_0dm.tdf
-    Info (12023): Found entity 1: lpm_divide_0dm File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_0dm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_0dm File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_0dm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_6nh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_6nh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_6nh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_6nh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_6nh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_i2f.tdf
-    Info (12023): Found entity 1: alt_u_div_i2f File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_i2f.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod4" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod4" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (12023): Found entity 1: alt_u_div_i2f File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_i2f.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod4" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod4" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -798,13 +769,13 @@ Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Div3
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_4dm.tdf
-    Info (12023): Found entity 1: lpm_divide_4dm File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_4dm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_4dm File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_4dm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_anh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_anh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_anh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_anh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_anh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_q2f.tdf
-    Info (12023): Found entity 1: alt_u_div_q2f File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_q2f.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod5" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
-Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod5" with the following parameter: File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+    Info (12023): Found entity 1: alt_u_div_q2f File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_q2f.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "SevenSegDisplay:Display|lpm_divide:Mod5" File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
+Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Mod5" with the following parameter: File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/SevenSegDisplay.vhd Line: 90
     Info (12134): Parameter "LPM_WIDTHN" = "24"
     Info (12134): Parameter "LPM_WIDTHD" = "24"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -816,60 +787,41 @@ Info (12133): Instantiated megafunction "SevenSegDisplay:Display|lpm_divide:Div4
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_7dm.tdf
-    Info (12023): Found entity 1: lpm_divide_7dm File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/lpm_divide_7dm.tdf Line: 24
+    Info (12023): Found entity 1: lpm_divide_7dm File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/lpm_divide_7dm.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_dnh.tdf
-    Info (12023): Found entity 1: sign_div_unsign_dnh File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/sign_div_unsign_dnh.tdf Line: 24
+    Info (12023): Found entity 1: sign_div_unsign_dnh File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/sign_div_unsign_dnh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_03f.tdf
-    Info (12023): Found entity 1: alt_u_div_03f File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/db/alt_u_div_03f.tdf Line: 22
-Warning (13034): The following nodes have both tri-state and non-tri-state drivers
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[0]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[1]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[2]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[3]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[4]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[5]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[6]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13035): Inserted always-enabled tri-state buffer between "RAMdata[7]" and its non-tri-state driver. File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-Info (13060): One or more bidirectional pins are fed by always enabled tri-state buffers
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[0]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[1]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[2]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[3]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[4]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[5]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[6]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Info (13061): Fan-out of permanently enabled tri-state buffer feeding bidirectional pin "RAMdata[7]" is moved to its source File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-Warning (13009): TRI or OPNDRN buffers permanently enabled
-    Warning (13010): Node "RAMdata[0]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[1]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[2]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[3]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[4]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[5]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[6]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-    Warning (13010): Node "RAMdata[7]~synth" File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 153
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "RESET" is stuck at VCC File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-    Warning (13410): Pin "PWDN" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-    Warning (13410): Pin "SIOC" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-    Warning (13410): Pin "SIOD" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 10
-    Warning (13410): Pin "OE" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 17
-    Warning (13410): Pin "CS" is stuck at GND File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 18
+    Info (12023): Found entity 1: alt_u_div_03f File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/db/alt_u_div_03f.tdf Line: 22
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "RAMdata[0]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[1]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[2]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[3]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[4]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[5]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[6]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
+    Warning (13040): bidirectional pin "RAMdata[7]" has no driver File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 12
 Info (286030): Timing-Driven Synthesis is running
-Critical Warning (18061): Ignored Power-Up Level option on the following registers
-    Critical Warning (18010): Register saveNextImage will power up to High File: C:/Users/joach/OneDrive/Dokumenter/Github/GRONK2000/FPGAgatherer/ImageCapture.vhd Line: 37
+Warning (14632): Output pin "LEDs[0]" driven by bidirectional pin "RAMdata[0]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[1]" driven by bidirectional pin "RAMdata[1]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[2]" driven by bidirectional pin "RAMdata[2]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[3]" driven by bidirectional pin "RAMdata[3]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[4]" driven by bidirectional pin "RAMdata[4]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[5]" driven by bidirectional pin "RAMdata[5]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[6]" driven by bidirectional pin "RAMdata[6]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
+Warning (14632): Output pin "LEDs[7]" driven by bidirectional pin "RAMdata[7]" cannot be tri-stated File: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/FPGA_LEDRAM.vhd Line: 15
 Info (17049): 8 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 5398 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 15 input pins
-    Info (21059): Implemented 77 output pins
+Info (21057): Implemented 5181 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 72 output pins
     Info (21060): Implemented 8 bidirectional pins
-    Info (21061): Implemented 5298 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 4968 megabytes
-    Info: Processing ended: Sun May 02 14:37:04 2021
-    Info: Elapsed time: 00:00:45
-    Info: Total CPU time (on all processors): 00:00:46
+    Info (21061): Implemented 5097 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 4971 megabytes
+    Info: Processing ended: Thu May 06 11:08:00 2021
+    Info: Elapsed time: 00:00:21
+    Info: Total CPU time (on all processors): 00:00:29
 
 

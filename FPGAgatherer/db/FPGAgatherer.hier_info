@@ -1,114 +1,171 @@
-|FPGA_LEDRAM
-address[0] << i[0].DB_MAX_OUTPUT_PORT_TYPE
-address[1] << i[1].DB_MAX_OUTPUT_PORT_TYPE
-address[2] << i[2].DB_MAX_OUTPUT_PORT_TYPE
-address[3] << i[3].DB_MAX_OUTPUT_PORT_TYPE
-address[4] << i[4].DB_MAX_OUTPUT_PORT_TYPE
-address[5] << i[5].DB_MAX_OUTPUT_PORT_TYPE
-address[6] << i[6].DB_MAX_OUTPUT_PORT_TYPE
-address[7] << i[7].DB_MAX_OUTPUT_PORT_TYPE
-address[8] << i[8].DB_MAX_OUTPUT_PORT_TYPE
-address[9] << i[9].DB_MAX_OUTPUT_PORT_TYPE
-address[10] << i[10].DB_MAX_OUTPUT_PORT_TYPE
-address[11] << i[11].DB_MAX_OUTPUT_PORT_TYPE
-address[12] << i[12].DB_MAX_OUTPUT_PORT_TYPE
-address[13] << i[13].DB_MAX_OUTPUT_PORT_TYPE
-address[14] << i[14].DB_MAX_OUTPUT_PORT_TYPE
-address[15] << i[15].DB_MAX_OUTPUT_PORT_TYPE
-address[16] << i[16].DB_MAX_OUTPUT_PORT_TYPE
-address[17] << i[17].DB_MAX_OUTPUT_PORT_TYPE
-address[18] << i[18].DB_MAX_OUTPUT_PORT_TYPE
-CS << CS_SW.DB_MAX_OUTPUT_PORT_TYPE
-WE << WE_SW.DB_MAX_OUTPUT_PORT_TYPE
-OE << OE_SW.DB_MAX_OUTPUT_PORT_TYPE
-CS_SW => CS.DATAIN
-WE_SW => WE.DATAIN
-OE_SW => OE.DATAIN
-addr_SW => i[0].CLK
-addr_SW => i[1].CLK
-addr_SW => i[2].CLK
-addr_SW => i[3].CLK
-addr_SW => i[4].CLK
-addr_SW => i[5].CLK
-addr_SW => i[6].CLK
-addr_SW => i[7].CLK
-addr_SW => i[8].CLK
-addr_SW => i[9].CLK
-addr_SW => i[10].CLK
-addr_SW => i[11].CLK
-addr_SW => i[12].CLK
-addr_SW => i[13].CLK
-addr_SW => i[14].CLK
-addr_SW => i[15].CLK
-addr_SW => i[16].CLK
-addr_SW => i[17].CLK
-addr_SW => i[18].CLK
-addr_SW => i[19].CLK
-addr_SW => i[20].CLK
-addr_SW => i[21].CLK
-addr_SW => i[22].CLK
-addr_SW => i[23].CLK
-addr_SW => i[24].CLK
-addr_SW => i[25].CLK
-addr_SW => i[26].CLK
-addr_SW => i[27].CLK
-addr_SW => i[28].CLK
-addr_SW => i[29].CLK
-addr_SW => i[30].CLK
-addr_SW => i[31].CLK
-LEDs[0] << LEDs[0].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[1] << LEDs[1].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[2] << LEDs[2].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[3] << LEDs[3].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[4] << LEDs[4].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[5] << LEDs[5].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[6] << LEDs[6].DB_MAX_OUTPUT_PORT_TYPE
-LEDs[7] << LEDs[7].DB_MAX_OUTPUT_PORT_TYPE
-HEX0[0] << sevensegdisplay:Display.HEX[0][0]
-HEX0[1] << sevensegdisplay:Display.HEX[0][1]
-HEX0[2] << sevensegdisplay:Display.HEX[0][2]
-HEX0[3] << sevensegdisplay:Display.HEX[0][3]
-HEX0[4] << sevensegdisplay:Display.HEX[0][4]
-HEX0[5] << sevensegdisplay:Display.HEX[0][5]
-HEX0[6] << sevensegdisplay:Display.HEX[0][6]
-HEX1[0] << sevensegdisplay:Display.HEX[1][0]
-HEX1[1] << sevensegdisplay:Display.HEX[1][1]
-HEX1[2] << sevensegdisplay:Display.HEX[1][2]
-HEX1[3] << sevensegdisplay:Display.HEX[1][3]
-HEX1[4] << sevensegdisplay:Display.HEX[1][4]
-HEX1[5] << sevensegdisplay:Display.HEX[1][5]
-HEX1[6] << sevensegdisplay:Display.HEX[1][6]
-HEX2[0] << sevensegdisplay:Display.HEX[2][0]
-HEX2[1] << sevensegdisplay:Display.HEX[2][1]
-HEX2[2] << sevensegdisplay:Display.HEX[2][2]
-HEX2[3] << sevensegdisplay:Display.HEX[2][3]
-HEX2[4] << sevensegdisplay:Display.HEX[2][4]
-HEX2[5] << sevensegdisplay:Display.HEX[2][5]
-HEX2[6] << sevensegdisplay:Display.HEX[2][6]
-HEX3[0] << sevensegdisplay:Display.HEX[3][0]
-HEX3[1] << sevensegdisplay:Display.HEX[3][1]
-HEX3[2] << sevensegdisplay:Display.HEX[3][2]
-HEX3[3] << sevensegdisplay:Display.HEX[3][3]
-HEX3[4] << sevensegdisplay:Display.HEX[3][4]
-HEX3[5] << sevensegdisplay:Display.HEX[3][5]
-HEX3[6] << sevensegdisplay:Display.HEX[3][6]
-HEX4[0] << sevensegdisplay:Display.HEX[4][0]
-HEX4[1] << sevensegdisplay:Display.HEX[4][1]
-HEX4[2] << sevensegdisplay:Display.HEX[4][2]
-HEX4[3] << sevensegdisplay:Display.HEX[4][3]
-HEX4[4] << sevensegdisplay:Display.HEX[4][4]
-HEX4[5] << sevensegdisplay:Display.HEX[4][5]
-HEX4[6] << sevensegdisplay:Display.HEX[4][6]
-HEX5[0] << sevensegdisplay:Display.HEX[5][0]
-HEX5[1] << sevensegdisplay:Display.HEX[5][1]
-HEX5[2] << sevensegdisplay:Display.HEX[5][2]
-HEX5[3] << sevensegdisplay:Display.HEX[5][3]
-HEX5[4] << sevensegdisplay:Display.HEX[5][4]
-HEX5[5] << sevensegdisplay:Display.HEX[5][5]
-HEX5[6] << sevensegdisplay:Display.HEX[5][6]
+|ImageCapture
+XCLK <= XCLK.DB_MAX_OUTPUT_PORT_TYPE
+RESET <= RESET.DB_MAX_OUTPUT_PORT_TYPE
+PWDN <= PWDN.DB_MAX_OUTPUT_PORT_TYPE
+SIOC <= SIOC.DB_MAX_OUTPUT_PORT_TYPE
+SIOD <= SIOD.DB_MAX_OUTPUT_PORT_TYPE
+HREF => ~NO_FANOUT~
+VSYNC => ~NO_FANOUT~
+PCLK => ~NO_FANOUT~
+getImagePin => ~NO_FANOUT~
+transferPin => j[9].ACLR
+transferPin => j[8].ACLR
+transferPin => j[7].ACLR
+transferPin => j[6].ACLR
+transferPin => j[5].ACLR
+transferPin => j[4].ACLR
+transferPin => j[3].ACLR
+transferPin => j[2].ACLR
+transferPin => j[1].ACLR
+transferPin => j[0].ACLR
+transferPin => j[31].ACLR
+transferPin => j[30].ACLR
+transferPin => j[29].ACLR
+transferPin => j[28].ACLR
+transferPin => j[27].ACLR
+transferPin => j[26].ACLR
+transferPin => j[25].ACLR
+transferPin => j[24].ACLR
+transferPin => j[23].ACLR
+transferPin => j[22].ACLR
+transferPin => j[21].ACLR
+transferPin => j[20].ACLR
+transferPin => j[19].ACLR
+transferPin => j[18].ACLR
+transferPin => j[17].ACLR
+transferPin => j[16].ACLR
+transferPin => j[15].ACLR
+transferPin => j[14].ACLR
+transferPin => j[13].ACLR
+transferPin => j[12].ACLR
+transferPin => j[11].ACLR
+transferPin => j[10].ACLR
+addrInc => j[0].CLK
+addrInc => j[1].CLK
+addrInc => j[2].CLK
+addrInc => j[3].CLK
+addrInc => j[4].CLK
+addrInc => j[5].CLK
+addrInc => j[6].CLK
+addrInc => j[7].CLK
+addrInc => j[8].CLK
+addrInc => j[9].CLK
+addrInc => j[10].CLK
+addrInc => j[11].CLK
+addrInc => j[12].CLK
+addrInc => j[13].CLK
+addrInc => j[14].CLK
+addrInc => j[15].CLK
+addrInc => j[16].CLK
+addrInc => j[17].CLK
+addrInc => j[18].CLK
+addrInc => j[19].CLK
+addrInc => j[20].CLK
+addrInc => j[21].CLK
+addrInc => j[22].CLK
+addrInc => j[23].CLK
+addrInc => j[24].CLK
+addrInc => j[25].CLK
+addrInc => j[26].CLK
+addrInc => j[27].CLK
+addrInc => j[28].CLK
+addrInc => j[29].CLK
+addrInc => j[30].CLK
+addrInc => j[31].CLK
+CAMdata[0] => ~NO_FANOUT~
+CAMdata[1] => ~NO_FANOUT~
+CAMdata[2] => ~NO_FANOUT~
+CAMdata[3] => ~NO_FANOUT~
+CAMdata[4] => ~NO_FANOUT~
+CAMdata[5] => ~NO_FANOUT~
+CAMdata[6] => ~NO_FANOUT~
+CAMdata[7] => ~NO_FANOUT~
+address[0] <= comb.DB_MAX_OUTPUT_PORT_TYPE
+address[1] <= address[1].DB_MAX_OUTPUT_PORT_TYPE
+address[2] <= address[2].DB_MAX_OUTPUT_PORT_TYPE
+address[3] <= address[3].DB_MAX_OUTPUT_PORT_TYPE
+address[4] <= address[4].DB_MAX_OUTPUT_PORT_TYPE
+address[5] <= address[5].DB_MAX_OUTPUT_PORT_TYPE
+address[6] <= address[6].DB_MAX_OUTPUT_PORT_TYPE
+address[7] <= address[7].DB_MAX_OUTPUT_PORT_TYPE
+address[8] <= address[8].DB_MAX_OUTPUT_PORT_TYPE
+address[9] <= address[9].DB_MAX_OUTPUT_PORT_TYPE
+address[10] <= address[10].DB_MAX_OUTPUT_PORT_TYPE
+address[11] <= address[11].DB_MAX_OUTPUT_PORT_TYPE
+address[12] <= address[12].DB_MAX_OUTPUT_PORT_TYPE
+address[13] <= address[13].DB_MAX_OUTPUT_PORT_TYPE
+address[14] <= address[14].DB_MAX_OUTPUT_PORT_TYPE
+address[15] <= address[15].DB_MAX_OUTPUT_PORT_TYPE
+address[16] <= address[16].DB_MAX_OUTPUT_PORT_TYPE
+address[17] <= address[17].DB_MAX_OUTPUT_PORT_TYPE
+address[18] <= address[18].DB_MAX_OUTPUT_PORT_TYPE
+RAMdata[0] <> <UNC>
+RAMdata[1] <> <UNC>
+RAMdata[2] <> <UNC>
+RAMdata[3] <> <UNC>
+RAMdata[4] <> <UNC>
+RAMdata[5] <> <UNC>
+RAMdata[6] <> <UNC>
+RAMdata[7] <> <UNC>
+WE << <GND>
+OE << <GND>
+CS << <GND>
+clk => ~NO_FANOUT~
+LEDs[0] <= j[0].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[1] <= j[1].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[2] <= j[2].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[3] <= j[3].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[4] <= j[4].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[5] <= j[5].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[6] <= j[6].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[7] <= j[7].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[8] <= j[8].DB_MAX_OUTPUT_PORT_TYPE
+LEDs[9] <= j[9].DB_MAX_OUTPUT_PORT_TYPE
+HEX0[0] <= sevensegdisplay:Display.HEX[0][0]
+HEX0[1] <= sevensegdisplay:Display.HEX[0][1]
+HEX0[2] <= sevensegdisplay:Display.HEX[0][2]
+HEX0[3] <= sevensegdisplay:Display.HEX[0][3]
+HEX0[4] <= sevensegdisplay:Display.HEX[0][4]
+HEX0[5] <= sevensegdisplay:Display.HEX[0][5]
+HEX0[6] <= sevensegdisplay:Display.HEX[0][6]
+HEX1[0] <= sevensegdisplay:Display.HEX[1][0]
+HEX1[1] <= sevensegdisplay:Display.HEX[1][1]
+HEX1[2] <= sevensegdisplay:Display.HEX[1][2]
+HEX1[3] <= sevensegdisplay:Display.HEX[1][3]
+HEX1[4] <= sevensegdisplay:Display.HEX[1][4]
+HEX1[5] <= sevensegdisplay:Display.HEX[1][5]
+HEX1[6] <= sevensegdisplay:Display.HEX[1][6]
+HEX2[0] <= sevensegdisplay:Display.HEX[2][0]
+HEX2[1] <= sevensegdisplay:Display.HEX[2][1]
+HEX2[2] <= sevensegdisplay:Display.HEX[2][2]
+HEX2[3] <= sevensegdisplay:Display.HEX[2][3]
+HEX2[4] <= sevensegdisplay:Display.HEX[2][4]
+HEX2[5] <= sevensegdisplay:Display.HEX[2][5]
+HEX2[6] <= sevensegdisplay:Display.HEX[2][6]
+HEX3[0] <= sevensegdisplay:Display.HEX[3][0]
+HEX3[1] <= sevensegdisplay:Display.HEX[3][1]
+HEX3[2] <= sevensegdisplay:Display.HEX[3][2]
+HEX3[3] <= sevensegdisplay:Display.HEX[3][3]
+HEX3[4] <= sevensegdisplay:Display.HEX[3][4]
+HEX3[5] <= sevensegdisplay:Display.HEX[3][5]
+HEX3[6] <= sevensegdisplay:Display.HEX[3][6]
+HEX4[0] <= sevensegdisplay:Display.HEX[4][0]
+HEX4[1] <= sevensegdisplay:Display.HEX[4][1]
+HEX4[2] <= sevensegdisplay:Display.HEX[4][2]
+HEX4[3] <= sevensegdisplay:Display.HEX[4][3]
+HEX4[4] <= sevensegdisplay:Display.HEX[4][4]
+HEX4[5] <= sevensegdisplay:Display.HEX[4][5]
+HEX4[6] <= sevensegdisplay:Display.HEX[4][6]
+HEX5[0] <= sevensegdisplay:Display.HEX[5][0]
+HEX5[1] <= sevensegdisplay:Display.HEX[5][1]
+HEX5[2] <= sevensegdisplay:Display.HEX[5][2]
+HEX5[3] <= sevensegdisplay:Display.HEX[5][3]
+HEX5[4] <= sevensegdisplay:Display.HEX[5][4]
+HEX5[5] <= sevensegdisplay:Display.HEX[5][5]
+HEX5[6] <= sevensegdisplay:Display.HEX[5][6]
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display
+|ImageCapture|SevenSegDisplay:Display
 NUM[0] => Mod0.IN47
 NUM[0] => Mod1.IN47
 NUM[0] => Mod2.IN47
@@ -303,7 +360,7 @@ HEX[5][5] <= sevensegdigit:genDigits:5:SevenSegDisplay.Segments[5]
 HEX[5][6] <= sevensegdigit:genDigits:5:SevenSegDisplay.Segments[6]
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19
@@ -348,7 +405,7 @@ Segments[5] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 Segments[6] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19
@@ -393,7 +450,7 @@ Segments[5] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 Segments[6] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:2:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:2:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19
@@ -438,7 +495,7 @@ Segments[5] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 Segments[6] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:3:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:3:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19
@@ -483,7 +540,7 @@ Segments[5] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 Segments[6] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:4:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:4:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19
@@ -528,7 +585,7 @@ Segments[5] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 Segments[6] <= Segments.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|FPGA_LEDRAM|SevenSegDisplay:Display|SevenSegDigit:\genDigits:5:SevenSegDisplay
+|ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:5:SevenSegDisplay
 Digit[0] => Mux0.IN19
 Digit[0] => Mux1.IN19
 Digit[0] => Mux2.IN19

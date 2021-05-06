@@ -23,13 +23,15 @@ extern bool CAN_Mailbox1Empty;
 extern bool CAN_Mailbox2Empty;
 
 
-/* USER CODE BEGIN PV */
 struct Queue queueRAM = {0, 0, {0}};
 struct Queue queueRx = {0, 0, {0}};
-#define PACKAGE_SIZE 8
 
+SemaphoreHandle_t semaphr_send;
 
-/* USER CODE END PV */
+void transmit_driver_init() {
+	semaphr_send = xSemaphoreCreateMutex();
+	if (semaphr_send == NULL) Error_Handler();
+}
 
 void floatTo4UIntArray(float floatData, uint8_t *destinationArray){
 	uint8_t *ptr;
@@ -159,46 +161,50 @@ void sendDCMotor(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader
 
 
 
-void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader) {
-	uint8_t dataToMB[PACKAGE_SIZE] = {0};
+void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes,
+		uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader) {
+
+	if (!xSemaphoreTakeFromISR(semaphr_send, NULL))
+		return;
+
+	uint8_t dataToMB[PACKAGE_SIZE] = { 0 };
 	uint32_t randoMailBox;
 	transmitHeader->ExtId = TxID;
 	uint32_t tsr = READ_REG(handler->Instance->TSR);
 
-if (numOfBytes % PACKAGE_SIZE == 0)
-{
-	for (int i = 0; i < numOfBytes/PACKAGE_SIZE; i++) {
-		while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {}
-		if (messageSplitter(dataArray, dataToMB, i)) {
-			if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB, &randoMailBox) != HAL_OK) {
-				// todo: Vi skal lave en bedre håndtering af HAL_BUSY, end Error.
-				Error_Handler();
-
+	if (numOfBytes % PACKAGE_SIZE == 0) {
+		for (int i = 0; i < numOfBytes / PACKAGE_SIZE; i++) {
+			while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {
 			}
-			if((tsr & CAN_TSR_TME0) != 0U){
-				CAN_Mailbox0Empty = true;
-			}else {
-				CAN_Mailbox0Empty = false;
+			if (messageSplitter(dataArray, dataToMB, i)) {
+				if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB,
+						&randoMailBox) != HAL_OK) {
+					Error_Handler();
 
-			}
-			if((tsr & CAN_TSR_TME1) != 0U){
-				CAN_Mailbox1Empty = true;
-			}else {
-				CAN_Mailbox1Empty = false;
+				}
+				if ((tsr & CAN_TSR_TME0) != 0U) {
+					CAN_Mailbox0Empty = true;
+				} else {
+					CAN_Mailbox0Empty = false;
 
-			}
-			if((tsr & CAN_TSR_TME2) != 0U){
-				CAN_Mailbox2Empty = true;
-			}else {
-				CAN_Mailbox2Empty = false;
+				}
+				if ((tsr & CAN_TSR_TME1) != 0U) {
+					CAN_Mailbox1Empty = true;
+				} else {
+					CAN_Mailbox1Empty = false;
 
+				}
+				if ((tsr & CAN_TSR_TME2) != 0U) {
+					CAN_Mailbox2Empty = true;
+				} else {
+					CAN_Mailbox2Empty = false;
+
+				}
 			}
 		}
 	}
 
-}
-else {return;}
-
+	if (!xSemaphoreGiveFromISR(semaphr_send, NULL)) Error_Handler();
 }
 
 int messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t position)

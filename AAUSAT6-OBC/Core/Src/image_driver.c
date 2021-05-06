@@ -1,24 +1,29 @@
 #include "image_driver.h"
 
-
-uint32_t IMAGE_DATA_ID = 0x5;
 struct CAN_QUEUE_DATA IMAGE_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA IMAGE_DATA_TX = {0,{0}};
 struct StructQueue IMAGE_CAN_RX_QUEUE = {0};
 Picture pic1;
-uint8_t cameraData[650] = {0};
+uint8_t cameraData[640] = {0};
 
 
 // Vi skal have en funktion som bare tager et billede som kan kaldes af partcl
 
 
 void CAM_init(CAM_HandleTypeDef *cam) {
+
+	HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_RESET);
+
 	// init SCCB
 	CAM_setReg(cam, 0x12, 0x80); // Software reset, YUV mode
 	CAM_setReg(cam, 0x1E, 0x31); // Flip image vertically and mirror image
 	CAM_setReg(cam, 0x13, 0x81); // Fast algorithm and auto exposure enable
 	CAM_setReg(cam, 0x3F, 0x01); // Edge enhancement factor
-	//CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
+	CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
+
+	HAL_TIM_OC_Start(cam->DMATimer, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
+	__HAL_TIM_ENABLE_DMA(cam->DMATimer, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
+	//HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_SET); // Transfer pin sættes høj
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
@@ -55,45 +60,37 @@ void CAM_takePicture(CAM_HandleTypeDef *cam) {
 	// Hvis ikke vi er ved at sende et billede, pulsér getImagePin på FPGA
 	if (cam->status == STANDBY) {
 
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
-		HAL_Delay(50);
+		HAL_GPIO_WritePin(Get_image_pin_GPIO_Port, Get_image_pin_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(Get_image_pin_GPIO_Port, Get_image_pin_Pin, GPIO_PIN_RESET);
+		osDelay(50);
+		HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_SET);
 		cam->status = READY;
 	}
 }
 
-int CAN_queuePackage(uint8_t *camData) {
-	IMAGE_DATA_TX.ID = IMAGE_DATA_ID;
-	for(int i = 0 ; i < PACKAGE_SIZE ; i++){
-		IMAGE_DATA_TX.data[i] = camData[i];
-	}
-	return passToCanTX(&IMAGE_DATA_TX);
-
-}
-
 void CAM_toOutputQueue(CAM_HandleTypeDef *cam) {
 	// Vent og placer pixel-koordinat-pakke i CAN-køen
-	/*
-	uint8_t coordinatePackage[8] = {(cam->pic->x & 0x00FF), (cam->pic->x >> 8),
-									(cam->pic->y & 0x00FF), (cam->pic->y >> 8),
-									(cam->pic->width & 0x00FF), (cam->pic->width >> 8),
-									(cam->pic->height & 0x00FF), (cam->pic->height >> 8)};
-	while(!CAN_queuePackage(CAN_ID_COORDINATE, coordinatePackage, 8)) {}
-*/
-	// Vent på at der plads i CAN-køen til en pakke med 8 pixels
 
-	while(cam->pic->x < cam->pic->width) { // Gentag indtil hele linjen er sendt / hele bufferen er tømt
+	struct CAN_QUEUE_DATA package = {IMAGE_ID_COORDINATE, {
+			(cam->pic->x & 0x00FF), (cam->pic->x >> 8),
+			(cam->pic->y & 0x00FF), (cam->pic->y >> 8),
+			(cam->pic->width & 0x00FF), (cam->pic->width >> 8),
+			(cam->pic->height & 0x00FF), (cam->pic->height >> 8)}};
+
+	while(!passToCanTX(&package)) {} // Vent på at der plads i CAN-køen til en pakke med 8 pixels
+
+
+	package.ID = IMAGE_ID_DATA;
+
+	for (; cam->pic->x < cam->pic->width;) { // Gentag indtil hele linjen er sendt / hele bufferen er tømt
+
+		// Inkrementer x-positionen i Picture
+		for (int i = 0; i < 8; i++, cam->pic->x++) {
+			package.data[i] = *(cam->destination + cam->pic->x);
+		}
+
 		// Når der er plads, put dem i køen
-		if (CAN_queuePackage(cam->destination + cam->pic->x)) {
-			// Inkrementer x-positionen i Picture
-			cam->pic->x += 8;
-		}
-		/*
-		else
-		{
-			HAL_Delay(1);
-		}
-		*/
+		while (!passToCanTX(&package)) { }
 	}
 
 	// Opdater koordinaterne i Picture
@@ -111,7 +108,7 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->pic->x = 0;
 			cam->pic->y = 0;
 			cam->status = STANDBY;
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, RESET);
+			HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_RESET);
 		}
 	} else if (cam->status == WAITING) {
 		CAM_toOutputQueue(cam);
@@ -165,16 +162,9 @@ void image(CAM_HandleTypeDef * cam){
 		LeaveStructQueue(&IMAGE_CAN_RX_QUEUE, &IMAGE_DATA_RX);
 
 		CAM_takePicture(cam);
+	}
 
-		//todo: hcam bliver vist aldrig sat, og bør hellere blive givet som parameter i stedet for global variabel.
-
-		while(cam->status != STANDBY){
-			CAM_update(cam);
-		}
-
-
-	}else{
-
-		return;
+	while(cam->status != STANDBY){
+		CAM_update(cam);
 	}
 }

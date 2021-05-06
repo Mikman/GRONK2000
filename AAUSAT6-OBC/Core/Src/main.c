@@ -169,6 +169,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
+  transmit_driver_init();
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -470,7 +472,7 @@ static void MX_TIM1_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM2;
-  sConfigOC.Pulse = 120-1;
+  sConfigOC.Pulse = 120;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
@@ -661,12 +663,26 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(MSB3_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Address_inc_Pin Get_image_pin_Pin DC_motor_Dir2_Pin Transfer_pin_Pin */
-  GPIO_InitStruct.Pin = Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir2_Pin|Transfer_pin_Pin;
+  /*Configure GPIO pin : Address_inc_Pin */
+  GPIO_InitStruct.Pin = Address_inc_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(Address_inc_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : Get_image_pin_Pin Transfer_pin_Pin */
+  GPIO_InitStruct.Pin = Get_image_pin_Pin|Transfer_pin_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : DC_motor_Dir2_Pin */
+  GPIO_InitStruct.Pin = DC_motor_Dir2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(DC_motor_Dir2_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : Watchdog_ext_int_Pin */
   GPIO_InitStruct.Pin = Watchdog_ext_int_Pin;
@@ -797,14 +813,14 @@ void task_image(void *argument)
 {
   /* USER CODE BEGIN task_image */
 
-	CAM_init(&hcam);
+
 	CAM_Handle_Init(&hcam, &hdma_tim1_ch3, &htim1, &hi2c1);
+	CAM_init(&hcam);
 
   /* Infinite loop */
   for(;;)
   {
-	image();
-    osDelay(1);
+	image(&hcam);
   }
   /* USER CODE END task_image */
 }

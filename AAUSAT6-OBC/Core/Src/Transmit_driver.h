@@ -15,8 +15,13 @@
 #include "mpu6050_driver.h"
 #include "DCMotordriver.h"
 #include "circle_queue_struct.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 
+#define PACKAGE_SIZE 8
+#define SEMAPHR_SEND_WAIT_TIME portMAX_DELAY
 
+void transmit_driver_init();
 
 void sendGPS(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader);
 

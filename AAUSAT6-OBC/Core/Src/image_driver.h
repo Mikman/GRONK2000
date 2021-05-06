@@ -11,10 +11,9 @@
 #include <stdint.h>
 #include "stm32l4xx_hal.h"
 
-#define CAN_ID_COORDINATE 32
-#define CAN_ID_DATA 33
-
-
+#define IMAGE_ID_COORDINATE 32
+#define IMAGE_ID_DATA 33
+#define IMAGE_ID_REQUEST 103
 
 enum CAM_STATUS {
     READY,        // Når vi er klar til at modtage en ny linje

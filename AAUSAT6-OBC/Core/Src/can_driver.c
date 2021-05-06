@@ -129,7 +129,7 @@ void placeData_1(uint8_t *p){
 
 			EnterStructQueue(&PARTCL_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
-	else if(RxHeader->ExtId == IMAGE_DATA_ID){
+	else if(RxHeader->ExtId == IMAGE_ID_REQUEST){
 			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];

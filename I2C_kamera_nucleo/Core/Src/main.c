@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -50,7 +50,7 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 CAM_HandleTypeDef hcam;
 Picture pic1;
-uint8_t cameraData[650] = {87};
+uint8_t cameraData[650] = { 87 };
 
 /* USER CODE END PV */
 
@@ -103,41 +103,44 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  //hi2c1.Instance->CR1 |= 0x8000;
-  //if (HAL_I2C_Master_Transmit(&hi2c1, 0x68 << 1, cameraData, 2, HAL_MAX_DELAY) != HAL_OK) {
+	//hi2c1.Instance->CR1 |= 0x8000;
+	//if (HAL_I2C_Master_Transmit(&hi2c1, 0x68 << 1, cameraData, 2, HAL_MAX_DELAY) != HAL_OK) {
 	//  int dev = 0;
-  //}
-  CAM_Handle_Init(&hcam);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET); // Transfer pin sættes lav
-  //HAL_TIM_PWM_Start(hcam.requestDataTimer, hcam.requestDataChannel); // PWM/addrInc startes
+	//}
+	CAM_Handle_Init(&hcam);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET); // Transfer pin sættes lav
+	//HAL_TIM_PWM_Start(hcam.requestDataTimer, hcam.requestDataChannel); // PWM/addrInc startes
 
-  CAM_init(&hcam);
-
-
-  int a = CAM_getReg(&hcam, 0x12);
-  int b = CAM_getReg(&hcam, 0x1E);
-  int c = CAM_getReg(&hcam, 0x13);
-  int d = CAM_getReg(&hcam, 0x3F);
-  int e = CAM_getReg(&hcam, 0x71);
+	/*
+	 CAM_init(&hcam);
 
 
-  HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_1); // Random kanal for at timeren altid kører
-  __HAL_TIM_ENABLE_DMA(&htim1, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET); // Transfer pin sættes høj
-  //HAL_DMA_Start_IT(htim1.hdma[TIM_DMA_ID_CC3], (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, 640);
+	 int a = CAM_getReg(&hcam, 0x12);
+	 int b = CAM_getReg(&hcam, 0x1E);
+	 int c = CAM_getReg(&hcam, 0x13);
+	 int d = CAM_getReg(&hcam, 0x3F);
+	 int e = CAM_getReg(&hcam, 0x71);
+	 */
 
-  CAM_takePicture(&hcam);
+	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
+	__HAL_TIM_ENABLE_DMA(&htim1, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET); // Transfer pin sættes høj
+	//HAL_DMA_Start_IT(htim1.hdma[TIM_DMA_ID_CC3], (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, 640);
+	CAM_takePicture(&hcam);
+	//HAL_GPIO_WritePin(transferPin_GPIO_Port, transferPin_Pin, GPIO_PIN_RESET);
+	//HAL_GPIO_WritePin(transferPin_GPIO_Port, transferPin_Pin, GPIO_PIN_SET);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-	  CAM_update(&hcam);
+	while (1) {
+
+		CAM_update(&hcam);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+	}
   /* USER CODE END 3 */
 }
 
@@ -151,15 +154,10 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -200,9 +198,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 /**
@@ -272,9 +267,9 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 6-1;
+  htim1.Init.Prescaler = 1-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 240-1;
+  htim1.Init.Period = 6000-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -287,11 +282,11 @@ static void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_TIM_OC_Init(&htim1) != HAL_OK)
+  if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
+  if (HAL_TIM_OC_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -302,24 +297,24 @@ static void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_TIMING;
-  sConfigOC.Pulse = 0;
+  sConfigOC.OCMode = TIM_OCMODE_PWM2;
+  sConfigOC.Pulse = 3000;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_TIMING;
+  sConfigOC.Pulse = 0;
+  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
   if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM2;
-  sConfigOC.Pulse = 120-1;
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -406,15 +401,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8|GPIO_PIN_12, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, getImagePin_Pin|GPIO_PIN_4|transferPin_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, addrIncTest_Pin|GPIO_PIN_12, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA0 PA1 PA2 PA3
                            PA4 PA5 PA6 PA7 */
@@ -424,15 +418,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA8 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_12;
+  /*Configure GPIO pins : getImagePin_Pin transferPin_Pin */
+  GPIO_InitStruct.Pin = getImagePin_Pin|transferPin_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : addrIncTest_Pin PA12 */
+  GPIO_InitStruct.Pin = addrIncTest_Pin|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB4 PB5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
+  /*Configure GPIO pin : PB4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -447,7 +448,7 @@ void CAM_Handle_Init(CAM_HandleTypeDef *cam) {
 	cam->hdma = &hdma_tim1_ch3;
 	cam->pic = &pic1;
 	cam->requestDataTimer = &htim1;
-	cam->requestDataChannel = TIM_CHANNEL_4;
+	cam->requestDataChannel = TIM_CHANNEL_1;
 	cam->DMATimer = &htim1;
 	cam->DMAChannel = TIM_CHANNEL_3;
 	cam->source = &(GPIOA->IDR);
@@ -473,11 +474,10 @@ void transmitBuffer() {
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	__disable_irq();
+	while (1) {
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 

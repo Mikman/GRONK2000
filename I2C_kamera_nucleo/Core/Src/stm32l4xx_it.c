@@ -208,11 +208,11 @@ void SysTick_Handler(void)
 void DMA1_Channel7_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
-  CAM_stopLineTransfer(&hcam);
-  transmitBuffer();
   /* USER CODE END DMA1_Channel7_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_tim1_ch3);
   /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
+  CAM_stopLineTransfer(&hcam);
+
   /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 

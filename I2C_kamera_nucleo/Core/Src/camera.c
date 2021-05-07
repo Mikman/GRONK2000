@@ -6,6 +6,7 @@
  */
 
 #include "camera.h"
+#include "main.h"
 
 void CAM_init(CAM_HandleTypeDef *cam) {
 	// init SCCB
@@ -13,35 +14,45 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 	CAM_setReg(cam, 0x1E, 0x31); // Flip image vertically and mirror image
 	CAM_setReg(cam, 0x13, 0x81); // Fast algorithm and auto exposure enable
 	CAM_setReg(cam, 0x3F, 0x01); // Edge enhancement factor
-	//CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
+	CAM_setReg(cam, 0x71, 0xB5); // 8-bar color bar test pattern
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
+
 	// init DMA
-	while (cam->requestDataTimer->Instance->CNT <=  120) {}
-	//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
-	//int x0 = cam->requestDataTimer->Instance->CNT;
+	//while (cam->requestDataTimer->Instance->CNT <=  50) {}
 	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
-	//int x = cam->requestDataTimer->Instance->CNT;
 	HAL_TIM_PWM_Start(cam->requestDataTimer, cam->requestDataChannel);
-	//int x1 = cam->requestDataTimer->Instance->CNT;
 
 
 	cam->status = RECEIVING;
+
+	/*
+
+
+
+	for (int i = 0; i < 640; i++) {
+					HAL_GPIO_WritePin(addrIncTest_GPIO_Port, addrIncTest_Pin,
+							GPIO_PIN_SET);
+					//HAL_Delay(1);
+					HAL_GPIO_WritePin(addrIncTest_GPIO_Port, addrIncTest_Pin,
+							GPIO_PIN_RESET);
+					//HAL_Delay(1);
+				}
+	CAM_stopLineTransfer(cam);
+	*/
+
 }
 
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
-	// abort DMA
-	//int y0 = cam->requestDataTimer->Instance->CNT;
-	HAL_DMA_Abort_IT(cam->hdma);
-	//int y1 = cam->requestDataTimer->Instance->CNT;
-	while (cam->requestDataTimer->Instance->CNT <= 120) {}
-	//int y2 = cam->requestDataTimer->Instance->CNT;
-	HAL_TIM_PWM_Stop(cam->requestDataTimer, cam->requestDataChannel);
-	//int y3 = cam->requestDataTimer->Instance->CNT;
-	//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
 
-	cam->status = WAITING;
+	// abort DMA
+	HAL_DMA_Abort_IT(cam->hdma);
+	//while (cam->requestDataTimer->Instance->CNT <= 50) {}
+	HAL_TIM_PWM_Stop(cam->requestDataTimer, cam->requestDataChannel);
+
+  	cam->status = WAITING;
+
 }
 
 void CAM_update(CAM_HandleTypeDef *cam) {
@@ -52,7 +63,7 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->pic->x = 0;
 			cam->pic->y = 0;
 			cam->status = STANDBY;
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, RESET);
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, RESET);
 		}
 	} else if (cam->status == WAITING) {
 		CAM_toOutputQueue(cam);
@@ -65,8 +76,8 @@ void CAM_takePicture(CAM_HandleTypeDef *cam) {
 	// Hvis ikke vi er ved at sende et billede, pulsér getImagePin på FPGA
 	if (cam->status == STANDBY) {
 
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
 		HAL_Delay(50);
 		cam->status = READY;
 	}

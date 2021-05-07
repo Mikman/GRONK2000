@@ -24,24 +24,7 @@ void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
 	HAL_TIM_PWM_Start(cam->requestDataTimer, cam->requestDataChannel);
 
-
 	cam->status = RECEIVING;
-
-	/*
-
-
-
-	for (int i = 0; i < 640; i++) {
-					HAL_GPIO_WritePin(addrIncTest_GPIO_Port, addrIncTest_Pin,
-							GPIO_PIN_SET);
-					//HAL_Delay(1);
-					HAL_GPIO_WritePin(addrIncTest_GPIO_Port, addrIncTest_Pin,
-							GPIO_PIN_RESET);
-					//HAL_Delay(1);
-				}
-	CAM_stopLineTransfer(cam);
-	*/
-
 }
 
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
@@ -52,7 +35,6 @@ void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
 	HAL_TIM_PWM_Stop(cam->requestDataTimer, cam->requestDataChannel);
 
   	cam->status = WAITING;
-
 }
 
 void CAM_update(CAM_HandleTypeDef *cam) {

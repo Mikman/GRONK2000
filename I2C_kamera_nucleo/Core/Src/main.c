@@ -103,15 +103,12 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-	//hi2c1.Instance->CR1 |= 0x8000;
-	//if (HAL_I2C_Master_Transmit(&hi2c1, 0x68 << 1, cameraData, 2, HAL_MAX_DELAY) != HAL_OK) {
-	//  int dev = 0;
-	//}
+
 	CAM_Handle_Init(&hcam);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET); // Transfer pin sættes lav
-	//HAL_TIM_PWM_Start(hcam.requestDataTimer, hcam.requestDataChannel); // PWM/addrInc startes
 
-	/*
+
+
 	 CAM_init(&hcam);
 
 
@@ -120,15 +117,13 @@ int main(void)
 	 int c = CAM_getReg(&hcam, 0x13);
 	 int d = CAM_getReg(&hcam, 0x3F);
 	 int e = CAM_getReg(&hcam, 0x71);
-	 */
+
 
 	//HAL_TIM_OC_Start(&htim1, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
 	__HAL_TIM_ENABLE_DMA(&htim1, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET); // Transfer pin sættes høj
-	//HAL_DMA_Start_IT(htim1.hdma[TIM_DMA_ID_CC3], (uint32_t)&(GPIOA->IDR), (uint32_t)cameraData, 640);
+
 	CAM_takePicture(&hcam);
-	//HAL_GPIO_WritePin(transferPin_GPIO_Port, transferPin_Pin, GPIO_PIN_RESET);
-	//HAL_GPIO_WritePin(transferPin_GPIO_Port, transferPin_Pin, GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 

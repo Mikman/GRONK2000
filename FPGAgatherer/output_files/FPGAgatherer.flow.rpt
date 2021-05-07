@@ -1,5 +1,5 @@
 Flow report for FPGAgatherer
-Thu May 06 18:53:56 2021
+Fri May 07 08:39:54 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Thu May 06 18:53:29 2021       ;
+; Flow Status                     ; Successful - Fri May 07 08:39:27 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGAgatherer                                ;
 ; Top-level Entity Name           ; ImageCapture                                ;
@@ -48,7 +48,7 @@ refer to the applicable agreement for further details.
 ; Device                          ; 5CEBA4F23C7                                 ;
 ; Timing Models                   ; Final                                       ;
 ; Logic utilization (in ALMs)     ; 2,575 / 18,480 ( 14 % )                     ;
-; Total registers                 ; 32                                          ;
+; Total registers                 ; 29                                          ;
 ; Total pins                      ; 102 / 224 ( 46 % )                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0 / 3,153,920 ( 0 % )                       ;
@@ -102,7 +102,10 @@ refer to the applicable agreement for further details.
 ; Fitter               ; 00:02:13     ; 1.1                     ; 6009 MB             ; 00:04:40                           ;
 ; Assembler            ; 00:00:11     ; 1.0                     ; 4835 MB             ; 00:00:10                           ;
 ; Timing Analyzer      ; 00:00:25     ; 1.5                     ; 5082 MB             ; 00:00:32                           ;
-; Total                ; 00:03:35     ; --                      ; --                  ; 00:06:31                           ;
+; Fitter               ; 00:01:57     ; 1.1                     ; 6023 MB             ; 00:03:42                           ;
+; Assembler            ; 00:00:09     ; 1.0                     ; 4839 MB             ; 00:00:08                           ;
+; Timing Analyzer      ; 00:00:25     ; 1.5                     ; 5080 MB             ; 00:00:36                           ;
+; Total                ; 00:06:06     ; --                      ; --                  ; 00:10:57                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -115,6 +118,9 @@ refer to the applicable agreement for further details.
 ; Fitter               ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
 ; Assembler            ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
 ; Timing Analyzer      ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; MIK-PC           ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -122,6 +128,9 @@ refer to the applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
+quartus_fit --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
+quartus_asm --read_settings_files=off --write_settings_files=off FPGAgatherer -c FPGAgatherer
+quartus_sta FPGAgatherer -c FPGAgatherer
 quartus_fit --read_settings_files=on --write_settings_files=off FPGAgatherer -c FPGAgatherer
 quartus_asm --read_settings_files=off --write_settings_files=off FPGAgatherer -c FPGAgatherer
 quartus_sta FPGAgatherer -c FPGAgatherer

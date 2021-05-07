@@ -109,7 +109,7 @@ set_location_assignment PIN_K17 -to RAMdata[7]
 set_location_assignment PIN_G16 -to getImagePin
 set_location_assignment PIN_J18 -to PWDN
 set_location_assignment PIN_H18 -to RESET
-set_location_assignment PIN_A12 -to addrInc
+set_location_assignment PIN_B16 -to addrInc
 set_location_assignment PIN_T12 -to display_SW
 set_location_assignment PIN_U21 -to HEX0[0]
 set_location_assignment PIN_V21 -to HEX0[1]

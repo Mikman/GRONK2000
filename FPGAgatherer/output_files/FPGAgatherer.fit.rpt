@@ -1,5 +1,5 @@
 Fitter report for FPGAgatherer
-Thu May 06 18:53:14 2021
+Fri May 07 08:39:15 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -62,7 +62,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Thu May 06 18:53:14 2021       ;
+; Fitter Status                   ; Successful - Fri May 07 08:39:15 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FPGAgatherer                                ;
 ; Top-level Entity Name           ; ImageCapture                                ;
@@ -70,7 +70,7 @@ refer to the applicable agreement for further details.
 ; Device                          ; 5CEBA4F23C7                                 ;
 ; Timing Models                   ; Final                                       ;
 ; Logic utilization (in ALMs)     ; 2,575 / 18,480 ( 14 % )                     ;
-; Total registers                 ; 32                                          ;
+; Total registers                 ; 29                                          ;
 ; Total pins                      ; 102 / 224 ( 46 % )                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0 / 3,153,920 ( 0 % )                       ;
@@ -153,12 +153,12 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.09        ;
+; Average used               ; 1.10        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   9.2%      ;
+;     Processor 2            ;   9.8%      ;
 +----------------------------+-------------+
 
 
@@ -169,12 +169,9 @@ refer to the applicable agreement for further details.
 +----------------------+------------+---------------------------------------------------+----------------------------+-----------+----------------+------------------+------------------+-----------------------+
 ; addrInc~inputCLKENA0 ; Created    ; Placement                                         ; Fitter Periphery Placement ;           ;                ;                  ;                  ;                       ;
 ; j[0]                 ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[0]~DUPLICATE   ;                  ;                       ;
-; j[2]                 ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[2]~DUPLICATE   ;                  ;                       ;
-; j[5]                 ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[5]~DUPLICATE   ;                  ;                       ;
+; j[6]                 ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[6]~DUPLICATE   ;                  ;                       ;
 ; j[12]                ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[12]~DUPLICATE  ;                  ;                       ;
 ; j[14]                ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[14]~DUPLICATE  ;                  ;                       ;
-; j[15]                ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[15]~DUPLICATE  ;                  ;                       ;
-; j[17]                ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[17]~DUPLICATE  ;                  ;                       ;
 ; j[22]                ; Duplicated ; Router Logic Cell Insertion and Logic Duplication ; Routability optimization   ;           ;                ; j[22]~DUPLICATE  ;                  ;                       ;
 +----------------------+------------+---------------------------------------------------+----------------------------+-----------+----------------+------------------+------------------+-----------------------+
 
@@ -423,8 +420,8 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ;                                                             ;                       ;       ;
 ; Difficulty packing design                                   ; Low                   ;       ;
 ;                                                             ;                       ;       ;
-; Total LABs:  partially or completely used                   ; 328 / 1,848           ; 18 %  ;
-;     -- Logic LABs                                           ; 328                   ;       ;
+; Total LABs:  partially or completely used                   ; 326 / 1,848           ; 18 %  ;
+;     -- Logic LABs                                           ; 326                   ;       ;
 ;     -- Memory LABs (up to half of total LABs)               ; 0                     ;       ;
 ;                                                             ;                       ;       ;
 ; Combinational ALUT usage for logic                          ; 5,098                 ;       ;
@@ -435,13 +432,13 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ;     -- <=3 input functions                                  ; 3,550                 ;       ;
 ; Combinational ALUT usage for route-throughs                 ; 0                     ;       ;
 ;                                                             ;                       ;       ;
-; Dedicated logic registers                                   ; 32                    ;       ;
+; Dedicated logic registers                                   ; 29                    ;       ;
 ;     -- By type:                                             ;                       ;       ;
 ;         -- Primary logic registers                          ; 24 / 36,960           ; < 1 % ;
-;         -- Secondary logic registers                        ; 8 / 36,960            ; < 1 % ;
+;         -- Secondary logic registers                        ; 5 / 36,960            ; < 1 % ;
 ;     -- By function:                                         ;                       ;       ;
 ;         -- Design implementation registers                  ; 24                    ;       ;
-;         -- Routing optimization registers                   ; 8                     ;       ;
+;         -- Routing optimization registers                   ; 5                     ;       ;
 ;                                                             ;                       ;       ;
 ; Virtual pins                                                ; 0                     ;       ;
 ; I/O pins                                                    ; 102 / 224             ; 46 %  ;
@@ -467,11 +464,11 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; Remote update blocks                                        ; 0 / 1                 ; 0 %   ;
 ; Oscillator blocks                                           ; 0 / 1                 ; 0 %   ;
 ; Impedance control blocks                                    ; 0 / 3                 ; 0 %   ;
-; Average interconnect usage (total/H/V)                      ; 3.4% / 3.5% / 3.1%    ;       ;
-; Peak interconnect usage (total/H/V)                         ; 15.5% / 16.1% / 13.6% ;       ;
+; Average interconnect usage (total/H/V)                      ; 3.5% / 3.6% / 3.1%    ;       ;
+; Peak interconnect usage (total/H/V)                         ; 17.7% / 18.6% / 15.0% ;       ;
 ; Maximum fan-out                                             ; 69                    ;       ;
 ; Highest non-global fan-out                                  ; 69                    ;       ;
-; Total fan-out                                               ; 16346                 ;       ;
+; Total fan-out                                               ; 16337                 ;       ;
 ; Average fan-out                                             ; 3.06                  ;       ;
 +-------------------------------------------------------------+-----------------------+-------+
 
@@ -497,8 +494,8 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ;                                                             ;                       ;                                ;
 ; Difficulty packing design                                   ; Low                   ; Low                            ;
 ;                                                             ;                       ;                                ;
-; Total LABs:  partially or completely used                   ; 328 / 1848 ( 18 % )   ; 0 / 1848 ( 0 % )               ;
-;     -- Logic LABs                                           ; 328                   ; 0                              ;
+; Total LABs:  partially or completely used                   ; 326 / 1848 ( 18 % )   ; 0 / 1848 ( 0 % )               ;
+;     -- Logic LABs                                           ; 326                   ; 0                              ;
 ;     -- Memory LABs (up to half of total LABs)               ; 0                     ; 0                              ;
 ;                                                             ;                       ;                                ;
 ; Combinational ALUT usage for logic                          ; 5098                  ; 0                              ;
@@ -515,10 +512,10 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; Dedicated logic registers                                   ; 0                     ; 0                              ;
 ;     -- By type:                                             ;                       ;                                ;
 ;         -- Primary logic registers                          ; 24 / 36960 ( < 1 % )  ; 0 / 36960 ( 0 % )              ;
-;         -- Secondary logic registers                        ; 8 / 36960 ( < 1 % )   ; 0 / 36960 ( 0 % )              ;
+;         -- Secondary logic registers                        ; 5 / 36960 ( < 1 % )   ; 0 / 36960 ( 0 % )              ;
 ;     -- By function:                                         ;                       ;                                ;
 ;         -- Design implementation registers                  ; 24                    ; 0                              ;
-;         -- Routing optimization registers                   ; 8                     ; 0                              ;
+;         -- Routing optimization registers                   ; 5                     ; 0                              ;
 ;                                                             ;                       ;                                ;
 ;                                                             ;                       ;                                ;
 ; Virtual pins                                                ; 0                     ; 0                              ;
@@ -535,7 +532,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ;     -- Registered Output Connections                        ; 0                     ; 0                              ;
 ;                                                             ;                       ;                                ;
 ; Internal Connections                                        ;                       ;                                ;
-;     -- Total Connections                                    ; 16418                 ; 0                              ;
+;     -- Total Connections                                    ; 16409                 ; 0                              ;
 ;     -- Registered Connections                               ; 439                   ; 0                              ;
 ;                                                             ;                       ;                                ;
 ; External Connections                                        ;                       ;                                ;
@@ -579,10 +576,10 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; HREF        ; E14   ; 7A       ; 40           ; 45           ; 40           ; 0                     ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
 ; PCLK        ; A14   ; 7A       ; 46           ; 45           ; 91           ; 0                     ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
 ; VSYNC       ; C15   ; 7A       ; 43           ; 45           ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
-; addrInc     ; A12   ; 7A       ; 36           ; 45           ; 51           ; 32                    ; 0                  ; yes    ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
+; addrInc     ; B16   ; 7A       ; 52           ; 45           ; 34           ; 29                    ; 0                  ; yes    ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
 ; clk         ; M9    ; 3B       ; 22           ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
 ; getImagePin ; G16   ; 7A       ; 50           ; 45           ; 51           ; 0                     ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
-; transferPin ; G15   ; 7A       ; 43           ; 45           ; 34           ; 32                    ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
+; transferPin ; G15   ; 7A       ; 43           ; 45           ; 34           ; 29                    ; 0                  ; no     ; no             ; no              ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; User                 ; no        ;
 +-------------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+-----------------+----------+--------------+--------------+-------------+---------------------------+----------------------+-----------+
 
 
@@ -631,8 +628,8 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; HEX5[1]     ; M8    ; 3B       ; 22           ; 0            ; 17           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
 ; HEX5[2]     ; T14   ; 4A       ; 43           ; 0            ; 17           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
 ; HEX5[3]     ; P14   ; 4A       ; 50           ; 0            ; 17           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
-; HEX5[4]     ; AB13  ; 4A       ; 33           ; 0            ; 91           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; Fitter               ; -                    ; -                   ;
-; HEX5[5]     ; U13   ; 4A       ; 33           ; 0            ; 40           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; Fitter               ; -                    ; -                   ;
+; HEX5[4]     ; AA12  ; 3B       ; 29           ; 0            ; 34           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; Fitter               ; -                    ; -                   ;
+; HEX5[5]     ; V6    ; 3A       ; 12           ; 0            ; 34           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; Fitter               ; -                    ; -                   ;
 ; HEX5[6]     ; W19   ; 4A       ; 44           ; 0            ; 0            ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; Off                               ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
 ; LEDs[0]     ; AA2   ; 2A       ; 0            ; 18           ; 77           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
 ; LEDs[1]     ; AA1   ; 2A       ; 0            ; 18           ; 94           ; no              ; no                     ; 1         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; 0                   ; Off                         ; User                 ; -                    ; -                   ;
@@ -695,9 +692,9 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ; VCCPD Voltage ;
 +----------+------------------+---------------+--------------+---------------+
 ; 2A       ; 10 / 16 ( 63 % ) ; 2.5V          ; --           ; 2.5V          ;
-; 3A       ; 0 / 16 ( 0 % )   ; 2.5V          ; --           ; 2.5V          ;
-; 3B       ; 5 / 32 ( 16 % )  ; 3.3V          ; --           ; 3.3V          ;
-; 4A       ; 38 / 48 ( 79 % ) ; 3.3V          ; --           ; 3.3V          ;
+; 3A       ; 1 / 16 ( 6 % )   ; 3.3V          ; --           ; 3.3V          ;
+; 3B       ; 6 / 32 ( 19 % )  ; 3.3V          ; --           ; 3.3V          ;
+; 4A       ; 36 / 48 ( 75 % ) ; 3.3V          ; --           ; 3.3V          ;
 ; 5A       ; 15 / 16 ( 94 % ) ; 2.5V          ; --           ; 2.5V          ;
 ; 5B       ; 11 / 16 ( 69 % ) ; 2.5V          ; --           ; 2.5V          ;
 ; 7A       ; 23 / 48 ( 48 % ) ; 2.5V          ; --           ; 2.5V          ;
@@ -721,7 +718,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; A9       ; 262        ; 8A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; A10      ; 260        ; 8A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; A11      ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
-; A12      ; 242        ; 7A       ; addrInc                         ; input  ; 2.5 V        ;                     ; Column I/O   ; Y               ; no       ; Off          ;
+; A12      ; 242        ; 7A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; A13      ; 230        ; 7A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; A14      ; 218        ; 7A       ; PCLK                            ; input  ; 2.5 V        ;                     ; Column I/O   ; Y               ; no       ; Off          ;
 ; A15      ; 216        ; 7A       ; CAMdata[4]                      ; input  ; 2.5 V        ;                     ; Column I/O   ; Y               ; no       ; Off          ;
@@ -743,7 +740,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; AA9      ; 89         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AA10     ; 87         ; 3B       ; HEX2[2]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; Y               ; no       ; Off          ;
 ; AA11     ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
-; AA12     ; 105        ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
+; AA12     ; 105        ; 3B       ; HEX5[4]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; N               ; no       ; Off          ;
 ; AA13     ; 113        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AA14     ; 111        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AA15     ; 116        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
@@ -766,7 +763,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; AB10     ; 98         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AB11     ; 100        ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AB12     ; 108        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
-; AB13     ; 106        ; 4A       ; HEX5[4]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; N               ; no       ; Off          ;
+; AB13     ; 106        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AB14     ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; AB15     ; 114        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; AB16     ;            ; 4A       ; VREFB4AN0                       ; power  ;              ;                     ; --           ;                 ; --       ; --           ;
@@ -791,7 +788,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; B13      ; 228        ; 7A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; B14      ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; B15      ; 225        ; 7A       ; XCLK                            ; output ; 2.5 V        ;                     ; Column I/O   ; Y               ; no       ; Off          ;
-; B16      ; 204        ; 7A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
+; B16      ; 204        ; 7A       ; addrInc                         ; input  ; 2.5 V        ;                     ; Column I/O   ; Y               ; no       ; Off          ;
 ; B17      ;            ;          ; NC                              ;        ;              ;                     ; --           ;                 ; --       ; --           ;
 ; B18      ;            ;          ; NC                              ;        ;              ;                     ; --           ;                 ; --       ; --           ;
 ; B19      ;            ; 7A       ; VCCIO7A                         ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
@@ -1089,7 +1086,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; T3       ;            ; --       ; VCCA_FPLL                       ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
 ; T4       ; 51         ; 3A       ; ^AS_DATA3, DATA3                ;        ;              ;                     ; Weak Pull Up ;                 ; --       ; On           ;
 ; T5       ;            ; --       ; VCCA_FPLL                       ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
-; T6       ;            ; 3A       ; VCCIO3A                         ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
+; T6       ;            ; 3A       ; VCCIO3A                         ; power  ;              ; 3.3V                ; --           ;                 ; --       ; --           ;
 ; T7       ; 66         ; 3A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; T8       ; 68         ; 3A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; T9       ; 83         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
@@ -1118,7 +1115,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; U10      ; 85         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; U11      ; 94         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; U12      ; 96         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
-; U13      ; 109        ; 4A       ; HEX5[5]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; N               ; no       ; Off          ;
+; U13      ; 109        ; 4A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; U14      ;            ; 4A       ; VCCIO4A                         ; power  ;              ; 3.3V                ; --           ;                 ; --       ; --           ;
 ; U15      ; 128        ; 4A       ; HEX4[4]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; Y               ; no       ; Off          ;
 ; U16      ; 150        ; 4A       ; HEX4[3]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; Y               ; no       ; Off          ;
@@ -1133,7 +1130,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; V3       ; 56         ; 3A       ; ^DCLK                           ;        ;              ;                     ; Weak Pull Up ;                 ; --       ; On           ;
 ; V4       ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; V5       ; 52         ; 3A       ; #TCK                            ; input  ;              ;                     ; --           ;                 ; --       ; --           ;
-; V6       ; 69         ; 3A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
+; V6       ; 69         ; 3A       ; HEX5[5]                         ; output ; 3.3-V LVTTL  ;                     ; Column I/O   ; N               ; no       ; Off          ;
 ; V7       ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; V8       ;            ; --       ; VCCPGM                          ; power  ;              ; 1.8V/2.5V/3.0V/3.3V ; --           ;                 ; --       ; --           ;
 ; V9       ; 75         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
@@ -1155,7 +1152,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; W3       ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; W4       ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; W5       ; 54         ; 3A       ; #TDI                            ; input  ;              ;                     ; --           ;                 ; --       ; --           ;
-; W6       ;            ; 3A       ; VCCPD3A                         ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
+; W6       ;            ; 3A       ; VCCPD3A                         ; power  ;              ; 3.3V                ; --           ;                 ; --       ; --           ;
 ; W7       ;            ; --       ; VCC_AUX                         ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
 ; W8       ; 63         ; 3A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; W9       ; 65         ; 3A       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
@@ -1179,7 +1176,7 @@ The pin-out file can be found in C:/Users/Mikkel S. Hansen/Documents/GitHub/GRON
 ; Y5       ;            ;          ; GND                             ; gnd    ;              ;                     ; --           ;                 ; --       ; --           ;
 ; Y6       ;            ;          ; NC                              ;        ;              ;                     ; --           ;                 ; --       ; --           ;
 ; Y7       ;            ; 3A       ; VREFB3AN0                       ; power  ;              ;                     ; --           ;                 ; --       ; --           ;
-; Y8       ;            ; 3A       ; VCCIO3A                         ; power  ;              ; 2.5V                ; --           ;                 ; --       ; --           ;
+; Y8       ;            ; 3A       ; VCCIO3A                         ; power  ;              ; 3.3V                ; --           ;                 ; --       ; --           ;
 ; Y9       ; 92         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; Y10      ; 90         ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
 ; Y11      ; 103        ; 3B       ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;                     ; Column I/O   ;                 ; no       ; On           ;
@@ -1315,7 +1312,7 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +----------------------------------------------------+----------------------+----------------------------------+---------------------------------------------------+----------------------------------+----------------------+---------------------+---------------------------+---------------+-------------------+-------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                         ; ALMs needed [=A-B+C] ; [A] ALMs used in final placement ; [B] Estimate of ALMs recoverable by dense packing ; [C] Estimate of ALMs unavailable ; ALMs used for memory ; Combinational ALUTs ; Dedicated Logic Registers ; I/O Registers ; Block Memory Bits ; M10Ks ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                   ; Entity Name         ; Library Name ;
 +----------------------------------------------------+----------------------+----------------------------------+---------------------------------------------------+----------------------------------+----------------------+---------------------+---------------------------+---------------+-------------------+-------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |ImageCapture                                      ; 2574.5 (12.5)        ; 2557.0 (12.5)                    ; 2.0 (0.0)                                         ; 19.5 (0.0)                       ; 0.0 (0.0)            ; 5098 (25)           ; 32 (32)                   ; 0 (0)         ; 0                 ; 0     ; 0          ; 102  ; 0            ; |ImageCapture                                                                                                                         ; ImageCapture        ; work         ;
+; |ImageCapture                                      ; 2574.5 (12.5)        ; 2557.0 (12.5)                    ; 2.0 (0.0)                                         ; 19.5 (0.0)                       ; 0.0 (0.0)            ; 5098 (25)           ; 29 (29)                   ; 0 (0)         ; 0                 ; 0     ; 0          ; 102  ; 0            ; |ImageCapture                                                                                                                         ; ImageCapture        ; work         ;
 ;    |SevenSegDisplay:Display|                       ; 2562.0 (0.0)         ; 2544.5 (0.0)                     ; 2.0 (0.0)                                         ; 19.5 (0.0)                       ; 0.0 (0.0)            ; 5073 (0)            ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display                                                                                                 ; SevenSegDisplay     ; work         ;
 ;       |SevenSegDigit:\genDigits:0:SevenSegDisplay| ; 3.5 (3.5)            ; 3.5 (3.5)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 7 (7)               ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:0:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
 ;       |SevenSegDigit:\genDigits:1:SevenSegDisplay| ; 3.5 (3.5)            ; 3.5 (3.5)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 7 (7)               ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|SevenSegDigit:\genDigits:1:SevenSegDisplay                                                      ; SevenSegDigit       ; work         ;
@@ -1331,18 +1328,18 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ;          |lpm_divide_mbm:auto_generated|           ; 164.0 (0.0)          ; 164.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 325 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated                                                   ; lpm_divide_mbm      ; work         ;
 ;             |sign_div_unsign_slh:divider|          ; 164.0 (0.0)          ; 164.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 325 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider                       ; sign_div_unsign_slh ; work         ;
 ;                |alt_u_div_uve:divider|             ; 164.0 (164.0)        ; 164.0 (164.0)                    ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 325 (325)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div1|lpm_divide_mbm:auto_generated|sign_div_unsign_slh:divider|alt_u_div_uve:divider ; alt_u_div_uve       ; work         ;
-;       |lpm_divide:Div2|                            ; 186.0 (0.0)          ; 186.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_0dm:auto_generated|           ; 186.0 (0.0)          ; 186.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated                                                   ; lpm_divide_0dm      ; work         ;
-;             |sign_div_unsign_6nh:divider|          ; 186.0 (0.0)          ; 186.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider                       ; sign_div_unsign_6nh ; work         ;
-;                |alt_u_div_i2f:divider|             ; 186.0 (186.0)        ; 186.0 (186.0)                    ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (367)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider|alt_u_div_i2f:divider ; alt_u_div_i2f       ; work         ;
-;       |lpm_divide:Div3|                            ; 191.5 (0.0)          ; 183.5 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_4dm:auto_generated|           ; 191.5 (0.0)          ; 183.5 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated                                                   ; lpm_divide_4dm      ; work         ;
-;             |sign_div_unsign_anh:divider|          ; 191.5 (0.0)          ; 183.5 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider                       ; sign_div_unsign_anh ; work         ;
-;                |alt_u_div_q2f:divider|             ; 191.5 (191.5)        ; 183.5 (183.5)                    ; 0.5 (0.5)                                         ; 8.5 (8.5)                        ; 0.0 (0.0)            ; 363 (363)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider|alt_u_div_q2f:divider ; alt_u_div_q2f       ; work         ;
-;       |lpm_divide:Div4|                            ; 164.5 (0.0)          ; 157.0 (0.0)                      ; 1.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_7dm:auto_generated|           ; 164.5 (0.0)          ; 157.0 (0.0)                      ; 1.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated                                                   ; lpm_divide_7dm      ; work         ;
-;             |sign_div_unsign_dnh:divider|          ; 164.5 (0.0)          ; 157.0 (0.0)                      ; 1.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider                       ; sign_div_unsign_dnh ; work         ;
-;                |alt_u_div_03f:divider|             ; 164.5 (164.5)        ; 157.0 (157.0)                    ; 1.5 (1.5)                                         ; 9.0 (9.0)                        ; 0.0 (0.0)            ; 310 (310)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider|alt_u_div_03f:divider ; alt_u_div_03f       ; work         ;
+;       |lpm_divide:Div2|                            ; 186.0 (0.0)          ; 186.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_0dm:auto_generated|           ; 186.0 (0.0)          ; 186.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated                                                   ; lpm_divide_0dm      ; work         ;
+;             |sign_div_unsign_6nh:divider|          ; 186.0 (0.0)          ; 186.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider                       ; sign_div_unsign_6nh ; work         ;
+;                |alt_u_div_i2f:divider|             ; 186.0 (186.0)        ; 186.5 (186.5)                    ; 0.5 (0.5)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 367 (367)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div2|lpm_divide_0dm:auto_generated|sign_div_unsign_6nh:divider|alt_u_div_i2f:divider ; alt_u_div_i2f       ; work         ;
+;       |lpm_divide:Div3|                            ; 191.0 (0.0)          ; 183.0 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4dm:auto_generated|           ; 191.0 (0.0)          ; 183.0 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated                                                   ; lpm_divide_4dm      ; work         ;
+;             |sign_div_unsign_anh:divider|          ; 191.0 (0.0)          ; 183.0 (0.0)                      ; 0.5 (0.0)                                         ; 8.5 (0.0)                        ; 0.0 (0.0)            ; 363 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider                       ; sign_div_unsign_anh ; work         ;
+;                |alt_u_div_q2f:divider|             ; 191.0 (191.0)        ; 183.0 (183.0)                    ; 0.5 (0.5)                                         ; 8.5 (8.5)                        ; 0.0 (0.0)            ; 363 (363)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div3|lpm_divide_4dm:auto_generated|sign_div_unsign_anh:divider|alt_u_div_q2f:divider ; alt_u_div_q2f       ; work         ;
+;       |lpm_divide:Div4|                            ; 165.0 (0.0)          ; 156.5 (0.0)                      ; 0.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_7dm:auto_generated|           ; 165.0 (0.0)          ; 156.5 (0.0)                      ; 0.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated                                                   ; lpm_divide_7dm      ; work         ;
+;             |sign_div_unsign_dnh:divider|          ; 165.0 (0.0)          ; 156.5 (0.0)                      ; 0.5 (0.0)                                         ; 9.0 (0.0)                        ; 0.0 (0.0)            ; 310 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider                       ; sign_div_unsign_dnh ; work         ;
+;                |alt_u_div_03f:divider|             ; 165.0 (165.0)        ; 156.5 (156.5)                    ; 0.5 (0.5)                                         ; 9.0 (9.0)                        ; 0.0 (0.0)            ; 310 (310)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Div4|lpm_divide_7dm:auto_generated|sign_div_unsign_dnh:divider|alt_u_div_03f:divider ; alt_u_div_03f       ; work         ;
 ;       |lpm_divide:Mod0|                            ; 354.0 (0.0)          ; 353.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.5 (0.0)                        ; 0.0 (0.0)            ; 707 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
 ;          |lpm_divide_85m:auto_generated|           ; 354.0 (0.0)          ; 353.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.5 (0.0)                        ; 0.0 (0.0)            ; 707 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
 ;             |sign_div_unsign_bnh:divider|          ; 354.0 (0.0)          ; 353.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.5 (0.0)                        ; 0.0 (0.0)            ; 707 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod0|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
@@ -1359,14 +1356,14 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ;          |lpm_divide_85m:auto_generated|           ; 281.0 (0.0)          ; 280.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.5 (0.0)                        ; 0.0 (0.0)            ; 561 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
 ;             |sign_div_unsign_bnh:divider|          ; 281.0 (0.0)          ; 280.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.5 (0.0)                        ; 0.0 (0.0)            ; 561 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
 ;                |alt_u_div_s2f:divider|             ; 281.0 (281.0)        ; 280.5 (280.5)                    ; 0.0 (0.0)                                         ; 0.5 (0.5)                        ; 0.0 (0.0)            ; 561 (561)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod3|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod4|                            ; 219.5 (0.0)          ; 219.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 219.5 (0.0)          ; 219.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 219.5 (0.0)          ; 219.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 219.5 (219.5)        ; 219.5 (219.5)                    ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (441)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
-;       |lpm_divide:Mod5|                            ; 149.5 (0.0)          ; 149.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5                                                                                 ; lpm_divide          ; work         ;
-;          |lpm_divide_85m:auto_generated|           ; 149.5 (0.0)          ; 149.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
-;             |sign_div_unsign_bnh:divider|          ; 149.5 (0.0)          ; 149.5 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
-;                |alt_u_div_s2f:divider|             ; 149.5 (149.5)        ; 149.5 (149.5)                    ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (299)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod4|                            ; 220.0 (0.0)          ; 220.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 220.0 (0.0)          ; 220.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 220.0 (0.0)          ; 220.0 (0.0)                      ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 220.0 (220.0)        ; 220.0 (220.0)                    ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 441 (441)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod4|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
+;       |lpm_divide:Mod5|                            ; 149.0 (0.0)          ; 149.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_85m:auto_generated|           ; 149.0 (0.0)          ; 149.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated                                                   ; lpm_divide_85m      ; work         ;
+;             |sign_div_unsign_bnh:divider|          ; 149.0 (0.0)          ; 149.5 (0.0)                      ; 0.5 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (0)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider                       ; sign_div_unsign_bnh ; work         ;
+;                |alt_u_div_s2f:divider|             ; 149.0 (149.0)        ; 149.5 (149.5)                    ; 0.5 (0.5)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 299 (299)           ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |ImageCapture|SevenSegDisplay:Display|lpm_divide:Mod5|lpm_divide_85m:auto_generated|sign_div_unsign_bnh:divider|alt_u_div_s2f:divider ; alt_u_div_s2f       ; work         ;
 +----------------------------------------------------+----------------------+----------------------------------+---------------------------------------------------+----------------------------------+----------------------+---------------------+---------------------------+---------------+-------------------+-------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -1476,8 +1473,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; RAMdata[5]  ; Bidir    ; -- ; --   ; --   ; -- ; (0)  ; (31)  ; --     ; --                     ; --                       ;
 ; RAMdata[6]  ; Bidir    ; -- ; --   ; --   ; -- ; (0)  ; (31)  ; --     ; --                     ; --                       ;
 ; RAMdata[7]  ; Bidir    ; -- ; --   ; --   ; -- ; (0)  ; (31)  ; --     ; --                     ; --                       ;
-; addrInc     ; Input    ; -- ; --   ; (0)  ; -- ; --   ; --    ; --     ; --                     ; --                       ;
-; transferPin ; Input    ; -- ; --   ; (0)  ; -- ; --   ; --    ; --     ; --                     ; --                       ;
+; addrInc     ; Input    ; -- ; (0)  ; --   ; -- ; --   ; --    ; --     ; --                     ; --                       ;
+; transferPin ; Input    ; -- ; (0)  ; --   ; -- ; --   ; --    ; --     ; --                     ; --                       ;
 +-------------+----------+----+------+------+----+------+-------+--------+------------------------+--------------------------+
 
 
@@ -1508,40 +1505,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; RAMdata[6]                  ;                   ;         ;
 ; RAMdata[7]                  ;                   ;         ;
 ; addrInc                     ;                   ;         ;
-;      - addrInc~inputCLKENA0 ; 1                 ; 0       ;
+;      - addrInc~inputCLKENA0 ; 0                 ; 0       ;
 ; transferPin                 ;                   ;         ;
-;      - j[9]                 ; 1                 ; 0       ;
-;      - j[8]                 ; 1                 ; 0       ;
-;      - j[7]                 ; 1                 ; 0       ;
-;      - j[6]                 ; 1                 ; 0       ;
-;      - j[5]                 ; 1                 ; 0       ;
-;      - j[4]                 ; 1                 ; 0       ;
-;      - j[3]                 ; 1                 ; 0       ;
-;      - j[2]                 ; 1                 ; 0       ;
-;      - j[1]                 ; 1                 ; 0       ;
-;      - j[0]                 ; 1                 ; 0       ;
-;      - j[23]                ; 1                 ; 0       ;
-;      - j[10]                ; 1                 ; 0       ;
-;      - j[11]                ; 1                 ; 0       ;
-;      - j[12]                ; 1                 ; 0       ;
-;      - j[13]                ; 1                 ; 0       ;
-;      - j[14]                ; 1                 ; 0       ;
-;      - j[15]                ; 1                 ; 0       ;
-;      - j[16]                ; 1                 ; 0       ;
-;      - j[17]                ; 1                 ; 0       ;
-;      - j[18]                ; 1                 ; 0       ;
-;      - j[19]                ; 1                 ; 0       ;
-;      - j[20]                ; 1                 ; 0       ;
-;      - j[22]                ; 1                 ; 0       ;
-;      - j[21]                ; 1                 ; 0       ;
-;      - j[0]~DUPLICATE       ; 1                 ; 0       ;
-;      - j[2]~DUPLICATE       ; 1                 ; 0       ;
-;      - j[5]~DUPLICATE       ; 1                 ; 0       ;
-;      - j[12]~DUPLICATE      ; 1                 ; 0       ;
-;      - j[14]~DUPLICATE      ; 1                 ; 0       ;
-;      - j[15]~DUPLICATE      ; 1                 ; 0       ;
-;      - j[17]~DUPLICATE      ; 1                 ; 0       ;
-;      - j[22]~DUPLICATE      ; 1                 ; 0       ;
+;      - j[9]                 ; 0                 ; 0       ;
+;      - j[8]                 ; 0                 ; 0       ;
+;      - j[7]                 ; 0                 ; 0       ;
+;      - j[6]                 ; 0                 ; 0       ;
+;      - j[5]                 ; 0                 ; 0       ;
+;      - j[4]                 ; 0                 ; 0       ;
+;      - j[3]                 ; 0                 ; 0       ;
+;      - j[2]                 ; 0                 ; 0       ;
+;      - j[1]                 ; 0                 ; 0       ;
+;      - j[0]                 ; 0                 ; 0       ;
+;      - j[23]                ; 0                 ; 0       ;
+;      - j[10]                ; 0                 ; 0       ;
+;      - j[11]                ; 0                 ; 0       ;
+;      - j[12]                ; 0                 ; 0       ;
+;      - j[13]                ; 0                 ; 0       ;
+;      - j[14]                ; 0                 ; 0       ;
+;      - j[15]                ; 0                 ; 0       ;
+;      - j[16]                ; 0                 ; 0       ;
+;      - j[17]                ; 0                 ; 0       ;
+;      - j[18]                ; 0                 ; 0       ;
+;      - j[19]                ; 0                 ; 0       ;
+;      - j[20]                ; 0                 ; 0       ;
+;      - j[22]                ; 0                 ; 0       ;
+;      - j[21]                ; 0                 ; 0       ;
+;      - j[0]~DUPLICATE       ; 0                 ; 0       ;
+;      - j[6]~DUPLICATE       ; 0                 ; 0       ;
+;      - j[12]~DUPLICATE      ; 0                 ; 0       ;
+;      - j[14]~DUPLICATE      ; 0                 ; 0       ;
+;      - j[22]~DUPLICATE      ; 0                 ; 0       ;
 +-----------------------------+-------------------+---------+
 
 
@@ -1550,8 +1544,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------+----------+---------+--------------+--------+----------------------+------------------+---------------------------+
 ; Name        ; Location ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-------------+----------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; addrInc     ; PIN_A12  ; 32      ; Clock        ; yes    ; Global Clock         ; GCLK14           ; --                        ;
-; transferPin ; PIN_G15  ; 32      ; Async. clear ; no     ; --                   ; --               ; --                        ;
+; addrInc     ; PIN_B16  ; 29      ; Clock        ; yes    ; Global Clock         ; GCLK8            ; --                        ;
+; transferPin ; PIN_G15  ; 29      ; Async. clear ; no     ; --                   ; --               ; --                        ;
 +-------------+----------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
@@ -1560,7 +1554,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------+----------+---------+----------------------+------------------+---------------------------+
 ; Name    ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +---------+----------+---------+----------------------+------------------+---------------------------+
-; addrInc ; PIN_A12  ; 32      ; Global Clock         ; GCLK14           ; --                        ;
+; addrInc ; PIN_B16  ; 29      ; Global Clock         ; GCLK8            ; --                        ;
 +---------+----------+---------+----------------------+------------------+---------------------------+
 
 
@@ -1569,22 +1563,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------+---------------------------+
 ; Routing Resource Type        ; Usage                     ;
 +------------------------------+---------------------------+
-; Block interconnects          ; 7,496 / 140,056 ( 5 % )   ;
-; C12 interconnects            ; 20 / 6,048 ( < 1 % )      ;
-; C2 interconnects             ; 2,247 / 54,648 ( 4 % )    ;
-; C4 interconnects             ; 873 / 25,920 ( 3 % )      ;
+; Block interconnects          ; 7,540 / 140,056 ( 5 % )   ;
+; C12 interconnects            ; 19 / 6,048 ( < 1 % )      ;
+; C2 interconnects             ; 2,255 / 54,648 ( 4 % )    ;
+; C4 interconnects             ; 876 / 25,920 ( 3 % )      ;
 ; DQS bus muxes                ; 0 / 17 ( 0 % )            ;
 ; DQS-18 I/O buses             ; 0 / 17 ( 0 % )            ;
 ; DQS-9 I/O buses              ; 0 / 17 ( 0 % )            ;
-; Direct links                 ; 1,120 / 140,056 ( < 1 % ) ;
+; Direct links                 ; 1,163 / 140,056 ( < 1 % ) ;
 ; Global clocks                ; 1 / 16 ( 6 % )            ;
-; Local interconnects          ; 982 / 36,960 ( 3 % )      ;
+; Local interconnects          ; 987 / 36,960 ( 3 % )      ;
 ; Quadrant clocks              ; 0 / 88 ( 0 % )            ;
-; R14 interconnects            ; 55 / 5,984 ( < 1 % )      ;
-; R14/C12 interconnect drivers ; 68 / 9,504 ( < 1 % )      ;
-; R3 interconnects             ; 2,864 / 60,192 ( 5 % )    ;
-; R6 interconnects             ; 3,495 / 127,072 ( 3 % )   ;
-; Spine clocks                 ; 2 / 120 ( 2 % )           ;
+; R14 interconnects            ; 47 / 5,984 ( < 1 % )      ;
+; R14/C12 interconnect drivers ; 56 / 9,504 ( < 1 % )      ;
+; R3 interconnects             ; 2,960 / 60,192 ( 5 % )    ;
+; R6 interconnects             ; 3,658 / 127,072 ( 3 % )   ;
+; Spine clocks                 ; 1 / 120 ( < 1 % )         ;
 ; Wire stub REs                ; 0 / 7,344 ( 0 % )         ;
 +------------------------------+---------------------------+
 
@@ -1813,7 +1807,7 @@ Info (11191): Automatically promoted 1 clock (1 global)
         Info (12525): This signal is driven by core routing -- it may be moved during placement to reduce routing delays
 Warning (16406): 1 global input pin(s) will use non-dedicated clock routing
     Warning (16407): Source REFCLK I/O is not placed onto a dedicated REFCLK input pin for global clock driver addrInc~inputCLKENA0, placed at CLKCTRL_G13
-        Info (179012): Refclk input I/O pad addrInc is placed onto PIN_A12
+        Info (179012): Refclk input I/O pad addrInc is placed onto PIN_B16
 Info (184021): Fitter periphery placement operations ending: elapsed time is 00:00:00
 Info (176233): Starting register packing
 Info (332104): Reading SDC File: 'FPGAgatherer.sdc'
@@ -1848,17 +1842,17 @@ Info (170137): Fitter placement was successful
 Info (170192): Fitter placement operations ending: elapsed time is 00:00:02
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 3% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 13% of the available device resources in the region that extends from location X33_Y0 to location X43_Y10
+    Info (170196): Router estimated peak interconnect usage is 15% of the available device resources in the region that extends from location X33_Y0 to location X43_Y10
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:02
-Info (11888): Total time spent on timing analysis during the Fitter is 1.08 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:03
+Info (11888): Total time spent on timing analysis during the Fitter is 1.07 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:25
+Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:22
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169064): Following 8 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
     Info (169065): Pin RAMdata[0] has a permanently disabled output enable File: C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/ImageCapture.vhd Line: 16
@@ -1871,10 +1865,10 @@ Warning (169064): Following 8 pins have no output enable or a GND or VCC output 
     Info (169065): Pin RAMdata[7] has a permanently disabled output enable File: C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/ImageCapture.vhd Line: 16
 Info (144001): Generated suppressed messages file C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/output_files/FPGAgatherer.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 6009 megabytes
-    Info: Processing ended: Thu May 06 18:53:16 2021
-    Info: Elapsed time: 00:02:15
-    Info: Total CPU time (on all processors): 00:04:42
+    Info: Peak virtual memory: 6023 megabytes
+    Info: Processing ended: Fri May 07 08:39:17 2021
+    Info: Elapsed time: 00:01:59
+    Info: Total CPU time (on all processors): 00:03:44
 
 
 +----------------------------+

@@ -28,14 +28,14 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 	int e = CAM_getReg(cam, 0x71);
 
 
-	HAL_TIM_OC_Start(cam->DMATimer, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
+	//HAL_TIM_OC_Start(cam->DMATimer, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
 	__HAL_TIM_ENABLE_DMA(cam->DMATimer, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
 	//HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_SET); // Transfer pin sættes høj
 }
 
 void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 	// init DMA
-	while (cam->requestDataTimer->Instance->CNT <=  3000) {}
+	//while (cam->requestDataTimer->Instance->CNT <=  3000) {}
 	HAL_DMA_Start_IT(cam->hdma, cam->source, cam->destination, cam->pic->width);
 	HAL_TIM_PWM_Start(cam->requestDataTimer, cam->requestDataChannel);
 
@@ -45,7 +45,7 @@ void CAM_startLineTransfer(CAM_HandleTypeDef *cam) {
 void CAM_stopLineTransfer(CAM_HandleTypeDef *cam) {
 	// abort DMA
 	HAL_DMA_Abort_IT(cam->hdma);
-	while (cam->requestDataTimer->Instance->CNT <= 3000) {}
+	//while (cam->requestDataTimer->Instance->CNT <= 3000) {}
 	HAL_TIM_PWM_Stop(cam->requestDataTimer, cam->requestDataChannel);
 
 	cam->status = WAITING;

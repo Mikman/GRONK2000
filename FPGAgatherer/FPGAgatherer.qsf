@@ -98,14 +98,14 @@ set_location_assignment PIN_B15 -to XCLK
 set_location_assignment PIN_C15 -to VSYNC
 set_location_assignment PIN_A14 -to PCLK
 set_location_assignment PIN_E14 -to HREF
-set_location_assignment PIN_T19 -to RAMdata[0]
-set_location_assignment PIN_T20 -to RAMdata[1]
-set_location_assignment PIN_R16 -to RAMdata[2]
-set_location_assignment PIN_R17 -to RAMdata[3]
-set_location_assignment PIN_R15 -to RAMdata[4]
-set_location_assignment PIN_P18 -to RAMdata[5]
-set_location_assignment PIN_K19 -to RAMdata[6]
-set_location_assignment PIN_K17 -to RAMdata[7]
+set_location_assignment PIN_H15 -to RAMdata[0]
+set_location_assignment PIN_A13 -to RAMdata[1]
+set_location_assignment PIN_C13 -to RAMdata[2]
+set_location_assignment PIN_G18 -to RAMdata[3]
+set_location_assignment PIN_B12 -to RAMdata[4]
+set_location_assignment PIN_B13 -to RAMdata[5]
+set_location_assignment PIN_D13 -to RAMdata[6]
+set_location_assignment PIN_G17 -to RAMdata[7]
 set_location_assignment PIN_G16 -to getImagePin
 set_location_assignment PIN_J18 -to PWDN
 set_location_assignment PIN_H18 -to RESET
@@ -164,10 +164,6 @@ set_location_assignment PIN_F15 -to SIOC
 set_location_assignment PIN_J17 -to SIOD
 set_global_assignment -name VHDL_FILE ImageCapture.vhd
 set_location_assignment PIN_G15 -to transferPin
-set_location_assignment PIN_B12 -to testGetImagePin
-set_location_assignment PIN_G17 -to testSaveNextImage
-set_location_assignment PIN_B13 -to testVSYNC_falling
-set_location_assignment PIN_D13 -to testWantAnImage
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK3_50
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK4_50

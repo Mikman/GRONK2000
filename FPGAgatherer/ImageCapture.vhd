@@ -36,6 +36,8 @@ signal addr: integer range 0 to 512000 := 0;
 
 signal counting, wantAnImage, VSYNC_falling, saveNextImage: boolean := false;
 
+signal currentLine: boolean := true;
+
 type preEditBuffer is array(3 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 type postEditBuffer is array(1 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
 signal preArray: preEditBuffer;
@@ -55,8 +57,9 @@ begin
 	
 	counting <= true when (VSYNC = '0' and wantAnImage and HREF = '1') else false;
 	
+	LEDs(7 downto 0) <= RAMdata(7 downto 0);
 	
-	
+	currentLine <= false when (VSYNC = '0') else true;
 	
 	process(addrInc)
 	begin
@@ -68,7 +71,6 @@ begin
 			j <= 0;
 		end if;
 	end process;
-
 	
 
 	process(PCLK) -- Da der kontinuerligt bliver lagt data over på RAM, så bliver de første to pixels fyldt med bras og sendt
@@ -151,7 +153,7 @@ begin
 		
 			if ( transferPin = '1' ) then 
 				addr <= j;
-				LEDs(7 downto 0) <= RAMdata(7 downto 0);
+				RAMdata <= "ZZZZZZZZ"; -- Set to high impedance (input) so FPGA and RAM are not both outputs at the same time
 				
 			else
 			
@@ -194,7 +196,7 @@ begin
 					
 					ticks <= ticks + 1;
 					
-				elsif(VSYNC = '1') then
+				elsif(currentLine) then
 				
 					addr <= 0;
 					ticks <= 0;

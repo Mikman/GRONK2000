@@ -121,7 +121,7 @@ void placeData_1(uint8_t *p){
 
 			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
-	else if(RxHeader->ExtId == CAN_ID_PARTCL_INPUT){
+	else if(RxHeader->ExtId == CAN_ID_PARTCL_INPUT || CAN_ID_PARTCL_CONTROL){
 			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];

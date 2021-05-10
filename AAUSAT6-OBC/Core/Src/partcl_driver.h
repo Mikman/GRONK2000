@@ -20,7 +20,14 @@
 #define BUF_SIZE_OUT 512
 
 #define CAN_ID_PARTCL_INPUT 64
+#define CAN_ID_PARTCL_CONTROL 95
 #define CAN_ID_PARTCL_OUTPUT 65
+
+enum PARTCL_STATUS {
+    PARTCL_READY,       // Vi venter på start pakke
+    PARTCL_RECEIVING,   // Vi er i gang med at modtage program
+};
+
 
 void partcl_init();
 

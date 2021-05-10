@@ -60,6 +60,7 @@ I2C_HandleTypeDef hi2c1;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim15;
 DMA_HandleTypeDef hdma_tim1_ch3;
 
 UART_HandleTypeDef huart1;
@@ -119,6 +120,7 @@ static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM6_Init(void);
+static void MX_TIM15_Init(void);
 void task_gps(void *argument);
 void task_dcmotor(void *argument);
 void task_mpu6050(void *argument);
@@ -169,10 +171,16 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM1_Init();
   MX_TIM6_Init();
+  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
   transmit_driver_init();
+  HAL_TIM_Base_Start(&htim15);
+
+  motor_init(&htim2, TIM_CHANNEL_2);
+  	motor_start(0);
+  	motor_direction(1);
 
   /* USER CODE END 2 */
 
@@ -197,19 +205,19 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of taskGPS */
-  taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
+  //taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
 
   /* creation of taskDCMotor */
   taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
 
   /* creation of taskMPU6050 */
-  taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
+  //taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
 
   /* creation of taskParTCL */
   taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
 
   /* creation of taskImage */
-  taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
+ // taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -403,7 +411,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x10808DD3;
+  hi2c1.Init.Timing = 0x00702681;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -454,7 +462,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 1-1;
+  htim1.Init.Prescaler = 1200-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 6000-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -615,6 +623,80 @@ static void MX_TIM6_Init(void)
 }
 
 /**
+  * @brief TIM15 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM15_Init(void)
+{
+
+  /* USER CODE BEGIN TIM15_Init 0 */
+
+  /* USER CODE END TIM15_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+  TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+
+  /* USER CODE BEGIN TIM15_Init 1 */
+
+  /* USER CODE END TIM15_Init 1 */
+  htim15.Instance = TIM15;
+  htim15.Init.Prescaler = 72;
+  htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim15.Init.Period = 65535;
+  htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim15.Init.RepetitionCounter = 0;
+  htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim15) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim15, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_OC_Init(&htim15) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_TIMING;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_OC_ConfigChannel(&htim15, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
+  sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+  sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+  sBreakDeadTimeConfig.DeadTime = 0;
+  sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+  sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+  sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+  if (HAL_TIMEx_ConfigBreakDeadTime(&htim15, &sBreakDeadTimeConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM15_Init 2 */
+
+  /* USER CODE END TIM15_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -752,9 +834,13 @@ void task_gps(void *argument)
   /* Infinite loop */
 	gps_init(&huart1, hdma_usart1_rx.Instance);
 	GPS_FIX_DATA test ={0};
+
   for(;;)
   {
+
+
 	GPS();
+
     osDelay(10000);
   }
   /* USER CODE END 5 */
@@ -770,22 +856,15 @@ void task_gps(void *argument)
 void task_dcmotor(void *argument)
 {
   /* USER CODE BEGIN task_dcmotor */
-	motor_init(&htim2, TIM_CHANNEL_2);
-	motor_start(0);
-	motor_direction(1);
+
   /* Infinite loop */
   for(;;)
   {
-	  motor_direction(1);
-	  motor_setPwm(100);
-	  osDelay(5000);
-	  motor_setPwm(50);
-	  osDelay(5000);
-	  motor_direction(0);
-	  	  motor_setPwm(100);
-	  	  osDelay(5000);
-	  	  motor_setPwm(50);
-	  	  osDelay(5000);
+	TIM15->CNT = 0;
+	motor();
+	volatile uint32_t tidsvaerdi = TIM15->CNT;
+	int dev = 0;
+	 osDelay(5000);
   }
   /* USER CODE END task_dcmotor */
 }
@@ -806,7 +885,8 @@ void task_mpu6050(void *argument)
   {
 
 	MPU6050();
-    osDelay(100);
+
+    osDelay(5000);
   }
   /* USER CODE END task_mpu6050 */
 }

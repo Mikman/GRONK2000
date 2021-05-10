@@ -18,32 +18,32 @@ HAL_StatusTypeDef MPU_Init(I2C_HandleTypeDef * I2C_handler){
 
 	initializationBuffer[0] = MPU_PWR_MGT_1;
 	initializationBuffer[1] = 0x00; //Set clocksource to internal 8MHz oscillator
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = SIGNAL_PATH_RESET;
 	initializationBuffer[1] = 0x07; // Resets gyro, accel & temp signal path to disable any filtering
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = DLPF_CFG;
 	initializationBuffer[1] = 0x00; //Digital low pass filter disable & gyro sample rate at 8 kHz
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = SMPLRT_DIV;
 	initializationBuffer[1] = 0x07; //Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV)  @ 1kHz
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = GYRO_CONFIG;
 	initializationBuffer[1] = GYRO_CONFIG_SCALE; // Sets the full scale to +-2000 degrees per second
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 	initializationBuffer[0] = ACCEL_CONFIG;
 	initializationBuffer[1] = ACCEL_CONFIG_SCALE; // Sets the accelerometer full scale to +-16g
-	returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY);
+	returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), initializationBuffer, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	if(returnValue != HAL_OK) return returnValue;
 
 
@@ -60,9 +60,9 @@ float MPU_Read_Temp(){
 
 	uint8_t tempBuf[2];
 	 tempBuf[0] = MPU_TempReg;
-	 returnValue = HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), tempBuf, 1, HAL_MAX_DELAY);
+	 returnValue = sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), tempBuf, 1, HAL_MAX_DELAY, &semaphr_I2C);
 	 if(returnValue != HAL_OK) return returnValue;
-	 returnValue = HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, tempBuf, 2, HAL_MAX_DELAY);
+	 returnValue = sem_HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, tempBuf, 2, HAL_MAX_DELAY, &semaphr_I2C);
 	 if(returnValue != HAL_OK) return returnValue;
 
 	 // Data composition from raw data
@@ -90,8 +90,8 @@ Axes3 MPU_Read_Gyro(){
 
 	 uint8_t gyroBuf[10];
 	 gyroBuf[0] = MPU_GyroOut;
-	 HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), gyroBuf, 1, HAL_MAX_DELAY);
-	 HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, gyroBuf, 6, HAL_MAX_DELAY);
+	 sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), gyroBuf, 1, HAL_MAX_DELAY, &semaphr_I2C);
+	 sem_HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, gyroBuf, 6, HAL_MAX_DELAY, &semaphr_I2C);
 
 	 // Data composition from raw data
 	 rawGyroData_X = ((int16_t)gyroBuf[0] << 8 | gyroBuf[1]);
@@ -123,8 +123,8 @@ Axes3 MPU_Read_Accel(){
 
 	 uint8_t accelBuf[10];
 	 accelBuf[0] = MPU_AccelOut;
-	 HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), accelBuf, 1, HAL_MAX_DELAY);
-	 HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, accelBuf, 6, HAL_MAX_DELAY);
+	 sem_HAL_I2C_Master_Transmit(hi2c, (MPU_Address<<1), accelBuf, 1, HAL_MAX_DELAY, &semaphr_I2C);
+	 sem_HAL_I2C_Master_Receive(hi2c, (MPU_Address<<1) | 0x01, accelBuf, 6, HAL_MAX_DELAY, &semaphr_I2C);
 
 	 // Data composition from raw data
 	 rawAccelData_X = ((int16_t)accelBuf[0] << 8 | accelBuf[1]);

@@ -10,6 +10,8 @@
 char input[BUF_SIZE_IN] = {0};
 
 uint16_t i_read = 0;
+enum PARTCL_STATUS STATUS;
+
 
 struct CAN_QUEUE_DATA PARTCL_DATA = {0,{0}};
 struct StructQueue PARTCL_CAN_RX_QUEUE = {0};
@@ -23,6 +25,25 @@ void partcl_readQueue() {
 		case CAN_ID_PARTCL_INPUT:
 			partcl_add_program((char *) &(PARTCL_DATA.data), 8); // Copy 8 characters or less (if null) from package into input buffer
 			break;
+
+		case CAN_ID_PARTCL_CONTROL:
+			if(PARTCL_DATA.data[0] > 0 && PARTCL_DATA.data[1] == 0) {
+				//Start pakke kommer nu ?!
+				//partcl_printf("start\n");
+				memset(input, 0, BUF_SIZE_IN); // Clear input buffer
+				STATUS = PARTCL_RECEIVING;
+
+			}
+			else if(PARTCL_DATA.data[1] > 0 && PARTCL_DATA.data[0] == 0) {
+				//Slutning af pakken er nu kommet
+				//partcl_printf("slut\n");
+				STATUS = PARTCL_READY;
+			}
+			else {
+				partcl_printf("Invalid command package\n");
+			}
+			break;
+
 		default:
 			continue; // Skip package if it is not with an expected ID
 		}
@@ -34,11 +55,13 @@ void partcl_execute() {
 
 	if (*input != 0) {
 		tcl_setup();
-		tcl_execute(); // Interpret and execute input progam
+		if(STATUS = PARTCL_READY){
+			tcl_execute(); // Interpret and execute input progam
+			memset(input, 0, BUF_SIZE_IN); // Clear input buffer
+		}
 	}
 	else return;
 
-	memset(input, 0, BUF_SIZE_IN); // Clear input buffer
 }
 
 void partcl_add_program(char * str, size_t size) {

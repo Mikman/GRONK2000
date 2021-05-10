@@ -26,11 +26,12 @@ extern bool CAN_Mailbox2Empty;
 struct Queue queueRAM = {0, 0, {0}};
 struct Queue queueRx = {0, 0, {0}};
 
-SemaphoreHandle_t semaphr_send;
-
 void transmit_driver_init() {
 	semaphr_send = xSemaphoreCreateMutex();
 	if (semaphr_send == NULL) Error_Handler();
+
+	semaphr_I2C = xSemaphoreCreateMutex();
+	if (semaphr_I2C == NULL) Error_Handler();
 }
 
 void floatTo4UIntArray(float floatData, uint8_t *destinationArray){
@@ -219,4 +220,22 @@ int messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t pos
 
 }
 return 1;
+}
+
+HAL_StatusTypeDef sem_HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout, SemaphoreHandle_t *sem) {
+	HAL_StatusTypeDef returnValue = HAL_ERROR;
+	if (xSemaphoreTake(*sem, SEMAPHR_WAIT_TIME) == pdPASS) {
+		returnValue = HAL_I2C_Master_Transmit(hi2c, DevAddress, pData, Size, Timeout);
+		xSemaphoreGive(*sem);
+	}
+	return returnValue;
+}
+
+HAL_StatusTypeDef sem_HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout, SemaphoreHandle_t *sem) {
+	HAL_StatusTypeDef returnValue = HAL_ERROR;
+		if (xSemaphoreTake(*sem, SEMAPHR_WAIT_TIME) == pdPASS) {
+			returnValue = HAL_I2C_Master_Receive(hi2c, DevAddress, pData, Size, Timeout);
+			xSemaphoreGive(*sem);
+		}
+		return returnValue;
 }

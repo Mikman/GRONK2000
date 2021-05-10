@@ -7,6 +7,7 @@
 
 #include "can_driver.h"
 #include "circle_queue_struct.h"
+#include "transmit_driver.h"
 
 #include <stdint.h>
 #include "stm32l4xx_hal.h"

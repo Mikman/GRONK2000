@@ -19,7 +19,10 @@
 #include "semphr.h"
 
 #define PACKAGE_SIZE 8
-#define SEMAPHR_SEND_WAIT_TIME portMAX_DELAY
+#define SEMAPHR_WAIT_TIME portMAX_DELAY
+
+SemaphoreHandle_t semaphr_send;
+SemaphoreHandle_t semaphr_I2C;
 
 void transmit_driver_init();
 
@@ -34,5 +37,9 @@ int messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t pos
 void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader);
 
 void floatTo4UIntArray(float floatData, uint8_t *destinationArray);
+
+HAL_StatusTypeDef sem_HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout, SemaphoreHandle_t *sem);
+
+HAL_StatusTypeDef sem_HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size, uint32_t Timeout, SemaphoreHandle_t *sem);
 
 #endif /* SRC_TRANSMIT_DRIVER_H_ */

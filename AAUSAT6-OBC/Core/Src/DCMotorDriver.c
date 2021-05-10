@@ -76,7 +76,7 @@ void motor(){
 			MOTOR_DATA_TX.ID = 0x9;
 
 		}
-		if(MOTOR_DATA_RX.data[5] > 0){
+			if(MOTOR_DATA_RX.data[5] > 0){
 			motor_stop();
 		}
 
@@ -88,7 +88,7 @@ void motor(){
 
 
 		floatTo4UIntArray(dutycycle, MOTOR_DATA_TX.data);
-		MOTOR_DATA_TX.data[5] = direction;
+		MOTOR_DATA_TX.data[4] = direction;
 
 		passToCanTX(&MOTOR_DATA_TX);
 

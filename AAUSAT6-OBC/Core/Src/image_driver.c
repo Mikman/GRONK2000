@@ -16,6 +16,7 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 
 	// init SCCB
 	CAM_setReg(cam, 0x12, 0x80); // Software reset, YUV mode
+	HAL_Delay(20);
 	CAM_setReg(cam, 0x1E, 0x31); // Flip image vertically and mirror image
 	CAM_setReg(cam, 0x13, 0x81); // Fast algorithm and auto exposure enable
 	CAM_setReg(cam, 0x3F, 0x01); // Edge enhancement factor
@@ -116,13 +117,13 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 void CAM_setReg(CAM_HandleTypeDef *cam, uint8_t reg_addr, uint8_t value) {
 	uint8_t addrAndValue[2] = {reg_addr, value};
 	uint8_t adressentest = cam->I2C_Address<<1;
-	HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), addrAndValue, 2, HAL_MAX_DELAY);
+	sem_HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), addrAndValue, 2, HAL_MAX_DELAY, &semaphr_I2C);
 }
 
 int CAM_getReg(CAM_HandleTypeDef *cam, int reg_addr) {
 	int buf[1] = {reg_addr};
-	HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), buf, 1, HAL_MAX_DELAY);
-	HAL_I2C_Master_Receive(cam->I2C_Handler, (cam->I2C_Address<<1) | 0x01, buf, 1, HAL_MAX_DELAY);
+	sem_HAL_I2C_Master_Transmit(cam->I2C_Handler, (cam->I2C_Address<<1), buf, 1, HAL_MAX_DELAY, &semaphr_I2C);
+	sem_HAL_I2C_Master_Receive(cam->I2C_Handler, (cam->I2C_Address<<1) | 0x01, buf, 1, HAL_MAX_DELAY, &semaphr_I2C);
 
 	return buf[0];
 }

@@ -173,14 +173,19 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
+
+  motor_direction(1);
+  HAL_Delay(1000);
+  motor_direction(0);
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
   transmit_driver_init();
   HAL_TIM_Base_Start(&htim15);
+  HAL_TIM_Base_Start_IT(&htim6);
 
   motor_init(&htim2, TIM_CHANNEL_2);
   	motor_start(0);
-  	motor_direction(1);
+  	//motor_direction(1);
 
   /* USER CODE END 2 */
 
@@ -205,19 +210,19 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of taskGPS */
-  //taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
+  taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
 
   /* creation of taskDCMotor */
   taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
 
   /* creation of taskMPU6050 */
-  //taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
+  taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
 
   /* creation of taskParTCL */
   taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
 
   /* creation of taskImage */
- // taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
+  taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

@@ -82,7 +82,6 @@ RCC.VCOInputFreq_Value=4000000
 PA5.GPIO_PuPd=GPIO_PULLUP
 NVIC.TIM2_IRQn=true\:1\:0\:true\:false\:true\:true\:true
 File.Version=6
-PA0.Mode=HSE-External-Clock-Source-for-LittleOrca
 RCC.PLLRCLKFreq_Value=72000000
 NVIC.PendSV_IRQn=true\:0\:0\:false\:false\:true\:false\:false
 ProjectManager.HalAssertFull=false

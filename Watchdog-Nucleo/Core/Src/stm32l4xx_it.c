@@ -43,6 +43,9 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
+extern CAN_TxHeaderTypeDef CanTxHeader;
+extern CAN_HandleTypeDef hcan1;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -227,7 +230,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 1 */
   //Write to CAN
   uint8_t fejlArray[8] = {1};
-  //sendData(0xA, 8, fejlArray);
+  sendData(&hcan1,0xA, 8, fejlArray, CanTxHeader);
   HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
   HAL_Delay(20);
   HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);

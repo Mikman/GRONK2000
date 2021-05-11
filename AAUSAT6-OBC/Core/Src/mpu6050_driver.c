@@ -148,7 +148,7 @@ void MPU6050(){
 
 		if (MPU_DATA_RX.data[7] > 0){
 			MPU_DATA_TX.ID = 0x8;
-			floatTo4UIntArray(MPU_Read_Temp(), MPU_DATA_TX.data);
+			floatTo4UIntArray(tempVal, MPU_DATA_TX.data);
 			passToCanTX(&MPU_DATA_TX);
 		}
 		if ((MPU_DATA_RX.data[6] > 0) && (MPU_DATA_RX.data[5] > 0) ){

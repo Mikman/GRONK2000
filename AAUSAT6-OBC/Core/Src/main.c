@@ -220,7 +220,7 @@ int main(void)
   //taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
 
   /* creation of taskMPU6050 */
- // taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
+  //taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
 
   /* creation of taskParTCL */
   //taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
@@ -939,12 +939,12 @@ void task_image(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  timerCounter = 0;
-	  TIM15->CNT = 0;
+	timerCounter = 0;
+	TIM15->CNT = 0;
 	image(&hcam);
 	volatile uint32_t tidsvaerdi = TIM15->CNT;
-		int dev = 0;
-		osDelay(10000);
+	int dev = 0;
+	osDelay(10000);
   }
   /* USER CODE END task_image */
 }

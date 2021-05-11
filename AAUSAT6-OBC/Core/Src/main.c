@@ -107,6 +107,7 @@ CAN_TxHeaderTypeDef CanTxHeader;
 CAN_RxHeaderTypeDef CanRxHeader;
 CAN_FilterTypeDef CanFilter;
 CAM_HandleTypeDef hcam;
+int timerCounter = 0;
 
 /* USER CODE END PV */
 
@@ -180,12 +181,15 @@ int main(void)
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 
   transmit_driver_init();
-  HAL_TIM_Base_Start(&htim15);
+  HAL_TIM_Base_Start_IT(&htim15);
   HAL_TIM_Base_Start_IT(&htim6);
 
   motor_init(&htim2, TIM_CHANNEL_2);
   	motor_start(0);
   	//motor_direction(1);
+
+  	CAM_Handle_Init(&hcam, &hdma_tim1_ch3, &htim1, &hi2c1);
+  	CAM_init(&hcam);
 
   /* USER CODE END 2 */
 
@@ -210,16 +214,16 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of taskGPS */
-  taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
+  //taskGPSHandle = osThreadNew(task_gps, NULL, &taskGPS_attributes);
 
   /* creation of taskDCMotor */
-  taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
+  //taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
 
   /* creation of taskMPU6050 */
-  taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
+ // taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
 
   /* creation of taskParTCL */
-  taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
+  //taskParTCLHandle = osThreadNew(task_partcl, NULL, &taskParTCL_attributes);
 
   /* creation of taskImage */
   taskImageHandle = osThreadNew(task_image, NULL, &taskImage_attributes);
@@ -865,10 +869,9 @@ void task_dcmotor(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	TIM15->CNT = 0;
+
 	motor();
-	volatile uint32_t tidsvaerdi = TIM15->CNT;
-	int dev = 0;
+
 	 osDelay(5000);
   }
   /* USER CODE END task_dcmotor */
@@ -911,7 +914,9 @@ void task_partcl(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  partcl_execute();	// Interpret and execute educational commands
+
+	partcl_execute();	// Interpret and execute educational commands
+
 	  taskYIELD();		// Go to another task when done
   }
   /* USER CODE END task_partcl */
@@ -929,13 +934,17 @@ void task_image(void *argument)
   /* USER CODE BEGIN task_image */
 
 
-	CAM_Handle_Init(&hcam, &hdma_tim1_ch3, &htim1, &hi2c1);
-	CAM_init(&hcam);
+
 
   /* Infinite loop */
   for(;;)
   {
+	  timerCounter = 0;
+	  TIM15->CNT = 0;
 	image(&hcam);
+	volatile uint32_t tidsvaerdi = TIM15->CNT;
+		int dev = 0;
+		osDelay(10000);
   }
   /* USER CODE END task_image */
 }

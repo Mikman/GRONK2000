@@ -224,6 +224,7 @@ PB1.Locked=true
 PA5.Signal=GPIO_Input
 TIM1.Channel-Output\ Compare3\ No\ Output=TIM_CHANNEL_3
 RCC.MCOPinFreq_Value=32000000
+NVIC.TIM1_BRK_TIM15_IRQn=true\:5\:0\:false\:false\:true\:true\:true\:true
 board=NUCLEO-L432KC
 RCC.VCOOutputFreq_Value=144000000
 ProjectManager.LastFirmware=true

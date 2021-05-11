@@ -100,7 +100,9 @@ int main(void)
   MX_TIM2_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim2);
+  TIM2->CNT = 0;
+  HAL_TIM_Base_Start_IT(&htim2);
+
 
   /* USER CODE END 2 */
 
@@ -317,7 +319,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
@@ -325,7 +327,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : OBC_Reset_Pin */
   GPIO_InitStruct.Pin = OBC_Reset_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(OBC_Reset_GPIO_Port, &GPIO_InitStruct);
 
@@ -343,7 +345,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(LD3_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 
 }

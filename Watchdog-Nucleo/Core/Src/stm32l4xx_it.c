@@ -227,11 +227,11 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 1 */
   //Write to CAN
   uint8_t fejlArray[8] = {1};
-  sendData(0xA, 8, fejlArray);
-  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
-  HAL_Delay(50);
+  //sendData(0xA, 8, fejlArray);
   HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
-
+  HAL_Delay(20);
+  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
+  htim2.Instance->CNT = 0;
 
   /* USER CODE END TIM2_IRQn 1 */
 }

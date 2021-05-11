@@ -45,6 +45,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+extern int timerCounter;
 
 /* USER CODE END PV */
 
@@ -61,7 +62,9 @@
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
 extern DMA_HandleTypeDef hdma_tim1_ch3;
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim15;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim7;
 
@@ -224,6 +227,22 @@ void CAN1_RX0_IRQHandler(void)
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
   receiveData();
   /* USER CODE END CAN1_RX0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
+  */
+void TIM1_BRK_TIM15_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
+
+  /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim1);
+  HAL_TIM_IRQHandler(&htim15);
+  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
+  timerCounter++;
+
+  /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
 }
 
 /**

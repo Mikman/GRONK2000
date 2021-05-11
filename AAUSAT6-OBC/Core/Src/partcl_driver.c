@@ -29,14 +29,14 @@ void partcl_readQueue() {
 		case CAN_ID_PARTCL_CONTROL:
 			if(PARTCL_DATA.data[0] > 0 && PARTCL_DATA.data[1] == 0) {
 				//Start pakke kommer nu ?!
-				//partcl_printf("start\n");
+				partcl_printf("start\n");
 				memset(input, 0, BUF_SIZE_IN); // Clear input buffer
 				STATUS = PARTCL_RECEIVING;
 
 			}
 			else if(PARTCL_DATA.data[1] > 0 && PARTCL_DATA.data[0] == 0) {
 				//Slutning af pakken er nu kommet
-				//partcl_printf("slut\n");
+				partcl_printf("slut\n");
 				STATUS = PARTCL_READY;
 			}
 			else {

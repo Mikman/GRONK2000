@@ -1,5 +1,5 @@
 Assembler report for FPGAgatherer
-Sat May 08 15:15:31 2021
+Tue May 11 09:09:45 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -10,7 +10,7 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/output_files/FPGAgatherer.sof
+  5. Assembler Device Options: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/output_files/FPGAgatherer.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat May 08 15:15:31 2021 ;
+; Assembler Status      ; Successful - Tue May 11 09:09:45 2021 ;
 ; Revision Name         ; FPGAgatherer                          ;
 ; Top-level Entity Name ; FPGA_LEDRAM                           ;
 ; Family                ; Cyclone V                             ;
@@ -52,23 +52,23 @@ refer to the applicable agreement for further details.
 +--------+---------+---------------+
 
 
-+---------------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                         ;
-+---------------------------------------------------------------------------------------------------+
-; File Name                                                                                         ;
-+---------------------------------------------------------------------------------------------------+
-; C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/output_files/FPGAgatherer.sof ;
-+---------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                             ;
++---------------------------------------------------------------------------------------+
+; File Name                                                                             ;
++---------------------------------------------------------------------------------------+
+; C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/output_files/FPGAgatherer.sof ;
++---------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Mikkel S. Hansen/Documents/GitHub/GRONK-STM32/FPGAgatherer/output_files/FPGAgatherer.sof ;
-+----------------+------------------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                                    ;
-+----------------+------------------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x0095B252                                                                                                 ;
-; Checksum       ; 0x0095B252                                                                                                 ;
-+----------------+------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Mikkel/Documents/GitHub/GRONK2000/FPGAgatherer/output_files/FPGAgatherer.sof ;
++----------------+------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                        ;
++----------------+------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x0095B252                                                                                     ;
+; Checksum       ; 0x0095B252                                                                                     ;
++----------------+------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -77,13 +77,13 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sat May 08 15:15:24 2021
+    Info: Processing started: Tue May 11 09:09:40 2021
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off FPGAgatherer -c FPGAgatherer
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4838 megabytes
-    Info: Processing ended: Sat May 08 15:15:31 2021
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:07
+    Info: Peak virtual memory: 4840 megabytes
+    Info: Processing ended: Tue May 11 09:09:45 2021
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 

@@ -38,8 +38,7 @@ int is_special_character(char c) {
 	return 0;
 }
 
-int from_frame(const char * frame, struct CAN_QUEUE_DATA * package) {
-	int len = strlen(frame);
+int from_frame(const char * frame, size_t len, struct CAN_QUEUE_DATA * package) {
 	int i = 0, j = 0;
 
 	if (frame[0] == COMM_DEL_START) i++;

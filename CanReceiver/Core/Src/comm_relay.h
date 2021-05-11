@@ -23,7 +23,7 @@ int is_special_character(char c);
 
 const char * replace_escape(char c);
 
-int from_frame(const char * frame, struct CAN_QUEUE_DATA * package);
+int from_frame(const char * frame, size_t len, struct CAN_QUEUE_DATA * package);
 
 
 #endif /* SRC_COMM_RELAY_H_ */

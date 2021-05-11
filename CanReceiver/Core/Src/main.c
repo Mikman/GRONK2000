@@ -421,7 +421,7 @@ void uart_in_read() {
 				}
 				else memcpy(frame, uart_in + uart_in_lastStart, frameLength);
 
-				if (from_frame(frame, &package) == 1) {
+				if (from_frame(frame, frameLength, &package) == 1) {
 					passToCanTX(&package);
 				}
 				uart_in_lastStart = uart_in_read_ptr - COMM_MAX_FRAME_SIZE;

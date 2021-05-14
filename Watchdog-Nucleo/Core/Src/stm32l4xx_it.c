@@ -52,16 +52,13 @@ CAN_HandleTypeDef *can1;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 
-void can_init(CAN_HandleTypeDef *hcan, CAN_RxHeaderTypeDef *CANRX, CAN_TxHeaderTypeDef *CANTX){
-	TxHeader = CANTX;
-	RxHeader = CANRX;
-	can1 = hcan;
-}
-
 /* USER CODE END PFP */
+
+
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
 
 /* USER CODE END 0 */
 
@@ -265,12 +262,8 @@ void TIM2_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
   //Write to CAN
-  uint8_t fejlArray[8] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
-  sendData(can1,0xA, 8, fejlArray, TxHeader);
-  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
-  HAL_Delay(20);
-  HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
-  htim2.Instance->CNT = 0;
+  Watchdog_Handler();
+
 
   /* USER CODE END TIM2_IRQn 1 */
 }

@@ -104,9 +104,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   TIM2->CNT = 0;
   HAL_TIM_Base_Start_IT(&htim2);
-  can_init(&hcan1, &CanRxHeader, &CanTxHeader);
-
   /* USER CODE END 2 */
+
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -129,15 +128,10 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -177,9 +171,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 /**
@@ -191,29 +182,11 @@ static void MX_CAN1_Init(void)
 {
 
   /* USER CODE BEGIN CAN1_Init 0 */
-	uint32_t ext_id = 0x00000000;                            // Den største værdi der kan være på MSB er 1
-	    uint32_t mask = 0x0;
-	    CanFilter.FilterMode = CAN_FILTERMODE_IDMASK;            // Vi vælger at bruge mask mode
-	    CanFilter.FilterIdHigh = (ext_id & 0x1FFFFFFF) >> 13; // (ext_id << 3) >> 16;                        // Da vi har 32 bit ID, er dette de 16 MSB af ID
-	    CanFilter.FilterIdLow =  (ext_id << 3) | CAN_ID_EXT;    // Da vi har 32 bit ID, er dette de 16 LSB af ID
-	    CanFilter.FilterMaskIdHigh = (mask & 0x1FFFFFFF) >> 13;// << 5;                    // Maskens 16 MSB
-	    CanFilter.FilterMaskIdLow = (mask << 3);// << 5 | 0x10;                    // Maskens 16 LSB
-	    CanFilter.FilterScale = CAN_FILTERSCALE_32BIT;        // ID er et 32 bit-tal
-	    CanFilter.FilterActivation = ENABLE;                    // Vi aktiverer filteret
-	    CanFilter.FilterBank = 0;                                // Vi vælger filter 0 ud af 14 mulige filtre
-	    CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;    // Vi vælger FIFO0 til forskel for FIFO1
-
 	    CanTxHeader.DLC = PACKAGE_SIZE;                        // Der kommer 8 byte som data i beskeden
 	    CanTxHeader.ExtId = 0x00000000;                        // 32 bit ID (29 er identifier)
 	    CanTxHeader.IDE = CAN_ID_EXT;                            // Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
 	    CanTxHeader.RTR = CAN_RTR_DATA;                        // Vi sender data
 	    CanTxHeader.TransmitGlobalTime = DISABLE;                // Der skal IKKE sendes et timestamp med hver besked
-
-	  CanRxHeader.DLC = PACKAGE_SIZE;
-	  CanRxHeader.ExtId = 0x0;
-	  CanRxHeader.IDE = CAN_ID_EXT;
-	  CanRxHeader.RTR = CAN_RTR_DATA;
-	  CanRxHeader.FilterMatchIndex = 0x00;
 
   /* USER CODE END CAN1_Init 0 */
 
@@ -239,6 +212,13 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+
+  /*##-3- Start the CAN peripheral ###########################################*/
+  if (HAL_CAN_Start(&hcan1) != HAL_OK)
+  {
+      /* Start Error */
+      Error_Handler();
+  }
 
 
   /* USER CODE END CAN1_Init 2 */
@@ -335,7 +315,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
@@ -405,6 +384,16 @@ if (numOfBytes % PACKAGE_SIZE == 0)
 
 }
 else {return;}
+
+}
+
+void Watchdog_Handler(){
+	uint8_t fejlArray[8] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
+	sendData(&hcan1,0xA, 8, fejlArray, &CanTxHeader);
+	HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
+	HAL_Delay(20);
+	HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
+	htim2.Instance->CNT = 0;
 
 }
 

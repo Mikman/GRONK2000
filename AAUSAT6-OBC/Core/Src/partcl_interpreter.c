@@ -7,7 +7,9 @@
 
 #include "partcl_interpreter.h"
 
-
+bool initSuspension = false;
+bool fullySuspended = false;
+bool initComplete = false;
 
 // Iterate through the characters of the next word/structure until a space is reached, and determine if it is a word, part of terminate character or an error occurred.
 int tcl_next(const char *s, size_t n, const char **from, const char **to,
@@ -686,13 +688,17 @@ void tcl_setup() {
   i = 0; 				// Set program character counter
   inp = 0; 				// Last read character from input buffer
   tcl_init(&tcl); 		// Initialize TCL struct, allocate memory and initialize Tcl functions
+  initComplete = true;
 }
 
-int counter = 0;
+
 
 void tcl_execute() {
 
-	for (;;) {
+	if (!initSuspension) tcl_setup();
+
+	for (; !initSuspension && initComplete;) {
+
 		if (i > buflen - 1) { // for størrelsen af buflen skal følgende forkomme:
 			buf = realloc(buf, buflen += CHUNK); // vi re-allokere 2048 nye bytes til buf... for whatever the reason
 		}
@@ -711,8 +717,11 @@ void tcl_execute() {
 				i = 0;
 				break;
 			} else if (p.token == TCMD && *(p.from) != '\0') {
-				counter++;
+
 				int r = tcl_eval(&tcl, buf, strlen(buf));
+
+				if (initSuspension) break;
+
 				if (r != FERROR) {
 					partcl_printf(tcl_string(tcl.result));
 				} else {
@@ -724,16 +733,33 @@ void tcl_execute() {
 				break;
 			}
 		}
-
 	}
 
-	free(buf); // Free ParTcl program memory
-	tcl_destroy(&tcl); // Free ParTcl internal loaded commands, variables, structures etc.
-
-	if (i) {
+	if (!initSuspension && i) {
 		partcl_printf("incomplete input\n");
 		return -1;
 	}
 
-	return 0;
+	if (initComplete && fullySuspended == false) {
+		free(buf); // Free ParTcl program memory
+		tcl_destroy(&tcl); // Free ParTcl internal loaded commands, variables, structures etc.
+
+		initComplete == false;
+
+		if (initSuspension)
+			fullySuspended = true;
+	}
+}
+
+void tcl_suspend() {
+	initSuspension = true;
+}
+
+void tcl_resume() {
+	initSuspension = false;
+	fullySuspended = false;
+}
+
+bool tcl_isFullySuspended() {
+	return fullySuspended;
 }

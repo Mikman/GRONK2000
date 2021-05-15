@@ -86,6 +86,8 @@ void Error_Handler(void);
 #define Get_image_pin_GPIO_Port GPIOB
 #define PWM_CAM_Pin GPIO_PIN_8
 #define PWM_CAM_GPIO_Port GPIOA
+#define MOTOR_PWM_Pin GPIO_PIN_3
+#define MOTOR_PWM_GPIO_Port GPIOB
 #define DC_motor_Dir2_Pin GPIO_PIN_4
 #define DC_motor_Dir2_GPIO_Port GPIOB
 #define Transfer_pin_Pin GPIO_PIN_5

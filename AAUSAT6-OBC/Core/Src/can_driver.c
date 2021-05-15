@@ -54,7 +54,7 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 		CAN_Mailbox0Empty = true;
 	}else {
 		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader);
+		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader, 1);
 	}
 }
 
@@ -63,7 +63,7 @@ void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
 		CAN_Mailbox1Empty = true;
 	}else {
 		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader);
+		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader, 1);
 	}
 }
 void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
@@ -71,7 +71,7 @@ void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
 		CAN_Mailbox2Empty = true;
 	}else {
 		LeaveStructQueue(&CAN_TX_QUEUE, &CAN_TX_QUEUE_DATA);
-		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader);
+		sendData(can1, CAN_TX_QUEUE_DATA.ID, PACKAGE_SIZE, CAN_TX_QUEUE_DATA.data, TxHeader, 1);
 	}
 }
 
@@ -81,13 +81,13 @@ void receiveData() {
 
     while (HAL_CAN_GetRxFifoFillLevel(can1, CAN_RX_FIFO0) > 0) {
          HAL_CAN_GetRxMessage(can1, CAN_RX_FIFO0, RxHeader, buffer); // Modtag beskeden og læg den i buffer
-         placeData_1(buffer);
+         placeData(RxHeader->ExtId, buffer);
     }
 }
 
 int passToCanTX(struct CAN_QUEUE_DATA *data){
 	if (CAN_Mailbox0Empty || CAN_Mailbox1Empty || CAN_Mailbox2Empty){
-		sendData(can1, data->ID, PACKAGE_SIZE, data->data, TxHeader);
+		sendData(can1, data->ID, PACKAGE_SIZE, data->data, TxHeader, 0);
 		return 1; // Succesful transmission is assumed
 	}else {
 		return EnterStructQueue(&CAN_TX_QUEUE, data);
@@ -96,41 +96,41 @@ int passToCanTX(struct CAN_QUEUE_DATA *data){
 
 
 
-void placeData_1(uint8_t *p){
-	if(RxHeader->ExtId == MPU_DATA_ID){
-		CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
+void placeData(uint32_t id, uint8_t *p){
+	if(id == MPU_DATA_ID){
+		CAN_TX_QUEUE_DATA.ID = id;
 		for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 			CAN_TX_QUEUE_DATA.data[i] = p[i];
 		}
 
 		EnterStructQueue(&MPU_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 	}
-	else if(RxHeader->ExtId == GPS_DATA_ID){
-			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
+	else if(id == GPS_DATA_ID){
+			CAN_TX_QUEUE_DATA.ID = id;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
 			EnterStructQueue(&GPS_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
-	else if(RxHeader->ExtId == MOTOR_DATA_ID){
-			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
+	else if(id == MOTOR_DATA_ID){
+			CAN_TX_QUEUE_DATA.ID = id;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
 			EnterStructQueue(&MOTOR_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
-	else if(RxHeader->ExtId == CAN_ID_PARTCL_INPUT || RxHeader->ExtId == CAN_ID_PARTCL_CONTROL){
-			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
+	else if(id == CAN_ID_PARTCL_INPUT || id == CAN_ID_PARTCL_CONTROL){
+			CAN_TX_QUEUE_DATA.ID = id;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}
 
 			EnterStructQueue(&PARTCL_CAN_RX_QUEUE, &CAN_TX_QUEUE_DATA);
 		}
-	else if(RxHeader->ExtId == IMAGE_ID_REQUEST){
-			CAN_TX_QUEUE_DATA.ID = RxHeader->ExtId;
+	else if(id == IMAGE_ID_REQUEST){
+			CAN_TX_QUEUE_DATA.ID = id;
 			for (int i = 0 ; i < PACKAGE_SIZE ; i++){
 				CAN_TX_QUEUE_DATA.data[i] = p[i];
 			}

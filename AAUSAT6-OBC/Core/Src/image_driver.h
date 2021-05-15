@@ -42,7 +42,7 @@ typedef struct {
 } CAM_HandleTypeDef;
 
 
-
+void CAM_init(CAM_HandleTypeDef *cam);
 void CAM_Handle_Init(CAM_HandleTypeDef *cam, DMA_HandleTypeDef *DMA_TimerChannel, TIM_HandleTypeDef *htim, I2C_HandleTypeDef *i2cHandle);
 void CAM_toOutputQueue(CAM_HandleTypeDef *cam);
 void CAM_update(CAM_HandleTypeDef *cam);

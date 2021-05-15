@@ -28,7 +28,7 @@ void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan);
 
 void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan);
 
-void placeData_1(uint8_t *p);
+void placeData(uint32_t id, uint8_t *p);
 
 void receiveData();
 

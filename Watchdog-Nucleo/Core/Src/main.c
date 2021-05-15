@@ -102,9 +102,10 @@ int main(void)
   MX_TIM2_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-  TIM2->CNT = 0;
-  HAL_TIM_Base_Start_IT(&htim2);
   can_init(&hcan1, &CanRxHeader, &CanTxHeader);
+  TIM2->CNT = 1000;
+  //htim2.Instance->SR &= ~TIM_SR_UIF_Msk; // Then the timer won't interrupt right after start
+  HAL_TIM_Base_Start_IT(&htim2);
 
   /* USER CODE END 2 */
 
@@ -129,15 +130,10 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -177,9 +173,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 /**
@@ -204,7 +197,7 @@ static void MX_CAN1_Init(void)
 	    CanFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;    // Vi vælger FIFO0 til forskel for FIFO1
 
 	    CanTxHeader.DLC = PACKAGE_SIZE;                        // Der kommer 8 byte som data i beskeden
-	    CanTxHeader.ExtId = 0x00000000;                        // 32 bit ID (29 er identifier)
+	    CanTxHeader.ExtId = 0x00000001;                        // 32 bit ID (29 er identifier)
 	    CanTxHeader.IDE = CAN_ID_EXT;                            // Vi har et extended ID = 32 bit til forskel fra standard på 16 bit (11 er identifier)
 	    CanTxHeader.RTR = CAN_RTR_DATA;                        // Vi sender data
 	    CanTxHeader.TransmitGlobalTime = DISABLE;                // Der skal IKKE sendes et timestamp med hver besked
@@ -335,7 +328,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 

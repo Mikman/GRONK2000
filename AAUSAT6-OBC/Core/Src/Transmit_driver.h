@@ -34,7 +34,7 @@ void sendDCMotor(CAN_HandleTypeDef *handler, CAN_TxHeaderTypeDef *transmitHeader
 
 int messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t position);
 
-void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader);
+void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes, uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader, int ISR);
 
 void floatTo4UIntArray(float floatData, uint8_t *destinationArray);
 

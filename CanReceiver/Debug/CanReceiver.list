@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00022596  00000000  00000000  00037130  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000e787  00000000  00000000  000596c6  2**0
+ 17 .debug_line   0000e785  00000000  00000000  000596c6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000c5282  00000000  00000000  00067e4d  2**0
+ 18 .debug_str    000c5282  00000000  00000000  00067e4b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  0012d0cf  2**0
+ 19 .comment      00000053  00000000  00000000  0012d0cd  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00004278  00000000  00000000  0012d124  2**2
+ 20 .debug_frame  00004278  00000000  00000000  0012d120  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2543,9 +2543,9 @@ static void MX_CAN1_Init(void)
  80016ba:	4b24      	ldr	r3, [pc, #144]	; (800174c <MX_CAN1_Init+0x13c>)
  80016bc:	4a24      	ldr	r2, [pc, #144]	; (8001750 <MX_CAN1_Init+0x140>)
  80016be:	601a      	str	r2, [r3, #0]
-  hcan1.Init.Prescaler = 18;
+  hcan1.Init.Prescaler = 125;
  80016c0:	4b22      	ldr	r3, [pc, #136]	; (800174c <MX_CAN1_Init+0x13c>)
- 80016c2:	2212      	movs	r2, #18
+ 80016c2:	227d      	movs	r2, #125	; 0x7d
  80016c4:	605a      	str	r2, [r3, #4]
   hcan1.Init.Mode = CAN_MODE_NORMAL;
  80016c6:	4b21      	ldr	r3, [pc, #132]	; (800174c <MX_CAN1_Init+0x13c>)
@@ -2555,13 +2555,13 @@ static void MX_CAN1_Init(void)
  80016cc:	4b1f      	ldr	r3, [pc, #124]	; (800174c <MX_CAN1_Init+0x13c>)
  80016ce:	2200      	movs	r2, #0
  80016d0:	60da      	str	r2, [r3, #12]
-  hcan1.Init.TimeSeg1 = CAN_BS1_7TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_12TQ;
  80016d2:	4b1e      	ldr	r3, [pc, #120]	; (800174c <MX_CAN1_Init+0x13c>)
- 80016d4:	f44f 22c0 	mov.w	r2, #393216	; 0x60000
+ 80016d4:	f44f 2230 	mov.w	r2, #720896	; 0xb0000
  80016d8:	611a      	str	r2, [r3, #16]
-  hcan1.Init.TimeSeg2 = CAN_BS2_8TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
  80016da:	4b1c      	ldr	r3, [pc, #112]	; (800174c <MX_CAN1_Init+0x13c>)
- 80016dc:	f44f 02e0 	mov.w	r2, #7340032	; 0x700000
+ 80016dc:	f44f 1280 	mov.w	r2, #1048576	; 0x100000
  80016e0:	615a      	str	r2, [r3, #20]
   hcan1.Init.TimeTriggeredMode = DISABLE;
  80016e2:	4b1a      	ldr	r3, [pc, #104]	; (800174c <MX_CAN1_Init+0x13c>)
@@ -3141,7 +3141,7 @@ void uart_in_read() {
  8001a80:	4618      	mov	r0, r3
  8001a82:	f003 ff33 	bl	80058ec <memcpy>
 
-				if (from_frame(frame, frameLength, &package) == 1) {
+ 				if (from_frame(frame, frameLength, &package) == 1) {
  8001a86:	6ab9      	ldr	r1, [r7, #40]	; 0x28
  8001a88:	f107 021c 	add.w	r2, r7, #28
  8001a8c:	1d3b      	adds	r3, r7, #4

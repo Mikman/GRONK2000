@@ -15,6 +15,7 @@
 #include <string.h>
 #include "partcl_driver.h"
 #include "DCMotorDriver.h"
+#include <stdbool.h>
 
 #if 0
 #define DBG partcl_printf(sprintf
@@ -28,7 +29,7 @@
 
 #define tcl_each(s, len, skiperr)                                              \
   for (struct tcl_parser p = {NULL, NULL, (s), (s) + (len), 0, TERROR};        \
-       p.start < p.end &&                                                      \
+       !initSuspension && p.start < p.end &&                                                      \
        (((p.token = tcl_next(p.start, p.end - p.start, &p.from, &p.to,         \
                              &p.q)) != TERROR) ||                              \
         (skiperr));                                                            \
@@ -133,5 +134,11 @@ void tcl_list_free(tcl_value_t *v);
 void tcl_setup();
 
 void tcl_execute();
+
+void tcl_suspend();
+
+void tcl_resume();
+
+bool tcl_isFullySuspended();
 
 #endif /* SRC_PARTCL_INTERPRETER_H_ */

@@ -142,8 +142,9 @@ int8_t convertToString(GPS_FIX_DATA *data, char *str) {
 
 
 void GPS(){
+
 	readGPS(&data);
-	if(UnreadElements(&GPS_CAN_RX_QUEUE)){
+	while (UnreadElements(&GPS_CAN_RX_QUEUE)){
 
 
 		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA_RX);
@@ -165,24 +166,23 @@ void GPS(){
 		}
 		if (GPS_DATA_RX.data[7] > 0){
 			GPS_DATA_TX.ID = 0x1;
-			floatTo4UIntArray(data.LAT, &GPS_DATA_TX.data[1]);
-			GPS_DATA_TX.data[0]=(uint8_t) data.LAT_DIR;
-			for (int i = 0; i < 3; i++ ) {
-				GPS_DATA_TX.data[i+5] = 0;
+			floatTo4UIntArray(data.LAT, &GPS_DATA_TX.data[0]);
+			GPS_DATA_TX.data[4]=(uint8_t) data.LAT_DIR;
+			for (int i = 5; i < 8; i++ ) {
+				GPS_DATA_TX.data[i] = 0;
 			}
 			passToCanTX(&GPS_DATA_TX);
 
 			GPS_DATA_TX.ID = 0x2;
-			floatTo4UIntArray(data.LON, &GPS_DATA_TX.data[1]);
-			GPS_DATA_TX.data[0]=(uint8_t) data.LON_DIR;
-			for (int i = 0; i < 3; i++ ) {
-				GPS_DATA_TX.data[i+5] = 0;
+			floatTo4UIntArray(data.LON, &GPS_DATA_TX.data[0]);
+			GPS_DATA_TX.data[4]=(uint8_t) data.LON_DIR;
+			for (int i = 5; i < 8; i++ ) {
+				GPS_DATA_TX.data[i] = 0;
 			}
 			passToCanTX(&GPS_DATA_TX);
 		}
 
-	}else{
-
-		return;
 	}
 }
+
+

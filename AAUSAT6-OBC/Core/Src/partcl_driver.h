@@ -15,6 +15,7 @@
 #include "can_driver.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include <stdbool.h>
 
 #define BUF_SIZE_IN 128
 #define BUF_SIZE_OUT 512
@@ -38,5 +39,7 @@ void partcl_add_program(char * str, size_t size);
 char partcl_getInputChar();
 
 void partcl_printf(const char *str);
+
+void partcl_readQueue();
 
 #endif /* SRC_PARTCL_DRIVER_H_ */

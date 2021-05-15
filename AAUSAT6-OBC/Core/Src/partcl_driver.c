@@ -12,35 +12,43 @@ char input[BUF_SIZE_IN] = {0};
 uint16_t i_read = 0;
 enum PARTCL_STATUS STATUS;
 
-
 struct CAN_QUEUE_DATA PARTCL_DATA = {0,{0}};
 struct StructQueue PARTCL_CAN_RX_QUEUE = {0};
 
 void partcl_readQueue() {
+
 	while (UnreadElements(&PARTCL_CAN_RX_QUEUE)) {
 		LeaveStructQueue(&PARTCL_CAN_RX_QUEUE, &PARTCL_DATA); // Read a package from queue
 
 		// Run through all accepted CAN packages
 		switch (PARTCL_DATA.ID) {
 		case CAN_ID_PARTCL_INPUT:
-			partcl_add_program((char *) &(PARTCL_DATA.data), 8); // Copy 8 characters or less (if null) from package into input buffer
+			if (STATUS == PARTCL_RECEIVING)
+				partcl_add_program((char *) &(PARTCL_DATA.data), 8); // Copy 8 characters or less (if null) from package into input buffer
+			else
+			{
+				partcl_printf("ERR: Send control package before program package.");
+			}
 			break;
 
 		case CAN_ID_PARTCL_CONTROL:
 			if(PARTCL_DATA.data[0] > 0 && PARTCL_DATA.data[1] == 0) {
 				//Start pakke kommer nu ?!
-				partcl_printf("start\n");
-				memset(input, 0, BUF_SIZE_IN); // Clear input buffer
 				STATUS = PARTCL_RECEIVING;
+
+				tcl_suspend();
+
+				partcl_printf("Start.");
+				memset(input, 0, BUF_SIZE_IN); // Clear input buffer
 
 			}
 			else if(PARTCL_DATA.data[1] > 0 && PARTCL_DATA.data[0] == 0) {
 				//Slutning af pakken er nu kommet
-				partcl_printf("slut\n");
+				partcl_printf("Slut.");
 				STATUS = PARTCL_READY;
 			}
 			else {
-				partcl_printf("Invalid command package\n");
+				partcl_printf("Invalid command package.");
 			}
 			break;
 
@@ -51,17 +59,11 @@ void partcl_readQueue() {
 }
 
 void partcl_execute() {
-	partcl_readQueue(); // Read input message from queue
 
-	if (*input != 0) {
-		tcl_setup();
-		if(STATUS = PARTCL_READY){
-			tcl_execute(); // Interpret and execute input progam
-			memset(input, 0, BUF_SIZE_IN); // Clear input buffer
-		}
+	if (STATUS == PARTCL_READY && *input != 0) {
+		tcl_resume();
+		tcl_execute(); // Interpret and execute input progam
 	}
-	else return;
-
 }
 
 void partcl_add_program(char * str, size_t size) {

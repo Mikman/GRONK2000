@@ -5,10 +5,12 @@ uint32_t timer_channel = 0;
 uint32_t CaptureDCMotor = 0;
 uint32_t ARR = 0;
 
-uint32_t MOTOR_DATA_ID = 105;
+#define TASK_QUEUE_LENGTH_MOTOR 2
+struct CAN_QUEUE_DATA taskQueueMotor[TASK_QUEUE_LENGTH_MOTOR] = {0};
+
 struct CAN_QUEUE_DATA MOTOR_DATA_RX = { 0, { 0 } };
 struct CAN_QUEUE_DATA MOTOR_DATA_TX = { 0, { 0 } };
-struct StructQueue MOTOR_CAN_RX_QUEUE = { 0 };
+struct StructQueue MOTOR_CAN_RX_QUEUE = {.pointRD = 0, .pointWR = 0, .queueLength =  TASK_QUEUE_LENGTH_MOTOR, .queue = taskQueueMotor};
 
 void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel) {
 	htim = htimer;
@@ -55,14 +57,14 @@ uint8_t motor_meassure_direction() {
 
 }
 
-void motor_direction(int dir) {
-	if (dir == 1) {
+void motor_direction(char dir) {
+	if (dir == 'R') {
 		HAL_GPIO_WritePin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin,
 				GPIO_PIN_SET);
 		HAL_GPIO_WritePin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin,
 				GPIO_PIN_RESET);
 	}
-	if (dir == 0) {
+	if (dir == 'L') {
 		HAL_GPIO_WritePin(DC_motor_Dir2_GPIO_Port, DC_motor_Dir2_Pin,
 				GPIO_PIN_SET);
 		HAL_GPIO_WritePin(DC_motor_Dir1_GPIO_Port, DC_motor_Dir1_Pin,
@@ -85,7 +87,7 @@ void motor() {
 		if (MOTOR_DATA_RX.data[4] > 0) {
 			dutycycle = motor_meassure_dutycycle();
 			direction = motor_meassure_direction();
-			MOTOR_DATA_TX.ID = 0x9;
+			MOTOR_DATA_TX.ID = 36;
 
 		}
 		if (MOTOR_DATA_RX.data[5] > 0) {
@@ -93,9 +95,9 @@ void motor() {
 		}
 
 		if (MOTOR_DATA_RX.data[6] == 'R') {
-			motor_direction(1);
+			motor_direction('R');
 		} else if (MOTOR_DATA_RX.data[6] == 'L') {
-			motor_direction(0);
+			motor_direction('L');
 		}
 
 		floatTo4UIntArray(dutycycle, MOTOR_DATA_TX.data);

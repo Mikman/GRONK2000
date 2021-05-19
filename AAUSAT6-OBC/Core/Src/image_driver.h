@@ -12,9 +12,9 @@
 #include <stdint.h>
 #include "stm32l4xx_hal.h"
 
-#define IMAGE_ID_COORDINATE 32
-#define IMAGE_ID_DATA 33
-#define IMAGE_ID_REQUEST 103
+#define IMAGE_ID_COORDINATE 128
+#define IMAGE_ID_DATA 129
+#define IMAGE_ID_CTRL 16
 
 enum CAM_STATUS {
     READY,        // Når vi er klar til at modtage en ny linje

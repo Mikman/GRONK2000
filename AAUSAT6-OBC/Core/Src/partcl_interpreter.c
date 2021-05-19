@@ -7,6 +7,8 @@
 
 #include "partcl_interpreter.h"
 
+extern htim6;
+
 bool initSuspension = false;
 bool fullySuspended = false;
 bool initComplete = false;
@@ -40,7 +42,6 @@ int tcl_next(const char *s, size_t n, const char **from, const char **to,
     *q = mode;
     return ((r == TWORD && *q) ? TPART : r);
   }
-
   if (*s == '[' || (!*q && *s == '{')) {
     /* Interleaving pairs are not welcome, but it simplifies the code */
     open = *s;
@@ -381,11 +382,27 @@ static int osdelay(struct tcl *tcl, tcl_value_t *args, void *arg) {
   tcl_value_t *delayTime = tcl_list_at(args, 1);
   int time = atoi(delayTime);
   tcl_free(delayTime);
- //os_delay(time);
-  char delayArray[10]={0};
-  char resultString[30] = "Delay has been executed: ";
-  strcat(resultString, itoa(time, delayArray, 10));
-  return tcl_result(tcl, FNORMAL, tcl_dup(resultString));
+  osDelay(time);
+  //char delayArray[10]={0};
+  //char resultString[30] = "Delay: ";
+  //strcat(resultString, itoa(time, delayArray, 10));
+  return tcl_result(tcl, FNORMAL, tcl_dup(""));
+}
+
+static int readtemp(struct tcl *tcl, tcl_value_t *args, void *arg) {
+	(void) arg;
+
+	float tempVal = MPU_Read_Temp(); //Eftertjek at den rigtige temperatur ligger her.
+	char tempValString[10] = { 0 };
+	itoa((int) tempVal, tempValString, 10);
+
+	tcl_value_t *var = tcl_list_at(args, 1);
+	tcl_value_t *val = tcl_list_at(tempValString, 0);
+	char resultString[30] = "Temp: ";
+	strcat(resultString, tcl_var(tcl, var, val));
+	int r = tcl_result(tcl, FNORMAL, tcl_dup(resultString));
+	tcl_free(var);
+	return r;
 }
 
 static int setpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
@@ -438,6 +455,26 @@ static int readpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
   return r;
 }
 
+static int watchdogoff(struct tcl *tcl, tcl_value_t *args, void *arg) {
+  (void)arg;
+  tcl_value_t *password = tcl_list_at(args, 1);
+
+ char passwordString[] = "Gronk2000";
+ // memcpy(passwordString, password, strlen(password)+1);
+
+  if (strcmp(password, passwordString)==0){
+
+
+	  HAL_TIM_Base_Stop_IT(&htim6);
+	  tcl_free(password);
+	  return tcl_result(tcl, FNORMAL, tcl_dup("Correct password. Disabling watchdog."));
+
+  }
+  tcl_free(password);
+  return tcl_result(tcl, FNORMAL, tcl_dup("Incorrect password."));
+
+}
+
 
 static int captureimage(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
@@ -450,20 +487,6 @@ static int captureimage(struct tcl *tcl, tcl_value_t *args, void *arg) {
 	char imageStringVal [30] = "Image has been captured!";
 
 	return tcl_result(tcl, FNORMAL, tcl_dup(imageStringVal));
-}
-
-static int readtemp(struct tcl *tcl, tcl_value_t *args, void *arg) {
-	(void) arg;
-
-	float tempVal = 26.78; //Eftertjek at den rigtige temperatur ligger her.
-	char tempValString[10] = { 0 };
-	itoa((int) tempVal, tempValString, 10);
-
-	tcl_value_t *var = tcl_list_at(args, 1);
-	tcl_value_t *val = tcl_list_at(tempValString, 0);
-	int r = tcl_result(tcl, FNORMAL, tcl_dup(tcl_var(tcl, var, val)));
-	tcl_free(var);
-	return r;
 }
 
 static int tcl_user_proc(struct tcl *tcl, tcl_value_t *args, void *arg) {
@@ -658,6 +681,8 @@ void tcl_init(struct tcl *tcl) {
   tcl_register(tcl, "readPWM", readpwm, 2, NULL);
   tcl_register(tcl, "captureImage", captureimage, 3, NULL);
   tcl_register(tcl, "osDelay", osdelay, 2, NULL);
+  tcl_register(tcl, "osDelay", osdelay, 2, NULL);
+  tcl_register(tcl, "WDOff", watchdogoff, 2, NULL);
 }
 
 void tcl_destroy(struct tcl *tcl) {

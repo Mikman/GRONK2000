@@ -72,10 +72,11 @@ int CAN_to_rxQueue(struct CAN_QUEUE_DATA * data) {
 	return EnterStructQueue(&CAN_RX_QUEUE, data);
 }
 
-void passToCanTX(struct CAN_QUEUE_DATA *data){
+int passToCanTX(struct CAN_QUEUE_DATA *data){
 	if (CAN_Mailbox0Empty || CAN_Mailbox1Empty || CAN_Mailbox2Empty){
 		sendData(can1, data->ID, PACKAGE_SIZE, data->data, TxHeader);
+		return 1; // Succesfull transmission is assumed
 	}else {
-		EnterStructQueue(&CAN_TX_QUEUE, data);
+		return EnterStructQueue(&CAN_TX_QUEUE, data);
 	}
 }

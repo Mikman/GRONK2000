@@ -20,9 +20,11 @@
 #define BUF_SIZE_IN 128
 #define BUF_SIZE_OUT 512
 
-#define CAN_ID_PARTCL_INPUT 64
-#define CAN_ID_PARTCL_CONTROL 95
-#define CAN_ID_PARTCL_OUTPUT 65
+#define CAN_ID_PARTCL_INPUT 13
+#define CAN_ID_PARTCL_CONTROL 12
+#define CAN_ID_PARTCL_OUTPUT 64
+
+#define PARTCL_EOT 4 // End of transmission character
 
 enum PARTCL_STATUS {
     PARTCL_READY,       // Vi venter på start pakke

@@ -8,6 +8,8 @@
 #ifndef SRC_MPU6050_DRIVER_H_
 #define SRC_MPU6050_DRIVER_H_
 
+#define MPU_ID_CTRL 0
+
 #include "main.h"
 
 #include "string.h"

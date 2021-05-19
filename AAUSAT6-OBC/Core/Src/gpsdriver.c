@@ -13,11 +13,12 @@ char GPSFormat[7] = "$GPGGA";
 UART_HandleTypeDef *uart;
 DMA_Channel_TypeDef *dma;
 
+#define TASK_QUEUE_LENGTH_GPS 2
+struct CAN_QUEUE_DATA taskQueueGPS[TASK_QUEUE_LENGTH_GPS] = {0};
 
-uint32_t GPS_DATA_ID = 101;
 struct CAN_QUEUE_DATA GPS_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA GPS_DATA_TX = {0,{0}};
-struct StructQueue GPS_CAN_RX_QUEUE = {0};
+struct StructQueue GPS_CAN_RX_QUEUE = {.pointRD = 0, .pointWR = 0, .queueLength =  TASK_QUEUE_LENGTH_GPS, .queue = taskQueueGPS};
 GPS_FIX_DATA data = { 0 };
 
 
@@ -38,7 +39,7 @@ int8_t readGPS(GPS_FIX_DATA *data){
 	for (uint16_t i = 0; i < GPS_BUFSIZE; i++) {
 		holdData[i] = rawData[i];
 	}
-
+	//return 0;
 	uint16_t dmaCounter = dma->CNDTR;
 
 	uint16_t index = GPS_BUFSIZE - dmaCounter;
@@ -150,13 +151,13 @@ void GPS(){
 		LeaveStructQueue(&GPS_CAN_RX_QUEUE, &GPS_DATA_RX);
 
 		if (GPS_DATA_RX.data[5] > 0){
-			GPS_DATA_TX.ID = 0x4;
+			GPS_DATA_TX.ID = 40;
 			floatTo4UIntArray(data.ALTITUDE, GPS_DATA_TX.data);
 			floatTo4UIntArray(data.H_GEOID, &GPS_DATA_TX.data[4]);
 			passToCanTX(&GPS_DATA_TX);
 		}
 		if (GPS_DATA_RX.data[6] > 0){
-			GPS_DATA_TX.ID = 0x3;
+			GPS_DATA_TX.ID = 39;
 			GPS_DATA_TX.data[0] = data.QUALITY;
 			GPS_DATA_TX.data[1] = data.HOURS;
 			GPS_DATA_TX.data[2] = data.MIN;
@@ -165,7 +166,7 @@ void GPS(){
 			passToCanTX(&GPS_DATA_TX);
 		}
 		if (GPS_DATA_RX.data[7] > 0){
-			GPS_DATA_TX.ID = 0x1;
+			GPS_DATA_TX.ID = 37;
 			floatTo4UIntArray(data.LAT, &GPS_DATA_TX.data[0]);
 			GPS_DATA_TX.data[4]=(uint8_t) data.LAT_DIR;
 			for (int i = 5; i < 8; i++ ) {
@@ -173,7 +174,7 @@ void GPS(){
 			}
 			passToCanTX(&GPS_DATA_TX);
 
-			GPS_DATA_TX.ID = 0x2;
+			GPS_DATA_TX.ID = 38;
 			floatTo4UIntArray(data.LON, &GPS_DATA_TX.data[0]);
 			GPS_DATA_TX.data[4]=(uint8_t) data.LON_DIR;
 			for (int i = 5; i < 8; i++ ) {

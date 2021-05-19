@@ -27,7 +27,7 @@ int CAN_from_rxQueue(struct CAN_QUEUE_DATA * data);
 
 int CAN_to_rxQueue(struct CAN_QUEUE_DATA * data);
 
-void passToCanTX(struct CAN_QUEUE_DATA *data);
+int passToCanTX(struct CAN_QUEUE_DATA *data);
 
 
 #endif /* CAN_DRIVER_H */

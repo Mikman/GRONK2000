@@ -7,7 +7,7 @@
 #include "circle_queue_struct.h"
 
 int StructQueueFull(struct StructQueue *q){
-	return (((q->pointWR +1) % SIZE_OF_STRUCTQUEUE) == q->pointRD);
+	return (((q->pointWR +1) % q->queueLength) == q->pointRD);
 }
 
 int StructQueueEmpty(struct StructQueue *q){
@@ -23,7 +23,7 @@ int EnterStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data) {
 		q->queue[q->pointWR] = *data;
 
 
-		if ((q->pointWR + 1) == SIZE_OF_STRUCTQUEUE){
+		if ((q->pointWR + 1) == q->queueLength){
 			q->pointWR = 0;
 		}
 		else{
@@ -40,7 +40,7 @@ int LeaveStructQueue(struct StructQueue *q, struct CAN_QUEUE_DATA *data) {
 	}
 	else {
 		*data = q->queue[q->pointRD];
-		if((q->pointRD + 1) ==SIZE_OF_STRUCTQUEUE){
+		if((q->pointRD + 1) == q->queueLength){
 			q->pointRD = 0;
 		}
 		else{

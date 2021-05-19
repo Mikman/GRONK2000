@@ -25,8 +25,8 @@ struct CAN_QUEUE_DATA {
 
 
 struct StructQueue {
-	uint16_t pointRD, pointWR;
-	struct CAN_QUEUE_DATA queue[SIZE_OF_STRUCTQUEUE];
+	uint16_t pointRD, pointWR, queueLength;
+	struct CAN_QUEUE_DATA* queue;
 };
 
 

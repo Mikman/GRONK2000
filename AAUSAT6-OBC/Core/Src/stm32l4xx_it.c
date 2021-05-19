@@ -45,7 +45,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern int timerCounter;
+extern uint32_t timerCounter;
 
 /* USER CODE END PV */
 
@@ -215,6 +215,16 @@ void CAN1_TX_IRQHandler(void)
   /* USER CODE END CAN1_TX_IRQn 1 */
 }
 
+
+
+/*
+#define TIMESTAMPS_LEN 100
+uint16_t i = 0;
+uint16_t timeStamps[TIMESTAMPS_LEN] = {0};
+
+int16_t elementsInQueue[TIMESTAMPS_LEN] = {0};
+*/
+
 /**
   * @brief This function handles CAN1 RX0 interrupt.
   */
@@ -226,6 +236,19 @@ void CAN1_RX0_IRQHandler(void)
   HAL_CAN_IRQHandler(&hcan1);
   /* USER CODE BEGIN CAN1_RX0_IRQn 1 */
   receiveData();
+
+	/*if (i < TIMESTAMPS_LEN) {
+		timeStamps[i] = TIM15->CNT;
+		TIM15->CNT = 0;
+		//elementsInQueue[i] = elements;
+		if (i == 2) {
+			int dev = -1;
+		}
+		i++;
+	}*/
+
+
+
   /* USER CODE END CAN1_RX0_IRQn 1 */
 }
 

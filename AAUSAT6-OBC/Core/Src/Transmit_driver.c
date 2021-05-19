@@ -44,59 +44,55 @@ void floatTo4UIntArray(float floatData, uint8_t *destinationArray){
 
 }
 
-void sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes,
+int hvorErJeg = 0;
+
+int sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes,
 		uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader, int ISR) {
 
-	if (ISR == 1){
-		if (!xSemaphoreTakeFromISR(semaphr_send, NULL))	return;
-	}
-	else if(ISR == 0){
-		if (!xSemaphoreTake(semaphr_send, 100))	return;
-	}
 
+	if(ISR == 0 && !xSemaphoreTake(semaphr_send, 0)){
+		hvorErJeg = -2;
+		return 0;
+	}
+	hvorErJeg = 1;
+
+	if (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {
+		hvorErJeg = -3;
+		if (ISR == 0 && !xSemaphoreGive(semaphr_send)) Error_Handler();
+		return 0;
+	}
 
 	uint8_t dataToMB[PACKAGE_SIZE] = { 0 };
 	uint32_t randoMailBox;
 	transmitHeader->ExtId = TxID;
 	uint32_t tsr = READ_REG(handler->Instance->TSR);
 
+	hvorErJeg = 2;
+
 	if (numOfBytes % PACKAGE_SIZE == 0) {
 		for (int i = 0; i < numOfBytes / PACKAGE_SIZE; i++) {
-			while (HAL_CAN_GetTxMailboxesFreeLevel(handler) == 0) {
-			}
 			if (messageSplitter(dataArray, dataToMB, i)) {
+				hvorErJeg = 3;
 				if (HAL_CAN_AddTxMessage(handler, transmitHeader, dataToMB,
 						&randoMailBox) != HAL_OK) {
 					Error_Handler();
-
 				}
-				if ((tsr & CAN_TSR_TME0) != 0U) {
-					CAN_Mailbox0Empty = true;
-				} else {
-					CAN_Mailbox0Empty = false;
-
-				}
-				if ((tsr & CAN_TSR_TME1) != 0U) {
-					CAN_Mailbox1Empty = true;
-				} else {
-					CAN_Mailbox1Empty = false;
-
-				}
-				if ((tsr & CAN_TSR_TME2) != 0U) {
-					CAN_Mailbox2Empty = true;
-				} else {
-					CAN_Mailbox2Empty = false;
-
-				}
+				hvorErJeg = 4;
 			}
 		}
 	}
-	if(ISR == 1){
-	if (!xSemaphoreGiveFromISR(semaphr_send, NULL)) Error_Handler();
-	}
-	else if (ISR == 0){
-		if (!xSemaphoreGive(semaphr_send)) Error_Handler();
-	}
+
+	hvorErJeg = 5;
+
+	if (ISR == 0 && !xSemaphoreGive(semaphr_send)) Error_Handler();
+
+	hvorErJeg = 0;
+
+	//if (uxSemaphoreGetCount(semaphr_send) == 0 || semaphr_send->uxMessagesWaiting == 0) {
+	//	int dev = -1;
+	//}
+
+	return 1;
 }
 
 int messageSplitter(uint8_t *sourceArray, uint8_t *destinationArray, uint8_t position)

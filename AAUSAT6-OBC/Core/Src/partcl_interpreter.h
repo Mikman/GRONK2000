@@ -16,6 +16,7 @@
 #include "partcl_driver.h"
 #include "DCMotorDriver.h"
 #include <stdbool.h>
+#include "main.h"
 
 #if 0
 #define DBG partcl_printf(sprintf

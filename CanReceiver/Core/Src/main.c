@@ -134,6 +134,20 @@ int main(void)
 
   uart_init();
 
+
+
+  // Code necessary for test of Req 10
+  struct CAN_QUEUE_DATA Req10TestPackage = {12, {1, 0, 0, 0, 0, 0, 0, 0}};
+
+  for (int i = 0; i < 100; i++) {
+	 Req10TestPackage.data[2] = i;
+	 while (!passToCanTX(&Req10TestPackage)) {}
+	 //HAL_Delay(100);
+  }
+
+
+
+
   while (1)
   {
 	  uart_transmitFromCanRxQueue(); 	// CAN IN -> UART OUT
@@ -427,7 +441,6 @@ void uart_in_read() {
 				uart_in_lastStart = uart_in_read_ptr - COMM_MAX_FRAME_SIZE;
 			}
 		}
-
 	}
 }
 

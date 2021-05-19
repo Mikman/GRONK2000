@@ -54,8 +54,6 @@ CAN_HandleTypeDef *can1;
 
 /* USER CODE END PFP */
 
-
-
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 

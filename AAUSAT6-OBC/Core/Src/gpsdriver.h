@@ -21,6 +21,8 @@
 #define GPS_SECTIONS 15		// Amount of comma-separated fields in the received GPGGA string
 #define GPS_SEC_LENGTH 15	// The length of each comma-separated field
 
+#define GPS_ID_CTRL 8
+
 /**
  * Data struct for holding data for a single GPS Fix
  */

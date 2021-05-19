@@ -1,9 +1,11 @@
 #include "image_driver.h"
 
-uint32_t IMAGE_DATA_ID = 103;
+#define TASK_QUEUE_LENGTH_IMAGE 11
+struct CAN_QUEUE_DATA TaskQueueImage[TASK_QUEUE_LENGTH_IMAGE] = {0};
+
 struct CAN_QUEUE_DATA IMAGE_DATA_RX = {0,{0}};
 struct CAN_QUEUE_DATA IMAGE_DATA_TX = {0,{0}};
-struct StructQueue IMAGE_CAN_RX_QUEUE = {0};
+struct StructQueue IMAGE_CAN_RX_QUEUE = {.pointRD = 0, .pointWR = 0, .queueLength = TASK_QUEUE_LENGTH_IMAGE, .queue = TaskQueueImage};
 Picture pic1;
 uint8_t cameraData[640] = {0};
 

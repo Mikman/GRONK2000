@@ -33,6 +33,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define PACKAGE_SIZE 8
+#define WATCHDOG_ID 160
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -105,7 +106,6 @@ int main(void)
   TIM2->CNT = 0;
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
-
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -196,11 +196,11 @@ static void MX_CAN1_Init(void)
 
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
-  hcan1.Init.Prescaler = 18;
+  hcan1.Init.Prescaler = 125;
   hcan1.Init.Mode = CAN_MODE_NORMAL;
   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan1.Init.TimeSeg1 = CAN_BS1_7TQ;
-  hcan1.Init.TimeSeg2 = CAN_BS2_8TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_12TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
   hcan1.Init.AutoWakeUp = DISABLE;
@@ -389,9 +389,9 @@ else {return;}
 
 void Watchdog_Handler(){
 	uint8_t fejlArray[8] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
-	sendData(&hcan1,0xA, 8, fejlArray, &CanTxHeader);
+	sendData(&hcan1, WATCHDOG_ID, 8, fejlArray, &CanTxHeader);
 	HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_RESET);
-	HAL_Delay(20);
+	HAL_Delay(100);
 	HAL_GPIO_WritePin(OBC_Reset_GPIO_Port, OBC_Reset_Pin, GPIO_PIN_SET);
 	htim2.Instance->CNT = 0;
 

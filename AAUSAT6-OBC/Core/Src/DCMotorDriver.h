@@ -8,6 +8,8 @@
 #ifndef SRC_DCMOTORDRIVER_H_
 #define SRC_DCMOTORDRIVER_H_
 
+#define MOTOR_ID_CTRL 4
+
 #include "main.h"
 #include "circle_queue_struct.h"
 #include "can_driver.h"
@@ -22,7 +24,7 @@ void motor_stop();
 
 float motor_meassure_dutycycle();
 
-void motor_direction(int dir);
+void motor_direction(char dir);
 
 void motor();
 

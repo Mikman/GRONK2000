@@ -405,18 +405,18 @@ static int readtemp(struct tcl *tcl, tcl_value_t *args, void *arg) {
 	return r;
 }
 
-static int setpwm(struct tcl *tcl, tcl_value_t *args, void *arg) {
+static int setSpeed(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
   tcl_value_t *argument = tcl_list_at(args, 1);
-  int pwm = atoi(argument);
+  int speed = atoi(argument);
   tcl_free(argument);
-  if (pwm > 100 || pwm <0){
-	  return tcl_result(tcl, FNORMAL, tcl_dup("Invalid PWM value"));
+  if (speed > 100 || speed <0){
+	  return tcl_result(tcl, FNORMAL, tcl_dup("Invalid Speed value"));
   }
-  motor_setPwm(pwm);
+  motor_start(speed, 'R');
   char pwmArray[4]={0};
-  char resultString[30] = "PWM has been executed: ";
-  strcat(resultString, itoa(pwm, pwmArray, 10));
+  char resultString[30] = "Speed has been set: ";
+  strcat(resultString, itoa(speed, pwmArray, 10));
 
   return tcl_result(tcl, FNORMAL, tcl_dup(resultString));
 }
@@ -675,7 +675,7 @@ void tcl_init(struct tcl *tcl) {
 
 
   // Custom GRONK command implementations
-  tcl_register(tcl, "setPWM", setpwm, 2, NULL);
+  tcl_register(tcl, "setSpeed", setSpeed, 2, NULL);
   tcl_register(tcl, "tF", testFunction, 2, NULL);
   tcl_register(tcl, "readTemp", readtemp, 2, NULL);
   tcl_register(tcl, "readPWM", readpwm, 2, NULL);

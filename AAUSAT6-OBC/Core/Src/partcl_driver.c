@@ -20,33 +20,11 @@ struct StructQueue PARTCL_CAN_RX_QUEUE = {.pointRD = 0, .pointWR = 0, .queueLeng
 
 extern uint32_t timerCounter;
 
-#define TIMESTAMPS_LEN 100
-uint16_t i = 0;
-uint16_t timeStamps[TIMESTAMPS_LEN] = { 0 };
-uint32_t timeStampsCounter[TIMESTAMPS_LEN] = {0};
-
-int16_t elementsInQueue[TIMESTAMPS_LEN] = { 0 };
-
 void partcl_readQueue() {
 
 	while (UnreadElements(&PARTCL_CAN_RX_QUEUE)) {
 		uint16_t elements = PARTCL_CAN_RX_QUEUE.pointWR - PARTCL_CAN_RX_QUEUE.pointRD;
 		LeaveStructQueue(&PARTCL_CAN_RX_QUEUE, &PARTCL_DATA); // Read a package from queue
-
-
-		if (i < TIMESTAMPS_LEN) {
-			timeStamps[i] = TIM15->CNT;
-			TIM15->CNT = 0;
-			timeStampsCounter[i] = timerCounter;
-			timerCounter = 0;
-			elementsInQueue[i] = elements;
-			if (i == 2) {
-				int dev = -1;
-			}
-			i++;
-		}
-
-
 
 		// Run through all accepted CAN packages
 		switch (PARTCL_DATA.ID) {

@@ -18,13 +18,19 @@ void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel);
 
 void motor_setPwm(uint8_t dutycycle);
 
-void motor_start(int8_t dutycycle);
+void motor_setSpeed(uint8_t speed);
+
+uint8_t motor_speedToDutycycle(uint8_t speed);
+
+void motor_start(int8_t speed, char dir);
 
 void motor_stop();
 
-float motor_meassure_dutycycle();
+float motor_measure_dutycycle();
 
-void motor_direction(char dir);
+uint8_t motor_measure_direction();
+
+void motor_setDirection(char dir);
 
 void motor();
 

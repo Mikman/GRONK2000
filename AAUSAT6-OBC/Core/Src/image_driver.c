@@ -110,6 +110,9 @@ void CAM_update(CAM_HandleTypeDef *cam) {
 			cam->pic->y = 0;
 			cam->status = STANDBY;
 			HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_RESET);
+
+			struct CAN_QUEUE_DATA ImageCapturedPackage = {130, {"IMG DONE"}};
+			while(!passToCanTX(&ImageCapturedPackage)) {}
 		}
 	} else if (cam->status == WAITING) {
 		CAM_toOutputQueue(cam);

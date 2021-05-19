@@ -5,7 +5,7 @@
 CAN_TxHeaderTypeDef *TxHeader;
 CAN_RxHeaderTypeDef *RxHeader;
 CAN_HandleTypeDef *can1;
-#define CAN_TX_QUEUE_LENGTH 300
+#define CAN_TX_QUEUE_LENGTH 1000
 struct CAN_QUEUE_DATA TXQueue[CAN_TX_QUEUE_LENGTH] = {0};
 struct StructQueue CAN_TX_QUEUE = {.pointRD = 0, .pointWR = 0, .queue = TXQueue, .queueLength = CAN_TX_QUEUE_LENGTH};
 struct CAN_QUEUE_DATA CAN_TX_QUEUE_DATA = {0,{0}};

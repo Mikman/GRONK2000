@@ -183,9 +183,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM6_Init();
   MX_TIM15_Init();
-  /* USER CODE BEGIN 2 */
-
-
+	/* USER CODE BEGIN 2 */
 
 	can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 	transmit_driver_init();
@@ -194,7 +192,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim6);
 
 	motor_init(&htim2, TIM_CHANNEL_2);
-	motor_start(0);
+	//motor_start(40);
 	//motor_direction(1);
 
 	CAM_Handle_Init(&hcam, &hdma_tim1_ch3, &htim1, &hi2c1);
@@ -203,13 +201,13 @@ int main(void)
 	MPU_Init(&hi2c1);
 
 	//OBC has restarted message.
-	struct CAN_QUEUE_DATA resetMessage = {CAN_ID_NRST,{"OBC NRST"}};
+	struct CAN_QUEUE_DATA resetMessage = { CAN_ID_NRST, { "OBC NRST" } };
 	passToCanTX(&resetMessage);
 
 	/* USER CODE END 2 */
 
-  /* Init scheduler */
-  osKernelInitialize();
+	/* Init scheduler */
+	osKernelInitialize();
 
   /* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
@@ -235,7 +233,7 @@ int main(void)
   taskDCMotorHandle = osThreadNew(task_dcmotor, NULL, &taskDCMotor_attributes);
 
   /* creation of taskMPU6050 */
-  //taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
+  taskMPU6050Handle = osThreadNew(task_mpu6050, NULL, &taskMPU6050_attributes);
 
   /* creation of taskParTCL_Exec */
   taskParTCL_ExecHandle = osThreadNew(task_partcl_Exec, NULL, &taskParTCL_Exec_attributes);
@@ -892,8 +890,25 @@ void task_mpu6050(void *argument)
   /* USER CODE BEGIN task_mpu6050 */
 	TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
+
+/*#define TIMESTAMPS_LEN 100
+	uint16_t i = 0;
+	uint16_t timeStamps[TIMESTAMPS_LEN] = { 0 };
+	uint32_t timeStampsCounter[TIMESTAMPS_LEN] = { 0 };*/
+
 	/* Infinite loop */
 	for (;;) {
+
+		/*if (i < TIMESTAMPS_LEN) {
+			timeStamps[i] = TIM15->CNT;
+			TIM15->CNT = 0;
+			timeStampsCounter[i] = timerCounter;
+			timerCounter = 0;
+			i++;
+		} else {
+			int dev = 0;
+		}*/
+
 		MPU6050();
 
 		vTaskDelayUntil(&xLastWakeTime, XPERIOD);

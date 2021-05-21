@@ -183,7 +183,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM6_Init();
   MX_TIM15_Init();
-	/* USER CODE BEGIN 2 */
+  /* USER CODE BEGIN 2 */
 
 	can_init(&hcan1, &CanRxHeader, &CanTxHeader);
 	transmit_driver_init();
@@ -204,10 +204,10 @@ int main(void)
 	struct CAN_QUEUE_DATA resetMessage = { CAN_ID_NRST, { "OBC NRST" } };
 	passToCanTX(&resetMessage);
 
-	/* USER CODE END 2 */
+  /* USER CODE END 2 */
 
-	/* Init scheduler */
-	osKernelInitialize();
+  /* Init scheduler */
+  osKernelInitialize();
 
   /* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
@@ -575,9 +575,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 720;
+  htim2.Init.Prescaler = 72-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 100;
+  htim2.Init.Period = 10000-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -789,7 +789,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, Watchdog_out_Pin|DC_motor_Dir1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, Address_inc_Pin|Get_image_pin_Pin|DC_motor_Dir2_Pin|Transfer_pin_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, Get_image_pin_Pin|DC_motor_Dir2_Pin|Transfer_pin_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : Watchdog_out_Pin DC_motor_Dir1_Pin */
   GPIO_InitStruct.Pin = Watchdog_out_Pin|DC_motor_Dir1_Pin;
@@ -805,13 +805,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : Address_inc_Pin */
-  GPIO_InitStruct.Pin = Address_inc_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(Address_inc_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Get_image_pin_Pin Transfer_pin_Pin */
   GPIO_InitStruct.Pin = Get_image_pin_Pin|Transfer_pin_Pin;
@@ -850,6 +843,7 @@ void task_gps(void *argument)
 	/* Infinite loop */
 
 	for (;;) {
+
 		GPS();
 
 		vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(XPERIOD));
@@ -871,6 +865,7 @@ void task_dcmotor(void *argument)
 	xLastWakeTime = xTaskGetTickCount();
 	/* Infinite loop */
 	for (;;) {
+
 		motor();
 
 		vTaskDelayUntil(&xLastWakeTime, XPERIOD);
@@ -891,23 +886,8 @@ void task_mpu6050(void *argument)
 	TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 
-/*#define TIMESTAMPS_LEN 100
-	uint16_t i = 0;
-	uint16_t timeStamps[TIMESTAMPS_LEN] = { 0 };
-	uint32_t timeStampsCounter[TIMESTAMPS_LEN] = { 0 };*/
-
 	/* Infinite loop */
 	for (;;) {
-
-		/*if (i < TIMESTAMPS_LEN) {
-			timeStamps[i] = TIM15->CNT;
-			TIM15->CNT = 0;
-			timeStampsCounter[i] = timerCounter;
-			timerCounter = 0;
-			i++;
-		} else {
-			int dev = 0;
-		}*/
 
 		MPU6050();
 
@@ -972,6 +952,7 @@ void task_partcl_hand(void *argument)
 	xLastWakeTime = xTaskGetTickCount();
 	/* Infinite loop */
 	for (;;) {
+
 		partcl_readQueue();
 
 		vTaskDelayUntil(&xLastWakeTime, XPERIOD);

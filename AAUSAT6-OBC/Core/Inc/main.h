@@ -80,8 +80,6 @@ void Error_Handler(void);
 #define MSB2_GPIO_Port GPIOA
 #define MSB3_Pin GPIO_PIN_7
 #define MSB3_GPIO_Port GPIOA
-#define Address_inc_Pin GPIO_PIN_0
-#define Address_inc_GPIO_Port GPIOB
 #define Get_image_pin_Pin GPIO_PIN_1
 #define Get_image_pin_GPIO_Port GPIOB
 #define PWM_CAM_Pin GPIO_PIN_8

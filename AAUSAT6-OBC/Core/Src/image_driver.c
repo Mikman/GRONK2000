@@ -31,7 +31,6 @@ void CAM_init(CAM_HandleTypeDef *cam) {
 	int d = CAM_getReg(cam, 0x3F);
 	int e = CAM_getReg(cam, 0x71);
 
-
 	//HAL_TIM_OC_Start(cam->DMATimer, TIM_CHANNEL_2); // Random kanal for at timeren altid kører
 	__HAL_TIM_ENABLE_DMA(cam->DMATimer, TIM_DMA_CC3); // DENNE LINJE GJORDE AT DMA VILLE SIT LIV
 	//HAL_GPIO_WritePin(Transfer_pin_GPIO_Port, Transfer_pin_Pin, GPIO_PIN_SET); // Transfer pin sættes høj

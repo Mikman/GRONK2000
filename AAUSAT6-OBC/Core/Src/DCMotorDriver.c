@@ -17,11 +17,12 @@ void motor_init(TIM_HandleTypeDef *htimer, uint32_t channel) {
 	timer_channel = channel;
 }
 
-void motor_setPwm(uint8_t dutycycle) {
-	if (dutycycle > 100)
-		dutycycle = 100;
+void motor_setPwm(float dutycycle) {
+	if (dutycycle > 1.0f)
+		dutycycle = 1.0f;
 	ARR = htim->Instance->ARR;
-	htim->Instance->CCR2 = (htim->Instance->ARR / 100) * dutycycle;
+	htim->Instance->CCR2 = (uint32_t)((htim->Instance->ARR) * dutycycle);
+
 }
 
 void motor_setSpeed(uint8_t speed) {
@@ -29,22 +30,21 @@ void motor_setSpeed(uint8_t speed) {
 	else motor_setPwm(motor_speedToDutycycle(speed));
 }
 
-uint8_t motor_speedToDutycycle(uint8_t speed) {
-	if (speed > 100) speed = 100;
+float motor_speedToDutycycle(uint8_t speed) {
+	if (speed >= 100) return 1.0f;
 
 	float sf = (speed / 100.0f);
 
-	float df = 2.0182f * (sf * sf * sf) - 1.8073f * (sf * sf) + 0.704f * sf + 0.1155f;
+	float dutycycle = -0.0621f * (sf * sf * sf * sf) + 1.3689f * (sf * sf * sf) - 0.6872f * (sf * sf) + 0.2987f * sf + 0.0608f;
 
-	int8_t dutycycle = df * 100;
 
-	if (dutycycle > 100) dutycycle = 100;
-	if (dutycycle < 0) dutycycle = 0;
+	if (dutycycle > 1.0f) dutycycle = 1.0f;
+	if (dutycycle < 0.0f) dutycycle = 0.0f;
 
-	return (uint8_t) dutycycle;
+	return dutycycle;
 }
 
-void motor_start(int8_t speed, char dir) {
+void motor_start(uint8_t speed, char dir) {
 	if (speed >= 0)
 		motor_setSpeed(speed);
 	motor_setDirection(dir);
@@ -60,8 +60,9 @@ void motor_stop() {
 }
 
 float motor_measure_dutycycle() {
-	float dutycycle = 0.;
-	dutycycle = (htim->Instance->CCR2) / (htim->Instance->ARR / 100);
+	float dutycycle = 0.0f;
+	dutycycle =  ((float)htim->Instance->CCR2) / ((float)htim->Instance->ARR);
+	dutycycle *= 100.0f;
 	return dutycycle;
 }
 

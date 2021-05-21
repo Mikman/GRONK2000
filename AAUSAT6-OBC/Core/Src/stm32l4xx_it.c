@@ -215,16 +215,6 @@ void CAN1_TX_IRQHandler(void)
   /* USER CODE END CAN1_TX_IRQn 1 */
 }
 
-
-
-/*
-#define TIMESTAMPS_LEN 100
-uint16_t i = 0;
-uint16_t timeStamps[TIMESTAMPS_LEN] = {0};
-
-int16_t elementsInQueue[TIMESTAMPS_LEN] = {0};
-*/
-
 /**
   * @brief This function handles CAN1 RX0 interrupt.
   */

@@ -50,7 +50,6 @@ int sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes,
 		uint8_t *dataArray, CAN_TxHeaderTypeDef *transmitHeader, int ISR) {
 
 	if(ISR == 0 && !xSemaphoreTake(semaphr_send, 0)){
-		hvorErJeg = -2;
 		return 0;
 	}
 
@@ -62,7 +61,6 @@ int sendData(CAN_HandleTypeDef *handler, uint32_t TxID, uint16_t numOfBytes,
 	uint8_t dataToMB[PACKAGE_SIZE] = { 0 };
 	uint32_t randoMailBox;
 	transmitHeader->ExtId = TxID;
-	uint32_t tsr = READ_REG(handler->Instance->TSR);
 
 	if (numOfBytes % PACKAGE_SIZE == 0) {
 		for (int i = 0; i < numOfBytes / PACKAGE_SIZE; i++) {

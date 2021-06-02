@@ -135,17 +135,13 @@ int main(void)
   uart_init();
 
 
-  /*
+
   // Code necessary for test of Req 10
   struct CAN_QUEUE_DATA Req10TestPackage = {16, {0, 0, 0, 0, 0, 0, 0, 0}};
 
-  for (int i = 0; i < 100; i++) {
+  /*for (int i = 0; i < 100; i++) {
 	 while (!passToCanTX(&Req10TestPackage)) {} // Transmitting message over CAN as fast as possible.
-  }
-  */
-
-
-
+  }*/
 
   while (1)
   {

@@ -6,6 +6,7 @@
  */
 
 #include "partcl_interpreter.h"
+#include "image_driver.h"
 
 extern htim6;
 
@@ -479,11 +480,19 @@ static int watchdogoff(struct tcl *tcl, tcl_value_t *args, void *arg) {
 static int captureimage(struct tcl *tcl, tcl_value_t *args, void *arg) {
   (void)arg;
 
-	//tcl_value_t *horizontal = tcl_list_at(args, 1);
-	//tcl_value_t *vertical = tcl_list_at(args, 2);
-	//captureImage();
-  //tcl_free(horizontal);
-  //tcl_free(vertical);
+	tcl_value_t *horizontal = tcl_list_at(args, 1);
+	tcl_value_t *vertical = tcl_list_at(args, 2);
+	
+	//Capture the image and transmit it via CAN
+	CAM_takePicture(cam);
+	while(cam->status != STANDBY){
+		CAM_update(cam);
+	}
+	//Deallocate memory from parameters
+  	tcl_free(horizontal);
+  	tcl_free(vertical);
+	
+	//Print text string
 	char imageStringVal [30] = "Image has been captured!";
 
 	return tcl_result(tcl, FNORMAL, tcl_dup(imageStringVal));

@@ -17,6 +17,8 @@
 #include "DCMotorDriver.h"
 #include <stdbool.h>
 #include "main.h"
+#include "circle_queue_struct.h"
+#include "image_driver.h"
 
 #if 0
 #define DBG partcl_printf(sprintf

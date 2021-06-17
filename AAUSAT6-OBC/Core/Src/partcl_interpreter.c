@@ -6,9 +6,10 @@
  */
 
 #include "partcl_interpreter.h"
-#include "image_driver.h"
 
 extern htim6;
+
+extern struct StructQueue IMAGE_CAN_RX_QUEUE;
 
 bool initSuspension = false;
 bool fullySuspended = false;
@@ -484,10 +485,14 @@ static int captureimage(struct tcl *tcl, tcl_value_t *args, void *arg) {
 	tcl_value_t *vertical = tcl_list_at(args, 2);
 	
 	//Capture the image and transmit it via CAN
-	CAM_takePicture(cam);
+	/*CAM_takePicture(cam);
 	while(cam->status != STANDBY){
 		CAM_update(cam);
-	}
+	}*/
+
+	struct CAN_QUEUE_DATA package = {16, {0}};
+	EnterStructQueue(&IMAGE_CAN_RX_QUEUE, &package);
+
 	//Deallocate memory from parameters
   	tcl_free(horizontal);
   	tcl_free(vertical);

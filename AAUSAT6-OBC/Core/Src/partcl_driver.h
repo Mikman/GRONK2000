@@ -17,7 +17,7 @@
 #include "task.h"
 #include <stdbool.h>
 
-#define BUF_SIZE_IN 128
+#define BUF_SIZE_IN 1024
 #define BUF_SIZE_OUT 512
 
 #define CAN_ID_PARTCL_INPUT 13
